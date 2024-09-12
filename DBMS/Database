@@ -1,7 +1,32 @@
 1. Issues with traditional file based system:
 - absence of indexing, super slow, high processing time, redundancy, inconsistency, unorganised data.
 
-2. Advantages of DBMS:
+2. Advantages of DBMS and explaination:
+- Structured Query Language used for accessing and manipulating data in dB(MySQL is a relational database management system)
+  CRUD ops on db , tables, columns and records.
+- A database schema is a logical representation of data that shows how the data in a database should be stored logically. 
+  It shows how the data is organized and the relationship between the tables.
+  Database schema contains table, field, views and relation between different keys like primary key, foreign key.
+- A Database is defined as a structured form of data storage in a computer or a collection of data in an organized manner and can be accessed in various ways. 
+  It is also the collection of schemas, tables, queries, views, etc. Databases help us with easily storing, accessing, and manipulating data held on a computer.
+  The Database Management System allows a user to interact with the database.
+  SQL provides various commands to interact with DB.
+- DBMS stands for Database Management System. It is a software program that primarily functions as an interface between the database and the end-user. 
+  It provides us the power such as managing the data, the database engine, and the database schema to facilitate the organization and manipulation of 
+  data using a simple query in almost no time.
+
+o	Hierarchical databases (DBMS)
+o	Network databases (IDMS)
+o	Relational databases (RDBMS
+o	Object-oriented databases
+o	Document databases (Document DB)
+o	Graph databases
+o	ER model databases
+o	NoSQL databases
+RDBMS stands for Relational Database Management System. It is a database management system based on a relational model. 
+It facilitates you to manipulate the data stored in the tables by using relational operators. RDBMS stores the data into the collection of tables
+and links those tables using the relational operators easily whenever required.
+
 - Data sharing, integrity(accuracy, consistency) constraints ensures organised and refined data, controlling redundancy, 
   provides backup and recovery failure, data security(authentication and encryption), 
   independence of data(can change structure of data without changing structure of application program).
@@ -14,7 +39,7 @@ a. Data Definition Language (DDL): provides the ability to define, create and mo
     TRUNCATE -> TRUNCATE TABLE table_name;
     COMMENT -> COMMENT 'comment_text' ON TABLE table_name;  // Add comments to the data dictionary.
  
-b. Data Modification Language (DML): used to query, and perform CRUD operations on row-level data from database tables. E.g., SELECT, UPDATE, INSERT, DELETE, etc.
+b. Data Modification Language (DML): used to query, and perform CRUD operations on row-level data from database tables. E.g., UPDATE, INSERT, DELETE, etc.
     INSERT -> INSERT INTO table_name (column1, column2, ...) VALUES (value1, value2, ...);
     UPDATE -> UPDATE table_name SET column1 = value1, column2 = value2 WHERE condition;
     DELETE -> DELETE FROM table_name WHERE condition;
@@ -101,27 +126,35 @@ Challenges:
 
 12. Explain different types of keys in a database. 
 -> mainly 7 types of keys
-* Candidate Key
-* Super Key
-* Primary Key 
-* Unique Key
-* Alternate Key
-* Foreign Key
-* Composite Key
-What are super, primary, candidate, and foreign keys? 
+* Candidate Key : The minimal set of attributes that can uniquely identify a tuple
+* Super Key : A set of one or more columns that can uniquely identify a row in a table (Eg: {EmpID}, {Email}, {Phone}, {SSN}, {EmpID, Email}, etc)
+* Primary Key : There can be more than one candidate key in relation out of which one can be chosen as the primary key and cannot be null.
+* Unique Key : A unique key is a set of one or more than one fields/columns of a table that uniquely identify a record in a database table and can be null.
+* Alternate Key : The candidate key other than the primary key is called an alternate key .
+* Foreign Key : A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table. 
+                The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+* Composite Key : To uniquely identify rows of a table, a combination of two or more columns/attributes can be used.
+
+E.g.:-
 EmpID	   Email	              Phone        SSN        Name
 101	  alice@example.com	    1234567890	123-45-6789	  Alice
 102  	bob@example.com	      9876543210	987-65-4321	  Bob
 103	  charlie@example.com	  5556667777	555-66-7777	  Charlie
 
-Super Key: A set of one or more columns that can uniquely identify a row in a table (Eg: {EmpID}, {Email}, {Phone}, {SSN}, {EmpID, Email}, etc)
-Candidate Key: Minimal Super Key that uniquely identifies a row (Eg: {EmpID}, {Email}, {Phone}, {SSN})
-Primary Key: The most important candidate key with non null constraint.
-Foreign Key: A primary key of some other table.
 
 13. What integrity rules exist in the DBMS?
-* Entity Integrity: Primary key can never be NULL.
-* Referential Integrity: Foreign key can never be NULL value and it should be the primary key of any other relation.
+* Entity Integrity:- Primary key can never be NULL.
+* Referential Integrity:- The values of the foreign key in a tuple of relation R1 can either take the values of the primary key for some tuple in relation R2(where FK is PK), 
+                         or can take NULL values, but can’t be empty.
+* Domain constraint :- Domain constraints can be defined as the definition of a valid set of values for an attribute.
+* Key Constraints :- ensures uniqueness of entity within entity set.
+* Not-Null Constraints :- It specifies that within a tuple, attributes overs which not-null constraint is specified must not contain any null value.
+* Primary Key Constraints :- It states that the primary key attributes are required to be unique and not null. 
+
+
+
+Data consistency means that the data is the same across all locations, while data integrity means that the data is accurate, complete, and reliable.
+
 
 14. Explain the difference between intension and extension in a database.
 
