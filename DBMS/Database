@@ -267,6 +267,15 @@ FROM table1 AS T1, table1 AS T2
 WHERE join_conditions;    
 
 
-28. 
+28. IMP Points :-
+
+•	A distributed database is a database that runs and stores data across multiple computers, 
+as opposed to doing everything on a single machine. Typically, distributed databases operate on 
+two or more interconnected servers on a computer network.
+•	The client-server architecture refers to a system that hosts, delivers, and manages most of the 
+resources and services that the client requests. In this model, all requests and services are delivered 
+over a network, and it is also referred to as the networking computing model or client server network.
+
+
 
 29.
