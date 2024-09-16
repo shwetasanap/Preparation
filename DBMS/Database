@@ -194,6 +194,29 @@ WHERE condition
 20. What is a Trigger? 
 A Trigger is a code associated with insert, update or delete operations. 
 The code is executed automatically whenever the associated query is executed on a table.
+Key Points :-
+          Triggers cannot be manually invoked or executed.
+          There is no chance that triggers will receive parameters.
+          A transaction cannot be committed or rolled back inside a trigger.
+
+TYPES :- Before and After for Insert,Update,Delete.
+Syntax of Trigger in SQL-->
+                    CREATE TRIGGER Trigger_Name  
+                    [ BEFORE | AFTER ]  [ Insert | Update | Delete]  
+                    ON [Table_Name]  
+                    [ FOR EACH ROW | FOR EACH COLUMN ]  
+                    AS  
+                    Set of SQL Statement  
+
+Use :- 
+
+Data integrity: Triggers allow you to enforce complex business rules and constraints at the database level, ensuring that data remains consistent and accurate.
+
+Automation: Triggers can automate repetitive or complex tasks by executing predefined actions whenever a specified event occurs. This reduces the need for manual intervention and improves efficiency.
+
+Audit trails: Triggers can be used to track changes made to data, such as logging modifications in a separate audit table. This helps in auditing and maintaining a history of data changes.
+
+Data validation: Triggers can perform additional validation checks on data before it is inserted, updated, or deleted, ensuring that only valid and conforming data is stored in the database.
 
 21. What is indexing?
 - technique used to optimize the speed and efficiency of data retrieval operations.
@@ -213,7 +236,36 @@ The code is executed automatically whenever the associated query is executed on 
 
 26. Why are cursors necessary in embedded SQL? 
 
-27. 
+27. SQL Joins :-
+
+SQL joins are used to retrieve data from multiple tables into a meaningful result set. It is performed whenever you need to fetch records from two or more tables. They are used with SELECT statement and join conditions.
+The following are the most commonly used joins in SQL:
+o	INNER JOIN --> common rows  
+                SELECT table1.column1,table1.column2,table2.column1,....
+                FROM table1 
+                INNER JOIN table2
+                ON  table1.matching_column = table2.matching_column;
+o	LEFT OUTER JOIN --> common rows + left handed table rows
+                SELECT table1.column1,table1.column2,table2.column1,....
+                FROM table1 
+                LEFT JOIN table2
+                ON table1.matching_column = table2.matching_column;
+o	RIGHT OUTER JOIN --> common rows + right handed table rows
+                SELECT table1.column1,table1.column2,table2.column1,....
+                FROM table1 
+                RIGHT JOIN table2
+                ON table1.matching_column = table2.matching_column;
+o FULL JOIN ---> creates the result-set by combining results of both LEFT JOIN 
+                 and RIGHT JOIN. The result-set will contain all the rows from both tables. 
+                 For the rows for which there is no matching, the result-set will contain NULL values.
+
+
+
+A SELF JOIN is used to join a table with itself. This join can be performed using table aliases.
+e.g.  SELECT column_lists    
+FROM table1 AS T1, table1 AS T2    
+WHERE join_conditions;    
+
 
 28. 
 
