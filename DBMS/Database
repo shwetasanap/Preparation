@@ -230,11 +230,43 @@ Data validation: Triggers can perform additional validation checks on data befor
 
 23. What is CLAUSE in SQL?
 
+They form specific parts of a SQL statement that perform a specific function and allow us to put constraints on data. 
+The sql clauses can help filter out the data according to the users' needs. The main clauses are SELECT, FROM, WHERE, 
+GROUP BY, HAVING, ORDER BY, INSERT, UPDATE, DELETE, and JOIN.
+
 24. What is a Live Lock?
 
 25. What is QBE? 
 
 26. Why are cursors necessary in embedded SQL? 
+
+        A cursor in SQL Server is a database object that allows us to retrieve each row at a time and manipulate its data.
+        A cursor is nothing more than a pointer to a row. It's always used in conjunction with a SELECT statement. 
+        It is usually a collection of SQL logic that loops through a predetermined number of rows one by one. 
+
+Life Cycle of a cursor :-
+
+1) Declare cursor ---> DECLARE cursor_name CURSOR  
+                       FOR select_statement;  
+2) Open cursor --->  OPEN cursor_name;  
+3) Fetch current active row using cursor ---> FETCH NEXT FROM cursor INTO variable_list;  
+4) CLOSE cursor_name;  
+5) DEALLOCATE cursor_name;  
+
+Fetch Data from the Cursor There is a total of 6 methods to access data from the cursor. They are as follows: 
+
+FIRST is used to fetch only the first row from the cursor table. 
+LAST is used to fetch only the last row from the cursor table. 
+NEXT is used to fetch data in a forward direction from the cursor table. 
+PRIOR is used to fetch data in a backward direction from the cursor table. 
+ABSOLUTE n is used to fetch the exact nth row from the cursor table. 
+RELATIVE n is used to fetch the data in an incremental way as well as a decremental way. 
+
+
+Need of Cursor :-
+-->Cursors allow us to process data row-by-row, which can be useful when we need to perform complex calculations or transformations on the data.
+-->Cursors allow us to iterate over a result set multiple times, which can be useful when we need to perform multiple operations on the same data.
+
 
 27. SQL Joins :-
 
