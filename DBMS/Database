@@ -343,3 +343,15 @@ over a network, and it is also referred to as the networking computing model or 
 
 Data warehouses can collect data from many sources, including operational systems, databases, 
 and external sources like social media and IoT devices.
+
+
+Standard Questions :-
+
+// EMPLOYEE WITH HIGHEST SALARY
+SELECT name, salary FROM employee ORDER BY salary DESC LIMIT 1; 
+
+// EMPLOYEE WITH SECOND HIGHEST SALARY
+SELECT name, salary FROM employee WHERE salary < (SELECT MAX(salary) FROM employee) ORDER BY salary DESC LIMIT 1;
+
+// EMPLOYEE WITH Nth HIGHEST SALARY
+SELECT name, salary FROM employee ORDER BY salary DESC LIMIT (N-1), 1;
