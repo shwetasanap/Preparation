@@ -339,4 +339,7 @@ over a network, and it is also referred to as the networking computing model or 
 
 
 
-29.
+29. Data Warehousing
+
+Data warehouses can collect data from many sources, including operational systems, databases, 
+and external sources like social media and IoT devices.
