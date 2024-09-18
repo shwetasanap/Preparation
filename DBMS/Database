@@ -344,6 +344,9 @@ over a network, and it is also referred to as the networking computing model or 
 Data warehouses can collect data from many sources, including operational systems, databases, 
 and external sources like social media and IoT devices.
 
+30. What is the concept of sub-query/inner query/nested query in terms of SQL?
+Sub-query is basically the query that is included inside some other query.
+
 
 Standard Questions :-
 
