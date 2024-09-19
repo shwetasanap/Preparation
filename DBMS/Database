@@ -61,7 +61,11 @@ e. Transaction Control Language (TCL): deal with the transaction of the database
   SAVEPOINT -> SAVEPOINT savepoint_name; // used to rollback certain operations and not the entire transaction, save point saves the transaction.
 
 4. ACID properties:
-A database transaction having these properties is known as ACID transaction:
+A database transaction having these properties is known as ACID transaction.
+
+ACID properties enforce reliability in database transactions by maintaining atomicity, consistency, isolation, and durability. 
+They prevent database corruption by bad transactions and provide recoverability after failures. 
+
 a. Atomicity: All the changes to data must be performed successfully or not at all.
 b. Consistency: integrity constraints must be maintained so that Data will be consistent before and after a transaction.
 c. Isolation: No other process can change the data while the transaction is running.
