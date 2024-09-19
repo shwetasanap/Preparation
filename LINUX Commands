@@ -1,0 +1,15 @@
+https://www.tutorialspoint.com/difference-between-linux-and-windows
+https://www.javatpoint.com/monolithic-structure-of-operating-system
+
+1.	LINUX is open source OS built upon linux kernel which is a brain of OS and it manages how computer interacts with it’s h/w and resources.
+2.	The Linux operating system is a set of programs which acts as a link between the computer and the end user.
+3.	The computer programs that allocate the system resources and coordinate all the details of the computer's internals is called the Operating System 
+    or the Kernelmemory management, task scheduling and file management.
+4.	Users communicate with the Kernel through a program known as the shell. The shell is a command line interpreter; it translates commands entered by 
+    the user and converts them into a language that is understood by the kernel.
+5.	h/w-->kernel-->shell-->Application programs
+6.	Kernel − The kernel is the heart of the Linux operating system. It interacts with the hardware and most of the tasks like memory management, 
+    task scheduling and file management.
+7.	Shell − The shell is the utility that processes your requests. When you type in a command at your terminal, the shell interprets the command
+    and calls the program that you want. The shell uses standard syntax for all commands. C Shell, Bourne Shell and Korn Shell are the most famous 
+    shells which are available with most of the Unix variants.
