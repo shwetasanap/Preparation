@@ -363,6 +363,10 @@ Sub-query is basically the query that is included inside some other query.
 
 31. No SQL :-
 
+NoSQL is a type of database management system (DBMS) that is designed to handle and store large volumes of unstructured and semi-structured data.
+NoSQL databases use flexible data models that can adapt to changes in data structures and are capable of scaling horizontally to handle growing amounts of data.
+The term NoSQL originally referred to “non-SQL” or “non-relational” databases, but the term has since evolved to mean “not only SQL”.
+
 MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling.
 It is a NoSQL db.
 NoSQL Database is used to refer a non-SQL or non relational database.
