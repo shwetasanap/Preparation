@@ -361,6 +361,43 @@ and external sources like social media and IoT devices.
 30. What is the concept of sub-query/inner query/nested query in terms of SQL?
 Sub-query is basically the query that is included inside some other query.
 
+31. No SQL :-
+
+MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling.
+It is a NoSQL db.
+NoSQL Database is used to refer a non-SQL or non relational database.
+It provides a mechanism for storage and retrieval of data other than tabular relations model used in relational databases. 
+NoSQL database doesn't use tables for storing data. It is generally used to store big data and real-time web applications.
+Collection is a group of MongoDB documents. It is the equivalent of an RDBMS table.
+A document is a set of key-value pairs. Documents have dynamic schema.
+Dynamic schema means that documents in the same collection do not need to have the same set of fields or structure,
+and common fields in a collection's documents may hold different types of data.
+
+•	Use below command to get list of all databases.
+-->> show dbs
+•	To create a new database execute the following command.
+-->> use DATABASE_NAME
+•	To know your current working/selected database execute the following command
+db
+•	To drop the database execute following command, this will drop the selected database
+-->> db.dropDatabase()
+•	To create the new collection execute the following commands
+-->> db.createCollection(name)
+•	To get the list of collections created execute the following command
+-->> Showcollections
+•	To drop the selected collection execute the following command
+-->> db.COLLECTION_NAME.drop()
+•	Insert document in collection
+-->> db.COLLECTION_NAME.insert(document)
+•	To get the list documents in collection execute the following command
+-->> db.COLLECTION_NAME.find()
+•	db.[name of collection].update({},{$set: {}})
+-->>db.students.updateOne(
+   { name: "Alice" },select document criteria
+   { $set: { age: 26 } }
+)
+-->> db.collection('inventory').deleteOne/ deleteMany({ status: 'D' });
+
 
 Standard Questions :-
 
