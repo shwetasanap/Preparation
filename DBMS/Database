@@ -333,6 +333,15 @@ FROM table1 AS T1, table1 AS T2
 WHERE join_conditions;    
 
 
+Cross Join in SQL produces a result set that contains the cartesian product of two or more tables. 
+Cross join is also called a Cartesian Join. 
+When CROSS JOIN is used with a WHERE clause, it behaves like INNER JOIN, filtering the results based on specific conditions.
+CROSS JOIN is the best choice when we need to match each row of one table to every other row of another table. 
+It is helpful in many applications where we need to obtain paired combinations of records.
+
+
+
+
 28. IMP Points :-
 
 •	A distributed database is a database that runs and stores data across multiple computers, 
