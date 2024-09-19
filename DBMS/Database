@@ -32,6 +32,7 @@ and links those tables using the relational operators easily whenever required.
   independence of data(can change structure of data without changing structure of application program).
 
 3. Different languages of DBMS:
+  Database Language is a special type of programming language used to define and manipulate a database.
 a. Data Definition Language (DDL): provides the ability to define, create and modify database objects such as tables, views, indexes, and users. E.g., CREATE, ALTER, DROP, TRUNCATE, RENAME, etc.
     CREATE -> CREATE TABLE table_name (column1 data_type, column2 data_type, ...);
     DROP -> DROP TABLE table_name;
