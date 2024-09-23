@@ -16,7 +16,7 @@ GIT	                                    GITHUB
 Software tool 	                        service
 Installed on local system	              Hosted as a website
 Manage different version of code	      Has a copy of local repo code
-Command line interface to interact      GUI for storing the files
+Command line interface to interact      GUI for interaction with the files
 with file changes	
 
 
