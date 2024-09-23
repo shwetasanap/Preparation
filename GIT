@@ -1,0 +1,39 @@
+What is Git?
+Git is a distributed version control system (VCS) widely used for tracking changes in source code during software development.
+It allows multiple developers to work on the same project simultaneously, track changes, and collaborate effectively. 
+Git is essential for managing the lifecycle of a project, providing tools for branching, merging, and reverting changes, 
+all while maintaining a history of the project’s progress.
+
+Key Features of Git:
+
+Distributed: Each user has the complete history of the project.
+Branching and Merging: Create separate branches for features or fixes and merge them back into the main project.
+Tracking Changes: Every change is recorded with commit messages and timestamps.
+Collaboration: Multiple users can contribute to the project without overwriting each other's work.
+
+
+GIT	                                    GITHUB
+Software tool 	                        service
+Installed on local system	              Hosted as a website
+Manage different version of code	      Has a copy of local repo code
+Command line interface to interact      GUI for storing the files
+with file changes	
+
+
+Important Git Concepts-->
+
+Repository (Repo): A project folder tracked by Git. It can be local (on your computer) or remote (like on GitHub or GitLab).
+Commit: A snapshot of your changes. It stores the state of your project at a specific point.
+Branch: A separate line of development. The main branch (formerly master) is typically the default branch.
+Staging Area: Where changes are stored before committing.
+Remote Repository: A version of your repository stored on a server like GitHub or GitLab.
+Merge: Combining branches together.
+Clone: Making a local copy of a remote repository.
+
+Basic Git Workflow-->
+
+Initialize a repository: git init
+Make changes: Modify files in the project.
+Stage changes: git add <filename> (prepares files for commit)
+Commit changes: git commit -m "commit message"
+Push to a remote repository: git push
