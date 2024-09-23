@@ -2,6 +2,7 @@
 - absence of indexing, super slow, high processing time, redundancy, inconsistency, unorganised data.
 
 2. Advantages of DBMS and explaination:
+- Data is collection of a distinct small unit of information. It can be used in variety of forms like text,numbers,media,etc.
 - Structured Query Language used for accessing and manipulating data in dB(MySQL is a relational database management system)
   CRUD ops on db , tables, columns and records.
 - A database schema is a logical representation of data that shows how the data in a database should be stored logically. 
