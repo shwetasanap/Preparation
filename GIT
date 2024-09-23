@@ -106,3 +106,33 @@ git stash list: Show all stashes.
 
 git fetch upstream: Fetch updates from the original repository when you've forked it.
 git merge upstream/main: Merge upstream changes into your fork.
+
+
+
+GIT Rebasing :-
+
+Rebasing is the process of moving or combining a sequence of commits to a new base commit.
+This method is a form of rewriting a branch’s commit history. Rebasing does not change the 
+content of your commits, but it does change the commit hash that is used to track your changes. 
+ But, instead of using a merge commit, rebasing re-writes the project history by creating brand 
+new commits for each commit in the original branch.
+
+Git Merge: A Git merge allows you to merge your feature branch with the main collaboration branch. 
+This method creates a new commit that incorporates the changes from both branches. 
+This is known as a merge commit.
+merge commit every time you need to incorporate upstream changes. 
+If main is very active, this can pollute your feature branch’s history quite a bit.
+While it’s possible to mitigate this issue with advanced git log options, it can make 
+it hard for other developers to understand the history of the project.
+
+Rebasing is a common way to integrate upstream changes into your local repository.
+Pulling in upstream changes with Git merge results in a superfluous merge commit every 
+time you want to see how the project has progressed. On the other hand, rebasing is like saying,
+“I want to base my changes on what everybody has already done.”
+
+
+The primary reason for rebasing is to maintain a linear project history. For example, consider a situation
+where the main branch has progressed since you started working on a feature branch. You want to get the 
+latest updates to the main branch in your feature branch, but you want to keep your branch's history clean
+so it appears as if you've been working off the latest main branch. This gives the later benefit of a clean 
+merge of your feature branch back into the main branch.
