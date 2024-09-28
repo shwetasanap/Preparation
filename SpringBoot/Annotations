@@ -2,6 +2,12 @@
 to provide supplemental information about a program. It is not a part of the application that we develop. 
 It does not have a direct effect on the operation of the code they annotate. It does not change the action of the compiled program.
 
+
+https://www.javatpoint.com/spring-boot-annotations
+https://www.linkedin.com/pulse/spring-boot-important-annotations-abid-anjum
+
+********************************************************************************************************************************************
+
 --> ApplicationContext represents the Spring IoC container that holds all the beans created by the application. 
 It is responsible for instantiating, configuring, and creating the beans. Additionally, it gets the beans' information 
 from configuration metadata provided in XML or Java.
