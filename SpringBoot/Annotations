@@ -1,1 +1,44 @@
+--> Spring Boot Annotations is a form of metadata that provides data about a program. In other words, annotations are used 
+to provide supplemental information about a program. It is not a part of the application that we develop. 
+It does not have a direct effect on the operation of the code they annotate. It does not change the action of the compiled program.
+
+--> ApplicationContext represents the Spring IoC container that holds all the beans created by the application. 
+It is responsible for instantiating, configuring, and creating the beans. Additionally, it gets the beans' information 
+from configuration metadata provided in XML or Java.
+
+In Spring Boot, the ApplicationContext plays a crucial role in managing the lifecycle of the beans and the overall application configuration.
+Spring Boot simplifies the setup of ApplicationContext through auto-configuration and annotation-based configuration.
+Unlike traditional Spring applications, you don't need to manually configure or load the ApplicationContext—Spring Boot 
+automatically does this when the application starts.
+
+*******  Key Concepts of ApplicationContext in Spring Boot  *******
+
+--> Auto-configuration:
+
+Spring Boot automatically configures the ApplicationContext based on the dependencies added in the project and the properties defined in application.properties or application.yml.
+For example, if you add spring-boot-starter-data-jpa as a dependency, Spring Boot will configure JPA repositories and related beans automatically.
+
+--> @SpringBootApplication:
+
+This annotation is a combination of three annotations:
+@Configuration: Indicates that the class provides Spring beans.
+@EnableAutoConfiguration: Enables auto-configuration.
+@ComponentScan: Scans the package and sub-packages for Spring components (like beans, controllers, services, etc.).
+It starts the process of auto-configuring the ApplicationContext and bootstraps the application.
+
+--> ApplicationContext Initialization:
+
+The entry point for a Spring Boot application is typically a main method with a call to SpringApplication.run(),
+which bootstraps the application and creates the ApplicationContext.
+
+--> Bean Management:
+
+Spring Boot uses the ApplicationContext to manage beans, wire dependencies, and resolve configuration properties.
+You can define beans in the context using annotations like @Component, @Service, @Repository, or by using @Bean inside a @Configuration class.
+
+--> Profiles and Environment:
+
+Spring Boot integrates environment support into the ApplicationContext, allowing you to manage different configurations for different environments (dev, prod, etc.) using profiles.
+Profiles can be defined in the application.properties or application.yml, and the context loads the corresponding configuration.
+
 
