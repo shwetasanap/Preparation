@@ -1,1 +1,114 @@
+HTTP methods in REST architecture define the type of operations performed on resources. The most commonly used methods are:
 
+GET: Retrieves data from a server. It's idempotent, meaning multiple identical requests have the same effect as one.
+
+Example: Fetching a list of users.
+POST: Sends data to the server to create a new resource.
+
+Example: Creating a new user.
+PUT: Updates an existing resource entirely. Also idempotent.
+
+Example: Replacing a user's profile data.
+PATCH: Partially updates an existing resource.
+
+Example: Modifying only the user's email.
+DELETE: Removes a resource from the server.
+
+Example: Deleting a user account.
+HEAD: Similar to GET but only retrieves metadata (headers) without the body content.
+
+OPTIONS: Returns the supported HTTP methods for a specific URL or resource.
+
+Each method in REST corresponds to actions in CRUD (Create, Read, Update, Delete) operations. REST relies on stateless communication, and HTTP methods standardize how clients interact with resources.
+
+***********************************************************************************************************************************************
+
+
+HTTP status codes in REST architecture provide feedback about the result of the request made by the client. These codes are grouped into five categories, based on their first digit:
+
+--> 1xx: Informational
+These codes indicate that the request has been received and is being processed.
+
+100 Continue: The server has received the initial part of the request and the client should continue with the rest.
+101 Switching Protocols: The server is switching to a different protocol as requested by the client.
+--> 2xx: Success
+These codes indicate that the request was successfully received, understood, and accepted.
+
+200 OK: The request was successful, and the response body contains the requested resource.
+Example: A successful GET or POST.
+201 Created: A new resource was successfully created.
+Example: After a successful POST request that creates a new resource.
+202 Accepted: The request has been accepted for processing, but the process has not been completed.
+Example: Long-running asynchronous requests.
+204 No Content: The request was successful, but there is no response body (useful for DELETE operations).
+Example: A successful DELETE with no content returned.
+
+--> 3xx: Redirection
+These codes indicate that further action is needed to complete the request, often involving redirection.
+
+301 Moved Permanently: The requested resource has been moved to a new URL permanently.
+302 Found: The resource is temporarily located elsewhere (often used for URL redirection).
+304 Not Modified: The resource has not been modified since the last request, so the client can use the cached version.
+
+--> 4xx: Client Errors
+These codes indicate that there was a problem with the client's request.
+
+400 Bad Request: The request is invalid, usually due to malformed syntax or missing required parameters.
+Example: Sending incorrect JSON data.
+401 Unauthorized: Authentication is required, but the client failed to provide valid credentials.
+Example: Missing or invalid authentication token.
+403 Forbidden: The client is authenticated but does not have permission to access the requested resource.
+Example: Trying to delete a resource without the right permissions.
+404 Not Found: The requested resource does not exist.
+Example: Accessing a non-existent endpoint.
+405 Method Not Allowed: The request method is not supported for the requested resource.
+Example: Trying to DELETE on a resource that only supports GET.
+409 Conflict: The request conflicts with the current state of the resource.
+Example: Attempting to create a resource that already exists.
+422 Unprocessable Entity: The server understands the request, but the content is invalid or cannot be processed.
+Example: Failing validation rules in a POST request.
+
+--> 5xx: Server Errors
+These codes indicate that there was a server-side problem while processing the request.
+
+500 Internal Server Error: A generic error occurred on the server.
+Example: Unhandled exception in the server-side code.
+502 Bad Gateway: The server received an invalid response from an upstream server while acting as a gateway or proxy.
+503 Service Unavailable: The server is temporarily unavailable (usually due to overload or maintenance).
+504 Gateway Timeout: The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server.
+
+-->                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Usage in REST
+In REST APIs, these status codes help communicate the result of the client's action. They provide meaningful feedback, allowing clients to handle responses correctly. For example:
+
+A successful GET request might return a 200 OK.
+A successful resource creation might return 201 Created.
+A failed request due to validation errors might return 400 Bad Request or 422 Unprocessable Entity.
+
+***********************************************************************************************************************************************
+
+Response Types :-
+
+In RESTful web services, the response types refer to the formats in which the server sends data back to the client after processing 
+a request. These formats are specified using MIME (Multipurpose Internet Mail Extensions) types in the Content-Type and Accept headers,
+ensuring the client and server can communicate effectively and interpret data consistently.
+
+
+In RESTful web services, the response types refer to the formats in which the server sends data back to the client after processing a request. These formats are specified using MIME (Multipurpose Internet Mail Extensions) types in the Content-Type and Accept headers, ensuring the client and server can communicate effectively and interpret data consistently.
+
+Here are the most common response types used in RESTful APIs:
+
+1. JSON (JavaScript Object Notation)
+    MIME Type: application/json
+    Description: JSON is the most commonly used format in REST APIs due to its simplicity and ease of use. 
+    It represents data as key-value pairs and is easy to parse for both humans and machines.
+2. XML (eXtensible Markup Language)
+    MIME Type: application/xml or text/xml
+    Description: XML was widely used before JSON became the dominant format. It uses tags to structure data 
+    in a hierarchical format. While not as lightweight as JSON, it can represent more complex relationships and metadata.
+3. HTML (Hypertext Markup Language)
+    MIME Type: text/html
+    Description: While not common for APIs, HTML is sometimes used in REST responses for web-based applications,
+    especially when returning rendered content, such as error pages.
+4. Plain Text
+    MIME Type: text/plain
+    Description: This format is used for returning plain, unformatted text. It is often used for simple responses or error messages.
