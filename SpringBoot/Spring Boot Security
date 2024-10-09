@@ -1,0 +1,9 @@
+Spring Security is a framework which provides various security features like: authentication, authorization 
+to create secure Java Enterprise Applications.
+
+Authentication is the process of knowing and identifying the user that wants to access.
+Authorization is the process to allow authority to perform actions in the application.
+
+We configure mentioned dependency in order to provide security :- spring-boot-starter-security
+
+
