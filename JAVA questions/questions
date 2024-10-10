@@ -1,0 +1,59 @@
+1) Stack and heap memory
+
+----> Stack Memory in Java
+Stored in computer RAM
+In Java, Stack Memory is a special region on the memory where the JVM (Java Virtual Machine) keeps track of method execution.
+
+Stack Memory in Java is used for static memory allocation and the execution of a thread. 
+It contains primitive values that are specific to a method and references to objects referred from the method that are in a heap.
+
+Access to this memory is in Last-In-First-Out (LIFO) order. Whenever we call a new method, a new block is created on top of 
+the stack which contains values specific to that method, like primitive variables and references to objects.
+
+When the method finishes execution, its corresponding stack frame is flushed, the flow goes back to the calling method, and space becomes available for the next method.
+If this memory is full, Java throws java.lang.StackOverFlowError.
+
+
+----> Heap Memory in Java
+Heap Memory facilitates Dynamic Memory Allocation for Java objects and JRE classes during program execution.
+Objects in the heap have global access, available from any part of the application.
+
+ Differenc
+---> Java Heap Space is used throughout the application, but Stack is only used for the method — or methods — currently running.
+
+******************************************************************************************************************************************************************************************
+
+2) Static keyword
+
+Used with method , variables and class
+In  case of multiple blocks then they will execute in the order they are defined.
+That’s the reason, values initialized by first block are overwritten by second block.
+
+
+In Java, the main difference between static variables, static methods, and static classes 
+is that static variables and methods are associated with a class, while a static class is a class type
+
+
+A static variable is instantiated once, a static method can be called from a class without instantiating 
+an instance of the class, a static class cannot be instantiated. 
+
+
+******************************************************************************************************************************************************************************************
+3) System.out.println() and  System.err.println() 
+
+System: It is a final class defined in the java.lang package.
+out: This is an instance of PrintStream type, which is a public and static member field of the System class.
+println(): As all instances of the PrintStream class have a public method println(), we can invoke the same on out as well. 
+This is an upgraded version of print(). It prints any argument passed to it and adds a new line to the output. 
+We can assume that System.out represents the Standard Output Stream.
+
+
+System.out.println() will print to the standard out of the system.	              System.err.println() will print to the standard error.
+System.out.println() is mostly used to display results on the console.	          System.err.println( is mostly used to output error texts.
+It gives output on the console with the default(black) color.	                    It also gives output on the console but most of the IDEs give it a red color to differentiate.
+
+
+******************************************************************************************************************************************************************************************
+
+4) stack or heap memory is cleared in the garbage collection
+Garbage Collection runs on the heap memory to free the memory used by objects that don't have any reference. 
