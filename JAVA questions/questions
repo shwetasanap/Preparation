@@ -57,3 +57,198 @@ It gives output on the console with the default(black) color.	                  
 
 4) stack or heap memory is cleared in the garbage collection
 Garbage Collection runs on the heap memory to free the memory used by objects that don't have any reference. 
+
+******************************************************************************************************************************************************************************************
+
+5) Java supports several key object-oriented programming (OOP) features:
+
+---> Encapsulation: Bundling the data (attributes) and methods (functions) that operate on the data into a single unit, usually a class. 
+Access to the data is restricted to methods within the class, often using access modifiers (private, public, protected).
+
+---> Inheritance: The ability to create a new class (subclass) that inherits properties and behaviors (methods) from an existing class
+(superclass). This promotes code reuse and establishes a hierarchical relationship between classes.
+
+---> Polymorphism: The ability to treat objects of different classes that share a common superclass as objects of that superclass.
+This includes method overloading (same method name with different parameters) and method overriding (subclass providing a specific implementation of a method already defined in its superclass).
+
+---> Abstraction: The concept of hiding complex implementation details and showing only the essential features of an object. 
+This is often achieved using abstract classes and interfaces, allowing you to define methods that must be implemented by 
+subclasses without specifying how they should be implemented.
+
+---> Classes and Objects: Java uses classes as blueprints to create objects. An object is an instance of a class, and it encapsulates 
+both data and behavior.
+
+---> Method Overriding: A subclass can provide a specific implementation of a method that is already defined in its superclass. 
+This is a key aspect of achieving polymorphism.
+
+---> Interfaces: Java allows the definition of interfaces, which are contracts that classes can implement.
+An interface can contain abstract methods (without implementation) and constants, promoting a way to achieve abstraction and
+multiple inheritance.
+
+******************************************************************************************************************************************************************************************
+
+6) Diamond problem and it's solution 
+
+The "diamond problem" in Java arises when a class inherits from two classes that both inherit from a common superclass, 
+creating an ambiguous situation regarding which superclass's methods or properties should be used. This is particularly 
+relevant in languages that support multiple inheritance, like C++, but Java handles this differently.
+
+
+Sol-1 :-  Single inheritance
+sol-2 :- use interfaces
+
+Referring to Default Methods: When a class implements multiple interfaces that have the same default method, super allows 
+the class to specify which interface's implementation to invoke.
+
+Syntax: The syntax InterfaceName.super.methodName() is used to call a default method from a specific interface.
+In this case, Car.super.start(); calls the start() method defined in the Car interface.
+
+E.g. :- 
+
+interface Vehicle {
+    void start();
+}
+
+interface Car {
+    default void start() {
+        System.out.println("Car is starting.");
+    }
+}
+
+interface Motorcycle {
+    default void start() {
+        System.out.println("Motorcycle is starting.");
+    }
+}
+
+class HybridVehicle implements Car, Motorcycle {
+    @Override
+    public void start() {
+        // Resolve ambiguity by explicitly calling one of the default methods
+        Car.super.start(); // or Motorcycle.super.start();
+        System.out.println("HybridVehicle is starting.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HybridVehicle hv = new HybridVehicle();
+        hv.start();
+    }
+}
+******************************************************************************************************************************************************************************************
+
+7) Difference between local and instance variable
+
+Feature	                   Local Variables	                         Instance Variables
+
+Scope                  	Limited to method/block	                    Accessible throughout the class
+Initialization	         Must be initialized explicitly	             Automatically initialized to default values
+Memory Location	            Stored on the stack	                     Stored in the heap
+Lifetime	             Exists only during method execution	           Exists as long as the object exists
+
+******************************************************************************************************************************************************************************************
+
+8) Difference between arraylist and linkedlist
+
+Feature	                                 ArrayList	                    LinkedList
+Data Structure                        	Dynamic array	               Doubly linked list
+Access Time                           O(1)	                               O(n)
+Insertion/Removal                    	O(n)	                       O(1) at ends; O(n) elsewhere
+Memory Overhead	                     Less overhead	               More overhead due to pointers
+Use Case                           	Frequent access by index	      Frequent insertions/removals
+
+
+******************************************************************************************************************************************************************************************
+
+9) Difference between hashmap and treemap
+
+
+
+Feature	                             HashMap                                       	TreeMap
+Data Structure	                    Hash table	                                    Red-black tree
+Ordering	                          No order	                                      Sorted order
+Access Time	                       O(1)                                           average	O(log n)
+Space Complexity                   Less overhead                                 	More overhead
+Null Keys/Values	                 One null key, multiple null values	             No null keys, but allows null values
+Use Case                         	Fast access, no order needed	                   Sorted keys required
+
+
+******************************************************************************************************************************************************************************************
+
+10) Difference between hashset and treeset
+
+
+Feature	                            HashSet	                                        TreeSet
+Data Structure	                   Hash table                                     	Red-black tree
+Ordering	                         No order                                       	Sorted order
+Access Time	                      O(1)                                           average	O(log n)
+Space Complexity	                Less overhead	                                  More overhead
+Null Elements	                   Allows one null	                               No null elements allowed
+Use Case	                       Fast access, no order needed	                   Sorted elements required
+
+
+******************************************************************************************************************************************************************************************
+
+11) Difference between iterator and listiterator
+
+
+Feature	                            Iterator	                                      ListIterator
+Supported Collections	              Any Collection	                                  Only List
+Direction of Traversal	             Forward only	                              Forward and backward
+Modification	                       Removes only	                            Removes and modifies elements
+Additional Methods	                 Basic methods only                      	More methods for list manipulation
+Methods	                            hasNext(), next(), remove()	            hasNext(), next(), hasPrevious(), previous(),
+                                                                           nextIndex(), previousIndex(), set(E e), add(E e)
+
+******************************************************************************************************************************************************************************************
+
+
+12) what is the purpose of java.util.concurrent package
+
+The package includes thread-safe variants of commonly used collections, such as:
+
+ConcurrentHashMap: A thread-safe version of HashMap that allows concurrent access and modifications without blocking the entire map.
+
+
+It provides several synchronization constructs, such as:
+
+Locks: The Lock interface and its implementations (like ReentrantLock) offer more flexible locking mechanisms than the traditional
+synchronized methods/blocks.
+
+Condition Variables: Condition objects allow threads to wait for specific conditions and notify others when conditions change, 
+enhancing the synchronization capabilities.
+
+
+******************************************************************************************************************************************************************************************
+
+13) How does exception propagate throughout the java code
+
+
+
+
+******************************************************************************************************************************************************************************************
+14) What is Java EE
+
+Java EE, or Java Platform, Enterprise Edition, is a set of specifications and standards that extend the Java SE (Standard Edition) 
+to provide a robust platform for developing large-scale, distributed, multi-tiered enterprise applications. 
+
+******************************************************************************************************************************************************************************************
+
+15) Difference between thread and process
+
+
+Threads and processes are fundamental concepts in operating systems and concurrent programming, 
+but they serve different purposes and have distinct characteristics. 
+
+
+Feature	                                   Process	                                                Thread
+Definition	                               Independent program in execution	           Smallest unit of processing within a process
+Memory Allocation	                        Separate memory space	                      Shares memory space with other threads
+Overhead                                 	Higher overhead (creation/management)	      Lower overhead (creation/management)
+Isolation	                                Isolated from other processes	              Not isolated; can affect each other
+Life Cycle	                               More complex life cycle                          	Simpler life cycle
+Use Cases	                                Suitable for isolated tasks	               Suitable for concurrent tasks
+
+
+******************************************************************************************************************************************************************************************
