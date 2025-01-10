@@ -1,14 +1,16 @@
 1. Introduction :-
-
+ESAG
 Hello -- ,
 
 Good morning/ Good afternoon/ Good Evening ,
 
-I am shweta sanap. I have complted my graduation in computer science from PICT with 9.81 CGPA.
-Currently, I am working as a JAVA developer in BFDL since past 2 years where we have been delivering digitalized lending platform.
-While working in Bajaj , i have primarily worked on JAVA , SpringBoot , RestFul arch , s/w debugging and also have used db's like MySQL,MongoDB.
-Also have pretty much knowledge about version control system like GIT.
-Recently , i have received a spot award for good performance in my team.
+I am shweta sanap.
+I have completed my graduation in computer science from PICT with 9.81 CGPA.
+Currently, I am working as a JAVA developer in BFDL since past 2.6 years where we have been delivering digitalized lending platform.
+I am quite proficient in JAVA , SpringBoot , RestFul arch , s/w debugging and also have used db's like MySQL,MongoDB.
+Also have pretty much knowledge about version control system like GIT,GITLAB.
+I have also been recognised for my work and have received a spot award for good performance in my team.
+So, with my skills and expertise i believe i would be able to contribute for the growth of this organisation.
 
 
 2. Why leaving Bajaj :-
@@ -17,5 +19,15 @@ Recently , i have received a spot award for good performance in my team.
 my strengths and expertise to make a meaningful impact. I believe that a new environment will provide fresh challenges in order to increase my growth."
 
 
-3. Challenges faced in project :-
+3. Project work :-
+
+"As a Java Developer on the Spring Boot project, I contributed in several important areas:
+
+Building and Designing APIs: I helped design and build the RESTful APIs using Spring Boot. I made sure that the APIs were efficient, easy to use, and well-structured.
+
+Database Integration: I worked with Spring Data JPA to connect the application to the database. I created and optimized database queries to ensure fast and accurate data retrieval.
+
+Security: I set up security features using Spring Security, including user authentication and authorization. This made sure only the right users could access sensitive parts of the application.
+
+Writing Tests: I wrote unit and integration tests to ensure that the application was reliable and bug-free. I used JUnit and Mockito to test different parts of the system.
 
