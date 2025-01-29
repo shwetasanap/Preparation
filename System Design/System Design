@@ -98,3 +98,30 @@ to occur and then executes a predefined set of actions when that event is trigge
 
 * E-commerce: EDA can handle tasks including order placing, inventory changes, and payment processing in e-commerce platforms. Order monitoring in real time, inventory control, and smooth connection with outside services are all made possible by it.
 
+
+* Microkernel Architecture Pattern: Centers around a core system (microkernel) with additional features and functionalities added as plugins or extensions.
+
+The Microkernel Architecture Pattern is a system design approach where a small, core system the microkernel manages essential functions.
+
+This design makes the system adaptable and easier to maintain because new functionalities can be integrated without altering the core system.
+
+
+* Microservices Architecture Pattern: Breaks down applications into small, independent services that can be developed, deployed, 
+and scaled independently.
+
+Data Flow Diagrams or DFDs is defined as a graphical representation of the flow of data through information. DFD is designed to show how a system is divided into smaller portions and to highlight the flow of data between these parts.
+
+Square	        Defines the source of destination of data
+Arrow	        Identifies data flow and acts as a pipeline throughwhich information flows
+Circle/Bubble	Represents a process that transforms incoming data flow into outgoing data
+Open Rectangle	It is a data store or data at rest/temporary repository of data
+
+High-Level Design is a initial step in development of applications where overall structure of a system is planned. 
+High-Level design focuses mainly on how different components of the system work together without getting to know about
+internal coding and implementation. This helps everyone involving in the project to understand the goals and ensures good 
+communication during development.
+
+
+Low-Level Design (LLD) is the detailed design process in the software development process that focuses on implementing 
+individual components described in the High-Level Design. It provides a blueprint for how each component in the system 
+will function and process and it also includes UML Diagrams, data structures, and algorithms. 
