@@ -47,6 +47,13 @@ provide them.
 * Event-Driven Architecture Pattern: Uses events to trigger and communicate between decoupled components,   
   enhancing responsiveness and scalability.
 
+When an event producer detects a state change, it produces an event and represents event as a message. 
+In this stage, producer doesn’t know the event consumer. It just sends the event to the router. 
+The router then processes event and performs required response to the event. After that, router informs event 
+consumer and sends the event to the consumer. The output of the event is result of event consumption.  
+
+In event-driven architecture, a "listener" is a function or component that actively waits for a specific event
+to occur and then executes a predefined set of actions when that event is triggered.
 
 	With event-driven architecture (EDA), various system components communicate with one another by generating, identifying, and reacting to events.
 	Components of Event-Driven Architecture(EDA)
