@@ -1,0 +1,93 @@
+Systems Design is the process of defining the architecture, components, modules, interfaces, and data for a system to satisfy 
+specified requirements in order to meet objectives and expectations of an organisation.
+
+
+Objectives of Systems Design
+
+- [ ] Practicality: We need a system that should be targetting the set of audiences(users) corresponding to which they are designing.
+- [ ] Accuracy: Above system design should be designed in such a way it fulfills nearly all requirements around which it is designed be it functional o non-functional requirements.
+- [ ] Completeness: System design should meet all user requirements
+- [ ] Efficient: The system design should be such that it should not overuse surpassing the cost of resources nor under use as it will by now we know will result in low thorough put (output) and less response time(latency).
+- [ ] Reliability: The system designed should be in proximity to a failure-free environment for a certain period of time.
+- [ ] Optimization: Time and space are just likely what we do for code chunks for individual components to work in a system.
+- [ ] Scalable(flexibility):System design should be adaptable with time as per different user needs of customers which we know will keep on changing on time.
+
+
+System design components are the building blocks that make up a system.
+The components of system design refer to the different elements that are involved in the design of a computer system as follows:
+
+
+- [ ] Load Balancers: Distribute incoming traffic across multiple servers to optimize performance and ensure reliability.
+- [ ] Key-Value Stores: Storage systems that manage data as pairs of keys and values, often implemented using distributed hash tables.
+- [ ] Blob Storage: A service for storing large amounts of unstructured data, such as media files (e.g., YouTube, Netflix).
+- [ ] Databases: Organized collections of data that facilitate easy access, management, and modification.
+- [ ] Rate Limiters: Control the maximum number of requests a service can handle in a given timeframe to prevent overload.
+- [ ] Monitoring Systems: Tools that enable administrators to track and analyze infrastructure performance, including bandwidth and CPU usage.
+
+
+
+There are various ways to organize the components in software or system architecture. 
+And the different predefined organization of components in software architectures are known as software architecture patterns. 
+
+
+
+* Client-Server Architecture Pattern: Separates the system into two main components: clients that request services and servers that
+provide them.
+
+  User enters the URL(Uniform Resource Locator) of the website or file. The Browser then requests the DNS(DOMAIN NAME SYSTEM) Server.
+	DNS Server lookup for the address of the WEB Server.
+	The DNS Server responds with the IP address of the WEB Server.
+	The Browser sends over an HTTP/HTTPS request to the WEB Server’s IP (provided by the DNS server).
+	The Server sends over the necessary files for the website.
+	The Browser then renders the files and the website is displayed. This rendering is done with the help of DOM (Document Object Model) interpreter, 
+  CSS interpreter, and JS Engine collectively known as the JIT or (Just in Time) Compilers.
+
+
+
+* Event-Driven Architecture Pattern: Uses events to trigger and communicate between decoupled components,   
+  enhancing responsiveness and scalability.
+
+
+	With event-driven architecture (EDA), various system components communicate with one another by generating, identifying, and reacting to events.
+	Components of Event-Driven Architecture(EDA)
+  Event-Driven Architecture (EDA) has several key elements that helps in facilitating communication and respond to events. 
+  The following are the main components of an event-driven architecture:
+
+    * Event Source
+      This refers to any system or component that generates events. Examples include user interfaces, sensors, databases, and external systems.
+      Event sources are crucial as they initiate the flow of information that drives the entire architecture.
+   
+    * Event
+    * The core unit of communication in EDA, representing significant occurrences or changes in state.
+    * Events are emitted by sources and can encapsulate various types of information, serving as the primary means through which different components communicate.
+    * 
+    * Event Broker/Event Bus
+    * Acting as a central hub, the event broker or event bus facilitates communication between various components by handling event distribution, filtering, and routing. It ensures that events reach the right subscribers, promoting efficient interaction within the system.
+    * 
+    * Publisher
+    * This component generates and sends events to the event bus.
+    * Publishers are responsible for emitting events when specific conditions or actions occur, effectively translating changes in the system into actionable messages that can trigger responses.
+    * 
+    * Subscriber
+    * A component that shows interest in particular event types and subscribes to them. Subscribers listen for relevant events on the event bus and take action accordingly.
+    * This allows for a responsive architecture where components react dynamically to changes.
+    * 
+    * Event Handler
+    * This is a piece of code or logic linked to a subscriber that defines how to process received events.
+    * Event handlers are essential to the system's responsiveness because they decide what precise steps should be taken in response to an event.
+    * 
+    * Dispatcher
+    * In some EDA implementations, a dispatcher is used to route events to the appropriate event handlers.
+    * This part controls how events go through the system, making sure they are routed to the appropriate locations for processing.
+    * 
+    * Aggregator
+    * Several related events are combined by an aggregator to create a single, more significant event.
+    * This reduces complexity by simplifying the management of numerous individual events, making it easier for subscribers to process relevant information.
+
+    * Listener
+    * A component that actively monitors the event bus for events and reacts to them.
+    * Listeners are often tailored to specific event types, ensuring that they respond promptly to changes that are relevant to their function.
+
+
+* E-commerce: EDA can handle tasks including order placing, inventory changes, and payment processing in e-commerce platforms. Order monitoring in real time, inventory control, and smooth connection with outside services are all made possible by it.
+
