@@ -93,7 +93,6 @@ a request. These formats are specified using MIME (Multipurpose Internet Mail Ex
 ensuring the client and server can communicate effectively and interpret data consistently.
 
 
-In RESTful web services, the response types refer to the formats in which the server sends data back to the client after processing a request. These formats are specified using MIME (Multipurpose Internet Mail Extensions) types in the Content-Type and Accept headers, ensuring the client and server can communicate effectively and interpret data consistently.
 
 Here are the most common response types used in RESTful APIs:
 
