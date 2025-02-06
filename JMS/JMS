@@ -30,6 +30,10 @@ In PTP model, there is no timing dependency between sender and receiver.
 2) Publisher/Subscriber Messaging Domain
 
 Publisher/Subscriber (Pub/Sub) Messaging Domain
+
+
+
+https://www.youtube.com/watch?v=9WGSVnhlOHE
 In Pub/Sub model, one message is delivered to all the subscribers. It is like broadcasting. Here, Topic is used as a message 
 oriented middleware that is responsible to hold and deliver messages.
 
