@@ -146,3 +146,6 @@ The MessageListener provides a way to decouple message processing from the rest 
 messages in a non-blocking, event-driven manner.
 
 The MessageListener interface has a single method called onMessage(), which is invoked automatically when a message is received.
+
+ MessageConsumer consumer = session.createConsumer(queue);
+        consumer.setMessageListener(new MyMessageListener());
