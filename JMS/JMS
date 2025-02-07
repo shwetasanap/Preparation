@@ -52,6 +52,15 @@ It is through a session that you create producers and consumers, and it controls
 --->Message Listener: A message listener is an object that implements the MessageListener interface.
 It listens for incoming messages and processes them as they arrive, without the need for polling.
 
+In JMS (Java Message Service), a MessageListener is an interface that allows you to handle incoming messages asynchronously.
+By implementing this interface, you can define how messages should be processed when they arrive at a destination (either a queue or a topic).
+The MessageListener provides a way to decouple message processing from the rest of your application code, allowing the system to react to 
+messages in a non-blocking, event-driven manner.
+
+The MessageListener interface has a single method called onMessage(), which is invoked automatically when a message is received.
+
+ MessageConsumer consumer = session.createConsumer(queue);
+        consumer.setMessageListener(new MyMessageListener());
 
 Exception Handling:
 
@@ -140,12 +149,4 @@ Understanding JMS’s messaging models, destinations, producers, consumers, and 
 messaging systems in enterprise Java applications.
 
 
-In JMS (Java Message Service), a MessageListener is an interface that allows you to handle incoming messages asynchronously.
-By implementing this interface, you can define how messages should be processed when they arrive at a destination (either a queue or a topic).
-The MessageListener provides a way to decouple message processing from the rest of your application code, allowing the system to react to 
-messages in a non-blocking, event-driven manner.
 
-The MessageListener interface has a single method called onMessage(), which is invoked automatically when a message is received.
-
- MessageConsumer consumer = session.createConsumer(queue);
-        consumer.setMessageListener(new MyMessageListener());
