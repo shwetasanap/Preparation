@@ -29,6 +29,10 @@ Queue: A point-to-point messaging model where each message sent to the queue is 
 Topic: A publish-subscribe messaging model where each message sent to the topic is delivered to all consumers subscribed to that topic. 
 This is used for multicast communication (one-to-many).
 
+ MessageConsumer consumer = session.createConsumer(queue);
+consumer.setMessageListener(new MyMessageListener());
+
+
 --->Connection: A connection represents a session between a client (producer or consumer) and the JMS provider (the messaging system).
 A connection is established to send and receive messages.
 
