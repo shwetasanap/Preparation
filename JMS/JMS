@@ -1,40 +1,144 @@
-JMS (Java Message Service) is an API that provides the facility to create, send and read messages. It provides loosely coupled, reliable and asynchronous communication.
-
-JMS is also known as a messaging service.
-
-Messaging is a technique to communicate applications or software components.
-
-JMS is mainly used to send and receive message from one application to another.
-
-Generally, user sends message to application. But, if we want to send message from one application to another, we need to use JMS API.
-
-Consider a scenario, one application A is running in INDIA and another application B is running in USA. To send message from A application to B, we need to use JMS.
+Java Message Service (JMS) is a Java API that allows applications to create, send, receive, and read messages in a messaging system. 
+It is a part of Java EE (Enterprise Edition) and provides a standard interface for messaging between different Java applications 
+or components, which can be crucial for building scalable and loosely coupled distributed systems.
 
 
-1) Asynchronous: To receive the message, client is not required to send request.
-                 Message will arrive automatically to the client.
+Key Concepts of JMS:
 
-2) Reliable: It provides assurance that message is delivered.
+---> Message: 
+A message in JMS represents a communication unit between different components in a distributed system. 
 
-There are two types of messaging domains in JMS.
+A message can contain:
 
-1) Point-to-Point Messaging Domain
+TextMessage: A simple text-based message (string).
+ObjectMessage: A message containing a Serializable Java object.
+BytesMessage: A message containing a stream of uninterpreted bytes.
+MapMessage: A message containing a set of name-value pairs (like a map).
+StreamMessage: A message containing a sequence of primitive values.
+Message: The base interface for all JMS message types.
 
-In PTP model, one message is delivered to one receiver only. Here, Queue is used as a message oriented middleware (MOM).
-The Queue is responsible to hold the message until receiver is ready.
-In PTP model, there is no timing dependency between sender and receiver.
+--->Message Producer: A message producer is responsible for sending messages to a destination (e.g., a queue or topic). 
+The producer creates a connection to the messaging server and sends messages.
+
+--->Message Consumer: A message consumer receives messages from a destination.
+It listens to a queue or topic, retrieves the message, and processes it.
+
+--->JMS Destinations:
+
+Queue: A point-to-point messaging model where each message sent to the queue is received by exactly one consumer. This is used for unicast communication (one-to-one).
+Topic: A publish-subscribe messaging model where each message sent to the topic is delivered to all consumers subscribed to that topic. 
+This is used for multicast communication (one-to-many).
+
+--->Connection: A connection represents a session between a client (producer or consumer) and the JMS provider (the messaging system).
+A connection is established to send and receive messages.
+
+The Connection object is created using a ConnectionFactory, which is a factory object provided by the JMS provider. 
+The ConnectionFactory is responsible for creating Connection instances.
+
+After the Connection object is created, it is necessary to start the connection by calling the start() method. 
+This is required for message consumption because JMS consumers typically start receiving messages only after the connection is started.
+When you're done using the connection, you should stop the connection to clean up resources and free up the communication channel. 
+This can be done by calling the stop() method.
+
+--->Session: A session is a single-threaded context for producing and consuming messages. It is used to create messages and manage 
+message producers and consumers.
+A Connection object can be used to create sessions. A Session in JMS is a single-threaded context for producing and consuming messages.
+It is through a session that you create producers and consumers, and it controls the delivery of messages.
+
+--->Message Listener: A message listener is an object that implements the MessageListener interface.
+It listens for incoming messages and processes them as they arrive, without the need for polling.
+
+
+Exception Handling:
+
+JMS Connection objects can throw exceptions during the connection setup or when handling messages. For example,
+JMSException can be thrown during creation or during operations like start(), stop(), or message delivery.
+
+
+Types of JMS Messaging Models:
+--->Point-to-Point (Queue):
+
+A Queue allows for point-to-point messaging, meaning that each message sent to the queue is consumed by only one receiver.
+Use case: A service where one consumer handles each request.
+
+--->Publish/Subscribe (Topic):
+
+A Topic allows multiple consumers to receive the same message.
+Use case: Broadcasting messages to multiple subscribers (e.g., news, stock prices).
+
+
+
+--> JMS Provider:
+A JMS provider is a messaging system that implements the JMS API. It manages the queues, topics, connections, and messages. Some popular JMS providers include:
+
+ActiveMQ
+Apache Kafka (while Kafka is not JMS-compliant, it’s often used as a messaging system in Java environments)
+IBM MQ
+Oracle AQ
+
+-->JMS Architecture:
+A typical JMS architecture involves:
+
+JMS Client (Producer/Consumer): The Java application that interacts with the messaging system.
+JMS Provider: The messaging system that provides infrastructure for JMS.
+Queue/Topic: The destination where messages are sent or received.
 
 
 
 
-2) Publisher/Subscriber Messaging Domain
+Sending a Message (Producer):
 
-Publisher/Subscriber (Pub/Sub) Messaging Domain
+import javax.jms.*;
+
+public class JMSProducer {
+    public static void main(String[] args) throws JMSException {
+        ConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        try (Connection connection = factory.createConnection();
+             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE)) {
+
+            Queue queue = session.createQueue("exampleQueue");
+            MessageProducer producer = session.createProducer(queue);
+            TextMessage message = session.createTextMessage("Hello, JMS!");
+            
+            producer.send(message);
+            System.out.println("Sent: " + message.getText());
+        }
+    }
+}
 
 
+Receiving a Message (Consumer):
 
-https://www.youtube.com/watch?v=9WGSVnhlOHE
-In Pub/Sub model, one message is delivered to all the subscribers. It is like broadcasting. Here, Topic is used as a message 
-oriented middleware that is responsible to hold and deliver messages.
+import javax.jms.*;
 
-In PTP model, there is timing dependency between publisher and subscriber.
+public class JMSConsumer {
+    public static void main(String[] args) throws JMSException {
+        ConnectionFactory factory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        try (Connection connection = factory.createConnection();
+             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE)) {
+
+            Queue queue = session.createQueue("exampleQueue");
+            MessageConsumer consumer = session.createConsumer(queue);
+
+            connection.start();
+            Message message = consumer.receive(1000);
+            if (message instanceof TextMessage) {
+                System.out.println("Received: " + ((TextMessage) message).getText());
+            }
+        }
+    }
+}
+
+Conclusion:
+JMS simplifies message-oriented middleware (MOM) in Java applications, enabling efficient communication between decoupled components. 
+It supports both synchronous and asynchronous communication patterns, making it versatile for a variety of distributed system designs.
+Understanding JMS’s messaging models, destinations, producers, consumers, and various message types is essential for building robust 
+messaging systems in enterprise Java applications.
+
+
+In JMS (Java Message Service), a MessageListener is an interface that allows you to handle incoming messages asynchronously.
+By implementing this interface, you can define how messages should be processed when they arrive at a destination (either a queue or a topic).
+The MessageListener provides a way to decouple message processing from the rest of your application code, allowing the system to react to 
+messages in a non-blocking, event-driven manner.
+
+The MessageListener interface has a single method called onMessage(), which is invoked automatically when a message is received.
