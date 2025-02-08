@@ -1,0 +1,109 @@
+The Exception Handling in Java is one of the powerful mechanism to handle the runtime errors so that the normal flow of 
+the application can be maintained.
+
+In Java, an exception is an event that occurs during the execution of a program that disrupts the normal flow of instructions.
+These exceptions can occur for various reasons, such as invalid user input, file not found, or division by zero.
+When an exception occurs, it is typically represented by an object of a subclass of the java.lang.Exception class.
+
+--> Built In exceptions
+
+1. Checked Exceptions
+
+Checked exceptions are the exceptions that are checked at compile-time. This means that the compiler verifies that the 
+code handles these exceptions either by catching them or declaring them in the method signature using the throws keyword.
+
+2. Unchecked Exceptions (Runtime Exceptions)
+
+Unchecked exceptions, also known as runtime exceptions, are not checked at compile-time. These exceptions usually occur 
+due to programming errors, such as logic errors or incorrect assumptions in the code. They do not need to be declared 
+in the method signature using the throws keyword, making it optional to handle them.
+
+3. Errors
+
+Errors represent exceptional conditions that are not expected to be caught under normal circumstances. 
+They are typically caused by issues outside the control of the application, such as system failures or resource exhaustion. 
+
+OutOfMemoryError: It occurs when the Java Virtual Machine (JVM) cannot allocate enough memory for the application.
+StackOverflowError: It is thrown when the stack memory is exhausted due to excessive recursion.
+NoClassDefFoundError: It indicates that the JVM cannot find the definition of a class that was available at compile-time.
+
+
+try
+The "try" keyword is used to specify a block where we should place an exception code. It means we can't use try block alone. 
+The try block must be followed by either catch or finally.
+
+catch
+The "catch" block is used to handle the exception. It must be preceded by try block which means we can't use catch block alone. 
+It can be followed by finally block later.
+
+finally
+The "finally" block is used to execute the necessary code of the program. It is executed whether an exception is handled or not.
+
+throw
+The "throw" keyword is used to throw an exception.
+
+throws
+The "throws" keyword is used to declare exceptions. It specifies that there may occur an exception in the method. 
+It doesn't throw an exception. It is always used with method signature.
+
+
+
+You can handle multiple types of exceptions by providing multiple catch blocks, each catching a different type of exception.
+Provide multiple catch blocks with most specific type of exceptions to most general type of exceptions.
+
+-->Use Custom Exceptions: 
+
+Create custom exception classes for specific error conditions in your application. 
+This helps in providing meaningful error messages and makes your code more self-documenting. Extending Exception class
+
+1) To catch and provide specific treatment to a subset of existing Java exceptions.
+2) Business logic exceptions: These are the exceptions related to business logic and workflow. 
+It is useful for the application users or the developers to understand the exact problem.
+
+
+Exception propagation :-
+
+The run-time system searches the call stack for an Exception handler
+It starts searching from the method where the exception occurred and proceeds backward through the call stack.
+If a handler is found, the exception is passed to it.
+If no handler is found, the default exception handler terminates the program and prints the stack trace.
+
+
+Exception Chaining :-
+
+Exception Chaining happens when one exception is thrown due to another exception. This helps developers to identify
+under what situation an Exception was thrown that in turn caused another Exception in the program. For example, 
+we have a method that reads two numbers and then divides them. The method throws ArithmeticException when we divide 
+a number by zero. While retrieving the denominator number from the array, there might have been an IOException that 
+prompted to return of the number as 0 that resulted in ArithmeticException. The original root cause in this scenario was the IOException. 
+
+
+A stack trace is information consisting of names of classes and methods that were invoked right from the start of program 
+execution to the point where an exception occurred. This is useful to debug where exactly the exception occurred and due to what reasons. 
+
+
+
+
+
+
+Exception Handling with Method Overriding in Java :-
+
+Rule 1: If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception.
+but can declare unchecked exception.
+
+Exception---> child class cannot override parent class method as it does not throws exeption
+
+Rule 2: If the superclass method declares an exception, subclass overridden method can declare the same subclass
+exception or no exception but cannot declare parent exception.
+
+final keyword: By using this keyword,
+we can declare a variable as final (meaning, variable value cannot be changed).
+we can declare a method as final (meaning, that method cannot be overridden).
+we can declare a class as final (meaning, that class cannot be extended).
+
+finally keyword: This is used in conjunction with the try-catch block or the try block where we want to run some logic whether
+or not an exception has occurred.
+
+finalize keyword: This is a method called by the Garbage Collector just before destroying the objects no longer needed in the program.
+
+--> try, catch and finally blocks forms single unit no statements in between
