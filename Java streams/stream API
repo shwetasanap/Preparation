@@ -70,5 +70,5 @@ The String::toUpperCase in the map() operation is an example of using a method r
 each element in a stream. In this case, it transforms each string in the stream to its uppercase equivalent.
 --> class :: static method name
 --> class :: getMethodName
---> object::methodName) are used to refer to an instance method of a specific object.
+--> object::methodName are used to refer to an instance method of a specific object.
 --> ClassName::new) are used to instantiate objects.
