@@ -1,4 +1,6 @@
 1) Stack and heap memory
+In Java, memory refers to the space allocated by the Java Virtual Machine (JVM) for storing variables, objects, methods,
+and other data during the execution of a program.
 
 ----> Stack Memory in Java
 Stored in computer RAM
@@ -25,7 +27,7 @@ Objects in the heap have global access, available from any part of the applicati
 
 2) Static keyword
 
-Used with method , variables and class
+Used with method,variables and class
 In  case of multiple blocks then they will execute in the order they are defined.
 That’s the reason, values initialized by first block are overwritten by second block.
 
@@ -49,7 +51,7 @@ We can assume that System.out represents the Standard Output Stream.
 
 
 System.out.println() will print to the standard out of the system.	              System.err.println() will print to the standard error.
-System.out.println() is mostly used to display results on the console.	          System.err.println( is mostly used to output error texts.
+System.out.println() is mostly used to display results on the console.	          System.err.println() is mostly used to output error texts.
 It gives output on the console with the default(black) color.	                    It also gives output on the console but most of the IDEs give it a red color to differentiate.
 
 
@@ -260,7 +262,9 @@ To use synchronized keywords in Java we have two ways 1) Synchronized method 2) 
 
 
 A volatile keyword is a field modifier that provides a visibility guarantee. Java uses volatile as an indicator to the Java compiler and thread that does not cache the value of this variable and always reads it from the main memory. The volatile keyword is only used with variables not with methods or classes.
-
+When a variable is marked as volatile, any read or write to that variable is done directly from the main memory (not from thread-local caches).
+This ensures that the latest value of the variable is visible to all threads. Without volatile, each thread might have its own copy of the variable 
+in its cache, and changes made by one thread might not be visible to others.
 Example:-
 
 class Test
