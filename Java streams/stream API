@@ -62,6 +62,9 @@ The map() method in the Java Stream API is an intermediate operation that allows
 the stream into another form, typically of a different type. It applies a given function to each element of the stream, 
 resulting in a new stream where each element has been transformed.
 
+A method reference in Java is a shorthand notation for calling a method in a more concise way. When using the map() method in Java
+Streams, a method reference can be used to refer to a method of a class or an instance instead of using a lambda expression.
+
 
 The String::toUpperCase in the map() operation is an example of using a method reference to apply a transformation to
 each element in a stream. In this case, it transforms each string in the stream to its uppercase equivalent.
