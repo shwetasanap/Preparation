@@ -26,3 +26,8 @@ Inheritance and Serialization:
 If a subclass doesn't implement Serializable but its superclass does, the subclass's non-serializable fields will be skipped. 
 However, the superclass's fields will still be serialized.
 If a superclass implements Serializable, the subclass will inherit this behavior, and its fields will also be serialized (unless marked transient).
+
+
+When deserializing an object, Java ensures that the class hierarchy is properly reconstructed. The parent class is deserialized first, followed by the child class.
+If the superclass has a serialVersionUID, the subclass must either declare a serialVersionUID with the same value or allow Java to generate one automatically
+based on the superclass's serialVersionUID. Otherwise, deserialization can fail if the serialVersionUID is not compatible.
