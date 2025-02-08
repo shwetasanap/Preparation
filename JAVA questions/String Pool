@@ -1,0 +1,31 @@
+String Immutability:
+
+In many programming languages, strings are immutable, meaning once created, their values cannot be changed.
+This makes them ideal for optimization, as the same string value can be reused in different parts of a program.
+
+String Pool in Java:
+
+In Java, the String Pool is a special area in memory (often part of the heap or method area) where all the unique string literals are stored. 
+When you create a string using a string literal (e.g., "Hello"), Java checks the pool to see if the exact string already exists.
+If it does, the reference to the existing string is returned instead of creating a new object. This saves memory and improves performance.
+
+How It Works:
+
+When you create a string using a string literal (e.g., "Hello"), Java first checks the pool to see if the string "Hello" already exists.
+If it does, it simply returns the reference to the existing string.
+If it doesn't exist, Java creates a new string object, adds it to the pool, and returns the reference.
+The pool is designed to store only unique strings; no two strings with the same value will be stored separately.
+
+You can manually add strings to the pool using the intern() method:
+intern() ensures that if the string is already in the pool, it will return the reference from the pool. Otherwise, it will add the string to the pool.
+
+
+Benefits:
+
+Memory Optimization: By reusing string values from the pool, memory consumption is reduced since identical strings aren’t duplicated.
+Performance Improvement: Searching for and comparing string references in the pool is faster than comparing string objects.
+
+Drawbacks:
+
+Memory overhead for the pool: The string pool can grow in size, which might become a concern in memory-limited environments, especially if there are a lot of unique strings.
+Not all strings are pooled: Strings created at runtime (using new String(), for instance) will not automatically be added to the pool unless explicitly interned.
