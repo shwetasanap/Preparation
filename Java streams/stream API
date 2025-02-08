@@ -1,1 +1,71 @@
 https://medium.com/thefreshwrites/java-8-stream-api-interview-questions-and-answers-dd559ebffb35
+
+The Java Stream API was introduced in Java 8 to provide a more functional approach to processing sequences of elements 
+(such as collections) in a declarative way. Streams allow you to express complex data processing queries concisely while 
+being more readable and efficient compared to traditional iteration approaches (like using loops).
+
+Key Concepts:
+
+Stream:
+
+A stream is a sequence of elements that can be processed in parallel or sequentially. 
+It doesn’t store data, but instead, it computes results from a source, such as a collection, an array, or I/O channels.
+
+Pipes vs Sources:
+
+Source: The origin of the stream (e.g., a collection, array, or file).
+Pipes (Intermediate Operations): Operations that transform a stream into another stream (e.g., filter(), map(), distinct()).
+Terminal Operations: Operations that produce a result or a side-effect (e.g., collect(), forEach(), reduce()).
+
+Laziness: Streams are lazily evaluated. Intermediate operations are not executed until a terminal operation is invoked. 
+This allows for optimization (such as short-circuiting) and lazy loading of elements.
+
+Parallelism: One of the most powerful features of the Stream API is parallel processing. With minimal effort,
+you can easily process data in parallel using parallelStream(), enabling multi-core processors to process large data more efficiently.
+
+Functional Approach: Stream operations are functional in nature. They can be chained, and they allow the use of lambda expressions,
+leading to concise and expressive code.
+
+Types of Stream Operations:
+
+
+Intermediate Operations (Returns a new Stream):
+
+map(): Transforms elements.
+filter(): Filters elements based on a condition.
+distinct(): Removes duplicates.
+sorted(): Sorts elements.
+limit(): Limits the number of elements.
+
+Terminal Operations (Consumes the Stream and produces a result):
+
+forEach(): Iterates over elements and applies an action.
+collect(): Collects elements into a collection like a list, set, or map.
+reduce(): Combines elements into a single result (e.g., summing numbers).
+count(): Returns the number of elements.
+anyMatch(), allMatch(), noneMatch(): Predicate-based matching operations.
+findFirst(), findAny(): Returns the first or any element (useful in parallel streams).
+min(), max(): Finds minimum or maximum values.
+
+
+
+
+
+Chaining Filters: You can chain multiple filter() calls to apply several conditions in sequence.
+
+List<Integer> filteredNumbers = numbers.stream()
+                                        .filter(n -> n % 2 == 0)      // Even numbers
+                                        .filter(n -> n > 5)           // Numbers greater than 5
+                                        .collect(Collectors.toList());
+
+The map() method in the Java Stream API is an intermediate operation that allows you to transform each element in
+the stream into another form, typically of a different type. It applies a given function to each element of the stream, 
+resulting in a new stream where each element has been transformed.
+
+
+The String::toUpperCase in the map() operation is an example of using a method reference to apply a transformation to
+each element in a stream. In this case, it transforms each string in the stream to its uppercase equivalent.
+--> class :: static method name
+--> class :: getMethodName
+--> object::methodName) are used to refer to an instance method of a specific object.
+--> ClassName::new) are used to instantiate objects.
