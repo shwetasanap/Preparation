@@ -1,1 +1,27 @@
+Serialization in Java is the process of converting an object into a byte stream so that it can be saved to a file, sent over a network, or stored in a database.
 
+To serialize an object:
+
+The class of the object must implement the Serializable interface (which is a marker interface with no methods).
+The object can be serialized using the ObjectOutputStream class.
+out.writeObject(person);
+
+
+Deserialization is the reverse process of converting a byte stream back into a Java object.
+
+To deserialize an object:
+You use ObjectInputStream to read the object from the byte stream.
+person = (Person) in.readObject();
+
+SerialVersionUID:
+While not mandatory, it's highly recommended to declare a serialVersionUID field in your class. 
+This field helps with version control during deserialization, ensuring compatibility between serialized 
+and deserialized objects even if the class has changed.
+
+Transient Fields:
+If you want to exclude a field from serialization (e.g., sensitive data like passwords), you can mark it with the transient keyword. 
+Transient fields are not serialized.
+
+Inheritance and Serialization:
+If a subclass doesn't implement Serializable but its superclass does, the subclass's non-serializable fields will be skipped. 
+However, the superclass's fields will still be serialized.
