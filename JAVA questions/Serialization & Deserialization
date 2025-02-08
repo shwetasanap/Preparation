@@ -25,3 +25,4 @@ Transient fields are not serialized.
 Inheritance and Serialization:
 If a subclass doesn't implement Serializable but its superclass does, the subclass's non-serializable fields will be skipped. 
 However, the superclass's fields will still be serialized.
+If a superclass implements Serializable, the subclass will inherit this behavior, and its fields will also be serialized (unless marked transient).
