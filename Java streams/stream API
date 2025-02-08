@@ -6,7 +6,7 @@ being more readable and efficient compared to traditional iteration approaches (
 
 Key Concepts:
 
-Stream:
+Stream: java.util.stream package.
 
 A stream is a sequence of elements that can be processed in parallel or sequentially. 
 It doesn’t store data, but instead, it computes results from a source, such as a collection, an array, or I/O channels.
