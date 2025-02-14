@@ -1,4 +1,5 @@
 https://medium.com/thefreshwrites/java-8-stream-api-interview-questions-and-answers-dd559ebffb35
+https://www.w3resource.com/java-exercises/stream/index.php
 
 The Java Stream API was introduced in Java 8 to provide a more functional approach to processing sequences of elements 
 (such as collections) in a declarative way. Streams allow you to express complex data processing queries concisely while 
