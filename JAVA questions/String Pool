@@ -2,6 +2,7 @@ String Immutability:
 
 In many programming languages, strings are immutable, meaning once created, their values cannot be changed.
 This makes them ideal for optimization, as the same string value can be reused in different parts of a program.
+Purpose :- Avoid duplicate string creation and reduce memory overhead.
 
 String Pool in Java:
 
