@@ -311,6 +311,14 @@ sleep --> does not releases lock on resource
 wait --> releases lock on resource 
 
 
+******************************************************************************************************************************************************************************************
+
+In Java, an atomic object typically refers to an object that provides atomic operations, ensuring that operations on it are completed
+without interference, particularly in multi-threaded environments. The java.util.concurrent.atomic package provides classes like 
+AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations on single variables.
+
+
+
 
 ******************************************************************************************************************************************************************************************
 
