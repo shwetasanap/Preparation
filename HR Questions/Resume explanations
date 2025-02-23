@@ -1,0 +1,68 @@
+Facilitated seamless communication between front-end and back-end services by building and consuming RESTful APIs,
+optimizing data exchange, and boosting application responsiveness by 25%.
+
+The 25% improvement in application responsiveness was calculated by measuring the average response time before and after
+optimizing the communication between the front-end and back-end services. By streamlining API calls, minimizing API calls for each user 
+actions,
+reducing payload sizes, and optimizing data processing, we achieved a measurable reduction in response time.
+The 25% figure reflects the percentage decrease in time it takes for the application to respond to user requests
+post-optimization, calculated by comparing the pre- and post-optimization response times.
+
+
+*********************************************************************************************************************************************
+
+Modernized legacy Java code using design patterns such as Factory, Singleton, and Builder, enhancing maintainability,
+readability, and reducing bug rates by 35%.
+
+
+
+Refactor the legacy code using design patterns like Factory, Singleton, and Builder. These patterns help by creating more modular, 
+reusable, and testable code, making it easier to maintain and debug.
+Measure Post-Modernization Bug Rate:
+
+After implementing the design patterns, monitor the number of bugs over the same time period or under similar conditions. 
+Let’s say the bug count dropped to 65 from 100.
+Calculate the Percentage Reduction:
+
+Use the following formula to calculate the percentage reduction in bugs:
+Percentage Reduction=Pre-Modernization Bugs−Post-Modernization Bugs/Pre-Modernization Bugs × 100
+
+
+*********************************************************************************************************************************************
+
+Implemented AWS S3 buckets for secure, cost-effective storage and efficient management of sensitive data, reducing data
+retrieval time by 30%.
+
+
+S3 uses a distributed architecture, ensuring that data is stored across multiple availability zones and can be accessed from different 
+locations. This helps reduce latency and improves access times.
+
+AWS S3 can support parallel requests, meaning that multiple users or systems can access data at the same time without performance degradation. 
+This is in contrast to systems that may become slower as the number of users increases.
+
+
+
+*********************************************************************************************************************************************
+
+
+Led the design, development, and maintenance of scalable, high-performance Java-based microservices using Spring Boot
+with Java 11 and 17, resulting in a 35% increase in system scalability.
+
+
+
+Adopting Spring Boot: Spring Boot provides a lightweight, flexible framework that simplifies the development and deployment of microservices.
+It also comes with built-in features like auto-scaling, health checks, and easy integration with container orchestration systems 
+like Kubernetes, which helps in scaling microservices efficiently.
+
+Upgrading Java Versions: Migrating to Java 11 or Java 17 can improve performance because these newer versions come with 
+optimizations, better memory management, faster garbage collection, and improved JVM performance, all of which contribute to scalability.
+
+Factors to consider :-
+
+Response Time: Check if the system can maintain acceptable response times as traffic increases.
+Throughput: Measure the number of requests the system can handle per second or minute without performance degradation.
+Error Rate: Monitor if the error rate increases as the load increases.
+
+Do this for before and after implementation.
+
+*********************************************************************************************************************************************
