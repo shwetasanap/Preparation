@@ -313,6 +313,8 @@ wait --> releases lock on resource
 
 ******************************************************************************************************************************************************************************************
 
+20) What is an atomic object
+
 In Java, an atomic object typically refers to an object that provides atomic operations, ensuring that operations on it are completed
 without interference, particularly in multi-threaded environments. The java.util.concurrent.atomic package provides classes like 
 AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations on single variables.
@@ -321,4 +323,25 @@ AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations 
 
 
 ******************************************************************************************************************************************************************************************
+
+21) Optional class
+
+
+
+
+
+
+******************************************************************************************************************************************************************************************
+
+22) Lambda expressions
+
+
+
+
+
+******************************************************************************************************************************************************************************************
+
+23) User defined Marker interfaces
+
+
 
