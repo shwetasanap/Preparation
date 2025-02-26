@@ -390,3 +390,21 @@ It returns true if the object is of the specified type or a type that inherits f
 The getClass() method is a method of the Object class, and every Java object inherits it.
 It returns the runtime class of the object, i.e., the exact type of the object at the moment.
 ******************************************************************************************************************************************************************************************
+
+
+Object Cloning (Shallow Copy vs Deep Copy)
+
+Cloning means creating a copy of an object in Java.
+
+Shallow Copy: Only the outer object is copied. If the object has other objects inside it (like an address or list), those inner objects 
+are not copied; they are just shared between the original and the copy.
+
+ @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();  // Shallow copy (does not copy address)
+    }
+
+
+
+
+Deep Copy: Both the outer object and all the inner objects are completely copied. The original and the copied object don’t share anything.
