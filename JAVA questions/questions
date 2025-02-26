@@ -345,3 +345,48 @@ AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations 
 
 
 
+******************************************************************************************************************************************************************************************
+
+
+24) Equals() and hashCode() methods (Significance & Best Practices)
+
+The equals() and hashCode() methods in Java are fundamental for working with collections, ensuring object comparison consistency,
+and providing effective hashing mechanisms.
+
+
+Significance of equals() and hashCode()
+
+equals() Method:
+
+The equals() method is used to compare two objects for logical equality.
+By default, the equals() method in the Object class compares object references (i.e., checks if two objects are the same in memory).
+When you override equals(), you're telling Java how to compare the contents or attributes of two objects.
+
+hashCode() Method:
+
+The hashCode() method provides a unique integer (hash code) representation of an object.
+It is used in hashing algorithms to efficiently store and retrieve objects in collections like HashMap, HashSet, and Hashtable.
+The hashCode() method ensures that objects that are logically equal (i.e., equals() returns true) must have the same hash code.
+
+When you override equals(), you must also override hashCode() to maintain the general contract between them. 
+
+
+When comparing objects in equals(), use instanceof to ensure you're comparing objects of the correct type. This avoids ClassCastException
+Best Practices for Overriding equals() and hashCode()
+
+Override both methods:
+
+Whenever you override equals(), also override hashCode() to maintain the contract. Failing to do so may result in inconsistent
+behavior in hash-based collections.
+
+Use the @Override annotation:
+
+Always use the @Override annotation to ensure you're overriding the correct methods, which also improves code readability and reduces errors.
+
+
+instanceof is a keyword used in Java to check if an object is an instance of a specific class or subclass. 
+It returns true if the object is of the specified type or a type that inherits from it, and false otherwise.
+
+The getClass() method is a method of the Object class, and every Java object inherits it.
+It returns the runtime class of the object, i.e., the exact type of the object at the moment.
+******************************************************************************************************************************************************************************************
