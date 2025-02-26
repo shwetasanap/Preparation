@@ -389,6 +389,7 @@ It returns true if the object is of the specified type or a type that inherits f
 
 The getClass() method is a method of the Object class, and every Java object inherits it.
 It returns the runtime class of the object, i.e., the exact type of the object at the moment.
+
 ******************************************************************************************************************************************************************************************
 
 
@@ -404,7 +405,300 @@ are not copied; they are just shared between the original and the copy.
         return super.clone();  // Shallow copy (does not copy address)
     }
 
-
-
-
 Deep Copy: Both the outer object and all the inner objects are completely copied. The original and the copied object don’t share anything.
+
+  @Override
+    public Object clone() throws CloneNotSupportedException {
+        // Deep copy: Clone the Address object as well
+        Person clonedPerson = (Person) super.clone();
+        clonedPerson.address = (Address) address.clone();  // Deep copy for Address
+        return clonedPerson;
+    }
+
+
+The Cloneable interface is a marker interface in Java, meaning it doesn't contain any methods. 
+The purpose of this interface is to indicate that an object can be cloned using the clone() method.
+If a class does not implement Cloneable, calling the clone() method on its object will throw a CloneNotSupportedException.
+
+If you want to clone an object of a custom class, that class must implement Cloneable.
+By default, clone() performs a shallow copy (it only copies the object itself, not the objects it refers to).
+If you want a deep copy (where nested objects are cloned as well), you need to override the clone() method (method in Object class) in your 
+class and implement the deep cloning logic.
+
+----> super.clone() to perform the default cloning
+
+******************************************************************************************************************************************************************************************
+
+Aspect	                        Tight Coupling	                                                 Loose Coupling
+
+Dependency	                 Strong dependency between classes.	                         Minimal or no direct dependency.
+Flexibility	                Hard to modify without affecting other components.	         Easier to modify and extend.
+Maintainability	            Difficult to maintain and refactor.                        	Easier to maintain and refactor.
+Testability	                Difficult to test in isolation.                            	Easier to test individual components.
+Reusability	                Difficult to reuse classes independently.	                  Easier to reuse classes independently.
+
+
+
+class Engine {
+    public void start() {
+        System.out.println("Engine started");
+    }
+}
+
+class Car {
+    private Engine engine = new Engine(); // Tight coupling
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+
+
+
+interface Engine {
+    void start();
+}
+
+class PetrolEngine implements Engine {
+    public void start() {
+        System.out.println("Petrol engine started");
+    }
+}
+
+class ElectricEngine implements Engine {
+    public void start() {
+        System.out.println("Electric engine started");
+    }
+}
+
+class Car {
+    private Engine engine;
+
+    public Car(Engine engine) {
+        this.engine = engine; // Loose coupling through dependency injection
+    }
+
+    public void drive() {
+        engine.start();
+        System.out.println("Car is driving");
+    }
+}
+
+******************************************************************************************************************************************************************************************
+
+
+SOLID Principles in Java
+
+The SOLID principles are a set of design principles that help developers create more maintainable, flexible, and scalable software. 
+They are particularly useful in object-oriented programming (OOP) and are often used in Java development. 
+
+
+1. Single Responsibility Principle (SRP)
+Definition: A class should have only one reason to change, meaning it should have only one responsibility or job.
+In Java: If a class is responsible for multiple unrelated tasks, it becomes harder to maintain. 
+You should refactor such classes into smaller, focused classes, each handling one responsibility.
+
+2. Open/Closed Principle (OCP)
+Definition: Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.
+In Java: You should be able to add new functionality to a class without modifying its existing code. 
+This is often achieved using inheritance or interfaces.
+
+interface Shape {
+    double area();
+}
+
+class Circle implements Shape {
+    private double radius;
+    public Circle(double radius) { this.radius = radius; }
+    public double area() { return Math.PI * radius * radius; }
+}
+
+class Rectangle implements Shape {
+    private double width, height;
+    public Rectangle(double width, double height) { this.width = width; this.height = height; }
+    public double area() { return width * height; }
+}
+
+class AreaCalculator {
+    public double calculateArea(Shape shape) { //recieves specific shape implementation in constructor --> dependency injection
+        return shape.area();
+    }
+}
+
+3. Liskov Substitution Principle (LSP)
+Definition: Objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program.
+In Java: A subclass should be able to substitute a superclass object without altering the desired behavior of the program. 
+This means the subclass should honor the behavior expected of the superclass.
+
+
+
+class Bird {
+    public void fly() { System.out.println("Flying"); }
+}
+
+class Sparrow extends Bird {
+    public void fly() { System.out.println("Sparrow flying"); }
+}
+
+class Penguin extends Bird {
+    // Violates LSP because penguins can't fly, which breaks expected behavior
+    public void fly() { throw new UnsupportedOperationException("Penguins can't fly!"); }
+}
+
+
+4. Interface Segregation Principle (ISP)
+Definition: Clients should not be forced to depend on interfaces they do not use.
+In Java: Instead of having a large, all-encompassing interface, you should break it into smaller, more specific interfaces. 
+This way, classes implement only the methods that are relevant to them.
+
+
+
+interface Animal {
+    void eat();
+    void sleep();
+    void fly();
+}
+
+class Dog implements Animal {
+    public void eat() { /* Dog eating */ }
+    public void sleep() { /* Dog sleeping */ }
+    public void fly() { throw new UnsupportedOperationException("Dogs can't fly!"); }
+}
+
+The above violates ISP because the Dog class is forced to implement the fly() method, which it doesn't need. 
+
+interface Animal {
+    void eat();
+    void sleep();
+}
+
+interface Flyable {
+    void fly();
+}
+
+class Dog implements Animal {
+    public void eat() { /* Dog eating */ }
+    public void sleep() { /* Dog sleeping */ }
+}
+
+class Bird implements Animal, Flyable {
+    public void eat() { /* Bird eating */ }
+    public void sleep() { /* Bird sleeping */ }
+    public void fly() { /* Bird flying */ }
+}
+
+5. Dependency Inversion Principle (DIP)
+Definition: High-level modules should not depend on low-level modules. Both should depend on abstractions. Furthermore, 
+abstractions should not depend on details. Details should depend on abstractions.
+In Java: The idea is to decouple high-level business logic from low-level details (like specific implementations) 
+using interfaces or abstract classes. This can be achieved through techniques like dependency injection.
+
+
+class LightBulb {
+    public void turnOn() { System.out.println("LightBulb turned on"); }
+    public void turnOff() { System.out.println("LightBulb turned off"); }
+}
+
+class Switch {
+    private LightBulb bulb;
+    public Switch(LightBulb bulb) { this.bulb = bulb; }
+
+    public void operate() {
+        // simple dependency, tightly coupled
+        bulb.turnOn();
+    }
+}
+This design violates DIP because Switch depends directly on the LightBulb. To follow DIP, we can introduce an abstraction (interface):
+
+interface Switchable {
+    void turnOn();
+    void turnOff();
+}
+
+class LightBulb implements Switchable {
+    public void turnOn() { System.out.println("LightBulb turned on"); }
+    public void turnOff() { System.out.println("LightBulb turned off"); }
+}
+
+class Switch {
+    private Switchable device;
+    public Switch(Switchable device) { this.device = device; }
+
+    public void operate() {
+        device.turnOn();
+    }
+}
+
+******************************************************************************************************************************************************************************************
+
+CopyOnWriteArrayList :-
+
+CopyOnWriteArrayList is a class in Java that belongs to the java.util.concurrent package and is a part of the Java Collections framework.
+It is a thread-safe variant of the ArrayList. The key feature of CopyOnWriteArrayList is that it handles concurrency by making a 
+
+fresh copy of the underlying array whenever a modification (such as adding or removing elements) occurs.
+
+Concurrency: It's thread-safe, but the trade-off is the performance overhead of copying the array for write operations.
+Ideal Usage: Best suited for applications with a lot of reads and fewer writes.
+No Synchronization Needed: No external synchronization is required when using CopyOnWriteArrayList because it ensures thread safety internally.
+
+
+
+
+******************************************************************************************************************************************************************************************
+
+
+Fail-Fast vs Fail-Safe Collections
+
+
+In the context of programming and data structures, Fail-Fast and Fail-Safe refer to different approaches in how collections
+(like lists, sets, or maps) behave when they are modified while being iterated over. 
+
+Fail-Fast Collections
+Definition: A collection is considered "fail-fast" when it immediately throws an exception if it detects that it has been structurally modified (i.e., changed in terms of adding or removing elements) while it is being iterated over.
+Behavior: If an iterator is actively traversing a collection and the collection is modified (such as by adding or removing elements), the collection will throw a ConcurrentModificationException (in Java, for example) to signal that something has gone wrong.
+Advantages:
+Helps detect errors early, making them easier to debug.
+Prevents undefined behavior or incorrect results when working with multi-threaded programs or when modifying the collection during iteration.
+Disadvantages:
+The program may throw exceptions unexpectedly during iteration if the collection is modified.
+Requires developers to handle concurrent modifications carefully, typically with synchronization or locks.
+
+
+List<Integer> list = new ArrayList<>();
+list.add(1);
+list.add(2);
+
+Iterator<Integer> iterator = list.iterator();
+list.add(3);  // This will cause ConcurrentModificationException during iteration
+while (iterator.hasNext()) {
+    System.out.println(iterator.next());
+}
+
+
+Fail-Safe Collections
+Definition: A collection is considered "fail-safe" when it doesn’t throw exceptions if it is modified during iteration. Instead, fail-safe collections allow the iteration to continue and typically work on a copy or snapshot of the data.
+Behavior: Fail-safe collections use a copy or snapshot mechanism to avoid issues with structural modifications. Even if the collection is modified during iteration (either by adding or removing elements), the iteration process continues over the original state of the collection, unaffected by the changes.
+Advantages:
+It avoids exceptions, which can be beneficial in some cases, particularly in concurrent systems where you may expect modifications during iteration.
+Makes iteration easier in multithreaded environments, as it doesn't require explicit synchronization.
+Disadvantages:
+Can introduce overhead, as collections may create copies of themselves during iteration, leading to increased memory usage and potentially slower performance.
+The behavior can be unpredictable if you expect changes to be reflected during iteration, as you are iterating over a snapshot of the collection at a given point in time.
+
+List<Integer> list = new CopyOnWriteArrayList<>();
+list.add(1);
+list.add(2);
+
+Iterator<Integer> iterator = list.iterator();
+list.add(3);  // No ConcurrentModificationException, the iteration continues normally
+while (iterator.hasNext()) {
+    System.out.println(iterator.next());
+}
+
+Conclusion:
+Fail-Fast collections are ideal when you want to quickly detect and fix problems with concurrent modifications in a collection. 
+However, they require careful management of how and when modifications happen during iteration.
+Fail-Safe collections are more tolerant and safe for concurrent modifications but may come with performance trade-offs due to 
+the overhead of copying the collection.
