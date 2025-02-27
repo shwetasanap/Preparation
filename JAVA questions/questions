@@ -644,7 +644,14 @@ Ideal Usage: Best suited for applications with a lot of reads and fewer writes.
 No Synchronization Needed: No external synchronization is required when using CopyOnWriteArrayList because it ensures thread safety internally.
 
 
-
+As the name indicates, CopyOnWriteArrayList creates a Cloned copy of underlying ArrayList, for every update operation at a certain point both will be synchronized automatically, which is taken care of by JVM. Therefore, there is no effect for threads that are performing read operation.
+It is costly to use because for every update operation a cloned copy will be created. Hence, CopyOnWriteArrayList is the best choice if our frequent operation is read operation.
+The underlined data structure is a grow-able array.
+It is a thread-safe version of ArrayList.
+Insertion is preserved, duplicates, null, and heterogeneous Objects are allowed.
+The main important point about CopyOnWriteArrayList is the Iterator of CopyOnWriteArrayList can not perform remove operation otherwise we get Run-time exception saying 
+UnsupportedOperationException. add() and set() methods on CopyOnWriteArrayList iterator also throws UnsupportedOperationException. Also Iterator of CopyOnWriteArrayList
+will never throw ConcurrentModificationException.
 
 ******************************************************************************************************************************************************************************************
 
