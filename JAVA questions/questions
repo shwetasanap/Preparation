@@ -875,3 +875,97 @@ These operations are atomic. If multiple threads try to update the same key, one
 In summary, ConcurrentHashMap is an excellent choice when you need a high-performance, thread-safe map that allows concurrent 
 access without requiring external synchronization. Its fine-grained locking mechanism helps achieve better concurrency and 
 throughput in multi-threaded applications.
+
+******************************************************************************************************************************************************************************************
+
+Java 8 Features (Most Asked in Interviews)
+
+1. Lambda Expressions
+2. Functional Interfaces
+3. Stream API
+4. Default Methods --> Java 8 allows interfaces to have default methods with implementation. This helps in adding new methods to interfaces without 
+                       breaking existing implementations.
+5. Method References
+6. Optional Class
+7. Parallel Streams
+
+******************************************************************************************************************************************************************************************
+
+
+Predicate, Consumer, Supplier, Function 
+
+In Java 8, the java.util.function package introduced several functional interfaces, including Predicate, Consumer, Supplier, and Function.
+These are essential for functional programming in Java and are commonly used in lambda expressions and streams. 
+
+1. Predicate<T>
+A Predicate is a functional interface that represents a condition or boolean test. It takes an argument of type T and returns
+a boolean value (true or false).
+
+Signature: boolean test(T t)
+Use Case: It is often used for filtering data in streams or conditions where you need to evaluate whether a condition is true or false.
+
+Predicate<String> isLengthGreaterThan3 = str -> str.length() > 3;
+
+System.out.println(isLengthGreaterThan3.test("Java"));  // true
+System.out.println(isLengthGreaterThan3.test("Hi"));    // false
+
+
+2. Consumer<T>
+A Consumer represents an operation that takes a single input of type T and returns no result.
+It is typically used for performing an action (side effect) such as printing, modifying values, etc.
+
+Signature: void accept(T t)
+Use Case: It’s often used for operations that modify an object, print to the console, or have some other side effect.
+
+Consumer<String> printUpperCase = str -> System.out.println(str.toUpperCase());
+
+printUpperCase.accept("hello");  // Output: HELLO
+
+Common Methods:
+andThen(Consumer<? super T> after) (to chain multiple consumers)
+
+3. Supplier<T>
+A Supplier represents a supplier of results. It doesn't take any arguments but returns a value of type T. 
+It's typically used when you want to generate or provide values, like generating random numbers, or providing default values.
+
+Signature: T get()
+Use Case: It’s often used when you want to generate or supply an object but don't need any input.
+
+Supplier<String> provideString = () -> "Hello, World!";
+
+System.out.println(provideString.get());  // Output: Hello, World!
+
+4. Function<T, R>
+A Function represents a function that takes an argument of type T and produces a result of type R. 
+It is used for transformation or mapping operations.
+
+Signature: R apply(T t)
+Use Case: It’s useful for converting or mapping one type of object into another, such as converting strings to 
+integers or transforming a list of objects.
+
+Function<String, Integer> stringLength = str -> str.length();
+
+System.out.println(stringLength.apply("Hello"));  // Output: 5
+
+
+******************************************************************************************************************************************************************************************
+
+Executor Framework & Thread Pooling
+
+The Executor Framework provides a high-level API to manage and control concurrent tasks in Java.
+Thread Pooling reduces the overhead of repeatedly creating and destroying threads by reusing a fixed number of threads.
+ExecutorService and ThreadPoolExecutor help in managing threads and queues efficiently, improving performance and resource 
+management in multithreaded applications.
+By leveraging the Executor framework and thread pooling, developers can ensure efficient thread management, 
+improve application scalability, and reduce resource overhead.
+
+
+******************************************************************************************************************************************************************************************
+
+
+
+
+
+
+
+
