@@ -417,7 +417,9 @@ public class LambdaExample {
 
 23) User defined Marker interfaces
 
-In Java, a marker interface is an interface that does not contain any methods. Its primary purpose is to signal to the JVM or a framework that the implementing class possesses certain properties or capabilities. Marker interfaces are often used for metadata tagging to provide additional information about a class without modifying its behavior directly.
+In Java, a marker interface is an interface that does not contain any methods. Its primary purpose is to signal to the JVM or a framework that the implementing class 
+possesses certain properties or capabilities. Marker interfaces are often used for metadata tagging to provide additional information about a class without modifying
+its behavior directly.
 
 Key Points about Marker Interfaces:
 A marker interface does not declare any methods.
