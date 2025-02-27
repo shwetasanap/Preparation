@@ -327,6 +327,19 @@ AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations 
 21) Optional class
 
 
+Every Java Programmer is familiar with NullPointerException. It can crash your code. And it is very hard to avoid it without using too many null checks.
+So, to overcome this, Java 8 has introduced a new class Optional in java.util package. It can help in writing a neat code without using too many null checks. 
+Optional is a container object which may or may not contain a non-null value. You must import java.util package to use this class. If a value is present,
+isPresent() will return true and get() will return the value.
+
+empty(): Returns an empty Optional object 
+of(value): Returns an Optional with a non-null value 
+ofNullable(value): Returns an Optional with a value if it's not null, or an empty Optional if it is null 
+isPresent(): Returns true if a value is present, and false if it's not 
+get(): Returns the value if it's present, or throws NoSuchElementException if it's not 
+orElse(): Used to deal with Optional values when the value may or may not be present 
+orElseGet(): Used to deal with Optional values when the value may or may not be present 
+orElseThrow(): Used to deal with Optional values when the value may or may not be present 
 
 
 
