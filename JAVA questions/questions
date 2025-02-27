@@ -319,7 +319,19 @@ In Java, an atomic object typically refers to an object that provides atomic ope
 without interference, particularly in multi-threaded environments. The java.util.concurrent.atomic package provides classes like 
 AtomicInteger, AtomicLong, AtomicReference, etc., which allow atomic operations on single variables.
 
+In Java, atomic operations are generally provided by the java.util.concurrent.atomic package, which includes classes designed to 
+safely manipulate variables in a multithreaded environment.
 
+Key Concepts:
+Atomic Variables: These are variables for which atomic operations (such as read, write, increment, etc.) are provided without needing synchronization.
+Atomic Classes: Java provides several atomic classes, such as AtomicInteger, AtomicLong, AtomicReference, etc., to handle variables atomically.
+These atomic classes provide a higher-level alternative to using synchronized blocks or methods for thread safety.
+
+Atomic Classes in Java
+AtomicInteger: Provides atomic operations for an int value.
+AtomicLong: Provides atomic operations for a long value.
+AtomicBoolean: Provides atomic operations for a boolean value.
+AtomicReference: Provides atomic operations for an object reference.
 
 
 ******************************************************************************************************************************************************************************************
