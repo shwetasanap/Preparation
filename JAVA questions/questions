@@ -348,13 +348,109 @@ orElseThrow(): Used to deal with Optional values when the value may or may not b
 
 22) Lambda expressions
 
+Lambda expressions in Java, introduced in Java SE 8, represent instances of functional interfaces (interfaces with a single abstract method). 
+They provide a concise way to express instances of single-method interfaces using a block of code.
 
+Functionalities of Lambda Expression
+Lambda Expressions implement the only abstract function and therefore implement functional interfaces lambda expressions are added in Java 8 and provide the below functionalities.
 
+Functional Interfaces: A functional interface is an interface that contains only one abstract method.
+Code as Data: Treat functionality as a method argument.
+Class Independence: Create functions without defining a class.
+Pass and Execute: Pass lambda expressions as objects and execute on demand.
 
+@FunctionalInterface
+interface MathOperation {
+    int operate(int a, int b);  // Single abstract method (SAM)
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        // Using lambda to implement the MathOperation interface
+        MathOperation add = (a, b) -> a + b;
+        MathOperation subtract = (a, b) -> a - b;
+
+        System.out.println("Addition: " + add.operate(5, 3));        // Output: 8
+        System.out.println("Subtraction: " + subtract.operate(5, 3)); // Output: 2
+    }
+}
+
+import java.util.*;
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("John", "Alice", "Bob", "Charlie");
+
+        // Sort names by length using a lambda expression
+        Collections.sort(names, (a, b) -> a.length() - b.length());
+
+        System.out.println(names);  // Output: [Bob, John, Alice, Charlie]
+    }
+}
+
+public class LambdaExample {
+    public static void main(String[] args) {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+
+        // Square each number and then sum them using map() and reduce()
+        int sumOfSquares = numbers.stream()
+                                  .map(n -> n * n)               // Square each number
+                                  .reduce(0, (a, b) -> a + b);   // Sum them up
+
+        System.out.println("Sum of squares: " + sumOfSquares);  // Output: 30
+    }
+}
 
 ******************************************************************************************************************************************************************************************
 
 23) User defined Marker interfaces
+
+In Java, a marker interface is an interface that does not contain any methods. Its primary purpose is to signal to the JVM or a framework that the implementing class possesses certain properties or capabilities. Marker interfaces are often used for metadata tagging to provide additional information about a class without modifying its behavior directly.
+
+Key Points about Marker Interfaces:
+A marker interface does not declare any methods.
+It is used to tag or mark a class for special treatment by the JVM or libraries.
+The presence of the interface is checked by the program at runtime, usually with the instanceof operator, or by using reflection.
+Marker interfaces help achieve a form of type checking.
+
+
+public class MarkerInterfaceExample {
+    public static void main(String[] args) {
+        UserData user = new UserData("Alice", 25);
+
+        // Check if the object is an instance of the Serializable interface
+        if (user instanceof Serializable) {
+            System.out.println("UserData is serializable");
+        } else {
+            System.out.println("UserData is not serializable");
+        }
+    }
+}
+
+Marker interfaces are interfaces that don’t contain methods but are used to provide metadata or to tag a class for special processing.
+You can create your own custom marker interfaces to indicate that certain behavior should be applied to the marked classes.
+They are often used for purposes like serialization, cloning, security checks, and threading.
+
+
+public class ValidationExample {
+    public static void main(String[] args) {
+        User user = new User("Alice", 25);
+
+        // Check if the class is validatable --> it is just a no method user defined interface.If object is instance of validatable then it should perform or implement or pass the
+mentioned validations.
+        if (user instanceof Validatable) {
+            System.out.println("Validating user: " + user.getName());
+            // Perform validation (for example, checking if age is valid)
+            if (user.getAge() < 18) {
+                System.out.println("User is not valid.");
+            } else {
+                System.out.println("User is valid.");
+            }
+        } else {
+            System.out.println("User is not validatable.");
+        }
+    }
+}
 
 
 
