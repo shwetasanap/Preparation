@@ -832,3 +832,46 @@ Fail-Fast collections are ideal when you want to quickly detect and fix problems
 However, they require careful management of how and when modifications happen during iteration.
 Fail-Safe collections are more tolerant and safe for concurrent modifications but may come with performance trade-offs due to 
 the overhead of copying the collection.
+
+
+******************************************************************************************************************************************************************************************
+
+ConcurrentHashMap & Its Working
+
+A ConcurrentHashMap is a part of Java's java.util.concurrent package, and it is a thread-safe, high-performance map implementation 
+that allows concurrent access to its elements by multiple threads without the need for external synchronization.
+
+Key Features of ConcurrentHashMap:
+
+Thread Safety: Unlike a regular HashMap, ConcurrentHashMap ensures that concurrent read and write operations can be performed 
+safely by multiple threads without corrupting the underlying data.
+
+Locking Mechanism:
+It uses a bucket-level locking mechanism (also known as segment locking) instead of locking the entire map like Hashtable does. This enables multiple threads to access different segments of the map concurrently.
+The map is divided into multiple segments (buckets), and each segment can be locked independently when modifications are being made.
+This reduces contention and increases the throughput.
+
+Non-blocking Reads:
+Reads do not require locking, so multiple threads can read from the map simultaneously without any performance degradation.
+Atomic Operations: Operations like putIfAbsent(), remove(), and replace() are atomic and thread-safe.
+
+Concurrency Levels:
+You can specify the number of concurrent segments when creating a ConcurrentHashMap (default is 16), allowing you to control 
+the granularity of the locking.
+
+How It Works:
+Internally, ConcurrentHashMap is divided into segments. Each segment is essentially a smaller hash map with its own locks. This approach minimizes the contention on the entire map, as different threads may work on different segments simultaneously.
+
+Here is how the basic operations work in ConcurrentHashMap:
+
+Read Operation:
+A read operation is non-blocking. Multiple threads can read from different segments at the same time without locking.
+Write Operation:
+A write operation requires locking the segment that the key belongs to. But since different segments can be locked independently, 
+other threads can still write to other segments concurrently.
+Update Operations (like putIfAbsent(), replace(), etc.):
+These operations are atomic. If multiple threads try to update the same key, one will succeed, and the others will fail gracefully.
+
+In summary, ConcurrentHashMap is an excellent choice when you need a high-performance, thread-safe map that allows concurrent 
+access without requiring external synchronization. Its fine-grained locking mechanism helps achieve better concurrency and 
+throughput in multi-threaded applications.
