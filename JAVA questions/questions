@@ -1062,3 +1062,6 @@ Implementing a special class loading behavior (like reloading classes in a hot-s
 A custom class loader can override the findClass method to load classes from custom sources.
 
 
+******************************************************************************************************************************************************************************************
+
+.war file into .jar to run 
