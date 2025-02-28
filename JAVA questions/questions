@@ -962,10 +962,103 @@ improve application scalability, and reduce resource overhead.
 
 ******************************************************************************************************************************************************************************************
 
+ Starvation & Race Conditions
+
+1. Starvation
+Starvation happens when a thread (a unit of work in your program) doesn't get a chance to run. 
+It’s like a thread waiting for its turn forever, while other threads are constantly getting priority and never letting it run.
+
+Example: Imagine you have several workers (threads), but some workers are always getting tasks (CPU time), 
+while others are kept waiting and never get a chance to work.
+
+How to avoid it:
+
+Make sure that threads get a fair chance to run by using fair locks or setting up thread priorities correctly.
+
+2. Race Condition
+A race condition occurs when two or more threads try to access and change the same data at the same time. 
+This can cause problems because the threads might interfere with each other and give wrong results.
+
+Example: Imagine two people trying to update a bank account balance at the same time without checking each other’s work.
+One person could overwrite the other’s changes, causing an incorrect balance.
+
+How to avoid it:
+
+Make sure only one thread can access or modify shared data at a time. You can do this by using synchronized blocks or
+using special classes like AtomicInteger which handle thread safety automatically.
+
+Key Differences:
+Starvation is about a thread being ignored and never getting a chance to run.
+Race Condition happens when threads mess with shared data at the same time and mess things up.
 
 
+******************************************************************************************************************************************************************************************
 
 
+Java Class Loading Mechanism & ClassLoader Hierarchy
 
+
+In Java, class loading refers to the process by which Java runtime environment (JRE) loads the classes needed for the program to run.
+The class loading mechanism is part of the Java Runtime Environment (JRE) that loads, links, and initializes classes.
+
+Here’s a breakdown of how class loading works in Java:
+
+Class Loader (JVM Class Loading): The class loader is responsible for loading class files from the file system or network into the
+Java Virtual Machine (JVM). When you run a Java program, the JVM doesn't know where the classes are located initially, so it relies 
+on the class loader to locate and load classes dynamically into memory.
+
+Class Loading Process:
+
+Loading: When a class is first referenced, the class loader looks for the corresponding .class file (bytecode) on the local 
+file system, a network resource, or another source.
+Linking: This involves verification (checking bytecode for validity), preparation (assigning memory for static variables),
+and optional resolution (substituting symbolic references with actual references).
+Initialization: After a class has been loaded and linked, it is initialized, which involves executing static blocks, 
+initializing static variables, and preparing the class for use.
+
+ClassLoader Hierarchy
+
+The class loader hierarchy in Java is structured as a tree, with multiple class loaders that form a chain of responsibility. 
+There are three major class loaders:
+
+Bootstrap ClassLoader (Primordial ClassLoader):
+
+The Bootstrap ClassLoader is the parent of all class loaders in Java and is part of the core Java runtime environment.
+It loads core Java classes, such as those in the java.lang, java.util, java.net, and other fundamental packages, from the 
+Java Runtime Environment (JRE).
+The classes it loads are typically stored in the rt.jar (or similar file) in the JRE.
+
+Extension ClassLoader (Platform ClassLoader):
+
+The Extension ClassLoader is responsible for loading classes from the JDK extension directory (jre/lib/ext) or any custom classpath 
+specified.
+It loads classes related to standard Java extensions (such as JDBC, JCE) that extend the functionality of the core Java platform.
+
+
+System/Application ClassLoader (User ClassLoader):
+
+The System ClassLoader, also known as the Application ClassLoader, is responsible for loading classes that are part of the classpath of your application.
+It loads classes from locations such as the classpath (including .jar files or directories). This is the default class loader for most user applications.
+It is the one typically responsible for loading the classes specified when running the program via the java -cp command.
+ClassLoader Hierarchy in Java
+The class loader hierarchy follows a parent-child relationship:
+
+Bootstrap ClassLoader (parent to all class loaders) -> It cannot be directly instantiated.
+Extension ClassLoader (child of Bootstrap ClassLoader) -> Responsible for loading classes from the JDK extensions.
+System/Application ClassLoader (child of Extension ClassLoader) -> Responsible for loading application-level classes.
+When a class is requested, the class loader first delegates the request to its parent. If the parent class loader can’t find the class, it will load the class itself.
+
+Example:
+If an application class A needs to load class B, the following hierarchy applies:
+
+ClassLoader for class A will first delegate the request to its parent class loader (which could be the system class loader or the extension class loader).
+If the parent class loader doesn't find the class, the current class loader will try to load it itself.
+If none of the class loaders can find it, a ClassNotFoundException will be thrown.
+Custom ClassLoader in Java
+Java allows you to create custom class loaders by extending the ClassLoader class. This is particularly useful when:
+
+Loading classes from non-standard locations (like databases, network resources).
+Implementing a special class loading behavior (like reloading classes in a hot-swapping application).
+A custom class loader can override the findClass method to load classes from custom sources.
 
 
