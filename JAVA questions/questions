@@ -1065,3 +1065,167 @@ A custom class loader can override the findClass method to load classes from cus
 ******************************************************************************************************************************************************************************************
 
 .war file into .jar to run 
+
+Steps:
+1. Extract the contents of the .war file
+A .war file is just a ZIP file, so you can extract it like any other compressed file.
+
+Windows: Use a tool like WinRAR or 7-Zip to extract the .war file.
+
+Linux/Mac: Use the unzip command in the terminal:
+
+bash
+Copy
+unzip yourfile.war -d yourfolder
+This will extract all the contents (web resources, classes, etc.) of the .war file into the folder yourfolder.
+
+2. Add a Main-Class entry for the .jar file
+A .war file doesn't have an entry point (i.e., it lacks a main method). To turn it into a .jar file that you can run, you'll need to add a class with a main method.
+
+Create a file called MainClass.java (or any name you prefer) in the extracted folder (yourfolder).
+
+Inside MainClass.java, add the following code. For simplicity, this code assumes you're using an embedded server like Jetty or a basic entry point to run the application:
+
+java
+Copy
+public class MainClass {
+    public static void main(String[] args) {
+        // Simple code to run a web server (like Jetty, Tomcat, etc.)
+        // If it's a Spring Boot app, you can start it here as well.
+        
+        System.out.println("Running your .war as a .jar");
+        // Your code to start the application goes here.
+    }
+}
+3. Recompile the Java file (if needed)
+If you added or modified any Java files, compile them using the javac command.
+
+For example:
+
+bash
+Copy
+javac -d . MainClass.java
+This will compile MainClass.java and place the .class files in the same directory.
+
+4. Create a MANIFEST.MF file
+This file tells Java which class to run when the .jar is executed. You'll need to create a MANIFEST.MF file inside the META-INF folder in the extracted .war folder.
+
+Create the following structure if it doesn’t already exist:
+
+Copy
+META-INF/
+  MANIFEST.MF
+Inside MANIFEST.MF, add this content:
+
+makefile
+Copy
+Manifest-Version: 1.0
+Main-Class: MainClass
+Make sure to replace MainClass with the name of your class if you used a different name.
+
+5. Repackage everything into a .jar file
+Now that you've added the Main-Class and ensured your Java files are compiled, you can repackage everything into a .jar.
+
+Run the following jar command:
+
+bash
+Copy
+jar cmf META-INF/MANIFEST.MF your_new_file.jar -C yourfolder .
+This command will:
+
+Use the MANIFEST.MF file located in the META-INF folder to specify the main class.
+Create a new .jar file named your_new_file.jar containing all files in the yourfolder directory.
+6. Run the .jar file
+Once the .jar file is created, you can run it with the following command:
+
+bash
+Copy
+java -jar your_new_file.jar
+If everything is set up correctly, your .war will now run as a .jar file!
+
+
+
+*****************************************************************************************************************************************************************************************
+
+agile methodologies
+
+Agile methodologies are a set of principles and practices for software development that emphasize flexibility, collaboration, 
+and customer feedback. These methodologies aim to deliver working software frequently and iteratively, allowing teams to adapt 
+to changes quickly and efficiently.
+
+
+Key Agile Frameworks and Practices:
+
+Scrum:
+
+Roles: Product Owner, Scrum Master, Development Team.
+Artifacts: Product Backlog, Sprint Backlog, Increment.
+Events: Sprint, Sprint Planning, Daily Scrum, Sprint Review, Sprint Retrospective.
+Focus: Short development cycles called Sprints (usually 2-4 weeks). Scrum emphasizes transparency, inspection, and adaptation.
+
+
+Kanban:
+
+Kanban Board: At the heart of Kanban is the visual representation of the workflow. This is typically a Kanban board, 
+where work items are represented by cards and are placed in columns that represent the stages of the process (e.g., "To Do," "In Progress," "Done").
+This visualization helps teams see where tasks are in the workflow and identifies any bottlenecks or areas needing attention.
+
+Limiting WIP helps teams focus on completing tasks before starting new ones. 
+This ensures that work flows smoothly without overloading the team. 
+
+
+Kanban vs. Scrum:
+Scrum uses fixed-length sprints, while Kanban focuses on continuous flow of work without the constraints of timeboxed iterations.
+Scrum has specific roles (Product Owner, Scrum Master, Development Team) and ceremonies (Daily Standups, Sprint Planning, etc.),
+whereas Kanban is more lightweight, with no required roles or ceremonies.
+In Scrum, teams work on a set number of items in a sprint, while in Kanban, work is pulled as needed, and the focus is on 
+completing tasks as efficiently as possible.
+
+
+Extreme Programming (XP):
+
+
+
+
+
+
+
+
+Lean Software Development:
+
+
+
+
+
+
+
+
+
+
+Feature-Driven Development (FDD):
+
+
+
+
+
+
+
+
+Benefits of Agile:
+
+Faster time-to-market: Frequent releases provide working software quicker.
+Improved collaboration: Emphasis on communication between developers, customers, and stakeholders.
+Better quality: Continuous testing, feedback, and improvement processes lead to high-quality software.
+Adaptability: Agile methodologies allow teams to respond to changes in customer needs, technology, or requirements.
+
+Challenges of Agile:
+
+Requires experienced teams: Agile methods can be difficult to implement without the right knowledge and discipline.
+Scope creep: If not managed properly, the flexible nature of Agile can lead to uncontrolled changes and feature creep.
+Requires customer involvement: Continuous feedback is essential, so active customer participation is needed.
+
+
+
+*****************************************************************************************************************************************************************************************
+
+JIRA and confluence
