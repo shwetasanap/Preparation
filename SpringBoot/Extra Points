@@ -40,6 +40,73 @@ EntityManagerFactory: For managing JPA entities.
 TransactionManager: For managing transactions with the database.
 
 
+**************************************************************************************************************************************
+
+In Spring Boot, both application.properties and bootstrap.properties are used to configure various aspects of your application,
+but they have different purposes and are loaded at different stages of the application lifecycle.
+
+1. application.properties
+
+Purpose: The application.properties file is the most common configuration file in Spring Boot applications. 
+It is used to configure application-specific properties locally.
+
+When it's loaded: This file is loaded at the later stages of the Spring Boot application lifecycle, after the application context 
+is created.
+
+Usage: It's generally used for setting properties like database configurations, server ports, logging levels, etc.
+
+Location: src/main/resources/application.properties (can also be application.yml).
+
+server.port=8080
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.username=root
+spring.datasource.password=secret
+logging.level.org.springframework=DEBUG
+
+
+In simple terms, bootstrap.properties is a configuration file used in Spring Boot applications that is loaded before the 
+regular application.properties. It is mainly used to set up properties that are needed early in the startup process, such 
+as connecting to an external configuration server (like Spring Cloud Config) or setting up the application’s environment.
+
+
+Why use bootstrap.properties?
+External Configuration: If your Spring Boot application is part of a larger system (like microservices), bootstrap.properties 
+can be used to connect to a central place where configuration is stored (e.g., a configuration server).
+
+Early loading: This file is loaded before other configuration files like application.properties, so it's useful for things 
+that need to be configured very early, like connecting to a database or a configuration server.
+
+# The URI of the configuration server
+spring.cloud.config.uri=http://localhost:8888
+
+# Name of the application to fetch configuration for
+spring.application.name=my-service
+
+# Active profile (like dev, prod)
+spring.profiles.active=dev
+
+
+How it Works:
+Spring Boot will look for bootstrap.properties first, and if you’re using Spring Cloud, it will fetch the configuration 
+from the server mentioned in spring.cloud.config.uri.
+After the bootstrap.properties file is processed, the application will continue to load the application.properties 
+file for other app-specific settings.
+
+
+Spring Cloud Config – In Simple Terms
+Spring Cloud Config is a tool that helps you manage and provide centralized configuration for applications in a distributed 
+system or microservices architecture. Instead of managing configurations locally in each microservice (like in application.properties 
+or application.yml), Spring Cloud Config allows you to store configuration in a central repository (such as a Git repository, 
+or a file system) and provide it to all your services.
+
+
+
+
+
+
+
+
+
 
 
 
