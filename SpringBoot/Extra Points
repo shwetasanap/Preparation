@@ -100,13 +100,59 @@ or application.yml), Spring Cloud Config allows you to store configuration in a 
 or a file system) and provide it to all your services.
 
 
+**************************************************************************************************************************************
 
 
+Swagger in Spring Boot – A Simple Guide
+Swagger is a framework used for documenting and testing REST APIs. It allows developers to define the structure of their 
+APIs in a standard format and provides a user-friendly interface for testing them. In Spring Boot applications,
+Swagger can be easily integrated to create interactive API documentation.
+
+Why Use Swagger?
+API Documentation: It auto-generates API documentation and makes it interactive, allowing developers to view, test, 
+and understand the endpoints without reading the code.
+Easy Testing: Swagger UI provides an interface for interacting with your APIs directly from the browser.
+Consistency: It helps keep the API documentation in sync with the actual implementation.
 
 
+**************************************************************************************************************************************
+
+Profiles in Spring Boot
+In Spring Boot, profiles allow you to define different configurations for different environments (like development, testing,
+production, etc.). Profiles help separate environment-specific configurations and prevent you from hardcoding values that might change across different environments.
+
+Why Use Profiles?
+Environment-Specific Configurations: You can define different configurations for each environment (dev, prod, test) without 
+changing the code.
+Flexibility: You can customize behavior depending on whether the application is running locally, on a test server, or in production.
+Separation of Concerns: Profiles allow you to separate application settings (such as database configurations, logging levels, etc.)
+that are environment-dependent.
+
+1. Defining Profiles in application.properties or application.yml
+You can define different configurations for each profile in application.properties or application.yml. 
+For example, you can define separate properties for a development profile and a production profile.
+
+Example with application.properties:
+application.properties: General settings (common across all profiles).
+application-dev.properties: Specific settings for the development environment.
+application-prod.properties: Specific settings for the production environment.
+
+2. Activating Profiles
+In application.properties: spring.profiles.active=dev
+
+3. Profile-Specific Beans and Configurations
+You can specify certain beans to only be active under a specific profile using the @Profile annotation.
+
+@Configuration
+@Profile("dev")
+public class DevConfig {
+    @Bean
+    public MyService devService() {
+        return new MyService("Dev Service");
+    }
+}
 
 
+How do you handle exceptions in Spring Boot?
 
-
-
-
+ What is the purpose of Spring Boot’s @Conditional annotations?
