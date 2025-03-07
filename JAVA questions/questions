@@ -1184,29 +1184,39 @@ completing tasks as efficiently as possible.
 
 Extreme Programming (XP):
 
-
-
-
-
-
+Extreme Programming (XP) is a software development methodology within the Agile framework that emphasizes technical excellence,
+collaboration, and delivering high-quality software rapidly. It's designed to improve software quality and responsiveness to
+changing customer requirements through frequent releases and close collaboration between developers and customers.
 
 
 Lean Software Development:
 
 
-
-
-
-
-
-
+Lean Software Development helps teams focus on what truly matters, deliver value quickly, and eliminate unnecessary work.
+It encourages continuous improvement, faster feedback, and building quality software from the start.
 
 
 Feature-Driven Development (FDD):
 
+Feature-Driven Development (FDD) is a software development methodology that focuses on building and delivering software 
+features in a structured, systematic way. It is part of the Agile family of methods, but it is more specific in its approach,
+emphasizing the development of well-defined features.
 
+The 5 Basic Steps of FDD:
+Develop an Overall Model: The team creates a high-level design or model of the software system. 
+This helps everyone understand how different parts of the system interact and ensures the architecture supports the features.
 
+Build a Feature List: A list of features is created based on the model. Each feature is described in a simple, user-friendly 
+way, and this list becomes the foundation of the work to be done.
 
+Plan by Feature: The features are prioritized and planned. Each feature will be assigned to a team and worked on in short iterations. 
+This makes sure that work is focused on delivering value to the customer.
+
+Design by Feature: In this phase, the feature is broken down into more detail, and design work is done to define how the feature
+will be implemented.
+
+Build by Feature: The feature is then developed, tested, and delivered. Once a feature is completed, it is integrated into the 
+overall system, and the team moves on to the next feature.
 
 
 
@@ -1229,3 +1239,51 @@ Requires customer involvement: Continuous feedback is essential, so active custo
 *****************************************************************************************************************************************************************************************
 
 JIRA and confluence
+
+Jira is a project management tool primarily used for issue tracking and project management in software development and other fields. 
+It helps teams plan, track, and manage their work, especially in Agile environments.
+
+1. Issues
+Issue: An issue in Jira represents a unit of work or a task. It can be anything from a bug to a user story, task, or a feature request.
+Issue Types: There are different types of issues in Jira, including:
+Bug: A defect or problem in the software.
+Story: A piece of work that needs to be completed, often representing a feature or functionality.
+Task: A simple, actionable work item.
+Epic: A large body of work that can be broken down into smaller stories or tasks.
+Sub-task: A smaller work item that is part of a larger issue.
+Change Request, Improvement, and others depending on the specific project setup.
+
+
+2. Projects
+Project: A project is a collection of issues and related work within Jira. It can represent a team, initiative, or product.
+Project Types: Jira offers different project types like Kanban, Scrum, Basic Software Development, and Business Projects, 
+each having specific configurations.
+
+3. Boards
+Kanban Board: A visual representation of tasks and their statuses in a workflow, commonly used for teams with continuous delivery cycles.
+Scrum Board: A board used by teams working in agile sprints, showing the sprint backlog, ongoing tasks, and completed work.
+
+4. Workflows
+Workflow: A sequence of statuses and transitions that an issue goes through during its lifecycle (e.g., "To Do", "In Progress", "Done").
+Status: The stage an issue is in, such as "Open," "In Progress," or "Closed."
+Transition: The action that moves an issue from one status to another.
+
+5. Sprints
+Sprint: A time-boxed period during which a Scrum team works to complete a predefined set of tasks or stories. 
+Sprints are often 1-4 weeks long.
+Sprint Backlog: A list of issues (stories, tasks, etc.) that the team commits to complete in a specific sprint.
+
+6. Epics and Stories
+Epic: A large user story that can be broken down into smaller, more manageable pieces (stories or tasks).
+Story: A feature or requirement that can be completed within a single sprint. A story is typically defined using the format
+“As a [user], I want [functionality] so that [benefit].”
+
+7. Backlog
+Product Backlog: A prioritized list of features, tasks, and bug fixes that need to be completed for the product.
+It's typically managed by a Product Owner.
+Sprint Backlog: A subset of the product backlog, selected to be worked on during a sprint.
+
+
+
+Confluence is a collaboration and documentation tool that allows teams to create, share, and collaborate on content like meeting notes, 
+project documentation, knowledge bases, and more.
