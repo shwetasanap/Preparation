@@ -153,6 +153,200 @@ public class DevConfig {
 }
 
 
+**************************************************************************************************************************************
+
 How do you handle exceptions in Spring Boot?
 
- What is the purpose of Spring Boot’s @Conditional annotations?
+Global Exception Handling with @ControllerAdvice -->
+In Spring Framework, @ControllerAdvice is used for global exception handling. 
+It allows you to handle exceptions across the whole application in one centralized place.
+This can help reduce boilerplate code by handling exceptions in a global manner, 
+rather than defining exception handlers for each individual controller.
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    // Handle specific exception (e.g., IllegalArgumentException)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ResponseEntity<>("Illegal argument error: " + ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    // Handle general exception (fallback for all other exceptions)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        return new ResponseEntity<>("An error occurred: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    // Handle custom exception (optional: specific to your app)
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<String> handleCustomException(CustomException ex) {
+        return new ResponseEntity<>("Custom error: " + ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+}
+@ExceptionHandler: Inside the @ControllerAdvice class, you can use @ExceptionHandler to handle specific exceptions. 
+You can handle multiple types of exceptions by specifying different methods for each exception type.
+ResponseEntity: This is used to return a response with a status code and a message.
+
+@Valid: Tells Spring to perform validation on the User object.
+BindingResult: This object will store any validation errors. You must immediately follow the @Valid annotation 
+with the BindingResult parameter in the method signature. If the User object fails validation, 
+bindingResult will contain the error details.
+
+
+You can annotate custom exceptions with @ResponseStatus to automatically return an HTTP status code when that exception is thrown.
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+
+**************************************************************************************************************************************
+
+What is the purpose of Spring Boot’s @Conditional annotations?
+
+In Spring Boot, the @Conditional annotations are used to conditionally include or exclude beans from the Spring application
+context based on certain conditions. These annotations allow you to configure your Spring beans in a flexible way, making your 
+application more dynamic and adaptable to different environments or configurations.
+
+The core idea is that a bean will only be registered in the Spring context if the condition(s) specified in the annotation are met.
+These conditions can be based on various criteria like environment properties, operating system, class availability, 
+or other application-specific conditions.
+
+@ConditionalOnProperty:
+
+This annotation allows you to conditionally create a bean based on the presence and value of a property in the environment
+(e.g., application.properties or application.yml).
+@Configuration
+public class MyConfig {
+
+    @Bean
+    @ConditionalOnProperty(name = "my.feature.enabled", havingValue = "true")
+    public MyFeature myFeature() {
+        return new MyFeature();
+    }
+}
+
+@ConditionalOnClass:
+
+This annotation conditionally creates a bean if a particular class is present in the classpath.
+@Configuration
+public class MyConfig {
+
+    @Bean
+    @ConditionalOnClass(name = "com.example.SomeLibrary")
+    public SomeLibraryBean someLibraryBean() {
+        return new SomeLibraryBean();
+    }
+}
+
+@ConditionalOnMissingBean:
+
+This annotation is used to define a bean conditionally based on the absence of another bean in the application context.
+It's useful for defining default beans only if a specific bean doesn't already exist.
+@Configuration
+public class MyConfig {
+
+    @Bean
+    @ConditionalOnMissingBean(MyService.class)
+    public MyService defaultMyService() {
+        return new DefaultMyService();
+    }
+}
+
+@ConditionalOnBean:
+
+This annotation is the opposite of @ConditionalOnMissingBean. It creates a bean only if another bean is present 
+in the application context.
+
+@ConditionalOnMissingClass:
+
+This annotation is used to conditionally create a bean if a class is missing from the classpath.
+@Configuration
+public class MyConfig {
+
+    @Bean
+    @ConditionalOnMissingClass("com.example.SomeLibrary")
+    public DefaultLibraryBean defaultLibraryBean() {
+        return new DefaultLibraryBean();
+    }
+}
+
+Custom Conditions with @Conditional
+You can also create your own custom conditions by implementing the Condition interface and using @Conditional with it.
+
+public class MyCustomCondition implements Condition {
+    @Override
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
+        // Custom logic to determine if the condition matches
+        return "true".equals(System.getProperty("my.custom.condition"));
+    }
+}
+
+@Configuration
+public class MyConfig {
+
+    @Bean
+    @Conditional(MyCustomCondition.class)
+    public MyCustomBean myCustomBean() {
+        return new MyCustomBean();
+    }
+}
+Steps to Implement the Condition Interface
+Create a Custom Condition Class: Implement the Condition interface and override the matches() method.
+Define the Condition Logic: In the matches() method, write the logic to determine if the condition is true or false.
+Use the @Conditional Annotation: Apply the @Conditional annotation to your bean, passing your custom condition class.
+
+
+
+The ConditionContext in the matches() method of the Condition interface provides contextual information about the current
+Spring environment and the application context, allowing you to make decisions about whether or not to register a bean based
+on specific conditions.
+
+1) getEnvironment():
+
+Provides access to the Environment, which contains properties and configuration data
+(e.g., values from application.properties, application.yml, environment variables, etc.).
+String propertyValue = context.getEnvironment().getProperty("my.custom.property");
+
+2) getBeanFactory():
+
+Returns the BeanFactory that can be used to access or query beans in the Spring context.
+You can use this to check if certain beans are already defined in the context.
+boolean isBeanPresent = context.getBeanFactory().containsBean("myBean");
+
+3) getClassLoader():
+
+Provides access to the ClassLoader of the current application.
+boolean isClassPresent = context.getClassLoader().loadClass("com.example.SomeClass") != null;
+
+
+The AnnotatedTypeMetadata interface is part of the Spring framework and is used in conjunction with the Condition
+interface to provide metadata about annotations 
+applied to the beans or configuration classes that are being processed. Specifically, it allows access to the 
+annotations applied to the target bean or class, which can then be used to make decisions about whether or not to 
+register a bean in the Spring context.
+
+getAnnotations():
+
+Returns a collection of Annotation objects representing the annotations applied to the target class or method.
+This can be useful when you need to inspect specific annotations on the class or method being processed.
+
+hasAnnotation(String annotationType):
+
+Checks if a particular annotation is present on the target class or method.
+This can be used to check for the presence of specific annotations.
+
+getAnnotationAttributes(String annotationType):
+
+Returns a map of attributes for the given annotation. You can use this to retrieve specific values from an annotation
+(like its properties or parameters).
+Map<String, Object> attributes = metadata.getAnnotationAttributes("com.example.MyCustomAnnotation");
