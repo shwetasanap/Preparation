@@ -20,7 +20,7 @@ If this memory is full, Java throws java.lang.StackOverFlowError.
 Heap Memory facilitates Dynamic Memory Allocation for Java objects and JRE classes during program execution.
 Objects in the heap have global access, available from any part of the application.
 
- Differenc
+ Difference
 ---> Java Heap Space is used throughout the application, but Stack is only used for the method — or methods — currently running.
 
 ******************************************************************************************************************************************************************************************
