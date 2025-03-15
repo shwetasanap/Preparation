@@ -66,3 +66,57 @@ Error Rate: Monitor if the error rate increases as the load increases.
 Do this for before and after implementation.
 
 *********************************************************************************************************************************************
+
+Enabled real-time communication between microservices by integrating AWS SQS and SNS in a publisher-
+subscriber pattern, increasing message processing efficiency by 35%.
+
+
+In Postman, you can show this by comparing the average response times and throughput before and after optimization. 
+This allows you to quantify improvements and demonstrate how real-time communication has improved efficiency.
+
+*********************************************************************************************************************************************
+
+
+Achieved 90% test coverage through comprehensive unit and integration testing using JUnit and Mockito, reducing
+bug count by 30% and enhancing system performance by 35%.
+
+JaCoCo is a widely used tool to measure the code coverage of your Java applications. It integrates well with build tools like Maven and 
+Gradle,and can also work with JUnit and Mockito tests.
+
+If you're using Maven, you can add the JaCoCo plugin in your pom.xml
+JaCoCo measures the test coverage by analyzing how much of the code is executed during the test run.
+After running your tests with JaCoCo, you can generate a report that shows the coverage percentage, helping you to ensure your
+tests cover most,if not all, of the code.
+
+
+*********************************************************************************************************************************************
+
+Enhanced team collaboration by leveraging Git for version control, managing source code changes, and
+collaborating through pull requests, improving efficiency by 45% and reducing merge conflicts by 35%.
+
+
+Metric	                            Before Git/Version Control	                  After Git/Version Control	Improvement
+Merge Conflicts	                        15 conflicts per week	                      10 conflicts per week	35% reduction
+Development Time Lost (per week)	      10 hours per developer	                    5.5 hours per developer	45% improvement
+Total Time Saved (Team of 5)	          50 hours per week	27.5 hours per week	          22.5 hours saved/week
+
+
+*********************************************************************************************************************************************
+
+Improved code quality by automating code quality checks using SonarQube, ensuring compliance with coding
+standards, reducing technical debt by 25%, and improving overall code quality by 30%.
+
+
+Technical Debt: Represents the amount of effort required to fix code quality issues.
+Code Coverage: Percentage of code covered by automated tests.
+Code Smells: Issues that don't necessarily affect functionality but indicate poor coding practices.
+Duplications: Percentage of code that is duplicated across the project.
+Maintainability: A measure of how easy it is to maintain the code in the future.
+Bugs: The number of defects in the code.
+Vulnerabilities: Security issues in the code.
+
+Manual Code Review: Developers manually reviewed code but missed many issues, often leading to more time spent on rework 
+and fixing problems in the later stages.
+
+After implementing SonarQube, it continuously analyzes the code for issues such as code smells, duplications, bugs, vulnerabilities,
+and enforces coding standards. 
