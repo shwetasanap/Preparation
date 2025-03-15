@@ -257,13 +257,19 @@ Use Cases	                                Suitable for isolated tasks	          
 
 16) Synchronized and volatile keyword :-
 
-The synchronized modifier is only for methods and blocks not for variables and classes. Synchronized keyword comes into the picture when multiple threads are trying to get access to the same java object simultaneously. A synchronized block or method allows only one thread at a time to execute on a given object, which will solve the problem of data inconsistency.
+The synchronized modifier is only for methods and blocks not for variables and classes. Synchronized keyword comes into the 
+picture when multiple threads are trying to get access to the same java object simultaneously. A synchronized block or method 
+allows only one thread at a time to execute on a given object, which will solve the problem of data inconsistency.
 To use synchronized keywords in Java we have two ways 1) Synchronized method 2) Synchronized block
 
 
-A volatile keyword is a field modifier that provides a visibility guarantee. Java uses volatile as an indicator to the Java compiler and thread that does not cache the value of this variable and always reads it from the main memory. The volatile keyword is only used with variables not with methods or classes.
-When a variable is marked as volatile, any read or write to that variable is done directly from the main memory (not from thread-local caches).
-This ensures that the latest value of the variable is visible to all threads. Without volatile, each thread might have its own copy of the variable 
+A volatile keyword is a field modifier that provides a visibility guarantee. Java uses volatile as an indicator to the Java 
+compiler and thread that does not cache the value of this variable and always reads it from the main memory. 
+The volatile keyword is only used with variables not with methods or classes.
+When a variable is marked as volatile, any read or write to that variable is done directly from the main memory 
+(not from thread-local caches).
+This ensures that the latest value of the variable is visible to all threads. Without volatile, each thread might
+have its own copy of the variable 
 in its cache, and changes made by one thread might not be visible to others.
 Example:-
 
