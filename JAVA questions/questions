@@ -674,6 +674,46 @@ class Penguin extends Bird {
     // Violates LSP because penguins can't fly, which breaks expected behavior
     public void fly() { throw new UnsupportedOperationException("Penguins can't fly!"); }
 }
+solution :-
+
+// Base class for all birds
+class Bird {
+    public void eat() {
+        System.out.println("Eating");
+    }
+}
+
+// A subclass for birds that can fly
+class FlyingBird extends Bird {
+    public void fly() {
+        System.out.println("Flying");
+    }
+}
+
+// A specific bird that can't fly
+class Penguin extends Bird {
+    public void swim() {
+        System.out.println("Swimming");
+    }
+}
+
+// A subclass of FlyingBird (can fly)
+class Sparrow extends FlyingBird {
+    @Override
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
+}
+
+public class LSPCompliantExample {
+    public static void main(String[] args) {
+        Bird bird = new Sparrow();
+        ((FlyingBird) bird).fly();  // This works fine
+
+        Penguin penguin = new Penguin();
+        penguin.swim();  // Penguin swims, but no fly method here
+    }
+}
 
 
 4. Interface Segregation Principle (ISP)
