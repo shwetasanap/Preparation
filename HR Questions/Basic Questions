@@ -21,32 +21,56 @@ my strengths and expertise to make a meaningful impact. I believe that a new env
 
 3. Project work :-
 
-"As a Java Developer on the Spring Boot project, I contributed in several important areas:
+"In my role at Bajaj Finserv Direct Limited, I contributed in the following areas:
 
-Building and Designing APIs: I helped design and build the RESTful APIs using Spring Boot. I made sure that the APIs were efficient, easy to use, and well-structured.
+API Development & Integration: Developed and consumed RESTful APIs to improve application responsiveness.
+Integrated AWS services like S3, SQS, and SNS for optimized data retrieval and message processing.
 
-Database Integration: I worked with Spring Data JPA to connect the application to the database. I created and optimized database queries to ensure fast and accurate data retrieval.
+Code Optimization: Refactored legacy code using design patterns (Factory, Singleton, Builder),
+enhancing maintainability and reducing bugs.
 
-Security: I set up security features using Spring Security, including user authentication and authorization. This made sure only the right users could access sensitive parts of the application.
+Microservices Architecture: Developed scalable microservices using Spring Boot and Java, 
+improving system performance and scalability.
 
-Writing Tests: I wrote unit and integration tests to ensure that the application was reliable and bug-free. I used JUnit and Mockito to test different parts of the system.
+Testing & Code Quality: Ensured high test coverage with JUnit and Mockito, reducing bugs.
+Automated code quality checks with SonarQube to reduce technical debt.
+
+Collaboration: Facilitated Agile processes, improving team efficiency, and used Git and JIRA 
+to streamline version control and issue tracking.
+
+These efforts significantly improved the system's performance and enhanced team collaboration."
+
 
 4. Notice period :-
 
 My company is transitioning from a startup to a service-based model, and as part of this shift, 
 the notice period was extended from 30 days to 90 days to align with industry standards and ensure smoother transitions.
 
-i am also open to negotiate an early release based on discussions with my current employer.
+I am also open to negotiate an early release based on discussions with my current employer.
 
 5. Salary expectations :-
 
 Based on my experience, skills and understanding of the role, I am expecting a salary in the range of [X to Y].
 However, i am open to discussion based on the overall compensation package,benefits and growth opportunities within the company.
 
-i appreciate the offer, and i am excited about the opportunity.However, based on my skills and experience and industry standards, i was expecting something
+I appreciate the offer, and i am excited about the opportunity.However, based on my skills and experience and industry standards, 
+i was expecting something
 closer to x range.Is there flexibility to align it with my expectations.
 
 
 Thank you so much for the offer! I’m excited about the opportunity to join [Company Name] and contribute to the team.
 The compensation package you’ve provided is fair, and I’m happy to accept the salary of [$X] along with the other benefits
 outlined. I’m looking forward to getting started and working with everyone.”
+
+
+6. Where do you see yourself in next n years ?
+
+In the next three years, I see myself growing into a senior software engineer role, taking on more responsibilities,
+and improving my skills in system architecture and cloud technologies. I also hope to mentor junior developers and 
+contribute to important technical decisions in the team.
+
+7. Career aspirations ?
+
+My career aspirations focus on continuous growth and skill improvement. I plan to stay updated with the latest industry 
+trends, pursue certifications, and attend conferences to learn from experts. By improving my skills,
+I aim to contribute innovative ideas and help the company succeed.
