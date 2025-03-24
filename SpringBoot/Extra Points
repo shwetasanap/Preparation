@@ -350,3 +350,229 @@ getAnnotationAttributes(String annotationType):
 Returns a map of attributes for the given annotation. You can use this to retrieve specific values from an annotation
 (like its properties or parameters).
 Map<String, Object> attributes = metadata.getAnnotationAttributes("com.example.MyCustomAnnotation");
+
+
+**************************************************************************************************************************************
+
+What do you need to call a API of another microservice in springboot ? 
+
+
+RestTeamplate :-
+
+RestTemplate is a core class in Spring that provides methods for making HTTP requests to external services, 
+enabling communication between different systems (e.g., microservices). It's part of the spring-web module 
+and was commonly used in Spring applications to interact with REST APIs before the introduction of WebClient
+in Spring 5 (which is a more modern, non-blocking alternative).
+
+Key Features of RestTemplate:
+Synchronous: RestTemplate is blocking and synchronous, meaning it will wait for the HTTP response before
+continuing the program's execution. This can be a limitation if you're building highly concurrent or reactive systems,
+but it's still useful for many traditional applications.
+
+Flexible HTTP requests: It supports various HTTP methods (GET, POST, PUT, DELETE, etc.) and can handle different types 
+of request bodies, headers, and responses.
+
+Object mapping: It provides built-in support for converting Java objects to HTTP request bodies and mapping HTTP 
+responses into Java objects (typically using Jackson or Gson for JSON).
+
+Error handling: It offers mechanisms for handling errors from HTTP responses, such as 4xx and 5xx status codes.
+
+
+1. Setup RestTemplate Bean:
+In a Spring Boot application, you'll typically create a RestTemplate bean in your configuration class so that
+it can be injected into other components (e.g., services or controllers).
+
+@Configuration
+public class AppConfig {
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+}
+
+2.
+You can use the getForObject or getForEntity methods to make GET requests.similarly for post
+String url = "https://api.example.com/data";
+MyResponse response = restTemplate.getForObject(url, MyResponse.class);
+
+String url = "https://api.example.com/data";
+ResponseEntity<MyResponse> response = restTemplate.getForEntity(url, MyResponse.class);
+System.out.println(response.getStatusCode());  // Prints the HTTP status
+System.out.println(response.getBody());  // Prints the response body
+
+3. Sending Custom HTTP Requests:
+Sometimes you need more control over the HTTP request, such as adding custom headers, setting timeouts, 
+or handling different HTTP methods. You can use the exchange method for this.
+
+The exchange method allows you to specify the HTTP method (GET, POST, PUT, DELETE, etc.), the request
+entity (which includes headers, body, etc.), and the expected response type.
+
+When to Use RestTemplate:
+Simple HTTP calls: When you need to make straightforward HTTP requests to another service, RestTemplate is a good choice.
+
+Synchronous operations: It's perfect for cases where the blocking behavior is acceptable, such as in non-high-concurrency environments.
+
+Legacy systems: If you're working with legacy Spring applications, RestTemplate might still be the default choice.
+
+When Not to Use RestTemplate:
+Asynchronous processing: For modern applications with high concurrency or real-time processing, consider using WebClient 
+(which is non-blocking) instead of RestTemplate.
+
+Reactive applications: If you're building a reactive application with Spring WebFlux, WebClient should be your go-to choice.
+
+
+WebClient :-
+
+WebClient is the modern, non-blocking, and asynchronous HTTP client introduced in Spring 5 as part of the 
+Spring WebFlux module. It was designed to be a more flexible and efficient way of making HTTP requests in 
+reactive and non-blocking applications. While RestTemplate is synchronous and blocking, WebClient is asynchronous
+and non-blocking, making it more suitable for high-concurrency applications, microservices, and scenarios where
+you need better performance.
+
+
+Supports Synchronous and Asynchronous Calls: While WebClient is inherently asynchronous, you can still block
+the response if needed using .block() (but generally, you'd want to avoid blocking in reactive apps).
+
+Flexible API: Provides an easy-to-use and flexible API for making HTTP requests, handling responses, 
+setting headers, managing timeouts, etc.
+
+
+How WebClient Works:
+WebClient is designed for making asynchronous HTTP requests, which means you can issue requests and immediately 
+continue with other tasks, waiting for the result when needed.
+
+It returns Mono<T> (for a single value) or Flux<T> (for multiple values), which are reactive streams that 
+represent the result of the asynchronous operation.
+
+Mono: Represents a single value or empty result.
+Flux: Represents a stream of multiple values.
+
+1. Set up WebClient Bean:
+In Spring Boot, you typically set up a WebClient.Builder bean for reuse throughout your application.
+@Configuration
+public class WebClientConfig {
+
+    @Bean
+    public WebClient.Builder webClientBuilder() {
+        return WebClient.builder();
+    }
+}
+
+2. Injecting WebClient in Services:
+
+@Service
+public class ExternalService {
+
+    private final WebClient.Builder webClientBuilder;
+
+    @Autowired
+    public ExternalService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
+
+    public Mono<String> callExternalAPI() {
+        return webClientBuilder.baseUrl("https://api.example.com")
+                .get()
+                .retrieve()
+                .bodyToMono(String.class);
+    }
+}
+baseUrl("https://api.example.com/data"): Sets the base URL.
+
+.get(): HTTP GET method.
+
+.retrieve(): Starts the HTTP request.
+
+.bodyToMono(String.class): Extracts and returns the body of the response as a String.
+
+
+Post requests:-
+public Mono<MyResponse> createItem(MyRequest request) {
+    return webClientBuilder.baseUrl("https://api.example.com/items")
+            .post() // HTTP POST method
+            .bodyValue(request) // Set the body of the request (request is an object)
+            .retrieve()
+            .bodyToMono(MyResponse.class); // Map the response to MyResponse class
+}
+
+
+This allows you to chain operations like filtering, mapping, error handling, and more.
+
+
+A generic method in WebClient allows you to create a reusable method that can handle different
+types of HTTP requests and responses, without being tightly coupled to a specific endpoint or object type.
+This is useful when you have various endpoints that follow a similar structure but differ in the data types 
+for the request and/or response.
+
+To implement a generic method in WebClient, you can leverage Java generics to accept any response type.
+Here’s how you can create a reusable, generic method that can make HTTP requests (GET, POST, PUT, etc.)
+and return a response of any type.
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+@Service
+public class WebClientService {
+
+    private final WebClient.Builder webClientBuilder;
+
+    public WebClientService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
+
+    /**
+     * Generic method for making HTTP requests
+     *
+     * @param url            The URL of the API
+     * @param httpMethod     The HTTP method (e.g., GET, POST, PUT, DELETE)
+     * @param requestBody    The request body (optional, can be null)
+     * @param responseType   The class type for the response
+     * @param <T>            The response type
+     * @return A Mono of type T representing the response body
+     */
+    public <T> Mono<T> makeRequest(String url, String httpMethod, Object requestBody, Class<T> responseType) {
+        WebClient.RequestBodySpec requestSpec = webClientBuilder.baseUrl(url);
+
+        switch (httpMethod.toUpperCase()) {
+            case "GET":
+                requestSpec = requestSpec.get();
+                break;
+            case "POST":
+                requestSpec = requestSpec.post().bodyValue(requestBody);
+                break;
+            case "PUT":
+                requestSpec = requestSpec.put().bodyValue(requestBody);
+                break;
+            case "DELETE":
+                requestSpec = requestSpec.delete();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported HTTP method: " + httpMethod);
+        }
+
+        return requestSpec
+                .retrieve() // Initiate the request and retrieve the response
+                .bodyToMono(responseType); // Convert the response body into the specified response type
+    }
+}
+Explanation:
+makeRequest Method: This is a generic method where:
+
+url: The endpoint to send the HTTP request to.
+
+httpMethod: The HTTP method to use (e.g., GET, POST, PUT, DELETE).
+
+requestBody: The body of the request, which may be null for methods like GET and DELETE.
+
+responseType: The class type of the expected response.
+
+<T>: This is the generic type that allows the method to return a response of any type, based on the provided class type.
+
+WebClient.RequestBodySpec: This is a flexible builder that allows you to specify the type of HTTP request you are 
+making (GET, POST, etc.), along with setting the request body if needed.
+
+retrieve(): Initiates the request and prepares for response handling.
+
+bodyToMono(responseType): Converts the response body to a Mono of the specified response type T.
