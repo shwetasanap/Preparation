@@ -1,0 +1,23 @@
+Lambda 
+
+--> aws serverless service. Doesnt need any server to run.Underline infrastructure AWS manage karta hai
+--> sns(message ata hai it is event)/sqs/s3(file upload/delete is event) se subscribed kar sakte hai and lambda invoke hota hai
+--> in our company, devops teams has written automated pipelines where they pull the code(eventHandler class path) from our git repo and put in the created lambda.(zip/jar/from s3)
+--> SNSEvent --> SNS records --> extract message from it to process.
+--> max runtime is 15 min aws hard limit
+
+SES 
+
+--> aws email service
+
+
+
+
+Jenkins (CI/CD)
+
+
+
+
+
+
+Docker
