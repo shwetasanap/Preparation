@@ -581,3 +581,10 @@ bodyToMono(responseType): Converts the response body to a Mono of the specified 
 An API Gateway is a key component in system design, particularly in microservices architectures and modern web applications. 
 It serves as a centralized entry point for managing and routing requests from clients to the appropriate microservices or
 backend services within a system.
+
+Retry mechanism in springboot, allows your application to automatically attempt an operation again in case of failure(n/w error,timeout).
+1. Add spring-retry dependency
+2. Add @EnableRetry in main class
+3. Write @Retryable annotated method which is perfoming a specific task and can get failed(paymnetgateway).and can give maxAttempts in this 
+   annotation.
+4. After all attempts if gets failed then calls a method annotated with @Recover.
