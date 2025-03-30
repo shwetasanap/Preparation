@@ -576,3 +576,8 @@ making (GET, POST, etc.), along with setting the request body if needed.
 retrieve(): Initiates the request and prepares for response handling.
 
 bodyToMono(responseType): Converts the response body to a Mono of the specified response type T.
+
+
+An API Gateway is a key component in system design, particularly in microservices architectures and modern web applications. 
+It serves as a centralized entry point for managing and routing requests from clients to the appropriate microservices or
+backend services within a system.
