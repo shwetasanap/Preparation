@@ -1372,3 +1372,10 @@ public class Task implements Callable {
       return name;
    }
 }
+
+CompletableFuture is a class in java.util.concurrent package that implements the Future and CompletionStage Interface. 
+It represents a future result of an asynchronous computation.
+CompletableFuture provides a powerful and flexible way to write asynchronous, non-blocking code. 
+It was introduced in Java 8 and has become popular due to its ease of use and ability to handle complex asynchronous workflows.
+
+*****************************************************************************************************************************************************************************************
