@@ -994,17 +994,6 @@ Function<String, Integer> stringLength = str -> str.length();
 System.out.println(stringLength.apply("Hello"));  // Output: 5
 
 
-******************************************************************************************************************************************************************************************
-
-Executor Framework & Thread Pooling
-
-The Executor Framework provides a high-level API to manage and control concurrent tasks in Java.
-Thread Pooling reduces the overhead of repeatedly creating and destroying threads by reusing a fixed number of threads.
-ExecutorService and ThreadPoolExecutor help in managing threads and queues efficiently, improving performance and resource 
-management in multithreaded applications.
-By leveraging the Executor framework and thread pooling, developers can ensure efficient thread management, 
-improve application scalability, and reduce resource overhead.
-
 
 ******************************************************************************************************************************************************************************************
 
@@ -1338,4 +1327,48 @@ project documentation, knowledge bases, and more.
 
 Callable vs Runnable interface
 
+Runnable and Callable both functional interface. Classes which are implementing these interfaces are designed to be executed
+by another thread.
 
+Sr. No.   	Key	            Runnable	                                                         Callable
+1        Package       It belongs to Java.lang                                       It belongs to java.util.concurrent
+2    Thread Creation   We can create thread by passing runnable as a parameter.      We can’t create thread by passing callable as
+                                                                                     parameter  
+3      Return Type     Ruunable does not return anything                             Callable can return results
+4.     Method            It has run() method                                         It has call()method
+5    Bulk Execution    It can’t be used for bulk execution of task                   It can be used for bulk execution of task by
+                                                                                     invoking invokeAll().
+
+The concurrent API in Java provides a feature known as an executor that initiates and controls the execution of threads. 
+As such, an executor offers an alternative to managing threads using the thread class. At the core of an executor is the 
+Executor interface. It refers to the objects that execute submitted Runnable tasks. 
+
+Executor Framework & Thread Pooling
+
+The Executor Framework provides a high-level API to manage and control concurrent tasks in Java.
+Thread Pooling reduces the overhead of repeatedly creating and destroying threads by reusing a fixed number of threads.
+ExecutorService and ThreadPoolExecutor help in managing threads and queues efficiently, improving performance and resource 
+management in multithreaded applications.
+By leveraging the Executor framework and thread pooling, developers can ensure efficient thread management, 
+improve application scalability, and reduce resource overhead.
+
+A Future interface provides methods to check if the computation is complete, to wait for its completion and to retrieve the results of the computation. The result is retrieved using Future’s get() method when the computation has completed, and it blocks until it is completed. 
+Future and FutureTask both are available in java.util.concurrent package from Java 1.5.
+public class Main {
+   public static void main(String args[]) throws InterruptedException, ExecutionException {
+      ExecutorService services = Executors.newSingleThreadExecutor();
+      Future<?> future = services.submit(new Task());
+      System.out.println("In Future Object" + future.get());
+   }
+}
+import java.util.concurrent.Callable;
+
+public class Task implements Callable {
+
+   @Override
+   public String call() throws Exception {
+      System.out.println("In call");
+      String name = "test";
+      return name;
+   }
+}
