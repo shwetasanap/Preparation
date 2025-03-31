@@ -32,6 +32,11 @@ try
 The "try" keyword is used to specify a block where we should place an exception code. It means we can't use try block alone. 
 The try block must be followed by either catch or finally.
 
+try-with-resources statement
+In Java, the try-with-resources statement is a try statement that declares one or more resources. 
+The resource is as an object that must be closed after finishing the program. 
+The try-with-resources statement ensures that each resource is closed at the end of the statement execution.
+
 catch
 The "catch" block is used to handle the exception. It must be preceded by try block which means we can't use catch block alone. 
 It can be followed by finally block later.
