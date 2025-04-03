@@ -1,0 +1,20 @@
+PostgreSQL, often shortened to "Postgres", is an advanced, open-source, object-relational database management system
+(ORDBMS) known for its reliability, flexibility, and adherence to SQL standards. 
+
+
+A relational database is a collection of data items with pre-defined relationships. 
+These items are organized as a set of tables with columns and rows.
+A relational database management system is software that lets you read, write, and modify the relational database. 
+PostgreSQL is an object-relational database management system (ORDMBS), which means that it has relational
+capabilities and an object-oriented design.
+
+Using object-oriented features of PostgreSQL, programmers can:
+
+Communicate with the database servers using objects in their code.
+Define complex custom data types.
+Define functions that work with their own data types.
+Define inheritance, or parent-child relationships, between tables.
+Thus, PostgreSQL design is more flexible than other relational database servers. 
+You can model different relationships and types within the existing database system
+instead of externally in your application code. You can maintain consistency and improve 
+database performance by enforcing intended behavior closer to the actual data.
