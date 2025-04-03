@@ -1,5 +1,34 @@
 Serialization in Java is the process of converting an object into a byte stream so that it can be saved to a file, sent over a network, or stored in a database.
 
+
+Without using transient, how can we achieve Serialization 
+1) Use static keyword with fields because they belong to class and not instance-> when object is serialized then only instance 
+vars are included and not class vars.
+2)override the writeObject readObject methods explicitly add the fields to be serialized.
+
+import java.io.*;
+class Example implements Serializable {
+   private static final long serialVersionUID = 1L;
+   private String name;
+   private String password; // We don't want to serialize this field
+   public Example(String name, String password) {
+       this.name = name;
+       this.password = password;
+   }
+   private void writeObject(ObjectOutputStream oos) throws IOException {
+       oos.defaultWriteObject(); // Serialize normal fields
+       oos.writeObject(null); // Write null instead of actual password
+   }
+   private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+       ois.defaultReadObject(); // Deserialize normal fields
+       password = null; // Ensure password remains null
+   }
+   @Override
+   public String toString() {
+       return "Example{name='" + name + "', password='" + password + "'}";
+   }
+}
+
 To serialize an object:
 
 The class of the object must implement the Serializable interface (which is a marker interface with no methods).
