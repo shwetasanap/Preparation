@@ -1,6 +1,8 @@
 ---
 ## **What is PL/SQL?**
-**PL/SQL** stands for **Procedural Language extension to SQL**. It's Oracle's procedural extension for SQL, and it allows writing **blocks of code** that include **variables, conditions, loops, and error handling**.
+PL/SQL stands for Procedural Language extension to SQL.
+It's Oracle's procedural extension for SQL, and it allows writing blocks of code that include variables, 
+conditions, loops, and error handling.
 ---
 ## **1. Structure of a PL/SQL Block**
 Every PL/SQL program has this basic structure:
