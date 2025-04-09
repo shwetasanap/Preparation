@@ -98,7 +98,7 @@ Does not return a value.
 ```sql
 CREATE OR REPLACE PROCEDURE greet_user(name IN VARCHAR2) IS
 BEGIN
-  DBMS_OUTPUT.PUT_LINE('Hello, ' || name);
+  DBMS_OUTPUT.PUT_LINE('Hello, ' || name);--> inbuilt package to pri nt message
 END;
 ```
 ### **Function:**
@@ -122,4 +122,14 @@ EXCEPTION
      DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
 END;
 ```
+---
+## **Other Common Inbuilt Exceptions:**
+| Exception Name       | Raised When... |
+|----------------------|----------------|
+| `NO_DATA_FOUND`      | `SELECT INTO` returns no rows |
+| `TOO_MANY_ROWS`      | `SELECT INTO` returns more than one row |
+| `ZERO_DIVIDE`        | Division by zero occurs |
+| `VALUE_ERROR`        | Conversion errors, wrong data type, string too long |
+| `INVALID_CURSOR`     | Invalid cursor operations |
+| `OTHERS`             | Catches all other unhandled exceptions |
 ---
