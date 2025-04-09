@@ -1,0 +1,90 @@
+JUNIT :-
+
+JUnit is a framework that provides annotations, assertions, and other tools to structure and execute unit tests.
+It helps developers write automated tests to ensure that individual components of their code function as expected.
+Spring Boot provides JUnit as a default test dependency, making it easy to integrate into your projects. 
+
+JUnit helps verify the correctness of your code by comparing actual results with expected outcomes. 
+Spring Boot provides built-in support for JUnit, including annotations like @SpringBootTest and @Test,
+making it easy to write tests for Spring Boot components like controllers, services, and repositories. 
+
+assertEquals(): Verifies that two values are equal. 
+assertTrue(): Verifies that a condition is true. 
+assertFalse(): Verifies that a condition is false. 
+
+### **Core JUnit 5 Annotations**
+| Annotation | Description |
+|-----------|-------------|
+| `@Test` | Marks a method as a test method. |
+| `@BeforeEach` | Runs before each test method. Useful for setup. |
+| `@AfterEach` | Runs after each test method. Useful for cleanup. |
+| `@BeforeAll` | Runs once before all test methods in the class. Must be `static`. |
+| `@AfterAll` | Runs once after all test methods in the class. Must be `static`. |
+| `@DisplayName` | Sets a custom name for the test method for better readability. |
+| `@Disabled` | Disables the test method or class; it will be skipped. |
+---
+### **Advanced/Additional Annotations**
+| Annotation | Description |
+|-----------|-------------|
+| `@Nested` | Allows defining nested test classes for grouping tests. |
+| `@Tag` | Assigns a tag to categorize tests (e.g., `@Tag("slow")`). |
+| `@ParameterizedTest` | Used for parameterized tests. Requires additional annotations like `@ValueSource`, etc. |
+| `@ValueSource`, `@CsvSource`, etc. | Provide data inputs for parameterized tests. |
+---
+### **Assertions (Not annotations but commonly used with tests)**
+JUnit 5 uses `Assertions.*` methods like:
+- `assertEquals(expected, actual)`
+- `assertTrue(condition)`
+- `assertThrows(Exception.class, () -> code)`
+---
+
+
+
+
+
+
+
+### **What is Mocking?**
+**Mocking** means creating fake versions (mocks) of objects so that:
+- You **don’t rely on real dependencies** (like databases, APIs, services).
+- You can **control behavior** and **verify interactions**.
+---
+### **Common Mockito Annotations**
+| Annotation | Purpose |
+|-----------|---------|
+| `@Mock` | Creates a mock instance of a class/interface. |
+| `@InjectMocks` | Injects the mocks into the class under test (via constructor/setter/field). |
+| `@Spy` | Wraps a real object but allows spying (monitoring method calls). |
+| `@Captor` | Creates an `ArgumentCaptor` to capture method arguments. |
+| `@ExtendWith(MockitoExtension.class)` | Needed in JUnit 5 to enable Mockito annotations. |
+---
+### **Basic Mockito Usage**
+```java
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
+   @Mock
+   UserRepository userRepository;
+   @InjectMocks
+   UserService userService;
+   @Test
+   void testGetUser() {
+       User mockUser = new User("Alice");
+       when(userRepository.findById(1)).thenReturn(Optional.of(mockUser));
+       User result = userService.getUserById(1);
+       assertEquals("Alice", result.getName());
+       verify(userRepository).findById(1); // Verifies method was called
+   }
+}
+```
+---
+### **Key Mockito Methods**
+| Method | Description |
+|--------|-------------|
+| `when(...).thenReturn(...)` | Stubs a method to return a value. |
+| `verify(mock).methodCall()` | Verifies that a method was called. |
+| `doReturn(...).when(mock).method(...)` | Alternate stubbing syntax (used with spies). |
+| `doThrow(...).when(mock).method(...)` | Simulates throwing exceptions. |
+| `ArgumentCaptor<T>` | Captures method arguments for assertions. |
+---
+Let me know if you want a real-world example or want to dive into mocking static methods,
+private methods, or constructors (with PowerMockito or Mockito 4+).
