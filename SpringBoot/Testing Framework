@@ -133,3 +133,20 @@ class SomeServiceTest {
 }
 ```
 ---
+@SpringBootTest` is used to test your full Spring Boot application.  
+It starts the whole application, just like when you run it normally, so you can test everything together—like controllers, services, and repositories.
+### Example:
+```java
+@SpringBootTest
+class MyTest {
+   @Test
+   void testAppStarts() {
+       // This will check if the app context loads properly
+   }
+}
+```
+You can also tell it to start a web server if needed:
+```java
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+```
+So, use `@SpringBootTest` when you want to test how parts of your app work together.
