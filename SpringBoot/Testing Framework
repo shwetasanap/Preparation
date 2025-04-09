@@ -150,3 +150,9 @@ You can also tell it to start a web server if needed:
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 ```
 So, use `@SpringBootTest` when you want to test how parts of your app work together.
+
+
+| Method Type | Best Practice              | Direct Testing Option                     |
+|-------------|----------------------------|-------------------------------------------|
+| `private`   | Test via public methods    | Use Reflection or change to package-private |
+| `static`    | Keep logic in instance methods if possible | Call directly or mock with `mockito-inline` |
