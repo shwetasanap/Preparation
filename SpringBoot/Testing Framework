@@ -88,3 +88,48 @@ class UserServiceTest {
 ---
 Let me know if you want a real-world example or want to dive into mocking static methods,
 private methods, or constructors (with PowerMockito or Mockito 4+).
+
+
+
+### **`@RunWith(MockitoJUnitRunner.class)` in Mockito**
+In **JUnit 4**, to use Mockito annotations like `@Mock` and `@InjectMocks`, you need to enable them using:
+```java
+@RunWith(MockitoJUnitRunner.class)
+public class SomeServiceTest {
+   @Mock
+   private SomeDependency dependency;
+   @InjectMocks
+   private SomeService service;
+   @Test
+   public void testSomething() {
+       when(dependency.doSomething()).thenReturn("mocked");
+       String result = service.useDependency();
+       assertEquals("mocked", result);
+       verify(dependency).doSomething();
+   }
+}
+```
+---
+### **Why use `@RunWith(MockitoJUnitRunner.class)`?**
+Because it:
+- Initializes all `@Mock` annotated fields.
+- Injects mocks into fields annotated with `@InjectMocks`.
+- Saves you from calling `MockitoAnnotations.initMocks(this);` manually.
+---
+### **Alternative in JUnit 5**
+In **JUnit 5**, instead of `@RunWith`, you use:
+```java
+@ExtendWith(MockitoExtension.class)
+```
+Example:
+```java
+@ExtendWith(MockitoExtension.class)
+class SomeServiceTest {
+   @Mock
+   SomeDependency dependency;
+   @InjectMocks
+   SomeService service;
+   // test methods...
+}
+```
+---
