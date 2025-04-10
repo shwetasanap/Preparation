@@ -1,7 +1,7 @@
 Design patterns in Java are reusable solutions to common problems in software design, categorized as creational, 
 structural, and behavioral, offering best practices for creating flexible, maintainable, and reusable code. 
 
-It is juat a template or set of guildelines to fllow in order to build a flexible and optimized solution.
+It is just a template or set of guildelines to fllow in order to build a flexible and optimized solution.
 
 1. Creational Patterns: Focus on object creation, providing flexible and reusable ways to instantiate objects. 
 
