@@ -235,6 +235,9 @@ enhancing the synchronization capabilities.
 Java EE, or Java Platform, Enterprise Edition, is a set of specifications and standards that extend the Java SE (Standard Edition) 
 to provide a robust platform for developing large-scale, distributed, multi-tiered enterprise applications. 
 
+J2EE, now known as Java Enterprise Edition (Java EE) and later Jakarta EE, is a Java-based platform and collection of APIs 
+and protocols designed for developing and deploying scalable, robust, and secure enterprise-level applications. 
+
 ******************************************************************************************************************************************************************************************
 
 15) Difference between thread and process
