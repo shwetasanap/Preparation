@@ -1,0 +1,84 @@
+Design patterns in Java are reusable solutions to common problems in software design, categorized as creational, 
+structural, and behavioral, offering best practices for creating flexible, maintainable, and reusable code. 
+
+It is juat a template or set of guildelines to fllow in order to build a flexible and optimized solution.
+
+1. Creational Patterns: Focus on object creation, providing flexible and reusable ways to instantiate objects. 
+
+Singleton: Ensures a class has only one instance and provides a global point of access. 
+Factory Method: Defines an interface for creating an object, but lets subclasses decide which class to instantiate. 
+
+### Scenario:
+You have different types of vehicles: **Car** and **Bike**, and you want to instantiate them based on a factory method.
+---
+### 1. **Product Interface**
+```java
+public interface Vehicle {
+   void start();
+}
+```
+---
+### 2. **Concrete Products**
+```java
+public class Car implements Vehicle {
+   @Override
+   public void start() {
+       System.out.println("Car is starting...");
+   }
+}
+public class Bike implements Vehicle {
+   @Override
+   public void start() {
+       System.out.println("Bike is starting...");
+   }
+}
+```
+---
+### 3. **Creator (Factory)**
+```java
+public abstract class VehicleFactory {
+   public abstract Vehicle createVehicle();
+}
+```
+---
+### 4. **Concrete Factories**
+```java
+public class CarFactory extends VehicleFactory {
+   @Override
+   public Vehicle createVehicle() {
+       return new Car();
+   }
+}
+public class BikeFactory extends VehicleFactory {
+   @Override
+   public Vehicle createVehicle() {
+       return new Bike();
+   }
+}
+```
+---
+### 5. **Client Code**
+```java
+public class Main {
+   public static void main(String[] args) {
+       VehicleFactory factory;
+       String vehicleType = "car"; // or "bike"
+       if ("bike".equalsIgnoreCase(vehicleType)) {
+           factory = new BikeFactory();
+       } else {
+           factory = new CarFactory();
+       }
+       Vehicle vehicle = factory.createVehicle();
+       vehicle.start();
+   }
+}
+```
+---
+
+Builder: Separates the construction of a complex object from its representation, allowing different representations to be created. 
+
+2. Structural Patterns: Deal with how classes and objects are composed to form larger structures. 
+Bridge: Decouples an abstraction from its implementation so that the two can vary independently. 
+
+3. Behavioral Patterns: Focus on communication and responsibilities between objects. 
+Strategy: Defines a family of algorithms, encapsulates each one, and makes them interchangeable. 
