@@ -1284,6 +1284,24 @@ Here’s a brief overview:
 - **Adaptive to Change**: Agile welcomes changing requirements, even late in development.
 - **Popular Frameworks**: Scrum, Kanban, and XP (Extreme Programming) are popular agile approaches.
 
+In Agile—especially in **Scrum**, which is one of the most popular frameworks—there are several key meetings 
+(also called **ceremonies**) that help keep the team aligned and the work transparent. Here are the main ones:
+1. **Sprint Planning**  
+  - **When**: At the beginning of each sprint  
+  - **Purpose**: The team decides what work will be done during the sprint and how it will be achieved.
+2. **Daily Stand-up (Daily Scrum)**  
+  - **When**: Every day (usually 15 minutes)  
+  - **Purpose**: Team members quickly share what they did yesterday, what they’ll do today, and any blockers.
+3. **Sprint Review**  
+  - **When**: At the end of the sprint  
+  - **Purpose**: The team demonstrates the completed work to stakeholders and gets feedback.
+4. **Sprint Retrospective**  
+  - **When**: After the sprint review, before the next sprint begins  
+  - **Purpose**: The team reflects on what went well, what didn’t, and how to improve in the next sprint.
+5. **Backlog Refinement (Grooming)** *(optional but recommended)*  
+  - **When**: Mid-sprint or as needed  
+  - **Purpose**: The team reviews and updates the product backlog—clarifying stories, estimating effort, and prioritizing.
+
 *****************************************************************************************************************************************************************************************
 
 JIRA and confluence
