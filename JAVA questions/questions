@@ -1274,6 +1274,16 @@ Requires customer involvement: Continuous feedback is essential, so active custo
 
 
 
+Sure! Agile methodology is a way of managing projects—especially software development—by breaking them down into smaller,
+manageable chunks called *iterations* or *sprints* (usually 1–4 weeks long).
+Here’s a brief overview:
+- **Iterative & Incremental**: Agile delivers work in small increments, allowing teams to adapt quickly to change.
+- **Customer Collaboration**: Frequent feedback from stakeholders ensures the product aligns with customer needs.
+- **Cross-functional Teams**: Developers, testers, designers, and product owners work closely together.
+- **Emphasis on Working Software**: More focus on delivering functional software than heavy documentation.
+- **Adaptive to Change**: Agile welcomes changing requirements, even late in development.
+- **Popular Frameworks**: Scrum, Kanban, and XP (Extreme Programming) are popular agile approaches.
+
 *****************************************************************************************************************************************************************************************
 
 JIRA and confluence
