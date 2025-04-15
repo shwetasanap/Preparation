@@ -1,0 +1,62 @@
+Amazon SQS (Simple Queue Service) is a fully managed message queuing service that enables you to decouple and scale microservices, distributed systems, and serverless applications. You can send, store, and receive messages between software components using SQS.
+There are two types of queues:
+• Standard Queue (best-effort ordering, at-least-once delivery)
+• FIFO Queue (first-in-first-out, exactly-once processing)
+How to Connect to AWS SQS Using Java
+Step 1: Add Dependencies
+If you're using Maven, add the AWS SDK for SQS:
+<dependency>
+<groupId>software.amazon.awssdk</groupId>
+<artifactId>sqs</artifactId>
+<version>2.25.0</version> <!-- Use latest -->
+</dependency>
+Step 2: Set Up Credentials
+You can authenticate AWS credentials in several ways:
+• ~/.aws/credentials file
+• Environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+• IAM Role (if running on EC2 or ECS)
+Step 3: Initialize SQS Client
+import software.amazon.awssdk.services.sqs.SqsClient;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+public class SqsExample {
+   public static void main(String[] args) {
+       SqsClient sqsClient = SqsClient.builder()
+               .region(Region.US_EAST_1)
+               .credentialsProvider(ProfileCredentialsProvider.create())
+               .build();
+   }
+}
+Step 4: Send Message to Queue
+import software.amazon.awssdk.services.sqs.model.SendMessageRequest;
+public void sendMessage(SqsClient sqsClient, String queueUrl, String messageBody) {
+   SendMessageRequest sendMsgRequest = SendMessageRequest.builder()
+           .queueUrl(queueUrl)
+           .messageBody(messageBody)
+           .delaySeconds(5)
+           .build();
+   sqsClient.sendMessage(sendMsgRequest);
+}
+Step 5: Receive Message
+import software.amazon.awssdk.services.sqs.model.ReceiveMessageRequest;
+import software.amazon.awssdk.services.sqs.model.Message;
+public void receiveMessages(SqsClient sqsClient, String queueUrl) {
+   ReceiveMessageRequest receiveRequest = ReceiveMessageRequest.builder()
+           .queueUrl(queueUrl)
+           .maxNumberOfMessages(5)
+           .waitTimeSeconds(10)
+           .build();
+   List<Message> messages = sqsClient.receiveMessage(receiveRequest).messages();
+   for (Message message : messages) {
+       System.out.println("Message: " + message.body());
+   }
+}
+Step 6: Delete Message (Optional)
+import software.amazon.awssdk.services.sqs.model.DeleteMessageRequest;
+public void deleteMessage(SqsClient sqsClient, String queueUrl, String receiptHandle) {
+   DeleteMessageRequest deleteRequest = DeleteMessageRequest.builder()
+           .queueUrl(queueUrl)
+           .receiptHandle(receiptHandle)
+           .build();
+   sqsClient.deleteMessage(deleteRequest);
+}
