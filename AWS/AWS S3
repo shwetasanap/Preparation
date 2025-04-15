@@ -1,0 +1,140 @@
+AWS S3
+
+Amazon S3 (Simple Storage Service) is a highly scalable, durable, and secure object storage service provided by AWS 
+(Amazon Web Services). It’s widely used for storing and retrieving any amount of data from anywhere on the web.
+
+Here’s a detailed breakdown of what AWS S3 does:
+1. Object Storage
+S3 stores data as objects inside buckets. Each object consists of:
+• Data: The actual file (binary or text)
+• Metadata: Information about the file (e.g., file type, size)
+• Key: A unique identifier for the object within a bucket
+
+2. Buckets
+Buckets are containers for storing objects. You can think of them like folders, though they don’t have a
+hierarchy (it’s flat, but keys can be structured like folder paths).
+
+3. Scalability
+S3 automatically scales to handle high volumes of data and concurrent requests.
+Whether you're storing 1 file or 1 billion, you don’t need to worry about infrastructure.
+
+4. Durability and Availability
+• Durability: S3 is designed for 99.999999999% (11 nines) durability. It achieves this by redundantly storing data across 
+multiple devices in multiple facilities.
+• Availability: You can configure S3 for high availability (Standard) or less frequent access (Infrequent Access, Glacier, etc.).
+
+5. Storage Classes
+S3 offers multiple storage classes optimized for different use cases and costs:
+• Standard: Frequently accessed data
+• Intelligent-Tiering: Automatically moves data to cost-effective tiers
+• Standard-IA / One Zone-IA: Infrequent access
+• Glacier / Glacier Deep Archive: Archival storage
+
+6. Versioning
+S3 supports versioning, which lets you keep multiple versions of an object. This is useful for backup and recovery.
+
+7. Lifecycle Policies
+You can define rules to automatically:
+• Move data to cheaper storage
+• Delete old versions
+• Expire objects after a set time
+
+8. Access Control & Security
+S3 provides fine-grained access control:
+• Bucket Policies: JSON-based rules for access
+• IAM Policies: Role/user-based access
+• ACLs (Access Control Lists): Legacy way to control permissions
+• Encryption: Supports server-side and client-side encryption (AES-256, KMS, etc.)
+
+9. Static Website Hosting
+You can host static websites directly from an S3 bucket. It supports routing rules, error pages, etc.
+
+10. Logging & Monitoring
+Integrates with AWS services like:
+• CloudTrail: Track API calls
+• CloudWatch: Monitor metrics and set alarms
+• S3 Access Logs: Track access requests for auditing
+
+11. Event Notifications
+S3 can trigger events on object creation, deletion, etc., and send them to:
+• AWS Lambda
+• SNS (Simple Notification Service)
+• SQS (Simple Queue Service)
+
+12. Multi-Region Replication (CRR / SRR)
+Automatically replicate objects to buckets in other AWS regions (for disaster recovery, compliance, etc.).
+
+
+
+Connect s3 to java code :-
+
+To connect AWS S3 in your Java code, you'll typically use the 
+AWS SDK(tools and libraries by aws to interact with aws sefvies with preferred programming language) 
+for Java. Here's a full guide on how to integrate and use it:
+
+1. Add AWS SDK Dependency
+If you're using Maven, add this to your pom.xml:
+<dependency>
+<groupId>software.amazon.awssdk</groupId>
+<artifactId>s3</artifactId>
+<version>2.25.4</version> <!-- or latest version -->
+</dependency>
+For Gradle:
+implementation 'software.amazon.awssdk:s3:2.25.4'
+
+2. Set up AWS Credentials
+The SDK looks for credentials in this order:
+1 Environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+2 Shared credentials file (~/.aws/credentials)
+3 IAM Role (if running on an EC2 instance or Lambda)
+Example ~/.aws/credentials file:
+[default]
+aws_access_key_id = YOUR_ACCESS_KEY
+aws_secret_access_key = YOUR_SECRET_KEY
+
+3. Java Code to Connect and Upload a File
+Basic Example (S3 v2 SDK):
+import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import java.nio.file.Paths;
+public class S3Uploader {
+   public static void main(String[] args) {
+       Region region = Region.US_EAST_1; // Set your region
+//S3Client class by aws to interact with aws s3 services to upload,download and delete data.
+       S3Client s3 = S3Client.builder() //builder() method use to construct complex objects
+               .region(region)
+               .credentialsProvider(ProfileCredentialsProvider.create())
+               .build();
+       String bucketName = "your-bucket-name";
+       String key = "folder/example.txt"; // File name in S3
+       String filePath = "/path/to/your/example.txt";
+       PutObjectRequest putReq = PutObjectRequest.builder()
+               .bucket(bucketName)
+               .key(key)
+               .build();
+       s3.putObject(putReq, Paths.get(filePath));
+       System.out.println("File uploaded successfully.");
+       s3.close();
+   }
+}
+4. Common Operations
+• Download a file:
+s3.getObject(GetObjectRequest.builder().bucket(bucket).key(key).build(),
+            Paths.get("local/path/to/save.txt"));
+• List objects:
+ListObjectsV2Request listReq = ListObjectsV2Request.builder().bucket(bucket).build();
+ListObjectsV2Response listRes = s3.listObjectsV2(listReq);
+listRes.contents().forEach(obj -> System.out.println(obj.key()));
+• Delete an object:
+s3.deleteObject(DeleteObjectRequest.builder().bucket(bucket).key(key).build());
+5. Optional: Use Environment Variables (Good for CI/CD)
+Set these in your shell or deployment environment:
+export AWS_ACCESS_KEY_ID=your_access_key
+export AWS_SECRET_ACCESS_KEY=your_secret_key
+export AWS_REGION=us-east-1
+Then in Java:
+S3Client s3 = S3Client.builder()
+       .region(Region.of(System.getenv("AWS_REGION")))
+       .build();
