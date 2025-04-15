@@ -1,0 +1,64 @@
+Amazon Simple Notification Service (SNS) is a fully managed messaging service for both application-to-application (A2A) and application-to-person (A2P) communication. It allows you to send messages (notifications) to multiple subscribers through various protocols like:
+• HTTP/S
+• Email
+• SMS
+• Amazon SQS
+• AWS Lambda
+• Mobile push (via Firebase, APNs, etc.)
+Key Concepts
+• Topic: A logical access point and communication channel.
+• Publisher: An entity that sends messages to a topic.
+• Subscriber: An entity that receives messages from a topic.
+How to Connect AWS SNS with Java
+You can interact with AWS SNS in Java using the AWS SDK for Java (v2 or v1). Here’s an example using AWS SDK v2, which is the latest and recommended version.
+1. Add Dependencies (Maven)
+<dependency>
+<groupId>software.amazon.awssdk</groupId>
+<artifactId>sns</artifactId>
+<version>2.25.0</version> <!-- Use latest -->
+</dependency>
+Also include the SDK BOM to manage versions:
+<dependencyManagement>
+<dependencies>
+<dependency>
+<groupId>software.amazon.awssdk</groupId>
+<artifactId>bom</artifactId>
+<version>2.25.0</version>
+<type>pom</type>
+<scope>import</scope>
+</dependency>
+</dependencies>
+</dependencyManagement>
+2. Create an SNS Client
+import software.amazon.awssdk.services.sns.SnsClient;
+import software.amazon.awssdk.regions.Region;
+SnsClient snsClient = SnsClient.builder()
+       .region(Region.US_EAST_1) // Choose your region
+       .build();
+3. Create a Topic
+import software.amazon.awssdk.services.sns.model.CreateTopicRequest;
+import software.amazon.awssdk.services.sns.model.CreateTopicResponse;
+CreateTopicRequest request = CreateTopicRequest.builder()
+       .name("MyTopic")
+       .build();
+CreateTopicResponse response = snsClient.createTopic(request);
+String topicArn = response.topicArn();
+System.out.println("Created topic with ARN: " + topicArn);
+4. Subscribe to a Topic
+Example: Subscribe an email endpoint
+import software.amazon.awssdk.services.sns.model.SubscribeRequest;
+SubscribeRequest subscribeRequest = SubscribeRequest.builder()
+       .protocol("email")
+       .endpoint("example@example.com")
+       .returnSubscriptionArn(true)
+       .topicArn(topicArn)
+       .build();
+snsClient.subscribe(subscribeRequest);
+Note: The user will receive an email to confirm the subscription.
+5. Publish a Message
+import software.amazon.awssdk.services.sns.model.PublishRequest;
+PublishRequest publishRequest = PublishRequest.builder()
+       .message("Hello from Java!")
+       .topicArn(topicArn)
+       .build();
+snsClient.publish(publishRequest);
