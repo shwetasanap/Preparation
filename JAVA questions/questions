@@ -1410,3 +1410,92 @@ CompletableFuture provides a powerful and flexible way to write asynchronous, no
 It was introduced in Java 8 and has become popular due to its ease of use and ability to handle complex asynchronous workflows.
 
 *****************************************************************************************************************************************************************************************
+
+In **multithreading** and **concurrent programming**, a **semaphore** is a synchronization mechanism used to control access to a shared resource by multiple threads.
+It helps prevent **race conditions** and ensures that multiple threads do not access a critical section of code at the same time, which could lead to unpredictable results or errors.
+
+### **Key Concepts of Semaphore:**
+
+1. **Semaphore Basics:**
+   A semaphore is essentially a counter that tracks the number of available resources or permits. It can either be **binary** or **counting**:
+   - **Binary Semaphore (Mutex):** This is a semaphore with a value of either 0 or 1, used to ensure mutual exclusion (only one thread can access the critical section).
+   - **Counting Semaphore:** This allows a range of values, typically representing the number of resources available (e.g., number of identical resources that can be accessed concurrently).
+
+2. **Operations on Semaphores:**
+   There are two primary operations that can be performed on a semaphore:
+   - **Wait (P or down operation):** This operation checks the semaphore’s value. If the value is greater than 0, it decrements the value and allows the thread to proceed. 
+    If the value is 0, the thread is blocked until the semaphore’s value becomes greater than 0.
+   - **Signal (V or up operation):** This operation increments the semaphore’s value, signaling that a resource is now available or that a thread has finished using the resource.
+
+3. **Usage in Multithreading:**
+   - **Controlling access to shared resources:** When multiple threads need to access shared resources (like a database, printer, or memory), semaphores can limit the number of threads 
+     that can access the resource at the same time.
+   - **Avoiding race conditions:** By controlling the number of threads accessing a critical section, semaphores help avoid **race conditions** 
+     (where the outcome of a program depends on the non-deterministic timing of threads).
+
+### **Example of Semaphore in Multithreading:**
+
+Let’s assume we have a scenario where **3 threads** are trying to access a shared resource, but only **2 threads** can access the resource at a time.
+A **counting semaphore** with an initial value of 2 can be used:
+
+import java.util.concurrent.Semaphore;
+
+public class SemaphoreExample {
+
+    // Create a semaphore with an initial permit count of 2 (only 2 threads can access the resource at a time)
+    private static final Semaphore semaphore = new Semaphore(2);
+
+    public static void main(String[] args) {
+        // Create and start 5 threads, but only 2 can access the resource at a time
+        for (int i = 0; i < 5; i++) {
+            Thread thread = new Thread(new ResourceAccessTask(i));
+            thread.start();
+        }
+    }
+
+    static class ResourceAccessTask implements Runnable {
+        private final int threadId;
+
+        public ResourceAccessTask(int threadId) {
+            this.threadId = threadId;
+        }
+
+        @Override
+        public void run() {
+            try {
+                // Attempt to acquire a permit from the semaphore
+                System.out.println("Thread-" + threadId + " is trying to access the resource.");
+                semaphore.acquire();  // Wait (decrease the semaphore count)
+
+                // Critical section: Accessing the shared resource
+                System.out.println("Thread-" + threadId + " has accessed the resource.");
+                Thread.sleep(2000);  // Simulating work with the resource
+
+                // Release the permit (increment the semaphore count)
+                semaphore.release();
+                System.out.println("Thread-" + threadId + " has released the resource.");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+}
+
+
+### **How This Works:**
+- The semaphore is initialized with a value of 2, meaning **only 2 threads** can access the resource simultaneously.
+- When a thread calls `semaphore.acquire()`, it decreases the semaphore’s value. If the value is greater than 0, the thread continues; if it’s 0, the thread is blocked until a resource becomes available.
+- When the thread finishes using the resource, it calls `semaphore.release()`, which increments the semaphore’s value, allowing another thread to proceed.
+
+### **Why Use Semaphores?**
+
+- **Resource Control:** You can control how many threads can access a resource at the same time, preventing overload or contention for resources.
+- **Synchronization:** Semaphores help synchronize threads, ensuring that they cooperate effectively without stepping on each other’s toes.
+- **Prevent Deadlocks:** By managing access to shared resources, semaphores can help avoid deadlocks that can occur if threads wait indefinitely for each other.
+
+### **Real-World Example:**
+Imagine a **parking lot** with only **3 parking spaces** (resources) available. The **semaphore** would keep track of how many spaces are open.
+If there are no spaces left, the **semaphore** would prevent additional cars (threads) from entering until a space becomes free.
+
+---
+
