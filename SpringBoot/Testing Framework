@@ -22,6 +22,7 @@ assertFalse(): Verifies that a condition is false.
 | `@AfterAll` | Runs once after all test methods in the class. Must be `static`. |
 | `@DisplayName` | Sets a custom name for the test method for better readability. |
 | `@Disabled` | Disables the test method or class; it will be skipped. |
+ @SpringBootTest --> use for integration testing.It loads the entire application context to test the application together.
 ---
 ### **Advanced/Additional Annotations**
 | Annotation | Description |
