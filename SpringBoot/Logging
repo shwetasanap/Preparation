@@ -1,0 +1,217 @@
+Sure! In Spring Boot, loggers are used to record application behavior, which is super helpful for debugging,
+monitoring, and understanding what's going on under the hood.
+
+1. What is Logging?
+
+Logging means recording messages during the execution of a program. These messages can be info like:
+
+	•	Errors
+
+	•	Debugging data
+
+	•	General information
+
+	•	Warnings
+
+2. Default Logger in Spring Boot
+
+Spring Boot uses SLF4J (Simple Logging Facade for Java) as an abstraction and typically uses Logback as the default 
+underlying implementation.
+
+That means:
+
+	•	You write logs using SLF4J (interface)
+
+	•	Logback does the actual logging (implementation)
+
+3. Logger Example
+
+Here’s a simple example:
+
+import org.slf4j.Logger;
+
+import org.slf4j.LoggerFactory;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+
+public class MyController {
+
+    private static final Logger logger = LoggerFactory.getLogger(MyController.class);
+
+    @GetMapping("/hello")
+
+    public String hello() {
+
+        logger.info("INFO log message");
+
+        logger.debug("DEBUG log message");
+
+        logger.warn("WARN log message");
+
+        logger.error("ERROR log message");
+
+        return "Hello World";
+
+    }
+
+}
+
+4. Log Levels (in increasing order of severity)
+
+	•	TRACE – most detailed
+
+	•	DEBUG
+
+	•	INFO
+
+	•	WARN
+
+	•	ERROR
+
+5. Setting Log Levels
+
+You can configure log levels in application.properties or application.yml:
+
+application.properties:
+
+logging.level.root=INFO
+
+logging.level.com.myapp=DEBUG
+
+application.yml:
+
+logging:
+
+  level:
+
+    root: INFO
+
+    com.myapp: DEBUG
+
+6. Changing the Logging Format
+
+You can also change the format, log file location, and more:
+
+# Write logs to a file
+
+logging.file.name=app.log
+
+logging.file.path=/var/logs
+
+# Change log pattern
+
+logging.pattern.console=%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+
+7. Common Alternatives
+
+While Logback is default, Spring Boot also supports:
+
+	•	Log4j2
+
+	•	Java Util Logging (JUL)
+
+If you want to switch, just exclude Logback and include the one you want.
+
+Let me know if you want to dive deeper into log rotation, custom appenders, or async logging. 
+Absolutely! Here's a breakdown of log levels in logging frameworks like Logback (used in Spring Boot).
+These levels control what kind of messages get logged, based on severity and importance.
+
+Log Levels (in order of severity):
+
+1. TRACE
+
+	•	Most detailed level.
+
+	•	Used for fine-grained information about the flow of a program.
+
+	•	Great for deep debugging — like method entry/exit, loop iterations, etc.
+
+Example:
+
+logger.trace("Starting calculation with inputs: {}, {}", a, b);
+
+2. DEBUG
+
+	•	Used for debugging information.
+
+	•	Less verbose than TRACE, but still gives internal state and flow insights.
+
+Example:
+
+logger.debug("User retrieved from DB: {}", user);
+
+3. INFO
+
+	•	General information about application behavior.
+
+	•	Use it for important application events — like startup, shutdown, business milestones.
+
+Example:
+
+logger.info("Application started on port 8080");
+
+4. WARN
+
+	•	Indicates a potential problem or something unexpected.
+
+	•	Doesn't stop the application, but it's worth investigating.
+
+Example:
+
+logger.warn("User tried to access deprecated API: /v1/old-endpoint");
+
+5. ERROR
+
+	•	Serious issue that has caused an operation to fail.
+
+	•	Application might still run, but this should be fixed ASAP.
+
+Example:
+
+logger.error("Unable to connect to database", exception);
+
+When to Use What?
+
+Log Level
+
+Use Case
+
+TRACE
+
+Very detailed debugging. Only use in development.
+
+DEBUG
+
+Useful debug info, safe for dev or QA.
+
+INFO
+
+High-level app events. OK for production.
+
+WARN
+
+Something unexpected, but not fatal. Monitor it.
+
+ERROR
+
+Something failed. Needs attention.
+
+Controlling Log Levels
+
+You can set the minimum log level for different packages:
+
+# Root level
+
+logging.level.root=INFO
+
+# Custom package
+
+logging.level.com.myapp.service=DEBUG
+
+So if INFO is the current level, DEBUG or TRACE logs won't be shown.
+
+Let me know if you want a visual chart or examples from real-world apps. 
