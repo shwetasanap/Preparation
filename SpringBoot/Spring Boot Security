@@ -6,4 +6,419 @@ Authorization is the process to allow authority to perform actions in the applic
 
 We configure mentioned dependency in order to provide security :- spring-boot-starter-security
 
+Token-based authentication in Spring Security is a method to secure RESTful APIs without using sessions. 
+It's commonly implemented using JWT (JSON Web Tokens), but can work with other tokens too.
+
+Let me break it down step-by-step:
+
+1. What is Token-Based Authentication?
+
+Instead of storing user info in a session on the server, the server generates a token (usually a JWT) 
+after the user logs in. The client stores this token and includes it in the Authorization header in subsequent requests.
+
+Authorization: Bearer <your_token_here>
+
+2. How It Works in Spring Security
+
+Here’s the general flow:
+
+	1	User logs in (e.g., /login) with credentials.
+
+	2	Spring validates the credentials, and if correct, generates a token (JWT).
+
+	3	The token is sent back to the client.
+
+	4	The client stores the token (in local storage or memory).
+
+	5	For every request, the client sends the token in the Authorization header.
+
+	6	Spring Security intercepts the request, validates the token, and allows access to the resource.
+
+3. Components Involved
+
+a. Authentication Filter
+
+	•	Custom filter that intercepts requests and checks for the token in the header.
+
+	•	If token is valid, it sets the authentication in the security context.
+
+b. Authentication Provider
+
+	•	Optional, but can be used to verify token or retrieve user info.
+
+c. Token Utility
+
+	•	A class to generate, parse, and validate tokens (especially for JWTs).
+
+d. Security Configuration
+
+	•	Override SecurityFilterChain or WebSecurityConfigurerAdapter (if using older Spring Boot)
+    to disable sessions and configure stateless behavior.
+
+4. Sample JWT Authentication Flow (Spring Boot 3+)
+
+SecurityConfig.java
+
+@Bean
+
+SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    return http
+
+        .csrf(csrf -> csrf.disable())
+
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+        .authorizeHttpRequests(auth -> auth
+
+            .requestMatchers("/auth/**").permitAll()
+
+            .anyRequest().authenticated())
+
+        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
+        .build();
+
+}
+
+JWTAuthenticationFilter.java
+
+public class JWTAuthenticationFilter extends OncePerRequestFilter {
+
+    @Override
+
+    protected void doFilterInternal(HttpServletRequest request,
+
+                                    HttpServletResponse response,
+
+                                    FilterChain filterChain)
+
+            throws ServletException, IOException {
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+
+            filterChain.doFilter(request, response);
+
+            return;
+
+        }
+
+        String token = authHeader.substring(7);
+
+        String username = jwtService.extractUsername(token);
+
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+            if (jwtService.isTokenValid(token, userDetails)) {
+
+                UsernamePasswordAuthenticationToken authToken =
+
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+
+            }
+
+        }
+
+        filterChain.doFilter(request, response);
+
+    }
+
+}
+
+
+The doFilter (or doFilterInternal) method is used in filters to intercept HTTP requests before they reach controllers.
+You use it to check things like authentication, modify the request/response, or block/allow the request.
+
+At the end of the method, you call:
+
+filterChain.doFilter(request, response);
+
+to pass the request to the next filter or controller.
+
+In Spring Security, it's used in custom filters like JWT authentication filters to check tokens before allowing access. 
+5. Benefits of Token-Based Auth
+
+	•	Stateless (good for scalability)
+
+	•	Works well with REST APIs
+
+	•	Easy to implement client-side (especially mobile or SPA)
+
+
+
+In token-based Spring Security (especially with JWT), several algorithms come into play behind the scenes — 
+primarily for authentication, encoding, and cryptographic signing. Let’s break down the key ones involved:
+
+1. Password Hashing (Authentication Phase)
+
+Algorithm: BCrypt
+
+	•	When a user logs in, their password is usually hashed using BCryptPasswordEncoder.
+
+	•	This protects passwords in storage.
+
+@Bean
+
+public PasswordEncoder passwordEncoder() {
+
+    return new BCryptPasswordEncoder();
+
+}
+
+	•	Why BCrypt?
+
+	◦	It’s slow and computationally expensive — good for security.
+
+	◦	Has built-in salting to prevent rainbow table attacks.
+
+2. Token Signing (JWT Creation)
+
+Algorithm: HMAC-SHA256 or RSA
+
+	•	JWTs are signed to ensure they haven’t been tampered with.
+
+	•	Two main approaches:
+
+a. Symmetric (HMAC-SHA256) — default & most common:
+
+	•	Uses a single secret key.
+
+	•	Libraries like io.jsonwebtoken (jjwt) use this by default.
+
+String jwt = Jwts.builder()
+
+    .setSubject(username)
+
+    .signWith(SignatureAlgorithm.HS256, secretKey)
+
+    .compact();
+
+b. Asymmetric (RSA or ECDSA) — more secure:
+
+	•	Uses a public/private key pair.
+
+	•	Common in OAuth2/OpenID Connect setups.
+
+	•	Example:
+
+	◦	RS256 = RSA Signature with SHA-256.
+
+3. Token Verification
+
+Algorithm: SHA256 (HMAC or RSA depending on signing)
+
+	•	When a request comes in with a token, Spring decodes and verifies the JWT signature using the same secret key or the public key.
+
+Claims claims = Jwts.parser()
+
+    .setSigningKey(secretKey)
+
+    .parseClaimsJws(token)
+
+    .getBody();
+
+4. Base64 Encoding
+
+	•	JWT tokens consist of three parts (header, payload, signature), all encoded using Base64Url (a variant of Base64 without padding).
+
+Example JWT:
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9. 
+
+eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTY5NDAzNzE2MH0. 
+
+xfdoQ0ZX14nQpNfiwF3sw7bl2NYkAdgU6hFvLGK6Kjo
+
+Summary of Algorithms
+
+Purpose
+
+Algorithm Used
+
+Password hashing
+
+BCrypt
+
+JWT signing (symmetric)
+
+HMAC-SHA256 (HS256)
+
+JWT signing (asymmetric)
+
+RSA / ECDSA (RS256, ES256)
+
+Token decoding
+
+Base64Url
+
+Signature verification
+
+SHA256 / RSA
+
+LDAP-based security in Spring Security is used to authenticate users against an LDAP (Lightweight Directory Access Protocol) server — often used in enterprise environments with Active Directory, OpenLDAP, or other directory services.
+
+1. What Is LDAP?
+
+LDAP stands for Lightweight Directory Access Protocol. It’s a protocol used to store and retrieve user 
+information(like usernames, passwords, emails, roles) from a centralized directory server.
+
+In Simple Terms:
+LDAP is like a phonebook for user accounts — commonly used in big organizations to manage all employee logins and access in one place.
+
+Used for:
+• User authentication and login
+• Storing roles/groups
+• Managing permissions
+• Integrating with systems like Active Directory or OpenLDAP
+Example Data in LDAP:
+uid=john, ou=people, dc=example, dc=com
+ - username: john
+ - password: (hashed)
+ - email: john@example.com
+ - groups: admin, dev
+
+2. How LDAP Authentication Works
+
+	1	The user submits credentials (username/password).
+
+	2	Spring Security uses an LDAP bind operation to authenticate the user.
+
+	3	If successful, the user is granted access.
+
+	4	Optionally, authorities (roles) can be retrieved from LDAP groups.
+
+3. Spring Security + LDAP Integration Overview
+
+Here’s the basic flow:
+
+	•	Spring Security filter intercepts login.
+
+	•	It delegates authentication to an LDAP authentication provider.
+
+	•	The provider connects to an LDAP server and attempts a bind using the user's DN (distinguished name) and password.
+
+4. Configuration Example (Spring Boot)
+
+application.yml
+
+spring:
+
+  ldap:
+
+    urls: ldap://localhost:8389/
+
+    base: dc=springframework,dc=org
+
+    username: cn=admin,dc=springframework,dc=org
+
+    password: admin
+
+Security Configuration (Java Config)
+
+@Bean
+
+public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    http
+
+        .authorizeHttpRequests(auth -> auth
+
+            .anyRequest().fullyAuthenticated()
+
+        )
+
+        .formLogin(Customizer.withDefaults())
+
+        .ldapAuthentication(ldap -> ldap
+
+            .userDnPatterns("uid={0},ou=people")
+
+            .groupSearchBase("ou=groups")
+
+            .contextSource(context -> context
+
+                .url("ldap://localhost:8389/dc=springframework,dc=org")
+
+                .managerDn("cn=admin,dc=springframework,dc=org")
+
+                .managerPassword("admin")
+
+            )
+
+            .passwordCompare(pw -> pw
+
+                .passwordEncoder(new LdapShaPasswordEncoder())
+
+                .passwordAttribute("userPassword")
+
+            )
+
+        );
+
+    return http.build();
+
+}
+
+5. Key Concepts
+
+Concept
+
+Description
+
+userDnPatterns
+
+Pattern to locate the user's DN based on username input. E.g. uid={0},ou=people
+
+groupSearchBase
+
+Where to search for group membership
+
+contextSource
+
+LDAP server connection details
+
+passwordCompare
+
+For comparing passwords stored in LDAP (e.g. SHA/BCrypt)
+
+6. LDAP vs Database Authentication
+
+Feature
+
+LDAP
+
+Database (JDBC, JPA)
+
+Centralized users
+
+Yes
+
+No
+
+Used by orgs
+
+Mostly large enterprises
+
+Custom applications
+
+Integration
+
+AD, OpenLDAP, etc.
+
+MySQL, Postgres, etc.
+
+7. Test LDAP Server for Development
+
+Spring provides an embedded LDAP server for testing:
+<dependency>
+<groupId>org.springframework.ldap</groupId>
+<artifactId>spring-ldap-test</artifactId>
+<scope>test</scope>
+</dependency>
 
