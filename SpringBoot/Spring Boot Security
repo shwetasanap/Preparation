@@ -261,7 +261,8 @@ Signature verification
 
 SHA256 / RSA
 
-LDAP-based security in Spring Security is used to authenticate users against an LDAP (Lightweight Directory Access Protocol) server — often used in enterprise environments with Active Directory, OpenLDAP, or other directory services.
+LDAP-based security in Spring Security is used to authenticate users against an LDAP (Lightweight Directory Access Protocol)
+server — often used in enterprise environments with Active Directory, OpenLDAP, or other directory services.
 
 1. What Is LDAP?
 
