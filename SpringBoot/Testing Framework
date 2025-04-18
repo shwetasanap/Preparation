@@ -50,6 +50,9 @@ JUnit 5 uses `Assertions.*` methods like:
 - You **don’t rely on real dependencies** (like databases, APIs, services).
 - You can **control behavior** and **verify interactions**.
 ---
+a mocking framework that facilitates unit testing by allowing developers to create mock objects, 
+which are dummy implementations of classes or interfaces, to isolate the code under test.
+
 ### **Common Mockito Annotations**
 | Annotation | Purpose |
 |-----------|---------|
