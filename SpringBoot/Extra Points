@@ -591,3 +591,38 @@ Retry mechanism in springboot, allows your application to automatically attempt 
 3. Write @Retryable annotated method which is perfoming a specific task and can get failed(paymnetgateway).and can give maxAttempts in this 
    annotation.
 4. After all attempts if gets failed then calls a method annotated with @Recover.
+
+
+n Spring Boot, application.yml and application.properties are two different formats used to define configuration 
+settings for your application. They serve the same purpose but have different syntax.
+
+1. application.properties
+This is the traditional format, simple and flat:
+server.port=8081
+spring.datasource.url=jdbc:mysql://localhost:3306/mydb
+spring.datasource.username=root
+spring.datasource.password=pass
+Pros:
+• Simple to read for small configurations
+• Familiar to developers coming from older Spring apps
+Cons:
+• Gets hard to manage with nested properties or complex configurations
+2. application.yml
+YAML format allows hierarchical (nested) configuration:
+server:
+ port: 8081
+spring:
+ datasource:
+   url: jdbc:mysql://localhost:3306/mydb
+   username: root
+   password: pass
+Pros:
+• Cleaner for nested configs
+• Easier to organize complex structures
+Cons:
+• Indentation matters (can be error-prone)
+• Syntax errors are harder to spot compared to .properties
+Which to Use?
+Both are supported equally by Spring Boot. It’s mostly a matter of preference or project convention. 
+You shouldn’t mix them unnecessarily—though you can technically use both, values in application.properties will
+override application.yml if both are present.
