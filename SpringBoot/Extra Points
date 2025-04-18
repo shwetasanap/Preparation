@@ -626,3 +626,45 @@ Which to Use?
 Both are supported equally by Spring Boot. It’s mostly a matter of preference or project convention. 
 You shouldn’t mix them unnecessarily—though you can technically use both, values in application.properties will
 override application.yml if both are present.
+
+
+
+
+
+
+
+
+
+Load balancing in microservices is a technique used to distribute network traffic or service requests across multiple instances of a service to ensure no single instance is overwhelmed. It enhances scalability, fault tolerance, and performance.
+Types of Load Balancing in Microservices
+1. Client-Side Load Balancing
+The client chooses the service instance to call.
+• Tools: Spring Cloud LoadBalancer, Netflix Ribbon (now deprecated)
+• How it works:
+◦ The client gets a list of available service instances from a service registry (like Eureka or Consul).
+◦ The client (or a library) picks one instance using a strategy like round-robin or random.
+@LoadBalanced
+@Bean
+public RestTemplate restTemplate() {
+   return new RestTemplate();
+}
+String response = restTemplate.getForObject("http://user-service/users", String.class);
+2. Server-Side Load Balancing
+A dedicated load balancer (like NGINX or HAProxy) forwards requests to available service instances.
+• How it works:
+◦ Clients send requests to a single endpoint (the load balancer).
+◦ The load balancer distributes the traffic based on its algorithm.
+3. API Gateway-Based Load Balancing
+An API gateway like Spring Cloud Gateway, Zuul, or Kong can act as a load balancer too.
+• Handles routing, security, rate limiting, etc.
+• Balances load among service instances behind the scenes.
+Service Discovery
+For dynamic load balancing, especially in client-side or gateway-based setups, you often need service discovery:
+• Eureka (Netflix OSS)
+• Consul
+• Zookeeper
+Load Balancing Strategies
+• Round Robin – Each instance gets a turn
+• Random – Randomly pick an instance
+• Least Connections – Instance with fewest active connections
+• Weighted – Based on instance capacity
