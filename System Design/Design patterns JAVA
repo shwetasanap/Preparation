@@ -76,7 +76,70 @@ public class Main {
 ---
 
 Builder: Separates the construction of a complex object from its representation, allowing different representations to be created. 
-
+The Builder Design Pattern is a creational design pattern used to construct complex objects step by step. 
+It separates the construction of an object from its representation so the same construction process can create different representations.
+When to Use Builder Pattern
+• When an object needs to be created with many possible configuration options.
+• When object construction is complex (e.g., has optional fields or nested structures).
+• When you want to make your code more readable and maintainable.
+Participants
+1 Builder – An interface that defines the steps to build the product.
+2 ConcreteBuilder – Implements the Builder interface to construct and assemble parts.
+3 Product – The complex object being built.
+4 Director (optional) – Controls the building process.
+Example in Java
+Product Class:
+public class Pizza {
+   private String dough;
+   private String sauce;
+   private String topping;
+   public Pizza(String dough, String sauce, String topping) {
+       this.dough = dough;
+       this.sauce = sauce;
+       this.topping = topping;
+   }
+   @Override
+   public String toString() {
+       return "Pizza with " + dough + ", " + sauce + ", " + topping;
+   }
+}
+Builder Class:
+public class PizzaBuilder {
+   private String dough;
+   private String sauce;
+   private String topping;
+   public PizzaBuilder setDough(String dough) {
+       this.dough = dough;
+       return this;
+   }
+   public PizzaBuilder setSauce(String sauce) {
+       this.sauce = sauce;
+       return this;
+   }
+   public PizzaBuilder setTopping(String topping) {
+       this.topping = topping;
+       return this;
+   }
+   public Pizza build() {
+       return new Pizza(dough, sauce, topping);
+   }
+}
+Usage:
+public class Main {
+   public static void main(String[] args) {
+       Pizza pizza = new PizzaBuilder()
+                       .setDough("Thin Crust")
+                       .setSauce("Tomato Basil")
+                       .setTopping("Mozzarella")
+                       .build();
+       System.out.println(pizza);
+   }
+}
+Advantages
+• More readable code (especially with method chaining).
+• Helps with immutability.
+• Avoids constructor telescoping (too many constructor parameters).
+• Makes object creation more flexible.
 2. Structural Patterns: Deal with how classes and objects are composed to form larger structures. 
 Bridge: Decouples an abstraction from its implementation so that the two can vary independently. 
 
