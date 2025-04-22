@@ -593,7 +593,7 @@ Retry mechanism in springboot, allows your application to automatically attempt 
 4. After all attempts if gets failed then calls a method annotated with @Recover.
 
 
-n Spring Boot, application.yml and application.properties are two different formats used to define configuration 
+In Spring Boot, application.yml and application.properties are two different formats used to define configuration 
 settings for your application. They serve the same purpose but have different syntax.
 
 1. application.properties
