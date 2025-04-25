@@ -87,6 +87,13 @@ This is a key aspect of achieving polymorphism.
 An interface can contain abstract methods (without implementation) and constants, promoting a way to achieve abstraction and
 multiple inheritance.
 
+Static Methods in Interface are those methods, which are defined in the interface with the keyword static. 
+Unlike other methods in Interface, these static methods contain the complete definition of the function and 
+since the definition is complete and the method is static, therefore these methods cannot be overridden or 
+changed in the implementation class.
+Similar to Default Method in Interface, the static method in an interface can be defined in the interface, 
+but cannot be overridden in Implementation Classes.
+
 ******************************************************************************************************************************************************************************************
 
 6) Diamond problem and it's solution 
