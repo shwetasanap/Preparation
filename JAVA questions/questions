@@ -94,6 +94,8 @@ changed in the implementation class.
 Similar to Default Method in Interface, the static method in an interface can be defined in the interface, 
 but cannot be overridden in Implementation Classes.
 
+ default methods can be overridden if needed in the implementation.
+
 ******************************************************************************************************************************************************************************************
 
 6) Diamond problem and it's solution 
