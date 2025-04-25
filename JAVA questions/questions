@@ -1501,3 +1501,4 @@ If there are no spaces left, the **semaphore** would prevent additional cars (th
 
 OOP focuses on building up from smaller, independent components (objects) and then combining them to create a larger, more complex system. 
 Upcasting converts a subclass object to its superclass reference, while downcasting converts a superclass reference to its subclass object. 
+List<String> syncList = Collections.synchronizedList(new ArrayList<String>());
