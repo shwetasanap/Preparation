@@ -138,7 +138,8 @@ class SomeServiceTest {
 ```
 ---
 @SpringBootTest` is used to test your full Spring Boot application.  
-It starts the whole application, just like when you run it normally, so you can test everything together—like controllers, services, and repositories.
+It starts the whole application, just like when you run it normally, so you can test everything together—like controllers,
+services, and repositories.
 ### Example:
 ```java
 @SpringBootTest
@@ -160,3 +161,6 @@ So, use `@SpringBootTest` when you want to test how parts of your app work toget
 |-------------|----------------------------|-------------------------------------------|
 | `private`   | Test via public methods    | Use Reflection or change to package-private |
 | `static`    | Keep logic in instance methods if possible | Call directly or mock with `mockito-inline` |
+
+Mockito Inline is an extension of Mockito Core including additional capabilities for mocking final classes, 
+final fields, static methods, and constructors. This library is useful when you need to mock or stub these types of methods or classes.
