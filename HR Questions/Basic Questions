@@ -168,6 +168,24 @@ and I believe my skills in [mention relevant skills/experience] align well with 
 contribute to a global leader and grow in such a dynamic environment."
 
 
+
+
+
+About my work :-
+
+
+
+I was involved in developing the loan application dashboard, where I implemented dynamic filters to help users 
+easily search and track loan applications. I also worked on the sanctions module, which involved designing workflows
+ for multi-level approvals from higher authorities, ensuring compliance and proper authorization.
+As part of the process, I integrated FCU (Field Credit Unit) activities into the application for verification 
+and fraud checks. I also contributed to Master Data Management, allowing users to manage and update master records 
+through the UI with proper validations and audit tracking.
+In the loan decisioning section, I implemented appropriate design patterns to handle different types of loans efficiently. 
+This module had around 12 different stages, and I ensured smooth transitions and logic flow across all stages based on the type of loan.
+Apart from these, I contributed significantly to code enhancements by writing several small utility APIs, as well as 
+RESTful services to communicate with other internal services for tasks like fetching loan status, customer data, and approval history.
+
 Behavioral Questions:
 Prepare to answer questions about your experience with Spring Boot projects, challenges you've faced, and how you've overcome them. 
 Be prepared to discuss your problem-solving approach, communication skills, and teamwork abilities. 
