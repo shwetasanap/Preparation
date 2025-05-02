@@ -1,1 +1,34 @@
-
+private void updateFCUActivityDetails(List<ApplicationApplicant> applicationApplicantList, Long applicationKey) {
+		
+		List<Boolean> flagList=new ArrayList<>();
+		for(ApplicationApplicant applicant:applicationApplicantList)
+		{
+			List<ApplicationApplicantFraudAlerts> applicationApplicantFraudAlerts = applicationApplicantFraudAlertsRepository
+					.findByApplicationApplicantAndFraudTypeAndIsActiveTrue(applicant,
+							ApplicationConstants.BANKING);	
+			if(applicationApplicantFraudAlerts.isEmpty())
+			{
+				flagList.add(Boolean.TRUE);
+			}
+			else
+			{
+				flagList.add(Boolean.FALSE);
+			}
+		}
+		
+		Boolean allEmpty=flagList.stream().allMatch(flag->Boolean.TRUE);
+		
+		if(allEmpty)
+		{
+			FCUActivityDetails fcuActivityDetails=fcuActivityDetailsRepository.
+					findByApplicationKeyAndFcuActivityAndIsActiveTrue(applicationKey,ApplicationConstants.BANKING_ALERTS);
+			
+			if(null!=fcuActivityDetails)
+			{
+				fcuActivityDetails.setIsActive(Boolean.FALSE);
+				fcuActivityDetailsRepository.save(fcuActivityDetails);
+			}
+		}
+		
+		
+	}
