@@ -1418,6 +1418,93 @@ It represents a future result of an asynchronous computation.
 CompletableFuture provides a powerful and flexible way to write asynchronous, non-blocking code. 
 It was introduced in Java 8 and has become popular due to its ease of use and ability to handle complex asynchronous workflows.
 
+
+1. What is ExecutorService?
+ExecutorService is a Java interface that helps manage a pool of threads to execute tasks asynchronously (i.e., in the background).
+It’s part of java.util.concurrent and is better than manually creating threads using new Thread().
+2. Why Use ExecutorService?
+Imagine you have 100 tasks to run. Creating 100 threads is heavy and inefficient.
+Instead:
+• You create a thread pool of 10 threads.
+• Submit all 100 tasks.
+• The pool reuses those 10 threads to complete the tasks.
+This saves system resources and improves performance.
+3. How to Create ExecutorService
+a. Fixed Thread Pool
+ExecutorService executor = Executors.newFixedThreadPool(3);
+• Only 3 threads are created.
+• If more tasks come in, they wait in a queue.
+b. Cached Thread Pool
+ExecutorService executor = Executors.newCachedThreadPool();
+• Creates new threads as needed.
+• Good for many short-lived tasks.
+c. Single Thread Executor
+ExecutorService executor = Executors.newSingleThreadExecutor();
+• Only 1 thread. Tasks are executed one by one.
+• Useful when you want to maintain order.
+4. Submitting Tasks
+a. Runnable (doesn't return result)
+executor.submit(() -> {
+   System.out.println("Task executed");
+});
+b. Callable (returns result)
+Callable<String> task = () -> {
+   Thread.sleep(1000);
+   return "Task completed";
+};
+Future<String> future = executor.submit(task);
+String result = future.get();  // Waits for result
+System.out.println(result);
+5. Shutting Down ExecutorService
+You must shut it down after use:
+executor.shutdown();  // Graceful shutdown
+If you want to stop immediately:
+executor.shutdownNow();  // Force shutdown
+6. Handling Results: Future
+When you submit a Callable, you get a Future<T>:
+• get() waits for the result
+• isDone() checks if it's finished
+• You can also cancel the task using cancel()
+7. Real-world Example
+Let’s say you’re processing multiple user uploads at once:
+ExecutorService executor = Executors.newFixedThreadPool(5);
+for (int i = 1; i <= 10; i++) {
+   final int fileId = i;
+   executor.submit(() -> {
+       System.out.println("Uploading file " + fileId);
+       // simulate delay
+       Thread.sleep(2000);
+       System.out.println("Uploaded file " + fileId);
+   });
+}
+executor.shutdown();
+8. Summary Table
+Feature
+Description
+submit()
+Submit a task (Runnable or Callable)
+shutdown()
+Graceful shutdown
+shutdownNow()
+Immediate shutdown
+Future<T>
+Handle task result and status
+FixedThreadPool
+Fixed number of threads
+CachedThreadPool
+Grows and reuses threads as needed
+SingleThread
+One thread, ordered execution
+
+
+
+
+
+
+
+
+
+
 *****************************************************************************************************************************************************************************************
 
 In **multithreading** and **concurrent programming**, a **semaphore** is a synchronization mechanism used to control access to a shared resource by multiple threads.
@@ -1665,5 +1752,18 @@ void print(List<Integer> list) { }  // Not allowed
 6. Can't use generics in static members
 Because generics depend on objects, not class.
 static T value;  // Not allowed
+******************************************************************************************************************************************************************************
+When to use which data structures:-
+Requirement-->Data Structure
+Fast lookup by key-->HashMap
+Sorted key-value pairs-->TreeMap
+Unique elements, fast lookup-->HashSet
+Sorted unique elements-->TreeSet
+Random access by index-->ArrayList
+Fast insert/delete at head-->LinkedList
+LIFO (Last-In-First-Out)-->Stack
+FIFO (First-In-First-Out)-->Queue
+Process by priority-->PriorityQueue
+
 ******************************************************************************************************************************************************************************
 
