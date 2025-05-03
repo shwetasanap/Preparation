@@ -668,3 +668,30 @@ Load Balancing Strategies
 • Random – Randomly pick an instance
 • Least Connections – Instance with fewest active connections
 • Weighted – Based on instance capacity
+
+
+
+
+Maven verion --> 3.0.0
+spring-boot-starter-parent is a special parent configuration in Spring Boot that makes setting up a project easier.
+Key Points:
+1 Simplifies Setup: It provides default settings and configurations so you don’t have to manually set up things like plugins, 
+  dependencies, and version numbers.
+2 Automatic Dependency Management: It automatically manages the versions of the libraries your project uses, ensuring they 
+  work well together.
+3 Pre-configured Plugins: It comes with pre-configured Maven plugins, so you don’t have to set them up yourself. 
+  This includes things like compiling Java code or building the project into a JAR file.
+4 Java Version: It automatically configures the Java version that works best with Spring Boot.
+
+How to Use:
+Add it to your pom.xml like this:
+<parent>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-parent</artifactId>
+<version>2.7.10</version> <!-- Use the version you need -->
+</parent>
+Why Use It:
+• Saves time: You don’t need to configure everything manually.
+• Less error-prone: It ensures your dependencies are compatible.
+• Easy to upgrade: Updating Spring Boot versions is easier.
+In short, spring-boot-starter-parent makes it super easy to create and manage a Spring Boot project without worrying about the setup and configurations.
