@@ -416,6 +416,23 @@ SELECT name, salary FROM employee WHERE salary < (SELECT MAX(salary) FROM employ
 SELECT name, salary FROM employee ORDER BY salary DESC LIMIT (N-1), 1; where N-1 is offset tells to skip the no of rows after returning result and 1 is no of rows to be returned.
 
 
+Optimization Technique-->Purpose
+Indexing-->Speed up searches
+Avoid SELECT *-->Reduce data load
+Joins over subqueries-->Better performance
+EXPLAIN plan-->Analyze query performance
+Normalization-->Remove redundancy
+Caching-->Reduce DB hits
+Partitioning based on certain columns of table-->Speed up large table queries
+Proper data types-->Save memory and improve speed
+LIMIT clause-->Control result size
+Query tuning-->Use efficient syntax
+Batching-->Fewer round-trips(insert/update in bulk rather than doing it by single row)
+Connection pooling-->Reuse connections
+Archiving-->Keep active tables small
+
+
+
 
 https://www.geeksforgeeks.org/sql-query-interview-questions/
 https://www.datacamp.com/blog/top-sql-interview-questions-and-answers-for-beginners-and-intermediate-practitioners
