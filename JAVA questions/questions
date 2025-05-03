@@ -1767,3 +1767,60 @@ Process by priority-->PriorityQueue
 
 ******************************************************************************************************************************************************************************
 
+Java 17 is a Long-Term Support (LTS) release, which means it will receive extended support and updates from Oracle.
+It was released in September 2021 and includes several new features and enhancements introduced after Java 11 (the previous LTS).
+Here's a list of notable Java 17 features:
+
+1. Sealed Classes (Finalized in Java 17)
+• Purpose: Restrict which classes can extend or implement a class or interface.
+• Syntax:
+public sealed class Animal permits Dog, Cat {}
+•
+• public final class Dog extends Animal {}
+• public final class Cat extends Animal {}
+•
+2. Pattern Matching for switch (Preview)
+• Improves: Type-checking and casting in switch statements.
+• Example:
+static String formatterPatternSwitch(Object o) {
+•    return switch (o) {
+•        case Integer i -> "int: " + i;
+•        case Long l    -> "long: " + l;
+•        case String s  -> "string: " + s;
+•        default        -> "unknown";
+•    };
+• }
+•
+3. New instanceof Pattern Matching (Finalized in Java 16)
+• Introduced in Java 16, but still relevant for Java 17 users.
+• Simplifies type casting:
+if (obj instanceof String s) {
+•    System.out.println(s.toLowerCase());
+• }
+•
+4. New switch Expressions (Preview in Java 12, Finalized later)
+• Useful for returning values directly from switch.
+int numLetters = switch (day) {
+•    case MONDAY, FRIDAY, SUNDAY -> 6;
+•    case TUESDAY                -> 7;
+•    default                     -> throw new IllegalStateException("Invalid day");
+• };
+•
+5. JEP 356: Enhanced Pseudo-Random Number Generators
+• New interfaces and implementations for random number generators.
+• Allows better stream-based generation:
+RandomGenerator generator = RandomGeneratorFactory.of("L64X256MixRandom").create();
+• int randomValue = generator.nextInt(100);
+•
+6. JEP 382: New macOS Rendering Pipeline
+• Replaces Quartz with Metal framework on macOS for better performance and future compatibility.
+7. JEP 389: Foreign Function & Memory API (Incubator)
+• Allows Java to interoperate with native code and memory outside the JVM safely.
+8. JEP 411: Deprecate Security Manager for Removal
+• Security Manager is deprecated due to limited real-world usage and complexity.
+9. Strong Encapsulation of JDK Internals
+• Internal elements of the JDK are now strongly encapsulated, making reflection-based access harder.
+10. Removal of Older Features
+• Applet API: Marked for removal.
+• RMI Activation: Removed.
+• Experimental AOT and JIT compiler (Graal): Removed.
