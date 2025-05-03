@@ -78,6 +78,15 @@ public class Main {
 Builder: Separates the construction of a complex object from its representation, allowing different representations to be created. 
 The Builder Design Pattern is a creational design pattern used to construct complex objects step by step. 
 It separates the construction of an object from its representation so the same construction process can create different representations.
+
+
+Method chaining in Java means calling multiple methods one after another in a single line, like this:
+object.method1().method2().method3();
+How It Works
+To enable method chaining, each method should return the current object (this) or another object that has the next method.
+
+
+
 When to Use Builder Pattern
 • When an object needs to be created with many possible configuration options.
 • When object construction is complex (e.g., has optional fields or nested structures).
