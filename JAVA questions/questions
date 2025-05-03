@@ -1514,4 +1514,156 @@ List<String> syncList = Collections.synchronizedList(new ArrayList<String>());
 
 *****************************************************************************************************************************************************************************************
 
+What are the key differences between String, CharSequence, and StringBuilder?
+
+Definition: CharSequence is an interface that represents a readable sequence of characters. 
+It is implemented by String, StringBuilder, and StringBuffer.Does not defines how characters are stored or manipulated.
+depends on implementation.
+
+Feature	        String	             CharSequence	              StringBuilder
+Type	           Immutable	            Interface	                 Mutable
+Thread-Safety	  Thread-safe	  Depends on implementation	      Not thread-safe
+Performance	   Slower for 
+              modifications   Depends on implementation	    Faster for modifications
+Use Case	      Fixed text	
+                             Generalized character sequence	Frequent text modifications
+Implements	    CharSequence	             —	                      CharSequence
+
+******************************************************************************************************************************************************************************
+What is a ClassNotFoundException vs NoClassDefFoundError?
+
+
+1. ClassNotFoundException
+Definition: A checked exception that occurs when an application tries to load a class at runtime using methods
+like Class.forName(), ClassLoader.loadClass(), or Class.newInstance(), but the specified class cannot be found.
+
+Cause:
+The class is not available in the classpath.
+The class file might be missing or incorrectly specified.
+
+When It Happens: At runtime, when the application explicitly tries to load a class dynamically, and the class is not found.
+
+2. NoClassDefFoundError
+Definition: An unchecked error that occurs when the Java Virtual Machine (JVM) or a class loader tries 
+to load a class during runtime, but the class definition is not available.
+
+Cause:
+The class was present during compilation but is missing at runtime.
+The class might not be in the runtime classpath or could have been removed or corrupted.
+Dependencies of the class are missing (e.g., another class that this class depends on cannot be found).
+
+When It Happens: At runtime, when a class is referenced by code (e.g., creating an instance or calling a static method),
+and the definition is not found.
+******************************************************************************************************************************************************************************
+
+4. What is the role of the java.lang.Object class and its common methods?
+
+--> Root class of all classes in java
+-->Object defines methods that are common to all Java objects, such as toString(), equals(), hashCode(), and more.
+   These methods can be overridden by subclasses to provide class-specific behavior.
+-->Since Object is the parent of all classes, it allows polymorphism. For example, any object can be assigned
+   to a variable of type Object.
+
+toString(),equals(Object obj),hashCode(),getClass(),clone(),finalize(),wait(), notify(), notifyAll()
+
+******************************************************************************************************************************************************************************
+
+Explain generics?
+
+
+Generics in Java allow you to write code that works with different types while providing compile-time type safety. 
+They were introduced in Java 5 to eliminate the need for casting and to help catch type-related errors at compile time.
+
+Why Use Generics?
+
+Without generics:
+List list = new ArrayList();
+list.add("Hello");
+String s = (String) list.get(0);  // Need to cast
+
+With generics:
+List<String> list = new ArrayList<>();
+list.add("Hello");
+String s = list.get(0);  // No need to cast
+
+Benefits of Generics
+1 Type Safety – Prevents inserting wrong types into collections.
+2 Code Reusability – Write generic algorithms and data structures.
+3 Elimination of Casting – No explicit type casting required.
+4 Compile-time Checking – Catches errors early.
+
+Generic Class Example
+public class Box<T> {
+   private T item;
+   public void setItem(T item) {
+       this.item = item;
+   }
+   public T getItem() {
+       return item;
+   }
+}
+Usage:
+Box<String> stringBox = new Box<>();
+stringBox.setItem("Hello");
+String s = stringBox.getItem();  // No cast needed
+
+Generic Method Example
+public <T> void printArray(T[] array) {
+   for (T element : array) {
+       System.out.println(element);
+   }
+}
+
+Bounded Type Parameters
+Restrict the types that can be used as a type argument.
+public <T extends Number> void printDouble(T number) {
+   System.out.println(number.doubleValue());
+}
+Wildcards (?)
+Used when you want to allow any type but still maintain some type safety.
+• <?> – Unknown type
+• <? extends T> – Upper bound
+public double sum(List<? extends Number> numbers) {
+    double sum = 0.0;
+    for (Number num : numbers) {
+        sum += num.doubleValue();
+    }
+    return sum;
+}
+• <? super T> – Lower bound
+public void addNumbers(List<? super Integer> list) {
+    list.add(1);
+    list.add(2);
+    list.add(3);
+}
+public void printList(List<?> list) {
+   for (Object obj : list) {
+       System.out.println(obj);
+   }
+}
+Limitations :-
+
+1. Generic types are erased at runtime
+• Java removes generic type info when your program runs.
+• So List<String> and List<Integer> become just List at runtime.
+• You can't check type like if (obj instanceof T).
+2. Can't use primitives
+• You can't use types like int, double in generics.
+• You must use wrapper classes like Integer, Double.
+List<int> list;    // Not allowed
+List<Integer> list; // OK
+3. Can't create objects of generic type
+You can't do:
+T obj = new T();   // Not allowed
+4. Can't create generic arrays
+This is not allowed:
+T[] arr = new T[10];  // Error
+5. No method overloading with different generic types
+This will cause error:
+void print(List<String> list) { }
+void print(List<Integer> list) { }  // Not allowed
+6. Can't use generics in static members
+Because generics depend on objects, not class.
+static T value;  // Not allowed
+******************************************************************************************************************************************************************************
 
