@@ -1,0 +1,88 @@
+Docker is a containerization platform that allows developers to package applications and their dependencies into 
+a portable container that can run consistently across different environments. 
+
+Key Docker Concepts for Java Developers
+
+Docker Images:
+A read-only template with the application code, dependencies, and configurations (e.g., a JDK image for Java applications).
+
+Docker Containers:
+A runtime instance of a Docker image. It encapsulates the application and its environment.
+
+Dockerfile:
+A script used to define the steps required to create a Docker image. For Java applications, it specifies the base image 
+(e.g., OpenJDK) and the commands to build and run the application.
+
+# Use an official OpenJDK runtime as the base image
+FROM openjdk:17-jdk-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the JAR file into the container
+COPY target/my-java-app.jar .
+
+# Expose the application's port
+EXPOSE 8080
+
+# Define the command to run the application
+CMD ["java", "-jar", "my-java-app.jar"]
+ENTRYPOINT--> cannot be overridden and have preference over cmd
+
+Docker Compose:
+A tool for defining and managing multi-container applications using a docker-compose.yml file.
+
+Docker Registry:
+A storage for Docker images (e.g., Docker Hub, AWS ECR). Java developers can push their application images to a 
+registry for easy sharing and deployment.
+
+
+Benefits :-
+
+Consistency Across Environments:
+Docker ensures that the application runs the same way on development, testing, and production environments
+by packaging the application and all its dependencies into a container.
+
+Portability:
+Containers can run anywhere, whether it's on your local machine, a virtual machine, a cloud server, or even a data center.
+
+Supports Microservices:
+Docker makes it easy to build, deploy, and manage microservices by running each service in its own container.
+
+Collaboration:
+Teams can share Docker images, ensuring everyone is working with the same environment and dependencies.
+
+Docker Commands :-
+
+1. Docker Basics
+docker --version: Check the installed Docker version.
+docker info: Display system-wide information about Docker.
+docker help: Show help for Docker commands.
+
+2. Docker Images
+docker images: List all locally available Docker images.
+docker pull <image-name>: Download a Docker image from the Docker Hub or another registry.
+Example: docker pull nginx
+docker build -t <image-name> .: Build an image from a Dockerfile in the current directory.
+Example: docker build -t my-app .
+docker tag <source-image> <target-image>: Tag an image with a new name.
+Example: docker tag my-app my-app:v1.0
+docker rmi <image-id>: Remove a Docker image.
+Example: docker rmi nginx
+
+3. Docker Containers
+docker ps: List all running containers.
+docker ps -a: List all containers (including stopped ones).
+docker run <image-name>: Create and start a new container from an image.
+Example: docker run nginx
+docker run -d <image-name>: Run a container in detached mode (in the background).
+Example: docker run -d nginx
+docker run -it <image-name>: Run a container interactively (with a terminal).
+Example: docker run -it ubuntu bash
+docker start <container-id>: Start a stopped container.
+docker stop <container-id>: Stop a running container.
+docker restart <container-id>: Restart a container.
+docker rm <container-id>: Remove a stopped container.
+docker logs <container-id>: Show logs for a container.
+docker exec -it <container-id> <command>: Execute a command inside a running container.
+Example: docker exec -it <container-id> bash
