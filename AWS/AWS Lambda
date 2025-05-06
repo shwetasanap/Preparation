@@ -1,0 +1,29 @@
+1.Add dependencies (aws-lambda-java-core, aws-lambda-java-events).
+
+2.Write the Lambda function code in a Java class.
+package com.example;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+
+// The class implements RequestHandler interface for input and output
+public class MyLambdaFunction implements RequestHandler<String, String> {
+
+    @Override
+    public String handleRequest(String input, Context context) {
+        // Log input and context information
+        context.getLogger().log("Input: " + input);
+
+        // Business logic here
+        String output = "Hello, " + input + "!";
+
+        return output;
+    }
+}
+3.Package the code as a JAR file.
+mvn clean package
+
+4.Deploy the JAR to AWS Lambda.
+ Option 1: AWS Management Console
+
+5.Test and monitor the Lambda function via AWS cloudWatch logs.
