@@ -132,7 +132,7 @@ Instead of manually setting up infrastructure, you write code to automate its cr
 ### Quick Terraform Example for Java Applications
 Here’s an example of provisioning an AWS EC2 instance for a Java application:
 
-```hcl name=main.tf
+file name=main.tf
 provider "aws" {
   region = "us-east-1"
 }
@@ -153,4 +153,43 @@ Commands to execute:
 3. `terraform apply` – Create the EC2 instance.
 
 ---
+file name=terraform.tfstate
+A Terraform state file (`terraform.tfstate`) is a
+A Terraform state file (terraform.tfstate) is a JSON file that stores information about the resources that Terraform manages.
 
+{
+  "version": 4,
+  "terraform_version": "1.4.0",
+  "serial": 1,
+  "lineage": "7c6b8eaf-dc5a-4b4a-a1a3-0d9e4f8c2a6e",
+  "outputs": {
+    "instance_ip": {
+      "value": "3.92.189.73",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "example",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "ami": "ami-0c55b159cbfafe1f0",
+            "arn": "arn:aws:ec2:us-east-1:123456789012:instance/i-0abcd1234efgh5678",
+            "availability_zone": "us-east-1a",
+            "instance_type": "t2.micro",
+            "private_ip": "192.168.1.1",
+            "public_ip": "3.92.189.73",
+            "tags": {
+              "Name": "example-instance"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
