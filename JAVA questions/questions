@@ -1835,3 +1835,13 @@ In collections, you can also add or remove elements from collections. But you ca
 
 Collections are iterated externally, while streams are internally iterated. Collections can be traversed multiple times,
 while streams can only be traversed once.
+
+******************************************************************************************************************************************************************************
+
+Java 8 StringJoiner is easily used to create a string with custom delimiters, prefixes, and suffixes.
+
+It helps join strings like:
+
+StringJoiner sj = new StringJoiner(", ", "[", "]");
+sj.add("A").add("B").add("C");
+System.out.println(sj); // Output: [A, B, C]
