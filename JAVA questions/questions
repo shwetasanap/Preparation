@@ -1843,3 +1843,45 @@ It helps join strings like:
 StringJoiner sj = new StringJoiner(", ", "[", "]");
 sj.add("A").add("B").add("C");
 System.out.println(sj); // Output: [A, B, C]
+
+******************************************************************************************************************************************************************************
+
+In Java, both Comparator.comparing and a normal comparator are used to define custom sorting logic, 
+especially when sorting collections like lists. Here's a breakdown of the difference and usage:
+
+1. Normal Comparator (Anonymous Class or Lambda)
+A normal comparator explicitly defines the comparison logic.
+Example:
+List<String> names = Arrays.asList("John", "Alice", "Bob");
+// Using a normal comparator with lambda
+Collections.sort(names, (s1, s2) -> s1.compareTo(s2));
+// Or with anonymous inner class
+Collections.sort(names, new Comparator<String>() {
+   public int compare(String s1, String s2) {
+       return s1.compareTo(s2);
+   }
+});
+2. Comparator.comparing
+Comparator.comparing is a static utility method added in Java 8. It makes comparator creation cleaner, 
+especially when sorting by object fields.
+
+Example:
+class Person {
+   String name;
+   int age;
+   // Constructor and getters
+   Person(String name, int age) {
+       this.name = name;
+       this.age = age;
+   }
+   public int getAge() {
+       return age;
+   }
+}
+List<Person> people = Arrays.asList(
+   new Person("Alice", 30),
+   new Person("Bob", 25),
+   new Person("John", 35)
+);
+// Using Comparator.comparing
+people.sort(Comparator.comparing(Person::getAge));
