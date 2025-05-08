@@ -84,3 +84,13 @@ min(): It returns the minimum element
 max(): It returns the maximum element
 count(): It returns the number of elements
 collect(): It returns a mutable result container
+
+
+You can sort a list of objects using Streams and the sorted() method in Java 8. You often use a comparator to define the sorting logic.
+List<Person> people = Arrays.asList(
+new Person("Ana", 30),
+new Person("Bob", 25)
+);
+List<Person> sortedList = people.stream()
+.sorted(Comparator.comparing(Person::getAge)) // sort by age
+.collect(Collectors.toList());
