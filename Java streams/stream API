@@ -73,3 +73,14 @@ each element in a stream. In this case, it transforms each string in the stream 
 --> class :: getMethodName
 --> object::methodName are used to refer to an instance method of a specific object.
 --> ClassName::new are used to instantiate objects.
+
+Reducing operations collect all the elements of a stream and continuously produce a single value. 
+Examples include calculating the average of elements, counting the number of elements,
+finding the maximum or minimum of elements, etc.
+
+Here are some of the reducing operations available in Java 8 streams:
+
+min(): It returns the minimum element
+max(): It returns the maximum element
+count(): It returns the number of elements
+collect(): It returns a mutable result container
