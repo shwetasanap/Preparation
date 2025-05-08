@@ -1824,3 +1824,14 @@ RandomGenerator generator = RandomGeneratorFactory.of("L64X256MixRandom").create
 • Applet API: Marked for removal.
 • RMI Activation: Removed.
 • Experimental AOT and JIT compiler (Graal): Removed.
+
+
+
+******************************************************************************************************************************************************************************
+
+What are the differences between collections and streams?
+The collections in Java are mainly used to store and group the data. Meanwhile, streams are primarily used to process data.
+In collections, you can also add or remove elements from collections. But you cannot add or remove elements from streams.
+
+Collections are iterated externally, while streams are internally iterated. Collections can be traversed multiple times,
+while streams can only be traversed once.
