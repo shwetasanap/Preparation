@@ -1885,3 +1885,16 @@ List<Person> people = Arrays.asList(
 );
 // Using Comparator.comparing
 people.sort(Comparator.comparing(Person::getAge));
+
+******************************************************************************************************************************************************************************
+A Spliterator in Java 8 is a special iterator used for splitting and traversing elements, especially in parallel streams.
+
+The key features are as follows:
+
+Traversal: Like an iterator, it visits elements one by one
+Partitioning: Can split the data source for parallel processing using trySplit()
+Parallelism: Optimized for use with parallel streams
+Characteristics: Informs about data traits (e.g., ORDERED, SIZED)
+Methods:
+tryAdvance(): Processes the next element
+trySplit(): Splits the data for parallel execution
