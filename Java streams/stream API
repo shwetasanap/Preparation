@@ -5,6 +5,8 @@ The Java Stream API was introduced in Java 8 to provide a more functional approa
 (such as collections) in a declarative way. Streams allow you to express complex data processing queries concisely while 
 being more readable and efficient compared to traditional iteration approaches (like using loops).
 
+Stream pipelining is the process of chaining different operations together.
+
 Key Concepts:
 
 Stream: java.util.stream package.
