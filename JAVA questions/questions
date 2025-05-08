@@ -362,15 +362,13 @@ So, to overcome this, Java 8 has introduced a new class Optional in java.util pa
 Optional is a container object which may or may not contain a non-null value. You must import java.util package to use this class. If a value is present,
 isPresent() will return true and get() will return the value.
 
-empty(): Returns an empty Optional object 
-of(value): Returns an Optional with a non-null value 
-ofNullable(value): Returns an Optional with a value if it's not null, or an empty Optional if it is null 
-isPresent(): Returns true if a value is present, and false if it's not 
-get(): Returns the value if it's present, or throws NoSuchElementException if it's not 
-orElse(): Used to deal with Optional values when the value may or may not be present 
-orElseGet(): Used to deal with Optional values when the value may or may not be present 
-orElseThrow(): Used to deal with Optional values when the value may or may not be present 
-
+of: It makes an optional with a non-null value
+empty: It makes an empty optional
+ofNullable: It makes an optional with a nullable value
+get: It receives the value if present; if not, then it delivers an exception, i.e., NoSuchElementException
+orElseGet: It returns the value if present; if not, it returns the result of invoking the supplier function.
+orElse: It returns the value if present; if not, then it returns the given default value
+orElseThrow: It returns the value if present; if not, then it delivers an exception produced by the given supplier
 
 
 
