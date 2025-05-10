@@ -1776,7 +1776,54 @@ public sealed class Animal permits Dog, Cat {}
 •
 • public final class Dog extends Animal {}
 • public final class Cat extends Animal {}
-•
+
+
+// Declare a sealed interface
+public sealed interface Shape permits Circle, Rectangle, Triangle {
+    double area();
+}
+
+// Classes implementing the sealed interface
+public final class Circle implements Shape {
+    private double radius;
+    
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+public final class Rectangle implements Shape {
+    private double width, height;
+    
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+}
+
+public final class Triangle implements Shape {
+    private double base, height;
+    
+    public Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return 0.5 * base * height;
+    }
+}
 2. Pattern Matching for switch (Preview)
 • Improves: Type-checking and casting in switch statements.
 • Example:
@@ -1792,7 +1839,7 @@ static String formatterPatternSwitch(Object o) {
 3. New instanceof Pattern Matching (Finalized in Java 16)
 • Introduced in Java 16, but still relevant for Java 17 users.
 • Simplifies type casting:
-if (obj instanceof String s) {
+if (obj instanceof String s) { //Inline pattern matching and casting
 •    System.out.println(s.toLowerCase());
 • }
 •
@@ -1823,7 +1870,8 @@ RandomGenerator generator = RandomGeneratorFactory.of("L64X256MixRandom").create
 • RMI Activation: Removed.
 • Experimental AOT and JIT compiler (Graal): Removed.
 
-
+11.Java 17 improves garbage collection with enhancements to ZGC (Z Garbage Collector) 
+and G1 Garbage Collector for better performance and lower latency.
 
 ******************************************************************************************************************************************************************************
 
