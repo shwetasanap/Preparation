@@ -683,59 +683,268 @@ In tech, sharding is used by databases like **MongoDB** and **Cassandra** to han
 
 *********************************************************************************************************************************************
 
-Low-Level Design (LLD) in Software Development
+### **Low-Level Design (LLD) in Software Development**
 
-Low-Level Design (LLD) is the process of designing the specifics of a system at a granular level.
+**Low-Level Design (LLD)** is the process of designing the specifics of a system at a granular level. 
 It focuses on the implementation-level details such as classes, methods, interactions, and data flow. 
 LLD is used to translate the high-level design (HLD) into a blueprint that developers can directly implement.
 
-Steps to Create an LLD
-1.Understand Requirements:
+---
 
-Break down the functionality into smaller, manageable components.
-Define specific use cases or scenarios for the system.
+### **What is Covered in LLD?**
+1. **Class Diagrams**:
+   - Define the structure of classes, their attributes, methods, and relationships (e.g., inheritance, association).
 
-2.Identify Entities:
+2. **Sequence Diagrams**:
+   - Illustrate how objects interact with each other over time to perform a specific functionality.
 
-Identify key objects, their attributes, and actions.
-Example: In a library management system, entities could be Book, User, and Librarian.
+3. **Object-Oriented Design Principles**:
+   - Includes encapsulation, inheritance, polymorphism, and abstraction.
+   - Adheres to design principles like SOLID (Single Responsibility, Open-Closed, etc.).
 
-3.Define Relationships:
+4. **Data Structures**:
+   - Defines data structures to be used (e.g., arrays, linked lists, hash maps).
 
-Determine how entities interact with each other. For example:
-A User can borrow multiple Books.
-A Book is associated with a specific Librarian.
+5. **State Diagrams**:
+   - Represent the possible states of an object and transitions between states.
 
-4.Design Class Diagrams:
+6. **Design Patterns**:
+   - Use of reusable patterns like Singleton, Factory, Observer, etc., to solve common design problems.
 
-Create diagrams to represent entities, their attributes, methods, and relationships.
+7. **Database Schema**:
+   - Specifies the database structure (tables, relationships, indexes, etc.) required for the system.
 
-5.Create Sequence Diagrams:
+---
 
-Show the flow of interaction between objects for specific use cases.
-Example: How a User borrows a Book.
+### **Steps to Create an LLD**
 
-6.Choose Data Structures:
+1. **Understand Requirements**:
+   - Break down the functionality into smaller, manageable components.
+   - Define specific use cases or scenarios for the system.
 
-Select appropriate data structures to store and manage data.
-Example: Use a hash map for quick lookups of books by their ID.
+2. **Identify Entities**:
+   - Identify key objects, their attributes, and actions.
+   - Example: In a library management system, entities could be `Book`, `User`, and `Librarian`.
 
-7.Incorporate Design Patterns:
+3. **Define Relationships**:
+   - Determine how entities interact with each other. For example:
+     - A `User` can borrow multiple `Books`.
+     - A `Book` is associated with a specific `Librarian`.
 
-Apply suitable design patterns to address problems like object creation, communication, or handling behavior.
+4. **Design Class Diagrams**:
+   - Create diagrams to represent entities, their attributes, methods, and relationships.
 
-8.State Transition Diagrams:
+5. **Create Sequence Diagrams**:
+   - Show the flow of interaction between objects for specific use cases.
+   - Example: How a `User` borrows a `Book`.
 
-If the system involves state changes (e.g., Book states: Available → Borrowed → Reserved), create state diagrams.
+6. **Choose Data Structures**:
+   - Select appropriate data structures to store and manage data.
+   - Example: Use a hash map for quick lookups of books by their ID.
 
-9.Database Design:
+7. **Incorporate Design Patterns**:
+   - Apply suitable design patterns to address problems like object creation, communication, or handling behavior.
 
-Create a schema for the database, including tables, columns, and relationships.
+8. **State Transition Diagrams**:
+   - If the system involves state changes (e.g., `Book` states: Available → Borrowed → Reserved), create state diagrams.
 
-10.Code Skeleton:
+9. **Database Design**:
+   - Create a schema for the database, including tables, columns, and relationships.
 
-Write a basic structure or pseudo-code for the classes and methods.
+10. **Code Skeleton**:
+    - Write a basic structure or pseudo-code for the classes and methods.
+
+---
+
+### **Real Example: LLD for Library Management System**
+
+#### **Requirements**:
+- Users can search for books.
+- Users can borrow or return books.
+- Librarians can add or remove books.
+
+---
+
+#### **Key Entities**:
+1. **Book**:
+   - Attributes: `bookId`, `title`, `author`, `status` (Available/Borrowed).
+   - Methods: `borrowBook()`, `returnBook()`.
+
+2. **User**:
+   - Attributes: `userId`, `name`, `borrowedBooks`.
+   - Methods: `borrowBook()`, `returnBook()`.
+
+3. **Librarian**:
+   - Attributes: `librarianId`, `name`.
+   - Methods: `addBook()`, `removeBook()`.
+
+---
+
+#### **Class Diagram**:
+````markdown name=class_diagram.md
+```plaintext
++------------------+       +------------------+       +------------------+
+|      Book        |       |      User        |       |   Librarian       |
++------------------+       +------------------+       +------------------+
+| bookId           |       | userId           |       | librarianId       |
+| title            |       | name             |       | name              |
+| author           |       | borrowedBooks    |       +------------------+
+| status           |       +------------------+       | addBook()         |
++------------------+       | borrowBook()     |       | removeBook()      |
+| borrowBook()     |       | returnBook()     |       +------------------+
+| returnBook()     |       +------------------+
++------------------+
+```
+````
+
+---
+
+#### **Sequence Diagram**: Borrow Book Use Case
+````markdown name=sequence_diagram.md
+```plaintext
+User --> LibrarySystem: searchBook("Book Title")
+LibrarySystem --> Database: fetchBookDetails()
+Database --> LibrarySystem: return Book Details
+User --> LibrarySystem: borrowBook(bookId)
+LibrarySystem --> Book: updateStatus("Borrowed")
+LibrarySystem --> User: addBookToBorrowedList(bookId)
+LibrarySystem --> Database: updateBookStatus()
+```
+````
+
+---
+Below is the **State Diagram** for the **Library Management System** example, focusing on the lifecycle of a `Book` entity.
+
+````markdown name=state_diagram_library_management.md
+```plaintext
++-------------------+        Borrow            +-------------------+
+|                   |------------------------->|                   |
+|    AVAILABLE      |                         |    BORROWED        |
+|                   |                         |                   |
++-------------------+                         +-------------------+
+         |                                           |
+         | Return                                    |
+         |                                           |
+         v                                           |
++-------------------+                         +-------------------+
+|                   |                         |                   |
+|     RESERVED      |<------------------------|      DAMAGED      |
+|                   |      Mark as Damaged    |                   |
++-------------------+                         +-------------------+
+         ^
+         |
+         |
+ Place Hold
+```
+````
+
+### **Explanation of the States and Transitions**:
+
+1. **AVAILABLE**:
+   - Initial state of a book when it is ready to be borrowed by users.
+   - **Transition**: 
+     - Moves to **BORROWED** when a user borrows the book.
+     - Moves to **RESERVED** when a user places a hold on the book.
+
+2. **BORROWED**:
+   - State when a book is loaned out to a user.
+   - **Transition**:
+     - Returns to **AVAILABLE** when the book is returned.
+     - Moves to **DAMAGED** if the book is marked as damaged upon return.
+
+3. **RESERVED**:
+   - State when a book is placed on hold for a user.
+   - **Transition**:
+     - Moves to **BORROWED** when the user picks up the reserved book.
+
+4. **DAMAGED**:
+   - State when a book is marked as damaged.
+   - **Transition**:
+     - May move back to **AVAILABLE** after repairs.
 
 
+#### **Database Schema**:
+````markdown name=database_schema.md
+```sql
+CREATE TABLE Books (
+    bookId INT PRIMARY KEY,
+    title VARCHAR(255),
+    author VARCHAR(255),
+    status ENUM('Available', 'Borrowed')
+);
+
+CREATE TABLE Users (
+    userId INT PRIMARY KEY,
+    name VARCHAR(255),
+    borrowedBooks JSON
+);
+
+CREATE TABLE Librarians (
+    librarianId INT PRIMARY KEY,
+    name VARCHAR(255)
+);
+````
+---
+
+#### **Example Code Skeleton**:
+```python name=library_management_system.py
+class Book:
+    def __init__(self, book_id, title, author):
+        self.book_id = book_id
+        self.title = title
+        self.author = author
+        self.status = "Available"
+
+    def borrow_book(self):
+        if self.status == "Available":
+            self.status = "Borrowed"
+            return True
+        return False
+
+    def return_book(self):
+        self.status = "Available"
 
 
+class User:
+    def __init__(self, user_id, name):
+        self.user_id = user_id
+        self.name = name
+        self.borrowed_books = []
+
+    def borrow_book(self, book):
+        if book.borrow_book():
+            self.borrowed_books.append(book.book_id)
+            print(f"Book {book.title} borrowed!")
+        else:
+            print("Book is not available.")
+
+    def return_book(self, book):
+        if book.book_id in self.borrowed_books:
+            book.return_book()
+            self.borrowed_books.remove(book.book_id)
+            print(f"Book {book.title} returned!")
+
+
+class Librarian:
+    def __init__(self, librarian_id, name):
+        self.librarian_id = librarian_id
+        self.name = name
+
+    def add_book(self, book, library):
+        library.add_book(book)
+
+    def remove_book(self, book_id, library):
+        library.remove_book(book_id)
+```
+
+---
+
+### **Key Elements to Include in LLD**
+1. **Use Case Diagrams** to visualize functionality.
+2. **Class and Sequence Diagrams** for object interactions.
+3. **Data Models and Database Schema** for data storage.
+4. **Code Skeletons** for implementation guidance.
+5. **Design Patterns** for reusability and maintainability.
+6. **State Diagrams** for systems with stateful entities.
+
+With these steps and tools, you'll have a clear and detailed Low-Level Design for your system!
