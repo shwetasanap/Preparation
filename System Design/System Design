@@ -109,23 +109,6 @@ This design makes the system adaptable and easier to maintain because new functi
 * Microservices Architecture Pattern: Breaks down applications into small, independent services that can be developed, deployed, 
 and scaled independently.
 
-Data Flow Diagrams or DFDs is defined as a graphical representation of the flow of data through information. DFD is designed to show how a system is divided into smaller portions and to highlight the flow of data between these parts.
-
-Square	        Defines the source of destination of data
-Arrow	        Identifies data flow and acts as a pipeline throughwhich information flows
-Circle/Bubble	Represents a process that transforms incoming data flow into outgoing data
-Open Rectangle	It is a data store or data at rest/temporary repository of data
-
-High-Level Design is a initial step in development of applications where overall structure of a system is planned. 
-High-Level design focuses mainly on how different components of the system work together without getting to know about
-internal coding and implementation. This helps everyone involving in the project to understand the goals and ensures good 
-communication during development.
-
-
-Low-Level Design (LLD) is the detailed design process in the software development process that focuses on implementing 
-individual components described in the High-Level Design. It provides a blueprint for how each component in the system 
-will function and process and it also includes UML Diagrams, data structures, and algorithms. 
-
 
 *********************************************************************************************************************************************
 
@@ -862,6 +845,13 @@ Below is the **State Diagram** for the **Library Management System** example, fo
    - **Transition**:
      - May move back to **AVAILABLE** after repairs.
 
+#### **Activity diagram**:
+An activity diagram represents the flow of activities or actions in a system. It is useful for modeling workflows or processes.
+Start --> Search Book --> [Book Found?] --> Yes --> Borrow Book --> Update Status --> End
+                              |
+                              No
+                              |
+                           End (Exit)
 
 #### **Database Schema**:
 ````markdown name=database_schema.md
@@ -947,4 +937,85 @@ class Librarian:
 5. **Design Patterns** for reusability and maintainability.
 6. **State Diagrams** for systems with stateful entities.
 
-With these steps and tools, you'll have a clear and detailed Low-Level Design for your system!
+UML Diagrams in System Design
+Unified Modeling Language (UML) diagrams are essential tools in system design. They help visualize the system's structure,
+behavior, and interactions. The most commonly used UML diagrams in system design are Class Diagrams, Sequence Diagrams,
+and Activity Diagrams.
+
+
+High-Level Design (HLD) in Software Development
+
+High-Level Design is a initial step in development of applications where overall structure of a system is planned. 
+High-Level design focuses mainly on how different components of the system work together without getting to know about
+internal coding and implementation. This helps everyone involving in the project to understand the goals and ensures good 
+communication during development.
+
+Steps to Create an HLD :
+
+1.Understand Requirements:
+
+Gather and analyze functional and non-functional requirements.
+
+2.Define the Architecture:
+
+Decide whether it will be monolithic, microservices-based, serverless, etc.
+
+3.Identify Major Components:
+
+Divide the system into logical modules or layers.
+Example: Presentation Layer, Application Layer, Data Layer.
+
+3.Define Data Flow:
+
+Create diagrams to show how data moves between components.
+Data Flow Diagrams or DFDs is defined as a graphical representation of the flow of data through information.
+DFD is designed to show how a system is divided into smaller portions and to highlight the flow of data between these parts.
+
+Square	        Defines the source of destination of data
+Arrow	        Identifies data flow and acts as a pipeline throughwhich information flows
+Circle/Bubble	Represents a process that transforms incoming data flow into outgoing data
+Open Rectangle	It is a data store or data at rest/temporary repository of data
+
+4.Choose Technology Stack:
+
+Based on requirements, choose appropriate technologies for each layer.
+
+Functional Requirements:
+Users can search for books.
+Users can borrow and return books.
+Librarians can add, update, or remove books.
+System tracks book availability.
+
+Non-Functional Requirements:
+Scalability to handle multiple users simultaneously.
+Reliability to ensure data consistency (e.g., book availability).
+Performance for fast search and borrow operations.
+Security for user data and operations.
+
+Aspect									Details
+Architecture						Layered (Presentation, Application, Data).
+Components						User Service, Book Service, Librarian Service, Notification Service.
+Data Flow						Frontend → Backend → Database.
+Technology Stack					React.js, Node.js, MongoDB, Redis.
+NFRs							Scalability, reliability, performance, security.
+Diagrams						Component, Data Flow, Deployment.
+
+
+Component Diagram :
++---------------------+      +---------------------+      +---------------------+
+|     User Service    |<---->|    Book Service     |<---->|    Librarian Service|
++---------------------+      +---------------------+      +---------------------+
+        ^                           ^                           ^
+        |                           |                           |
+        v                           v                           v
++---------------------+      +---------------------+      +---------------------+
+|  Notification Svc   |      |      Database       |      |       Cache         |
++---------------------+      +---------------------+      +---------------------+
+
+Data Flow Diagram :
+
+User --> Frontend --> API Gateway --> Backend Services --> Database
+
+Deployment Diagram :
+
+[Client Devices] --> [Load Balancer] --> [Backend Cluster] --> [Database Cluster]
