@@ -1019,3 +1019,121 @@ User --> Frontend --> API Gateway --> Backend Services --> Database
 Deployment Diagram :
 
 [Client Devices] --> [Load Balancer] --> [Backend Cluster] --> [Database Cluster]
+
+
+*********************************************************************************************************************************************
+
+
+### Scalable System Design Patterns
+
+Below is an explanation of the three scalable system design patterns: **Rate Limiter**, **Circuit Breaker**, and **Write-Through/Write-Behind Cache**. These patterns are commonly used to build robust and scalable systems.
+
+---
+
+### **1. Rate Limiter**
+
+#### **What It Is**:
+A **Rate Limiter** is a design pattern that ensures a system processes requests at a controlled rate. 
+It limits the number of requests a client can make to a server within a specified time window.
+
+#### **Why It’s Important**:
+- Protects the system from being overwhelmed by too many requests (e.g., DDoS attacks).
+- Ensures fair usage of resources across clients.
+- Improves system stability and performance.
+
+#### **How It Works**:
+1. Define a **threshold** (e.g., 100 requests per second).
+2. Monitor incoming requests.
+3. Reject excess requests once the threshold is reached.
+
+#### **Implementation Approaches**:
+1. **Token Bucket**:
+   - Tokens are added to a bucket at a constant rate.
+   - Each request consumes a token. If the bucket is empty, the request is throttled.
+2. **Leaky Bucket**:
+   - Requests are processed at a fixed rate. Excess requests are queued and processed later.
+3. **Sliding Window**:
+   - Tracks requests in a moving time window (e.g., last 60 seconds).
+
+#### **Example**:
+- An API allows a maximum of 1,000 requests per user per hour. If a user exceeds this limit, they receive a 
+`429 Too Many Requests` error.
+
+#### **Tools for Rate Limiting**:
+- NGINX, Envoy, AWS API Gateway, Redis (for token bucket implementation).
+
+---
+
+### **2. Circuit Breaker**
+
+#### **What It Is**:
+A **Circuit Breaker** is a design pattern used to prevent a system from making calls to a failing service or component. 
+It acts like an electrical circuit breaker, "tripping" when failures are detected.
+
+#### **Why It’s Important**:
+- Prevents cascading failures across the system.
+- Improves resilience by isolating failing components.
+- Reduces latency caused by retrying failed requests.
+
+#### **How It Works**:
+1. **Closed State**:
+   - Requests flow normally. Failures are monitored.
+2. **Open State**:
+   - After a certain number of failures, the circuit trips. Requests are blocked.
+3. **Half-Open State**:
+   - After a cooldown period, a few requests are allowed to test if the service has recovered.
+
+#### **Example**:
+- A payment service fails due to high load. The circuit breaker trips, and requests are blocked for a cooldown period.
+Once the service recovers, the circuit breaker allows requests again.
+
+#### **Tools for Circuit Breaker**:
+- Netflix Hystrix (now deprecated), Resilience4j, Spring Cloud Circuit Breaker.
+
+---
+
+### **3. Write-Through/Write-Behind Cache**
+
+#### **What It Is**:
+These are caching strategies used to handle updates to data stored in a cache and a database.
+
+#### **Write-Through Cache**:
+- Data is written to both the cache and the database simultaneously.
+- Ensures the cache always has the latest data.
+- **Trade-off**: Slower writes due to database interaction.
+
+#### **Write-Behind Cache**:
+- Data is written to the cache first and asynchronously written to the database later.
+- Improves write performance but introduces a risk of data loss in case of a failure.
+
+#### **Why It’s Important**:
+- Reduces database load by serving frequently accessed data from the cache.
+- Improves read and write performance in high-traffic systems.
+
+#### **How It Works**:
+1. **Write-Through**:
+   - On write: `Cache → Database`.
+   - On read: `Cache → (if cache miss) Database → Cache`.
+2. **Write-Behind**:
+   - On write: `Cache → (asynchronously) Database`.
+   - On read: `Cache → (if cache miss) Database → Cache`.
+
+#### **Example**:
+- A shopping cart system stores data in a cache for faster access. 
+Updates to the cart are written to the cache, and depending on the strategy, either immediately or later updated in the database.
+
+#### **Tools for Caching**:
+- Redis, Memcached.
+
+---
+
+### **Summary Table**
+
+| **Pattern**                 | **Purpose**                                                                                 | **Key Features**                                                                                      | **Example Use Case**                                                                 |
+|-----------------------------|---------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| **Rate Limiter**            | Controls the rate of requests to a system.                                                  | Prevents overloading, ensures fair usage, improves stability.                                         | API Gateway limiting 1,000 requests/hour per user.                                    |
+| **Circuit Breaker**         | Prevents cascading failures by isolating failing components.                                | States: Closed, Open, Half-Open. Improves resilience.                                                 | Payment service failing due to high traffic.                                         |
+| **Write-Through Cache**     | Writes data to both cache and database simultaneously.                                       | Cache always consistent with database but slower writes.                                              | User profile updates immediately reflected in cache and database.                    |
+| **Write-Behind Cache**      | Writes data to cache first and asynchronously updates the database.                         | Faster writes but risk of data loss if cache fails before syncing.                                    | Shopping cart updates written to cache and synced to database later.                 |
+
+These patterns are essential building blocks in designing **scalable**, **resilient**, and **high-performance systems**!
