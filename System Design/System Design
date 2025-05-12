@@ -125,3 +125,561 @@ communication during development.
 Low-Level Design (LLD) is the detailed design process in the software development process that focuses on implementing 
 individual components described in the High-Level Design. It provides a blueprint for how each component in the system 
 will function and process and it also includes UML Diagrams, data structures, and algorithms. 
+
+
+*********************************************************************************************************************************************
+
+Scalability (horizontal vs vertical)
+
+Scalability in system design refers to the ability of a system to handle increased load or demand by either **adding resources**
+or **enhancing existing resources**. 
+There are two main types of scalability:
+
+---
+
+### 1. **Horizontal Scalability (Scaling Out/In)**:
+- Involves adding or removing nodes (servers/machines) to a system to distribute the load.
+- Often used in distributed systems.
+- Each new node works together with existing nodes to handle more requests.
+
+#### Example:
+Imagine you run a web application hosted on a single server. As the number of users grows, the server becomes overwhelmed. 
+To scale horizontally:
+- Add several servers.
+- Use a **load balancer** to distribute user requests across these servers.
+
+**Real-world Example**: 
+- Netflix uses horizontal scaling to handle millions of users streaming content concurrently.
+- Databases like MongoDB or Cassandra are designed to scale horizontally by sharding data across multiple nodes.
+
+**Key Advantages**:
+- Fault Tolerance: If one server fails, others can take over.
+- Elasticity: Easily add more servers as demand grows.
+- Cost Efficiency: Use commodity hardware instead of a single expensive machine.
+
+**Challenges**:
+- Complex management (e.g., maintaining distributed data consistency).
+- Requires architectural changes (e.g., statelessness in applications).
+
+Real-life scenario:
+Before scaling:
+1 server handles 1,000 users.
+After horizontal scaling:
+Add 2 more servers → Now 3 servers handle 3,000 users collectively.
+In practice (Tech Stack Example):
+Frontend: React App
+Backend: Java Spring Boot API
+Scaling horizontally:
+Deploy the same Spring Boot API on 3 different EC2 instances.
+Use AWS Elastic Load Balancer to distribute traffic across the 3 servers.
+Use Amazon RDS (managed database) to allow all 3 backend instances to access the same data.
+
+
+AWS ELB (Elastic Load Balancer) Explained:
+AWS ELB is a fully managed load balancing service that automatically distributes incoming application traffic across 
+multiple targets (like EC2 instances, containers, IP addresses) in one or more availability zones.
+
+Why use ELB?
+To improve fault tolerance and availability.
+To scale horizontally by balancing traffic across multiple backend servers.
+To avoid single points of failure.
+
+Types of Load Balancers in AWS ELB:
+1. Application Load Balancer (ALB):
+Operates at Layer 7 (HTTP/HTTPS).
+Ideal for web apps, microservices, and routing based on URL path or host.
+Example: /api/* goes to one service, /admin/* goes to another.
+
+2. Network Load Balancer (NLB):
+Operates at Layer 4 (TCP/UDP).
+Very high performance, capable of handling millions of requests per second.
+Good for low latency, gaming, IoT, or real-time systems.
+
+3. Gateway Load Balancer (GWLB):
+Used for third-party virtual appliances (like firewalls).
+Works with security and traffic inspection tools.
+
+4. Classic Load Balancer (CLB) (legacy):
+Supports both Layer 4 and Layer 7 but is now mostly replaced by ALB and NLB.
+
+How it works (Simple ALB Example):
+User sends a request to your website.
+The DNS (via Route 53) routes the request to your ALB.
+The ALB receives the request and checks the routing rules.
+It then forwards the request to a healthy EC2 instance in your target group.
+The EC2 instance handles the request and sends a response back via ALB.
+
+Features:
+Health checks: Routes traffic only to healthy instances.
+Auto Scaling integration: Automatically adjusts the number of EC2 instances.
+SSL termination: ALB can manage SSL certificates.
+Sticky sessions: Option to bind a user’s session to the same instance.
+
+
+
+### 2. **Vertical Scalability (Scaling Up/Down)**:
+- Involves upgrading the existing machine (e.g., increasing CPU, memory, or storage).
+- The system remains on a single server, but with enhanced capacity.
+
+#### Example:
+Imagine a web application running on a server with 8GB RAM and a 4-core CPU. As demand grows, you scale vertically by:
+- Upgrading to a server with 32GB RAM and a 16-core CPU.
+
+**Real-world Example**:
+- A small e-commerce website hosted on a single server might scale vertically by upgrading the hardware as traffic increases.
+- Relational databases like PostgreSQL or MySQL often scale vertically for moderate loads.
+
+**Key Advantages**:
+- Simplicity: No architectural changes or distributed systems complexity.
+- Easier to implement for smaller systems.
+
+**Challenges**:
+- Downtime: Often requires taking the server offline for upgrades.
+- Limits: There's a physical limit to how much hardware can be upgraded.
+- Single Point of Failure: If the server crashes, the entire system goes down.
+
+---
+
+### Choosing Between Horizontal and Vertical Scaling:
+The choice depends on your system's needs:
+- **Horizontal Scaling**: Best for large-scale, high-demand systems that require fault tolerance and distributed workloads 
+(e.g., cloud services, large e-commerce platforms).
+- **Vertical Scaling**: Suitable for smaller systems or when simplicity is critical, and demand growth is predictable and moderate.
+
+Tech Example:
+You have a Java Spring Boot application running on an EC2 instance (t2.micro), and it can handle 100 users.
+Problem:
+Your traffic grows — now 500 users are accessing the app, and it's slow.
+Vertical Scaling Solution:
+You stop the current EC2 instance and start a bigger one (e.g., t2.large) with:
+More CPUs
+More RAM
+Now your application can handle more load — without changing the number of servers.
+Limitations of Vertical Scaling:
+There's a hardware limit — you can’t upgrade forever.
+Downtime is often needed to scale up.
+Single point of failure — if the server goes down, everything is down.
+In summary:
+Vertical scaling = Bigger machine
+Horizontal scaling = More machines
+What is t2.micro?
+It’s a small virtual server in AWS.
+Has 1 CPU and 1 GB of RAM.
+Cheap and good for small apps, testing, or learning.
+Like a small bike — light, cheap, but can’t carry much.
+What is t2.large?
+It’s a bigger virtual server.
+Has 2 CPUs and 8 GB of RAM.
+Costs more, but faster and handles heavier apps or more users.
+Like a car — stronger, can carry more people, good for long rides.
+Main difference:
+t2.micro = small, cheap, slow
+t2.large = big, more power, faster
+
+### Summary Table:
+
+| Feature                  | Horizontal Scaling           | Vertical Scaling           |
+|--------------------------|------------------------------|----------------------------|
+| **Approach**             | Add more servers/nodes      | Upgrade existing server    |
+| **Fault Tolerance**      | High                        | Low                        |
+| **Cost**                 | Commodity hardware          | Expensive upgrades         |
+| **Complexity**           | High (distributed systems)  | Low                        |
+| **Downtime**             | No                          | Possible                   |
+| **Physical Limits**      | Virtually unlimited         | Limited by hardware        |
+
+---
+
+### Combined Approach:
+Many modern systems use a combination of both:
+- Use **vertical scaling** for an initial setup or moderate growth.
+- Transition to **horizontal scaling** as growth becomes exponential.
+
+
+*********************************************************************************************************************************************
+
+In system design, understanding **Availability**, **Reliability**, **Latency**, and **Throughput** is essential to building 
+scalable and robust systems. Here's a detailed explanation of these concepts:
+
+---
+
+### **1. Availability**
+**Definition**: Availability refers to the percentage of time that a system is operational and accessible when needed.
+
+- **Formula for Availability**:  
+  \[
+  \text{Availability} = \frac{\text{Uptime}}{\text{Uptime} + \text{Downtime}} \times 100
+  \]
+
+- High availability systems are designed to minimize downtime, ensuring the system remains accessible even under failures.
+
+#### Example:
+- A system with **99.9% availability** (often called "three nines") is down for roughly **8.76 hours/year**.
+- A system with **99.99% availability** ("four nines") is down for only **52.56 minutes/year**.
+
+**Techniques to Improve Availability**:
+- Redundancy (e.g., multiple servers, failover mechanisms).
+- Load balancers to distribute traffic.
+- Replication of data across regions.
+
+#### Real-World Example:
+Online services like Google or Amazon aim for near **100% availability** so users can always access their platforms.
+
+---
+
+### **2. Reliability**
+**Definition**: Reliability is the ability of a system to perform its functions correctly and consistently without failure over a specific time period.
+
+- A reliable system is **fault-tolerant** and can recover quickly from failures.
+
+#### Difference Between Availability and Reliability:
+- **Availability** focuses on **uptime** (how often a system is accessible).
+- **Reliability** focuses on **error-free operation** (how often a system operates without issues).
+
+#### Example:
+- A car that starts every time without failure is **reliable**.
+- A system that processes transactions without errors for an extended time is considered reliable.
+
+**Techniques to Improve Reliability**:
+- Use of **circuit breakers** to isolate failures.
+- Redundant components to prevent single points of failure.
+- Testing systems for edge cases and unexpected scenarios.
+
+#### Real-World Example:
+Banking systems are designed to be highly reliable to ensure accurate financial transactions.
+
+---
+
+### **3. Latency**
+**Definition**: Latency is the time it takes for a system to respond to a request.
+
+- Measured in **milliseconds (ms)** or **seconds**.
+- It represents the delay between a user's action and the system's response.
+
+#### Example:
+- Clicking a button on a website and waiting for the page to load.
+- A system with 100ms latency responds much faster than one with 500ms latency.
+
+**Techniques to Reduce Latency**:
+- Use **CDNs (Content Delivery Networks)** to serve content closer to users.
+- Optimize database queries.
+- Minimize network hops and packet sizes.
+
+#### Real-World Example:
+Streaming services like Netflix aim to reduce latency so that content starts playing almost instantly after a user clicks "Play."
+
+---
+
+### **4. Throughput**
+**Definition**: Throughput refers to the number of requests or tasks a system can process per unit of time.
+
+- Measured in **requests per second (RPS)**, **transactions per second (TPS)**, or **bits per second**.
+
+#### Example:
+- A web server that handles **1,000 requests/second** has a higher throughput than one that handles **100 requests/second**.
+
+**Techniques to Increase Throughput**:
+- Scaling horizontally (adding more servers).
+- Using asynchronous processing and queues.
+- Optimizing algorithms and system resources.
+
+#### Real-World Example:
+E-commerce platforms like Amazon focus on high throughput to handle millions of orders during peak times (e.g., Black Friday).
+
+---
+
+### Summary Table:
+
+| **Metric**      | **Definition**                                         | **Focus**                          | **Example**                                                      |
+|------------------|-------------------------------------------------------|------------------------------------|------------------------------------------------------------------|
+| **Availability** | Percentage of time the system is operational          | Uptime                             | Google.com being accessible 99.99% of the time                  |
+| **Reliability**  | Ability to operate correctly without failures         | Error-Free Operation               | A banking system that never loses money during transactions     |
+| **Latency**      | Time taken to respond to a request                    | Speed                              | Website loading in 100ms                                         |
+| **Throughput**   | Number of requests/tasks processed per unit time      | Capacity                           | A server handling 1,000 requests/second                         |
+
+---
+
+### Real-World Analogy:
+Imagine a water pipeline:
+- **Availability**: The water is available whenever you turn on the tap.
+- **Reliability**: The water flows without leaks or interruptions.
+- **Latency**: How quickly the water starts flowing after you turn on the tap.
+- **Throughput**: The amount of water that can flow through the pipeline in a minute.
+
+By optimizing these metrics, you can design systems that are fast, robust, and user-friendly!
+
+
+*********************************************************************************************************************************************
+
+### CAP Theorem in System Design
+
+The **CAP Theorem**, also known as **Brewer's Theorem**, is a fundamental principle in distributed systems. 
+It states that **a distributed system cannot simultaneously provide all three of the following guarantees**, 
+but can only achieve at most two out of the three:
+
+1. **Consistency (C)**  
+2. **Availability (A)**  
+3. **Partition Tolerance (P)**
+
+Let’s break these concepts down:
+
+---
+
+### **1. Consistency (C)**
+**Definition**:  
+Every read from the system returns the most recent write (or an error). In other words, all nodes in the system see the same data
+at the same time.
+
+**Example**:
+- Imagine you update your profile picture in a social media application, and all your friends immediately see the updated picture. 
+  This is consistency.
+
+**Trade-off**:
+- Ensuring consistency in a distributed system often requires communication between nodes, which can increase latency.
+
+---
+
+### **2. Availability (A)**
+**Definition**:  
+Every request (read or write) receives a response (success or failure), even in the presence of failures in some nodes.
+
+**Example**:
+- A distributed database like DynamoDB ensures that every request gets a response, even if some nodes are down or unreachable.
+
+**Trade-off**:
+- To guarantee availability, the system might serve stale data (sacrificing consistency).
+
+---
+
+### **3. Partition Tolerance (P)**  
+**Definition**:  
+The system continues to operate even if there is a failure in the communication between nodes (network partition). 
+Partition tolerance is a fundamental requirement for any distributed system.
+
+**Example**:
+- If a network partition happens (e.g., one data center cannot communicate with another), the system remains operational,
+possibly at the cost of consistency or availability.
+
+**Trade-off**:
+- Partition tolerance is non-negotiable in distributed systems because network failures are inevitable.
+
+---
+
+### **The CAP Trade-Off**
+According to CAP Theorem, in the presence of a network partition, you must choose between:
+1. **Consistency (C)**: Ensuring all nodes have the same data.
+2. **Availability (A)**: Ensuring the system always responds to requests.
+
+#### Scenarios:
+1. **CP Systems (Consistency + Partition Tolerance)**:
+   - Prioritize consistency over availability.
+   - Example: **HBase, MongoDB (in certain configurations)**.
+   - Use case: Financial systems, where accurate data is more critical than immediate availability.
+
+2. **AP Systems (Availability + Partition Tolerance)**:
+   - Prioritize availability over consistency.
+   - Example: **Cassandra, DynamoDB**.
+   - Use case: Social media feeds, where occasionally stale data is acceptable.
+
+3. **CA Systems (Consistency + Availability)**:
+   - Achieving both consistency and availability is impossible in the presence of partitions.
+     This configuration could only work in non-distributed systems or when there is no network partition.
+
+---
+
+### **Real-Life Analogy**
+Imagine a distributed system as a group of friends trying to coordinate over a phone network:
+1. **Consistency**: Everyone must hear the same message at the same time.
+2. **Availability**: Everyone must be able to speak, even if the network is spotty.
+3. **Partition Tolerance**: The group can continue communicating even if some people lose connection.
+
+If the network gets split (partition), the group has to compromise:
+- Sacrifice **consistency**: Let everyone share what they know immediately, even if it’s not the latest information.
+- Sacrifice **availability**: Wait until the network is restored to ensure everyone gets the same information.
+
+---
+
+### **Practical Applications of CAP Theorem**
+
+| **System**          | **CAP Choice**      | **Reason**                                                   |
+|----------------------|---------------------|-------------------------------------------------------------|
+| **Relational Databases** | CA (Consistency + Availability) | Not designed for partition tolerance; typically non-distributed. |
+| **Cassandra/DynamoDB**  | AP (Availability + Partition Tolerance) | Prioritize availability for high scalability and fault tolerance. |
+| **HBase**             | CP (Consistency + Partition Tolerance) | Prioritize consistency for applications needing strict correctness. |
+
+---
+
+### Key Points:
+- Partition tolerance is a given in distributed systems.
+- You must choose between **consistency** and **availability** depending on your use case.
+- The CAP theorem guides architects in designing systems tailored to their specific requirements.
+
+
+
+*********************************************************************************************************************************************
+
+Load Balancing, Caching, Database Scaling, Replication, Sharding
+
+Here’s a simple explanation of **Load Balancing**, **Caching**, **Database Scaling**, **Replication**, and **Sharding** in system design:
+
+---
+
+### 1. **Load Balancing**
+
+**What it is**:  
+Load balancing is like a traffic cop for your system. It distributes incoming requests (traffic) across multiple servers so no single server gets overwhelmed.
+
+**Why it’s important**:  
+- Prevents any one server from becoming a bottleneck.
+- Improves performance and reliability by ensuring requests go to healthy servers.
+
+**Example**:  
+Imagine a restaurant where multiple chefs cook orders. The manager assigns incoming orders to different chefs to ensure all orders are prepared on time.  
+
+In tech, this is done by a **load balancer** like NGINX or AWS Elastic Load Balancer.
+
+---
+
+### 2. **Caching**
+
+**What it is**:  
+Caching is like storing frequently used items in a nearby drawer for quick access, rather than going to the storage room every time.
+
+**Why it’s important**:  
+- Reduces the time it takes to fetch data.
+- Saves resources by avoiding repeated computations or database queries.
+
+**Example**:  
+When you visit a website, images or data you frequently access are saved in a cache (e.g., browser cache or CDN) 
+so they load faster the next time.
+
+### Content Delivery Network (CDN) in Simple Terms
+
+A **CDN (Content Delivery Network)** is like a network of warehouses located in different parts of the world that store copies 
+of your website's content. When someone visits your website, the CDN delivers the content from the warehouse (server) closest to 
+them, making the loading process faster.
+
+---
+
+### Why Use a CDN?
+
+1. **Faster Loading Times**:
+   - Instead of fetching content from a central server (which might be far away), a CDN fetches it from a nearby server, 
+     reducing the time it takes to load.
+
+2. **Lower Latency**:
+   - Latency is the delay between a request and a response. A CDN reduces latency by serving content locally.
+
+3. **Better Reliability**:
+   - Even if one server goes down, the CDN can serve content from another nearby server.
+
+4. **Handles More Traffic**:
+   - A CDN can distribute traffic across multiple servers, preventing overload on a single server.
+
+---
+
+### How Does It Work?
+
+1. **Origin Server**:
+   - The main server where your website or app is hosted.
+   - Example: Your website is hosted in New York.
+
+2. **CDN Servers (Edge Servers)**:
+   - Copies of your content (like images, videos, or static files) are stored on servers around the world.
+   - Example: A CDN server in India stores a copy of your website.
+
+3. **User's Request**:
+   - When a user in India visits your website, the content is served from the **CDN server in India**, not the origin server 
+     in New York. This makes the loading process faster.
+
+---
+
+### Example:
+- Without a CDN:  
+  A user in Australia requests a video hosted on your server in the US. It takes longer to load because the data has to travel a 
+  long distance.
+
+- With a CDN:  
+  The video is served from a CDN server in Australia, which is closer to the user, so it loads much faster.
+
+---
+
+### Real-Life Analogy:
+Imagine you want to order a product:
+- Without a CDN: The product is shipped from a factory far away, and delivery takes time.
+- With a CDN: The product is shipped from a nearby warehouse, so delivery is much faster.
+
+---
+
+### Popular CDN Providers:
+- Cloudflare
+- Akamai
+- AWS CloudFront
+- Google Cloud CDN
+- Microsoft Azure CDN
+
+In tech, caching tools like **Redis** or **Memcached** are often used.
+
+---
+
+### 3. **Database Scaling**
+
+**What it is**:  
+Database scaling means making your database capable of handling more data or more requests as your system grows.
+
+**Types**:
+1. **Vertical Scaling**: Upgrading the database server’s hardware (e.g., adding more RAM, CPU).
+   - Simple but has limits.
+2. **Horizontal Scaling**: Adding more database servers and distributing the workload.
+   - More complex but scales better.
+
+**Example**:  
+If one delivery truck can’t handle all orders, you can:
+- Get a bigger truck (**vertical scaling**).
+- Use multiple trucks (**horizontal scaling**).
+
+---
+
+### 4. **Replication**
+
+**What it is**:  
+Replication means creating copies of your database so you have multiple identical versions.
+
+**Why it’s important**:  
+- Improves **availability**: If one copy fails, others can take over.
+- Improves **read performance**: Queries can be spread across replicas.
+
+**Example**:  
+Imagine you have multiple copies of your recipe book in different locations. If one copy is unavailable, you can use another.
+
+In tech, **read replicas** are common for reducing load on the primary database.
+
+---
+
+### 5. **Sharding**
+
+**What it is**:  
+Sharding means splitting a large database into smaller, independent parts (shards), where each shard handles a portion of the data.
+
+**Why it’s important**:  
+- Helps scale databases horizontally by distributing data across multiple servers.
+- Reduces the load on each server.
+
+**Example**:  
+Imagine a library where books are divided by genre, and each section (shard) is managed separately. Instead of searching the whole library, you only search the relevant section.
+
+In tech, sharding is used by databases like **MongoDB** and **Cassandra** to handle massive datasets.
+
+---
+
+### Summary Table:
+
+| **Concept**         | **What It Does**                                                                 | **Example**                                                                                 |
+|----------------------|----------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Load Balancing**   | Distributes traffic across servers.                                             | Assigning orders to multiple chefs in a restaurant.                                         |
+| **Caching**          | Stores frequently used data for quick access.                                   | Keeping favorite snacks in your desk drawer instead of the kitchen.                        |
+| **Database Scaling** | Increases database capacity through vertical (bigger server) or horizontal (more servers) scaling. | Using multiple delivery trucks instead of one.                                             |
+| **Replication**      | Creates copies of the database to improve availability and read performance.    | Having multiple copies of a recipe book in different locations.                            |
+| **Sharding**         | Divides a large database into smaller, independent parts to distribute the load. | Dividing a library into sections by genre for easier management.                           |
+
+*********************************************************************************************************************************************
+
