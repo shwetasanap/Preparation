@@ -683,3 +683,59 @@ In tech, sharding is used by databases like **MongoDB** and **Cassandra** to han
 
 *********************************************************************************************************************************************
 
+Low-Level Design (LLD) in Software Development
+
+Low-Level Design (LLD) is the process of designing the specifics of a system at a granular level.
+It focuses on the implementation-level details such as classes, methods, interactions, and data flow. 
+LLD is used to translate the high-level design (HLD) into a blueprint that developers can directly implement.
+
+Steps to Create an LLD
+1.Understand Requirements:
+
+Break down the functionality into smaller, manageable components.
+Define specific use cases or scenarios for the system.
+
+2.Identify Entities:
+
+Identify key objects, their attributes, and actions.
+Example: In a library management system, entities could be Book, User, and Librarian.
+
+3.Define Relationships:
+
+Determine how entities interact with each other. For example:
+A User can borrow multiple Books.
+A Book is associated with a specific Librarian.
+
+4.Design Class Diagrams:
+
+Create diagrams to represent entities, their attributes, methods, and relationships.
+
+5.Create Sequence Diagrams:
+
+Show the flow of interaction between objects for specific use cases.
+Example: How a User borrows a Book.
+
+6.Choose Data Structures:
+
+Select appropriate data structures to store and manage data.
+Example: Use a hash map for quick lookups of books by their ID.
+
+7.Incorporate Design Patterns:
+
+Apply suitable design patterns to address problems like object creation, communication, or handling behavior.
+
+8.State Transition Diagrams:
+
+If the system involves state changes (e.g., Book states: Available → Borrowed → Reserved), create state diagrams.
+
+9.Database Design:
+
+Create a schema for the database, including tables, columns, and relationships.
+
+10.Code Skeleton:
+
+Write a basic structure or pseudo-code for the classes and methods.
+
+
+
+
