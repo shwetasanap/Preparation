@@ -1366,7 +1366,7 @@ project documentation, knowledge bases, and more.
 Callable vs Runnable interface
 
 Runnable and Callable both functional interface. Classes which are implementing these interfaces are designed to be executed
-by another thread.
+by another thread.In Java, Runnable and Callable are two key interfaces used to represent tasks that can be executed by multiple threads.
 
 Sr. No.   	Key	            Runnable	                                                         Callable
 1        Package       It belongs to Java.lang                                       It belongs to java.util.concurrent
