@@ -1531,7 +1531,8 @@ It helps prevent **race conditions** and ensures that multiple threads do not ac
 
 Let’s assume we have a scenario where **3 threads** are trying to access a shared resource, but only **2 threads** can access the resource at a time.
 A **counting semaphore** with an initial value of 2 can be used:
-
+Class Name: Semaphore
+Package: java.util.concurrent
 import java.util.concurrent.Semaphore;
 
 public class SemaphoreExample {
