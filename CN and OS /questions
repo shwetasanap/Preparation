@@ -1,0 +1,167 @@
+Great! Since you have 3 years of experience as a developer and are preparing for an Amazon interview, I'll explain **Operating System (OS) concepts** in a way that’s both **simple and deep enough** for interview preparation. We'll focus on the most **commonly asked OS topics** and concepts that Amazon and similar companies tend to focus on in system design and coding interviews.
+
+---
+
+### 🔧 1. **Processes and Threads**
+
+#### 🧠 Basic Idea:
+
+* A **process** is a running program (like Chrome or VS Code).
+* A **thread** is a smaller unit of execution inside a process.
+
+#### ✅ Key Points:
+
+* A process has **its own memory space**.
+* Threads share memory **within the same process**, making communication faster, but also riskier (race conditions).
+
+#### 🔥 Interview Tip:
+
+Know how to create threads, and the difference between **multitasking (multiple processes)** and **multithreading (multiple threads)**.
+
+---
+
+### ⚙️ 2. **CPU Scheduling**
+
+#### 🧠 Basic Idea:
+
+The OS decides **which process/thread gets the CPU** and for how long.
+
+#### ✅ Key Scheduling Algorithms:
+
+* **FCFS (First Come First Serve)**
+* **SJF (Shortest Job First)**
+* **Round Robin (RR)** – used in time-sharing systems.
+* **Priority Scheduling**
+
+#### 🔥 Interview Tip:
+
+Understand **context switching**, **CPU burst vs I/O burst**, and **how these algorithms affect performance** (e.g., response time, throughput).
+
+---
+
+### 💾 3. **Memory Management**
+
+#### 🧠 Basic Idea:
+
+The OS manages RAM and decides where programs are loaded and how memory is allocated.
+
+#### ✅ Key Concepts:
+
+* **Paging**: Break memory into fixed-size blocks.
+* **Segmentation**: Break memory into logical segments (code, stack, heap).
+* **Virtual Memory**: Use disk as extra RAM using **swap** or **page files**.
+* **Page Replacement Algorithms**: FIFO, LRU (Least Recently Used), etc.
+
+#### 🔥 Interview Tip:
+
+Be able to explain **page faults**, **TLB (Translation Lookaside Buffer)**, and how virtual memory works under the hood.
+
+---
+
+### 📂 4. **File Systems**
+
+#### 🧠 Basic Idea:
+
+The OS handles reading/writing from storage (files, directories).
+
+#### ✅ Key Concepts:
+
+* File structure (flat vs hierarchical)
+* File allocation methods: contiguous, linked, indexed
+* Access permissions (read, write, execute)
+
+#### 🔥 Interview Tip:
+
+Know how files are stored, accessed, and locked (e.g., what happens during simultaneous access).
+
+---
+
+### 📦 5. **Concurrency & Synchronization**
+
+#### 🧠 Basic Idea:
+
+Managing **multiple processes/threads** running at the same time safely.
+
+#### ✅ Key Tools:
+
+* **Mutex / Lock**: Allows only one thread access at a time.
+* **Semaphore**: Like a lock but allows multiple threads (used for controlling access to resources).
+* **Deadlock**: When two or more threads are waiting for each other forever.
+
+#### 🔥 Interview Tip:
+
+Understand:
+
+* The 4 conditions of a **deadlock**.
+* How to prevent it: **Banker’s algorithm**, **resource hierarchy**, **timeouts**.
+
+---
+
+### 📚 6. **Inter-Process Communication (IPC)**
+
+#### 🧠 Basic Idea:
+
+Mechanism for processes to communicate and synchronize.
+
+#### ✅ Common Techniques:
+
+* Pipes
+* Message Queues
+* Shared Memory
+* Sockets
+
+#### 🔥 Interview Tip:
+
+You should know **when to use which IPC mechanism**, especially in distributed system or client-server apps.
+
+---
+
+### 📤 7. **I/O and Device Management**
+
+#### 🧠 Basic Idea:
+
+The OS handles communication between hardware devices (keyboard, disk) and software.
+
+#### ✅ Key Concepts:
+
+* Device drivers
+* Interrupts
+* Buffers and caching
+
+---
+
+### 🔐 8. **Security and Protection**
+
+#### 🧠 Basic Idea:
+
+OS must protect processes from each other, and restrict access to hardware.
+
+#### ✅ Key Concepts:
+
+* User mode vs Kernel mode
+* Access control (ACLs, capabilities)
+* System calls
+
+---
+
+### 🧪 Practice Questions for Interviews:
+
+1. What’s the difference between a process and a thread?
+2. How does virtual memory work?
+3. Explain how LRU page replacement algorithm works.
+4. Describe how deadlock occurs. How can it be prevented?
+5. Explain how Round Robin scheduling works and its tradeoffs.
+6. How do two processes communicate in Linux?
+7. How does the OS know which process to schedule next?
+
+---
+
+### 📌 Tips for Amazon Interview:
+
+* Use real-life analogies (e.g., "process is like a restaurant, thread is like a waiter").
+* Know your programming language’s threading model (e.g., Java's `Thread`, Python's GIL).
+* Practice system design questions involving concurrency (e.g., building a rate limiter, task scheduler).
+
+---
+
+Would you like me to create **flashcards**, **diagrams**, or **sample coding questions** (like implementing mutex, or simulating scheduling)?
