@@ -576,3 +576,43 @@ Locking files :-
 | **Advisory Locking**  | OS does **not enforce** lock; processes must cooperate  | Common in UNIX/Linux              |
 | **Mandatory Locking** | OS **enforces** the lock; access denied if not acquired | Rare; needs special settings      |
 
+
+
+*************************************************************************************************************************************************************************
+**Fragmentation** in an operating system (OS) refers to the condition where storage space (typically RAM or disk) is used inefficiently, reducing performance and the system's ability to allocate memory effectively. It happens when memory is broken into small, non-contiguous pieces over time. There are two main types:
+
+---
+
+### 1. **Internal Fragmentation**
+
+* **Definition**: Occurs when fixed-sized memory blocks are allocated to processes, and a process doesn't use the entire block, leaving unused space inside.
+* **Example**: If a process needs 28 KB and the memory block size is 32 KB, 4 KB is wasted.
+* **Cause**: Allocation of memory in blocks that are larger than necessary.
+
+---
+
+### 2. **External Fragmentation**
+
+* **Definition**: Happens when free memory is split into small blocks scattered throughout, making it difficult to allocate large contiguous blocks to processes.
+* **Example**: Even if there's 100 KB free in total, it might be split into chunks of 10 KB scattered everywhere, making it impossible to satisfy a request for 50 KB.
+* **Cause**: Frequent allocation and deallocation of variable-sized memory blocks.
+
+---
+
+### 3. **Compaction (Solution to External Fragmentation)**
+
+* A technique used to reduce external fragmentation by moving processes and data in memory to combine free space into a single contiguous block.
+* This is **time-consuming** and can only be done if memory relocation is supported.
+
+---
+
+### Summary Table:
+
+| Type                   | Cause                       | Wasted Space   | Example                                   |
+| ---------------------- | --------------------------- | -------------- | ----------------------------------------- |
+| **Internal**           | Fixed-size block allocation | Inside block   | 28 KB process in 32 KB block → 4 KB waste |
+| **External**           | Variable-size allocation    | Between blocks | Total free space enough, but fragmented   |
+| **Solution (Partial)** | Compaction                  | -              | Rearranging memory to unify free space    |
+
+Let me know if you want diagrams or animations to help visualize it!
+
