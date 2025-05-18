@@ -255,3 +255,324 @@ SJF: Short jobs will have lower waiting times, as they are executed sooner. Howe
 Round Robin: Waiting time tends to be more evenly distributed. However, if the time quantum is too large or too small, it can impact waiting times negatively.
 
 Priority Scheduling: Low-priority processes can face high waiting times if high-priority processes continuously arrive and preempt them.
+
+*************************************************************************************************************************************************************************
+
+Concurrency & Synchronization
+
+Concurrency refers to the ability of an operating system to manage multiple processes or threads in a way that they appear to run simultaneously,
+even on systems with a single CPU. It allows multiple tasks to make progress by sharing the CPU, and even though only one task runs at a time,
+it seems like all are progressing simultaneously.
+
+Key Point: Concurrency doesn't necessarily mean simultaneous execution. It can be time-sharing where processes take turns executing.
+
+Types of Concurrency:
+Process-Level Concurrency: Multiple processes (independent programs) run concurrently. Each process has its own memory space.
+Thread-Level Concurrency: Multiple threads within the same process execute concurrently. Threads share the same memory space but can perform different tasks.
+
+Example of Concurrency:
+Imagine a system running three processes:
+
+Process A: Starts execution, but after some time, it needs to wait for an I/O operation (e.g., reading from disk).
+
+Process B: Starts executing while Process A is waiting for I/O.
+
+Process C: Starts executing while Process A and B are executing concurrently.
+
+Even though there’s only one CPU, the OS switches between processes so that it appears that all 
+processes are running simultaneously.
+
+
+Synchronization in Operating Systems
+Synchronization ensures that concurrent processes or threads operate correctly and avoid issues when 
+accessing shared resources (e.g., memory, files, or devices). Without synchronization, concurrent 
+processes may interfere with each other, leading to race conditions, data inconsistency, 
+or even system crashes.
+
+
+Common Issues in Concurrency:
+
+Race Conditions: Occur when two or more processes or threads access shared data concurrently 
+and the final outcome depends on the timing of their execution. This can lead to unpredictable behavior.
+
+Deadlocks: Occur when two or more processes are blocked forever, waiting for each other to release resources.
+Deadlock happens when two or more processes are waiting for each other to release resources, causing all processes to be stuck. A deadlock occurs if the following four conditions hold simultaneously:
+
+Mutual Exclusion: Only one process can use a resource at a time.
+
+Hold and Wait: A process holding one resource is waiting for another.
+
+No Preemption: Resources can't be forcibly taken from processes.
+
+Circular Wait: A circular chain of processes exists, each waiting for a resource held by the next.
+
+Solution: One solution is to use deadlock detection algorithms, or deadlock prevention strategies, such as limiting the conditions under which processes can request resources.
+
+b) Starvation
+Starvation occurs when a process is perpetually denied access to resources, even though it should eventually get a chance to execute. This often happens in priority-based scheduling when lower-priority processes are continually preempted by higher-priority ones.
+Solution: Aging is a technique where the priority of a process is gradually increased over time, ensuring it eventually gets access to resources.
+
+
+Operating systems provide several mechanisms to ensure proper synchronization of concurrent processes:
+
+a) Mutex (Mutual Exclusion)
+A mutex is a locking mechanism used to prevent more than one thread or process from entering a 
+critical section at the same time. When a thread locks a mutex, other threads are blocked 
+from entering the critical section until the mutex is unlocked.
+
+Example:
+
+Process 1 locks a mutex to access shared data.
+
+Process 2 attempts to access the same data, but it's blocked until Process 1 unlocks the mutex.
+
+b) Semaphores
+A semaphore is a synchronization primitive that can be used to signal and control access to resources.
+A semaphore maintains a count that is used to manage how many threads can access a resource simultaneously.
+
+There are two types of semaphores:
+
+Binary Semaphore: A semaphore with only two states (0 and 1), similar to a mutex.
+
+Counting Semaphore: A semaphore that counts the number of available resources 
+(e.g., how many printers are available).
+
+P (Wait) Operation: Decreases the semaphore's value, potentially blocking a process.
+
+V (Signal) Operation: Increases the semaphore's value, potentially allowing a blocked process to proceed.
+
+Example of a Counting Semaphore:
+
+A system with 3 printers uses a counting semaphore initialized to 3. Each time a process wants to
+print, it performs a "wait" operation on the semaphore. If the semaphore is greater than 0, it proceeds; otherwise, it waits. After finishing printing, it signals the semaphore to increase its value.
+
+c) Condition Variables
+A condition variable is a synchronization primitive that allows threads to communicate with each other 
+and synchronize based on certain conditions (like waiting for a resource to become available).
+
+Threads can wait on a condition variable until another thread signals them (using notify or notifyAll).
+
+Condition variables are typically used in conjunction with mutexes to ensure mutual exclusion.
+
+Example:
+
+A producer thread waits for an empty space in a buffer to produce data.
+
+A consumer thread waits for data to be available in the buffer.
+
+Once data is available, the producer signals the consumer to proceed.
+
+
+
+
+ 1. Banker’s Algorithm (Deadlock Avoidance)
+The Banker's Algorithm is a deadlock avoidance algorithm proposed by Dijkstra. It's like how a bank lends money—only if it’s sure it can fulfill all pending loans safely. The OS only grants resource requests if doing so keeps the system in a safe state.
+
+Key Concepts:
+Each process must declare its maximum need of each resource type up front.
+
+The system checks whether granting a resource request leaves it in a safe state (i.e., all processes can eventually finish).
+
+If yes, the request is granted. If not, it’s postponed.
+
+🔢 Example:
+Let’s say we have:
+
+3 processes: P1, P2, P3
+
+3 resource instances of type A
+
+Process	Max Need	Allocated	Need
+P1	2	1	1
+P2	1	0	1
+P3	1	1	0
+
+Available resources = 1
+
+Now, suppose P2 requests 1 unit. The OS checks:
+
+If request ≤ available? ✅ (1 ≤ 1)
+
+Tentatively allocate and check if system stays safe:
+
+P2 gets 1 (Allocated → 1), now Need → 0.
+
+P2 can finish, releases resources.
+
+P1 and P3 can also complete in turn.
+✅ Safe state → Grant request.
+
+✅ Pros:
+Prevents deadlocks safely.
+
+❌ Cons:
+Requires knowing max resource needs in advance.
+
+Not used in modern OS due to complexity and overhead.
+
+🧱 2. Resource Hierarchy Protocol (Deadlock Prevention)
+This is a deadlock prevention technique that avoids circular wait by assigning a fixed order (hierarchy) to resource types.
+
+How it works:
+Resources are numbered (e.g., File = 1, Printer = 2, Scanner = 3).
+
+A process can only request resources in increasing order.
+
+If a process holds resource 2, it can’t request resource 1.
+
+🖼 Example:
+Suppose Process A needs a printer (2) and a scanner (3).
+
+It must first request the printer, then the scanner.
+
+If another process holds scanner (3), it couldn’t request printer (2) afterward.
+
+By enforcing a strict order:
+
+Circular wait cannot happen.
+
+Therefore, deadlock is prevented.
+
+✅ Pros:
+Simple and effective.
+
+No need for process history or future predictions.
+
+❌ Cons:
+Inflexible. Processes must know in advance what resources they need.
+
+Not optimal for dynamic or unpredictable workloads.
+
+⏳ 3. Timeouts (Deadlock Recovery/Prevention Strategy)
+Timeouts are used as a practical method to recover from or avoid deadlock, especially in distributed systems.
+
+How it works:
+When a process requests a resource, it sets a timeout.
+
+If it waits too long, the request is canceled or retried.
+
+The OS may choose to:
+
+Abort the process.
+
+Roll back to a safe state.
+
+Retry the request after some time.
+
+🖼 Example:
+Process A requests a lock on File X.
+
+It waits for 5 seconds (timeout).
+
+If the lock is not granted, the system assumes potential deadlock and takes action:
+
+Abort A, or
+
+Retry after delay, or
+
+Send notification or log.
+
+✅ Pros:
+Simple to implement.
+
+Useful in distributed and real-time systems.
+
+❌ Cons:
+Not foolproof. Timeout values are arbitrary.
+
+A process may be aborted even when not in deadlock (false positive).
+
+*************************************************************************************************************************************************************************
+
+A file system provides a logical view of how data is stored, even though it's physically scattered across 
+sectors and blocks on a disk.
+
+Responsibilities of a File System:
+
+Storing and organizing files
+Managing directories
+Tracking file metadata (name, size, permissions, etc.)
+Allocating space on disk
+Ensuring data security and access control
+
+Basic File Concepts
+1. File: A named collection of related information stored on a disk.
+2. File Attributes (metadata):
+Name
+Type (.txt, .exe, .jpg)
+Size
+Creation and modification dates
+Permissions (read, write, execute)
+Owner
+
+3. File Operations:
+Create, Open, Read, Write, Delete
+Seek (move within file)
+Append, Rename
+Set/Get file attributes
+
+Directories are used to organize files. The structure may vary based on the OS and file system type.
+
+Common Directory Structures:
+Single-level directory:
+All files are in one directory (not scalable).
+
+Two-level directory:
+One directory per user.
+
+Hierarchical (tree-structured):
+Most common (e.g., Windows, Linux).
+Allows directories within directories (subdirectories).
+
+Files are stored on disks, which are divided into blocks. How blocks are allocated affects performance and space usage.
+
+1. Contiguous Allocation:
+File occupies a set of contiguous blocks.
+
+Easy and fast access.
+
+Problem: Fragmentation, difficult to extend files.
+
+2. Linked Allocation:
+Each file is a linked list of blocks scattered across disk.
+
+No fragmentation.
+
+Slower for random access (need to follow links).
+
+3. Indexed Allocation:
+A separate index block stores pointers to file blocks.
+
+Supports random access.
+
+Similar to inode system in UNIX.
+
+
+ File Access Steps:
+Open(): OS looks up file metadata (e.g., inode, MFT).
+
+Permission Check: OS verifies read/write/execute rights.
+
+Read()/Write():
+
+File blocks are loaded from disk into memory.
+
+Data is read/written from/to the buffer cache.
+
+Close(): Final changes flushed to disk if needed.
+
+File Access Modes:
+Read (r)
+Write (w)
+Append (a)
+Read/Write (r+, w+, etc.)
+
+Locking files :-
+
+| Lock Type             | Description                                             | Use Case                          |
+| --------------------- | ------------------------------------------------------- | --------------------------------- |
+| **Shared Lock**       | Multiple readers allowed (no writing)                   | Reading logs, shared config files |
+| **Exclusive Lock**    | Only one process can read or write                      | Writing to databases, files       |
+| **Advisory Locking**  | OS does **not enforce** lock; processes must cooperate  | Common in UNIX/Linux              |
+| **Mandatory Locking** | OS **enforces** the lock; access denied if not acquired | Rare; needs special settings      |
+
