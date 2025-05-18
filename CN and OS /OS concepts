@@ -1,1 +1,257 @@
+In the computer world, **OS** stands for **Operating System**. It is software that manages hardware and software resources on a computer or device. 
+The operating system provides an interface between the user and the hardware of the computer, allowing users to interact with the system and run programs.
+It handles tasks such as:
 
+1. **Memory management** – Ensures that each program gets enough memory and that the memory is used efficiently.
+2. **Process management** – Controls the execution of programs and processes, ensuring they run smoothly without interference.
+3. **File system management** – Manages files, directories, and access to them on storage devices.
+4. **Device management** – Controls input/output devices like keyboards, mice, printers, and storage devices.
+5. **Security and access control** – Protects the system from unauthorized access and ensures the security of data.
+
+Popular operating systems include:
+
+* **Windows** (developed by Microsoft)
+* **macOS** (developed by Apple)
+* **Linux** (an open-source OS)
+* **Android** (based on Linux, for mobile devices)
+* **iOS** (Apple's mobile OS)
+
+ 1. Processes and Threads
+
+A process is a running program (like Chrome or VS Code).
+
+Memory space: Each process has its own address space, including code, data, and stack.
+
+Execution state: A process includes the state of its execution, such as registers, program counter, and the stack pointer.
+
+Isolation: Processes are isolated from each other to ensure that one process cannot directly interfere with another (i.e., memory protection).
+
+Resource management: A process is allocated resources such as CPU time, memory, and input/output devices by the operating system.
+
+Creation: A process is created when a program is executed, and it terminates when the program completes or is terminated.
+
+A thread is a smaller unit of execution inside a process.
+
+Lightweight: Threads are considered lightweight because they share the same memory space as other threads within the same process, which reduces overhead compared to processes.
+
+Shared resources: Threads within a process share the same memory and resources, allowing for efficient communication and data sharing.
+
+Independent execution: Each thread has its own execution context, including its own program counter, stack, and registers, but it shares the code and data of the parent process.
+
+Concurrency: Threads within a process can run concurrently on different processors or cores, improving the performance of tasks that can be parallelized.
+
+Ex :-
+
+The browser itself is a process. It manages memory and resources for the application.
+Within that browser, different tasks (such as rendering a webpage, downloading a file, 
+and playing a video) can run in threads. These threads can run concurrently,
+with each task operating in its own thread, making the browser more efficient and responsive.
+
+*************************************************************************************************************************************************************************
+Multitasking (Multiple Processes):
+
+Used when different programs or applications are running. For example, when you have a web browser, 
+email client, and music player open at the same time, each runs as a separate process.
+Each process has its own memory, resources(CPU,memory), and state, meaning that if one process crashes, it does not directly affect others.
+Communication between processes is usually done through IPC, which involves overhead and more complexity.
+
+
+Key Concepts of Multitasking:
+Task Switching: The OS switches between tasks (or processes) so quickly that it appears as if all tasks are happening at the same time.
+In preemptive multitasking, this switching is done automatically by the OS.
+
+Context Switching: When switching from one task to another, the OS saves the state of the current task (its context) and loads the 
+state of the next task. This involves saving the CPU registers, program counter, and other critical information.
+
+Overhead: Context switching introduces overhead because it involves saving and restoring information
+(registers, program counter, etc.), which can reduce CPU efficiency.
+Time Consuming: Each context switch takes time and resources, and frequent switching can reduce overall performance.
+
+
+Time Sharing: The system divides CPU time into small slices, with each process or thread getting its fair share of processing power.
+
+1. Preemptive Multitasking
+In preemptive multitasking, the operating system has control over when a process or thread should be paused and another one should start.
+The OS allocates a fixed amount of CPU time (called a time slice) to each process or thread and can interrupt the currently running process
+to give CPU time to other processes or threads. This helps ensure that all processes get a fair share of CPU time and prevents one process
+from monopolizing the system.
+
+
+
+2. Cooperative Multitasking
+In cooperative multitasking, the operating system relies on processes to voluntarily give up control of the CPU after completing a certain
+task or reaching a "yield point." The process continues running until it decides (or is coded) to give up control, allowing another
+process to execute. This method depends on the cooperation of processes to share CPU time.
+
+
+Multithreading (Multiple Threads):
+
+Used when different tasks within the same program need to run concurrently. For example, a web server may use threads to handle
+multiple client requests at the same time.
+
+Threads within the same process share memory and resources, making it more efficient for tasks that require frequent communication or shared data.
+
+If one thread crashes or causes an error, it may affect the entire process.
+
+
+*************************************************************************************************************************************************************************
+CPU Scheduling
+
+CPU scheduling is the process used by an operating system (OS) to decide which process (program) gets to use the CPU (Central Processing Unit) at any given time.
+Since the CPU is the most important resource and there are usually multiple processes running, the OS must make decisions to ensure smooth execution and 
+fair allocation of CPU time.
+
+Without CPU scheduling, the system wouldn't know which process should run next, leading to inefficiency and poor performance.
+The goal is to maximize CPU usage, ensure fairness among processes, and minimize waiting times.
+
+
+Key Terms:
+Process: A program that is being executed.
+
+CPU Burst: The time a process needs on the CPU to complete its task.
+
+Context Switching: Switching from one process to another. The state of the current process is saved, and the state of the next process is loaded.
+
+
+Types of CPU Scheduling Algorithms:-
+
+
+1. First-Come, First-Served (FCFS):
+How it works: The first process to arrive gets executed first. It's like a queue where the first one in line is the first one to be served.
+
+Example:
+Process 1: 4ms
+Process 2: 2ms
+Process 3: 3ms
+The processes are executed in the order they arrive:
+Order: Process 1 → Process 2 → Process 3
+
+Drawback: It can lead to long waiting times, especially for processes that come later (known as the convoy effect).
+
+2. Shortest Job Next (SJN) or Shortest Job First (SJF):
+
+How it works: The process with the shortest burst time is selected next. It is considered optimal as it minimizes the average waiting time.
+
+Example:
+Process 1: 6ms
+Process 2: 2ms
+Proces 3: 4ms
+The shortest burst is 2ms (Process 2), so it runs first, followed by the 4ms process (Process 3), and finally, the 6ms process (Process 1).
+Order: Process 2 → Process 3 → Process 1
+
+Drawback: If the CPU burst times are unknown in advance, it can be difficult to predict which process is the shortest.
+
+
+3. Round Robin (RR):
+
+How it works: Each process is given a small unit of time, called a time quantum or time slice. Once the time is up, the next process is selected.
+
+Example:
+Process 1: 5ms
+Process 2: 3ms
+Process 3: 4ms
+
+Time quantum: 3ms
+
+In Round Robin:
+
+Process 1 runs for 3ms (now 2ms left).
+Process 2 runs for 3ms (done).
+Process 3 runs for 3ms (now 1ms left).
+Process 1 runs for its remaining 2ms.
+Finally, Process 3 runs for its last 1ms.
+
+Order: Process 1 → Process 2 → Process 3 → Process 1 → Process 3
+
+Drawback: If the time quantum is too large, Round Robin behaves similarly to FCFS. If it's too small, the overhead of context switching increases.
+
+
+Priority Scheduling:
+
+How it works: Each process is assigned a priority. The process with the highest priority gets executed first. 
+If two processes have the same priority, they are scheduled based on other algorithms (e.g., FCFS).
+
+Example:
+
+Process 1: Priority 2 (lower priority)
+Process 2: Priority 1 (higher priority)
+Process 3: Priority 3 (highest priority)
+
+The processes are scheduled based on priority:
+
+Process 3 runs first (highest priority).
+Then Process 2 runs (higher priority).
+Finally, Process 1 runs.
+
+Order: Process 3 → Process 2 → Process 1
+
+Drawback: Low priority processes may starve if higher priority processes keep arriving.
+
+
+CPU Burst vs I/O Burst
+Processes typically alternate between CPU bursts (periods where the CPU is actively processing instructions) and I/O bursts
+(periods where the process is waiting for input/output operations to complete, like reading from disk or waiting for user input).
+
+CPU Burst: A phase in which the process is using the CPU to perform computations or calculations.
+
+I/O Burst: A phase where the process is blocked, waiting for an I/O operation (like reading a file or accepting user input) to complete.
+
+Key Insight:
+Efficient CPU scheduling algorithms try to take advantage of CPU bursts and I/O bursts to maximize CPU utilization and keep the system responsive.
+
+Example:
+
+Process 1 has a CPU burst of 8ms and an I/O burst of 5ms.
+Process 2 has a CPU burst of 3ms and an I/O burst of 10ms.
+
+A well-designed scheduling algorithm will let Process 2 run (using the CPU for 3ms) while Process 1 is in its I/O burst
+(waiting for I/O to complete). This helps maximize CPU utilization without wasting time on idle periods.
+
+
+How Scheduling Algorithms Affect Performance
+The performance of a system is generally measured by several metrics, such as response time, turnaround time, waiting time, and throughput. 
+
+a) Response Time
+Response time is the time it takes for the system to respond to a user's request. It's critical in interactive systems where the user expects feedback in a timely manner.
+
+FCFS: The response time can be quite high, especially if a long process arrives before a short process. The user may have to wait for a long time before seeing any result.
+
+SJF: If the shortest job is scheduled first, it minimizes the response time for shorter jobs, but longer processes may suffer if they arrive later.
+
+Round Robin: Response time can be more consistent, but if the time slice is too large, it can behave similarly to FCFS. If it's too small, the system spends too much time context switching.
+
+Priority Scheduling: Low-priority jobs can suffer from poor response times if high-priority processes keep arriving (this is called starvation).
+
+b) Throughput
+Throughput is the number of processes that are completed in a given amount of time. Higher throughput means more processes are being executed in less time.
+
+FCFS: Throughput may not be high since processes with large CPU bursts can block others.
+
+SJF: Can maximize throughput, as it minimizes the time the CPU is idle, executing the shortest jobs first.
+
+Round Robin: Generally, throughput is moderate, as each process gets a fair share of the CPU, but frequent context switches can reduce overall efficiency.
+
+Priority Scheduling: Throughput can be good if the processes are well-prioritized, but it may suffer if the system frequently executes only high-priority processes, leaving others starved.
+
+c) Turnaround Time
+Turnaround time is the total time taken for a process to complete, from submission to completion. It includes both waiting time and execution time.
+
+FCFS: Long jobs can drastically increase the turnaround time of shorter jobs, as they have to wait their turn.
+
+SJF: Short jobs get executed first, minimizing the average turnaround time, which is optimal for many jobs but can increase turnaround time for longer jobs.
+
+Round Robin: The turnaround time can be moderate and more evenly distributed among processes, depending on the time slice. If the time slice is too small, 
+the system may spend too much time context switching.
+
+Priority Scheduling: The turnaround time may be high for low-priority processes that are frequently preempted.
+
+d) Waiting Time
+Waiting time is the amount of time a process spends waiting in the ready queue before it gets the CPU.
+
+FCFS: Waiting time can be high for processes that arrive after longer ones. Long jobs increase the waiting time for shorter jobs (convoy effect).
+
+SJF: Short jobs will have lower waiting times, as they are executed sooner. However, longer jobs may face high waiting times if shorter jobs keep arriving.
+
+Round Robin: Waiting time tends to be more evenly distributed. However, if the time quantum is too large or too small, it can impact waiting times negatively.
+
+Priority Scheduling: Low-priority processes can face high waiting times if high-priority processes continuously arrive and preempt them.
