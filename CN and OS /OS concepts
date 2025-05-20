@@ -1227,3 +1227,95 @@ Imagine a **building** (the computer system):
 
 ---
 
+Here’s a concise explanation of **user mode** and **kernel mode** in operating systems:
+
+---
+
+## User Mode
+- **Definition:** A restricted processing mode designed for applications and user processes.
+- **Access:** Cannot directly access hardware or reference memory used by the OS.
+- **Purpose:** Protects the system from accidental or malicious interference by user programs.
+- **Examples:** Running a web browser, text editor, or any regular application.
+
+---
+
+## Kernel Mode
+- **Definition:** An unrestricted processing mode for the operating system’s core components.
+- **Access:** Has full access to all hardware and system resources.
+- **Purpose:** Allows the OS to execute critical tasks like hardware management, process scheduling, and security enforcement.
+- **Examples:** Running device drivers, managing memory, handling system calls.
+
+---
+
+## Key Differences
+
+| Feature          | User Mode                             | Kernel Mode                         |
+|------------------|--------------------------------------|-------------------------------------|
+| Privilege Level  | Low (restricted)                     | High (unrestricted)                 |
+| Direct HW Access | No                                   | Yes                                 |
+| Critical Tasks   | No                                   | Yes                                 |
+| Example          | MS Word, Chrome, Games               | OS Kernel, Device Drivers           |
+| Switching        | System call or interrupt triggers    | Switches back to user after task    |
+
+---
+
+## Why Have Two Modes?
+- **Protection:** Prevents user programs from harming the system or each other.
+- **Stability:** Isolates faults to user mode, reducing impact on the whole system.
+- **Security:** Only trusted code (the kernel) can perform sensitive operations.
+
+---
+
+### **Summary**
+- **User Mode:** For applications, with limited privileges.
+- **Kernel Mode:** For the OS core, with full privileges.
+
+**System calls** in an operating system (OS) are special functions or interfaces through which user programs request services from the kernel (the core part of the OS).
+
+---
+
+### **What are System Calls?**
+- They are the **mechanism** that allows user-level processes to interact with the operating system.
+- User applications cannot directly access hardware or sensitive resources; they use system calls to request the OS to perform tasks on their behalf.
+- System calls act as an interface between a process (user space) and the operating system (kernel space).
+
+---
+
+### **Examples of System Call Operations**
+- **File operations:** open, read, write, close files.
+- **Process control:** create, terminate, or manage processes.
+- **Device management:** interact with devices like printers, disks, etc.
+- **Information maintenance:** get time, get process ID, etc.
+- **Communication:** send and receive messages between processes.
+
+---
+
+### **How System Calls Work**
+1. A user program executes a system call instruction (e.g., `read()` in C).
+2. The CPU switches mode from **user mode to kernel mode**.
+3. The kernel executes the requested service.
+4. The result is returned to the user program, and the CPU switches back to user mode.
+
+---
+
+### **Example:**
+```c
+int fd = open("file.txt", O_RDONLY); // open() is a system call
+```
+
+---
+
+### **Summary Table**
+
+| User Action         | System Call     |
+|---------------------|----------------|
+| Read a file         | read()         |
+| Write to a file     | write()        |
+| Create a new process| fork()         |
+| Execute a program   | exec()         |
+| Terminate process   | exit()         |
+
+---
+
+**In short:**  
+System calls are the gateway for user programs to access OS services and perform privileged operations safely.
