@@ -173,7 +173,6 @@ Then the same thing happens in reverse on your friend’s device!
 
 
 
-Absolutely! Let’s walk through the **TCP 3-way handshake** — a fundamental concept for how two computers **set up a reliable connection** before they start exchanging data.
 
 ---
 
@@ -235,6 +234,457 @@ Connection Established ✅
 * Now both devices can **safely exchange data** using TCP.
 * Data is sent in order, acknowledged, and retransmitted if lost.
 
+Here’s a concise explanation of reliability, flow control, and congestion control in computer networks:
+
+### 1. Reliability
+Reliability ensures that data sent from a source arrives correctly and completely at the destination, 
+despite potential errors in transmission. Reliable communication protocols (like TCP) provide:
+- **Error detection** (using checksums)
+- **Error correction** (retransmitting lost or corrupted packets)
+- **Acknowledgments** (receiver confirms successful receipt)
+- **Sequence numbers** (to detect duplicate or out-of-order packets)
+
+### 2. Flow Control
+Flow control manages the rate of data transmission between sender and receiver to prevent overwhelming the receiver’s buffer.
+It ensures that the sender only sends as much data as the receiver can handle. Techniques include:
+- **Stop-and-wait:** Sender waits for acknowledgment after each packet.
+- **Sliding window:** Sender can transmit multiple packets before needing an acknowledgment, allowing higher throughput.
+ The sliding window is a flow control protocol that allows a sender to send multiple frames (packets) before needing an 
+ acknowledgment for the first one. It keeps track of which packets have been sent, acknowledged, and which can be sent next.
+
+How It Works
+Window Size: There is a fixed or variable-sized "window" of unacknowledged packets that the sender may transmit.
+Sender’s Window: Limits the number of outstanding (unacknowledged) packets; as acknowledgments arrive, the window "slides" forward, allowing more packets to be sent.
+Receiver’s Window: Tells the sender how much more data it can accept (prevents buffer overflow).
+Sequence Numbers: Each packet has a unique sequence number for tracking.
+Acknowledgments: The receiver acknowledges received packets, allowing the sender to move the window forward.
+- **TCP’s advertised window:** Receiver tells sender how much data it can accept.The advertised window is a number sent by the receiver
+to the sender, telling the sender how much free space is left in its buffer.
+The sender is only allowed to send that much data (in bytes) without waiting for further acknowledgments
+
+### 3. Congestion Control
+Congestion control prevents too much data from being injected into the network, which could cause routers and links to become overloaded, 
+resulting in packet loss and delays. Key techniques (especially in TCP) include:
+- **Slow start:** Gradually increases transmission rate to probe network capacity.
+- **Congestion avoidance:** Adjusts sending rate when network nears capacity.
+- **Fast retransmit and fast recovery:** Quickly responds to packet loss without drastically reducing transmission rate.
+- **Random Early Detection (RED):** Routers proactively drop packets before the buffer is full to signal congestion.
+
+**Summary Table:**
+
+| Aspect             | Purpose                                  | Example Protocols/Methods      |
+|--------------------|------------------------------------------|-------------------------------|
+| Reliability        | Correct, complete data delivery          | TCP, ARQ (Automatic Repeat reQuest) |
+| Flow Control       | Prevent receiver from being overwhelmed  | Stop-and-wait, Sliding Window |
+| Congestion Control | Prevent network overload (global)        | TCP Congestion Control, RED   |
+
+Here’s a concise explanation of each concept:
+
 ---
 
-Would you like a **real-world analogy** or visual animation link to better grasp it?
+### 1. HTTP/HTTPS
+
+- **HTTP (HyperText Transfer Protocol):**  
+  The foundation of data communication on the web. It defines how messages are formatted and transmitted between clients (like browsers) and servers.
+
+- **HTTPS (HTTP Secure):**  
+  The secure version of HTTP. It uses encryption (SSL/TLS) to protect data from eavesdroppers and attackers, ensuring privacy and integrity.
+  SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols that provide security for data sent over the internet.
+---
+
+### 2. How HTTP/HTTPS Works
+
+1. **Client (browser) makes a request** to a server (e.g., www.example.com) for a resource (like a web page).
+2. **Server responds** with the requested resource (HTML, image, etc.).
+3. **HTTPS** adds a security layer, establishing an encrypted connection before data is exchanged.
+
+---
+
+### 3. Statelessness
+
+- **Stateless Protocol:**  
+  HTTP is stateless, meaning each request from a client to a server is independent.  
+  The server does not remember previous requests or any client state between requests.
+
+- **Implication:**  
+  If you need to maintain state (e.g., user login), you use cookies, sessions, or tokens.
+
+---
+
+Here’s a simple explanation:
+
+---
+
+### What is DNS?
+
+**DNS** stands for **Domain Name System**.  
+It is like the “phone book” of the internet: it translates human-friendly domain names (like `www.example.com`) into IP addresses
+(like `93.184.216.34`) that computers use to identify each other on the network.
+
+---
+
+### How Name Resolution Works (Step-by-Step)
+
+1. **You enter a website address** (like `www.example.com`) in your browser.
+2. **Your computer checks its local cache** to see if it already knows the IP address.
+3. **If not found locally,** your computer asks the configured DNS server (often provided by your ISP or a public DNS like 
+   Google’s 8.8.8.8).
+4. **Recursive Query:** If the DNS server doesn’t know the answer, it asks other DNS servers on your behalf:
+   - First, it contacts a **root DNS server** (knows where to find top-level domains like .com, .net).
+   - Then, it asks the **TLD server** (responsible for .com, .org, etc.).
+   - Next, it contacts the **authoritative DNS server** for the domain (has the actual IP address for `example.com`).
+5. **DNS server returns the IP address** to your computer.
+6. **Your computer connects to the website** using the IP address.
+
+---
+
+**In short:**  
+DNS translates website names into IP addresses. Your computer either finds the address in its cache or asks a chain of
+DNS servers until it gets the answer.
+
+Would you like a diagram or more advanced details?
+### 4. Persistent Connections
+
+- **Non-persistent (original HTTP/1.0):**  
+  Each request/response pair opens and closes a TCP connection. Inefficient.
+
+- **Persistent connections (HTTP/1.1 and later):**  
+  The same TCP connection can be reused for multiple requests/responses.  
+  Reduces latency and improves performance. Enabled by default in HTTP/1.1 with `Connection: keep-alive`.
+
+---
+
+### 5. REST Principles
+
+**REST (Representational State Transfer)** is an architectural style for designing networked applications, often using HTTP.
+
+**Key REST Principles:**
+- **Stateless:** Each request is independent; no session is stored on the server.
+- **Client-Server:** Separation of concerns; client handles UI, server handles data.
+- **Uniform Interface:** Standardized way to interact (using HTTP methods: GET, POST, PUT, DELETE).
+- **Resource-Based:** Everything is a resource, identified by a URL.
+- **Cacheable:** Responses can be cached to improve performance.
+- **Layered System:** The architecture can have multiple layers (proxies, gateways).
+
+---
+
+**Summary Table:**
+
+| Term                     | Explanation                                                         |
+|--------------------------|---------------------------------------------------------------------|
+| HTTP/HTTPS               | Protocol for web communication; HTTPS adds security                 |
+| Statelessness            | Each HTTP request is independent; server does not keep state         |
+| Persistent Connections   | Reuse same TCP connection for multiple requests (keep-alive)         |
+| REST Principles          | Guidelines for designing scalable, maintainable web APIs             |
+
+Here’s a simple explanation of DHCP and how it assigns IP addresses:
+
+---
+
+### What is DHCP?
+
+**DHCP** stands for **Dynamic Host Configuration Protocol**.  
+It is a network protocol used to automatically assign IP addresses and other network settings to devices on a network.
+
+---
+
+### What does DHCP do?
+
+- **Automatically assigns IP addresses** to computers, phones, printers, etc., so they can communicate on a network.
+- **Provides additional information** such as subnet mask, gateway, and DNS server addresses.
+- **Prevents IP address conflicts** by keeping track of which IP addresses are in use.
+
+---
+
+### How are IP addresses assigned using DHCP?
+
+1. **Device joins the network** (e.g., you connect your laptop to Wi-Fi).
+2. **Device sends a DHCP Discover message** to find a DHCP server.
+3. **DHCP server responds** with an available IP address and other configuration info.
+4. **Device accepts the offer** and sends a request back.
+5. **DHCP server confirms** and leases the IP address to the device for a certain time.
+6. **Device uses the assigned IP address** for network communication.
+
+---
+
+Absolutely! Here’s a simple, detailed comparison of **IPv4** and **IPv6**:
+
+---
+
+## **What is IPv4?**
+- **IPv4** stands for Internet Protocol version 4.
+- It’s the older, widely used system for identifying devices on a network.
+- **Address format:** Four numbers separated by dots (e.g., `192.168.1.1`)
+- **Address size:** 32 bits (can make about 4.3 billion unique addresses)
+- **Limitation:** We are running out of IPv4 addresses because so many devices are connected to the Internet.
+
+---
+
+## **What is IPv6?**
+- **IPv6** stands for Internet Protocol version 6.
+- It’s the newer system, made to solve the shortage of IPv4 addresses.
+- **Address format:** Eight groups of hexadecimal numbers separated by colons (e.g., `2001:0db8:85a3:0000:0000:8a2e:0370:7334`)
+- **Address size:** 128 bits (can make an almost unlimited number of addresses)
+- **Extra benefits:** Built-in security, better performance, and easier network management.
+
+---
+
+## **Key Differences Table**
+
+| Feature            | IPv4                          | IPv6                                   |
+|--------------------|------------------------------|----------------------------------------|
+| Address Length     | 32 bits                      | 128 bits                               |
+| Address Example    | 192.168.1.1                  | 2001:0db8:85a3:0000:0000:8a2e:0370:7334|
+| Number of Addresses| ~4.3 billion                 | ~3.4×10³⁸ (huge!)                      |
+| Written As         | Decimal (dots)               | Hexadecimal (colons)                   |
+| Security           | Optional                     | Built-in (mandatory)                   |
+| NAT Needed?        | Often                        | Not usually needed                     |
+| Used Since         | 1980s                        | 1990s (but adoption still growing)     |
+
+---
+
+## **Simple Example**
+
+- **IPv4:** Like having a phone number with only 7 digits (limited, can run out).
+- **IPv6:** Like switching to a phone number with 50 digits (so many options, you never run out).
+
+---
+
+CIDR Notation (Classless Inter-Domain Routing)
+
+CIDR is a way to write IP addresses with their network size.
+It looks like: 192.168.1.0/24
+The /24 means the first 24 bits of the IP address are the network part (the rest are for devices).
+This replaces the old "Class A, B, C" system and is much more flexible.
+How it works:
+The part after the slash (e.g., /24) tells you how many bits are the network part.
+The rest of the bits are for hosts (devices).
+Example:
+192.168.1.0/24 → 256 addresses (from 192.168.1.0 to 192.168.1.255)
+10.0.0.0/8 → 16,777,216 addresses!
+192.168.1.0/28 → 16 addresses (smaller subnet)
+
+
+---
+
+### **Step-by-Step Calculation**
+
+1. **/24 means 24 bits are used for the network part of the address.**
+   - An IP address has 32 bits in total (for IPv4).
+
+2. **The remaining bits are used for hosts (devices) in the network.**
+   - 32 (total bits) - 24 (network bits) = **8 bits for hosts**
+
+3. **Each host bit can be either 0 or 1.**
+   - So, the number of possible combinations = 2⁸ = **256**
+
+---
+
+### **Summary Table**
+
+| Network Notation      | Host Bits | Calculation         | Total Addresses |
+|---------------------- |-----------|---------------------|-----------------|
+| 192.168.1.0/24        | 8         | 2 × 2 × ... × 2 (8 times) = 2⁸ | 256         |
+
+---
+
+**In short:**  
+**192.168.1.0/24** gives 256 addresses because 8 bits are left for devices, and 2⁸ = 256.
+
+The first address in the range is called the network address.
+
+It identifies the subnet itself, not a device.
+Example: In 192.168.1.0/24, the network address is 192.168.1.0.
+The last address in the range is called the broadcast address.
+
+It is used to send a message to all devices in that subnet.
+Example: In 192.168.1.0/24, the broadcast address is 192.168.1.255.
+
+
+Absolutely! Here’s a simple explanation of **subnetting** and **subnet mask** with examples:
+
+---
+
+## **Subnetting**
+
+**Subnetting** is the process of dividing one large network into smaller, manageable networks called **subnets**.  
+Each subnet acts like its own little network, making things more organized, secure, and efficient.
+
+---
+
+### **Example of Subnetting**
+
+Suppose you have a company network: **192.168.1.0/24**
+
+- This means you have **256 IP addresses** (from 192.168.1.0 to 192.168.1.255).
+- You want to split this into **4 smaller subnets**, maybe for different departments.
+
+#### **Subnet Calculation**
+
+- 256 addresses ÷ 4 subnets = **64 addresses per subnet**
+- To do this, you use a **subnet mask** of **255.255.255.192** (or /26 in CIDR notation).
+
+#### **Subnet Ranges**
+
+| Subnet | Network Address   | Usable IP Range           | Broadcast Address   | Subnet Mask         |
+|--------|-------------------|--------------------------|---------------------|---------------------|
+| 1      | 192.168.1.0       | 192.168.1.1 - 192.168.1.62| 192.168.1.63        | 255.255.255.192     |
+| 2      | 192.168.1.64      | 192.168.1.65 - 192.168.1.126| 192.168.1.127    | 255.255.255.192     |
+| 3      | 192.168.1.128     | 192.168.1.129 - 192.168.1.190| 192.168.1.191   | 255.255.255.192     |
+| 4      | 192.168.1.192     | 192.168.1.193 - 192.168.1.254| 192.168.1.255   | 255.255.255.192     |
+
+---
+
+## **Subnet Mask**
+
+A **subnet mask** tells computers which part of the IP address is the network and which part is for devices.
+
+### **How It Works**
+
+- In **255.255.255.0** (/24):  
+  - The first 24 bits (255.255.255) are the **network part**.
+  - The last 8 bits (.0) are for devices (hosts).
+
+- In **255.255.255.192** (/26):  
+  - The first 26 bits are the network part.
+  - The last 6 bits are for devices (hosts).
+
+### **Subnet Mask Example**
+
+| Subnet Mask         | CIDR Notation | Number of Hosts (Usable) |
+|---------------------|---------------|--------------------------|
+| 255.255.255.0       | /24           | 254                      |
+| 255.255.255.128     | /25           | 126                      |
+| 255.255.255.192     | /26           | 62                       |
+
+*(Usable hosts: total addresses minus 2 for network & broadcast addresses)*
+
+---
+
+## **Simple Analogy**
+
+Think of a big building (network) divided into smaller apartments (subnets).  
+**Subnet mask** is like the wall that separates the apartments, showing which rooms (IP addresses) belong to which apartment (subnet).
+
+---
+
+**Summary:**  
+- **Subnetting** splits a big network into smaller parts.
+- **Subnet mask** defines where those splits happen.
+
+Great question! Here’s how to decide on a subnet mask like **255.255.255.192**:
+
+---
+
+## **Understanding Subnet Masks**
+
+A **subnet mask** divides an IP address into two parts:
+- **Network part** (identifies the network)
+- **Host part** (identifies devices within that network)
+
+Subnet masks are written in two ways:
+- **Dotted decimal:** e.g., 255.255.255.192
+- **CIDR notation:** e.g., /26
+
+---
+
+## **How to Decide the Subnet Mask**
+
+### 1. **Know How Many Subnets or Hosts You Need**
+- **More subnets:** Use a **larger subnet mask** (more bits for the network, fewer for hosts)
+- **More hosts per subnet:** Use a **smaller subnet mask** (fewer bits for the network, more for hosts)
+
+### 2. **Convert Subnet Mask to Binary**
+- 255.255.255.192 in binary is:  
+  `11111111.11111111.11111111.11000000`
+- The number of **1s** = number of network bits (here, 26), so it’s **/26** in CIDR notation.
+
+### 3. **Calculate Hosts per Subnet**
+- Number of host bits: 32 - 26 = **6 bits for hosts**
+- Number of addresses: 2⁶ = **64 addresses per subnet**
+- Usable addresses: 64 - 2 = **62** (subtract 2 for network and broadcast address)
+
+---
+
+## **How to Choose?**
+- If you want each subnet to support up to **62 devices**, choose **255.255.255.192** (**/26**).
+- If you need more hosts, use a mask with fewer network bits (e.g., 255.255.255.128 = /25).
+- If you need more subnets but fewer hosts per subnet, use a mask with more network bits (e.g., 255.255.255.224 = /27).
+
+---
+
+## **Summary Table**
+
+| Subnet Mask         | CIDR | Hosts per Subnet (usable) |
+|---------------------|------|---------------------------|
+| 255.255.255.0       | /24  | 254                       |
+| 255.255.255.128     | /25  | 126                       |
+| 255.255.255.192     | /26  | 62                        |
+| 255.255.255.224     | /27  | 30                        |
+
+---
+
+**In short:**  
+**255.255.255.192** is chosen when you want about 62 usable addresses in each subnet.  
+Pick your subnet mask based on how many hosts you need in each subnet!
+
+Sure! Here’s a clear and simple explanation of **default gateway** and **routing basics**:
+
+---
+
+## **Default Gateway**
+
+### What is it?
+- The **default gateway** is a device (usually a router) on your network that your computer sends data to when it wants to communicate with devices outside its own local network.
+- Think of the default gateway as the “door” to the outside world (like the internet or another network).
+
+### How does it work?
+- Every device on a network (like your PC, phone, or printer) has an IP address and knows the IP address of the default gateway.
+- When you send data to an IP address not on your local network, your device forwards that data to the default gateway.
+- The default gateway then takes care of sending the data to its final destination.
+
+### Example:
+- Your computer: **192.168.1.10**
+- Local network: **192.168.1.0/24**
+- Default gateway (router): **192.168.1.1**
+
+If you want to visit google.com, your PC sends the request to **192.168.1.1** (default gateway), which then forwards it out to the internet.
+
+---
+
+## **Routing Basics**
+
+### What is routing?
+- **Routing** is the process of moving data (called packets) from one network to another until it reaches its destination.
+- It’s like how mail moves from your house, to the post office, to the final address.
+
+### How does it work?
+- **Routers** are devices that connect different networks and make decisions about where to send each packet based on its destination IP address.
+- Routers use something called a **routing table** to figure out the best path for the data to travel.
+
+### Routing Table Example:
+A simple routing table on a router might look like this:
+
+| Destination        | Next Hop (Gateway)   |
+|--------------------|---------------------|
+| 192.168.1.0/24     | Local Network       |
+| 10.0.0.0/8         | 192.168.1.2         |
+| 0.0.0.0/0          | 192.168.1.1 (Default Gateway) |
+
+- **0.0.0.0/0** means “anywhere not listed above” – this is the **default route**.
+
+### Step-by-Step Example:
+1. **Device** wants to send data to 8.8.8.8 (Google’s DNS, not on local network).
+2. Device checks its routing table, sees no specific route for 8.8.8.8.
+3. Uses the **default gateway** (e.g., 192.168.1.1).
+4. Router (default gateway) forwards the packet towards its destination, possibly through other routers.
+
+---
+
+## **Summary**
+
+- **Default Gateway:** The “exit point” from your local network to other networks or the internet.
+- **Routing:** The method routers use to move packets between networks, using routing tables to decide the path.
+
+---
+
