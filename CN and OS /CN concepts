@@ -688,3 +688,375 @@ A simple routing table on a router might look like this:
 
 ---
 
+Here’s a clear and simple introduction to **Socket Programming Basics**:
+
+---
+
+## **What is Socket Programming?**
+
+**Socket programming** is a way to enable communication between two computers (or programs) over a network (like the internet or a local network).  
+A **socket** is like a virtual endpoint for sending or receiving data.
+
+---
+
+## **Key Concepts**
+
+1. **Socket:**  
+   An endpoint for communication between two machines.
+
+2. **IP Address:**  
+   The unique address of a device on a network.
+
+3. **Port:**  
+   A number that identifies a specific process or service on a device.
+
+4. **Protocols:**  
+   - **TCP (Transmission Control Protocol):** Reliable, connection-oriented communication (like a phone call).
+   - **UDP (User Datagram Protocol):** Fast, connectionless communication (like sending a letter).
+
+---
+
+## **Basic Steps in Socket Programming**
+
+### 1. **Server Side**
+- Create a socket.
+- Bind the socket to an IP address and port.
+- Listen for incoming connections.
+- Accept a connection.
+- Send/receive data.
+- Close the connection.
+
+### 2. **Client Side**
+- Create a socket.
+- Connect to the server’s IP address and port.
+- Send/receive data.
+- Close the connection.
+
+---
+
+## **Simple Example (Python, TCP)**
+
+### **Server:**
+```python
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(('localhost', 12345))    # Bind to address and port
+server_socket.listen(1)                     # Listen for connections
+
+print("Waiting for a connection...")
+client_socket, addr = server_socket.accept() # Accept a connection
+print("Connected by", addr)
+
+data = client_socket.recv(1024)             # Receive data
+print("Received:", data.decode())
+
+client_socket.sendall(b"Hello from server!") # Send data
+
+client_socket.close()
+server_socket.close()
+```
+
+### **Client:**
+```python
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('localhost', 12345))  # Connect to server
+
+client_socket.sendall(b"Hello from client!") # Send data
+
+data = client_socket.recv(1024)              # Receive data
+print("Received:", data.decode())
+
+client_socket.close()
+```
+
+---
+
+## **Summary Table**
+
+| Step      | Server                   | Client                  |
+|-----------|--------------------------|-------------------------|
+| 1         | Create socket            | Create socket           |
+| 2         | Bind to address/port     | Connect to server       |
+| 3         | Listen                   |                         |
+| 4         | Accept connection        |                         |
+| 5         | Send/receive data        | Send/receive data       |
+| 6         | Close connection         | Close connection        |
+
+---
+
+Absolutely! Here’s a clear and practical explanation of **Network Troubleshooting in Computer Networks**:
+
+---
+
+## **What is Network Troubleshooting?**
+
+**Network troubleshooting** is the process of identifying, diagnosing, and resolving problems that prevent computers or devices from communicating over a network.
+
+---
+
+## **Common Network Problems**
+
+- No internet access
+- Slow network speeds
+- Unable to connect to Wi-Fi or LAN
+- Intermittent connectivity
+- Specific applications or websites are unreachable
+
+---
+
+## **Basic Network Troubleshooting Steps**
+
+### 1. **Check Physical Connections**
+   - Make sure cables are plugged in.
+   - Check if devices (routers, switches, computers) have power and are turned on.
+
+### 2. **Verify Device Configuration**
+   - Check IP addresses, subnet masks, gateways, and DNS settings.
+   - Ensure Wi-Fi credentials are correct.
+
+### 3. **Test Connectivity**
+   - **Ping**: Use the `ping` command to test if you can reach another device.
+     - Example: `ping 8.8.8.8` (Google DNS)
+   - **Traceroute/Tracert**: Trace the path packets take to a destination.
+     - Example: `tracert google.com` (Windows) or `traceroute google.com` (Linux/Mac)
+
+### 4. **Check Network Devices**
+   - Restart routers, switches, and computers.
+   - Check for faulty network cards or ports.
+
+### 5. **Check for Network Loops or Overloads**
+   - Ensure there are no duplicate IPs or broadcast storms.
+   - Verify no device is flooding the network.
+
+### 6. **Review Firewalls and Security Settings**
+   - Check if any firewall is blocking network traffic.
+   - Examine antivirus or security software settings.
+
+### 7. **Examine Logs and Error Messages**
+   - Check logs on routers, switches, or servers for errors.
+   - Look for error messages on client devices.
+
+### 8. **Use Diagnostic Tools**
+   - **ipconfig / ifconfig**: View IP configuration.
+   - **nslookup**: Diagnose DNS issues.
+   - **netstat**: View active network connections.
+   - **Wireshark**: Capture and analyze network traffic (advanced).
+
+---
+
+## **Example Troubleshooting Scenario**
+
+**Problem:** A PC cannot access the internet.
+
+**Step-by-Step:**
+1. Check if the Ethernet/Wi-Fi cable is plugged in and the adapter is enabled.
+2. Use `ipconfig` (Windows) or `ifconfig` (Linux/Mac) to check for a valid IP address.
+3. Try `ping 192.168.1.1` (router) – if no reply, there’s a local network problem.
+4. Try `ping 8.8.8.8` (external) – if no reply, the issue may be with ISP or router.
+5. Try `ping google.com` – if IP ping works but this fails, it’s a DNS problem.
+6. Restart the PC and router, check firewall settings, and test again.
+
+---
+
+## **Summary Table**
+
+| Step                        | Tool/Command      | Example                 |
+|-----------------------------|-------------------|-------------------------|
+| Check physical connections  | Visual/Manual     |                         |
+| Test local connectivity     | ping              | ping 192.168.1.1        |
+| Test internet connectivity  | ping              | ping 8.8.8.8            |
+| Check DNS                   | nslookup          | nslookup google.com     |
+| Check config                | ipconfig/ifconfig | ipconfig                |
+| Trace route                 | tracert/traceroute| tracert google.com      |
+
+
+---
+
+## **netstat**
+
+**netstat** (network statistics) is a command-line tool used to display network connections, routing tables, 
+interface statistics, and more.  
+It’s available on Windows, Linux, and macOS.
+
+### **Common Uses:**
+- See all active network connections (TCP and UDP)
+- View listening ports on your machine
+- Check routing tables
+- Diagnose network issues
+
+### **Examples:**
+- **Show all active connections:**  
+  `netstat -an`
+- **Show listening ports:**  
+  `netstat -l` (Linux) or `netstat -an | find "LISTEN"` (Windows)
+- **Show process IDs with connections:**  
+  `netstat -ano` (Windows)
+- **Show routing table:**  
+  `netstat -r`
+
+---
+
+## **telnet**
+
+**telnet** is a command-line tool and protocol used to connect to remote computers over a network, using the Telnet protocol.  
+It’s often used for testing connectivity to specific ports or services.
+
+### **Common Uses:**
+- Test if a specific port on a remote server is open and reachable
+- Manually connect to services like HTTP, SMTP, etc. for testing or debugging
+
+### **Examples:**
+- **Test connection to a web server on port 80:**  
+  `telnet example.com 80`
+- **Test connection to a mail server on port 25:**  
+  `telnet mail.example.com 25`
+
+### **Note:**
+- Telnet is **not secure** (data sent as plain text). For secure connections, use SSH.
+- On some systems, you may need to install the telnet client.
+
+---
+
+## **Summary Table**
+
+| Tool    | Purpose                                     | Example Command                |
+|---------|---------------------------------------------|-------------------------------|
+| netstat | Check network connections & listening ports | netstat -an                   |
+| telnet  | Test remote connectivity to a port/service  | telnet google.com 80          |
+
+Great question! In computer networks, failures can happen at different points in the communication path. Recognizing where failures can occur helps you troubleshoot and fix problems faster. Here’s how to understand and identify where issues might arise:
+
+---
+
+## 1. **Client-Side Failures**
+
+These happen on the device trying to connect (PC, mobile, etc.).
+
+**Common causes:**
+- Incorrect configuration (wrong IP, DNS, gateway settings)
+- Hardware failure (bad network card, loose cable, broken Wi-Fi)
+- Software issues (firewall blocking, outdated drivers, malware)
+- Application errors or crashes
+
+**How to recognize:**
+- Only one device has the problem; others work fine.
+- The device cannot connect to any network or only specific services.
+
+---
+
+## 2. **Network Failures**
+
+These affect the communication path between client and server (switches, routers, cables, wireless links, the internet).
+
+**Common causes:**
+- Faulty or misconfigured switches, routers, or access points
+- Cable damage or wireless interference
+- Network congestion (too much traffic)
+- Firewall or security appliance blocking traffic
+- ISP outages
+
+**How to recognize:**
+- Multiple devices have problems at the same time
+- Devices can talk locally but not reach outside networks (e.g., no internet)
+- Traceroute or ping fails at a particular “hop” in the network path
+
+---
+
+## 3. **Server-Side Failures**
+
+These happen on the server or service being accessed.
+
+**Common causes:**
+- Server is offline, crashed, or overloaded
+- Service (like a website or database) is not running
+- Software bugs or misconfiguration
+- Server firewall or security settings blocking connections
+
+**How to recognize:**
+- All clients are unable to reach a specific service or website, but can access others
+- Server responds to some requests but not others
+- Server logs show errors or downtime
+
+---
+
+## **Summary Table**
+
+| Failure Point  | Symptoms                                | Example Tools to Diagnose          |
+|----------------|-----------------------------------------|------------------------------------|
+| Client         | Only one device affected                | ipconfig/ifconfig, ping, firewall  |
+| Network        | Multiple devices affected, timeouts     | ping, traceroute, switch/router logs|
+| Server         | All clients can’t reach service         | server logs, service status, telnet |
+
+---
+Here’s a clear overview of **common network attacks** and essential **network security concepts**:
+
+---
+
+## **Common Network Attacks**
+
+
+| Attack Type      | Description                                | Defense/Prevention            |
+|------------------|--------------------------------------------|-------------------------------|
+| DoS/DDoS         | Overwhelms systems with traffic            | Firewalls, rate limiting      |
+| MITM             | Intercepts communications                  | Encryption, VPNs, HTTPS       |
+| Phishing         | Tricks users into revealing info           | User education, email filters |
+| Spoofing         | Fakes identity or data                     | Authentication, validation    |
+| Sniffing         | Captures data packets via wireshark        | Encryption, secure protocols  |
+| SQL Injection    | Injects code into database queries         | Input validation, sanitization|
+| Malware          | Spreads malicious software                 | Antivirus, updates, firewalls |
+| Password Attack  | Attempts to crack passwords                | Strong passwords, MFA         |
+
+---
+## **Network Security Best Practices**
+
+- **Use strong, unique passwords** and enable multi-factor authentication (MFA).
+- **Keep software and devices updated** to patch vulnerabilities.
+- **Implement firewalls** to filter unwanted traffic.
+- **Encrypt sensitive data** (use HTTPS, VPNs, etc.).
+- **Monitor network activity** for unusual or unauthorized access.
+- **Educate users** about phishing and social engineering.
+- **Segment the network** to limit the impact of breaches.
+- **Regularly back up data** to recover from ransomware or data loss.
+
+---
+Sure! Here’s a simple explanation:
+
+---
+
+## Layer 4 (TCP) Load Balancer
+
+- **Works at the transport layer (Layer 4).**
+- Balances traffic based on IP address and port (like the “address” and “door number”).
+- Doesn’t look at what’s inside the data, just where it’s going.
+- **Fast and simple**—good for any kind of network traffic (not just web).
+- Example: Passes all web requests to different servers, but doesn’t know if you’re asking for a picture or a webpage.
+
+---
+
+## Layer 7 (HTTP) Load Balancer
+
+- **Works at the application layer (Layer 7).**
+- Understands what’s inside the data (like reading the letter, not just the envelope).
+- Can balance traffic based on things like URLs, cookies, or headers.
+- **Smart and flexible**—can send images to one server, and videos to another.
+- Example: If you request `/images`, it sends you to the image server; if you request `/videos`, it sends you to the video server.
+
+---
+
+## Summary Table
+
+| Feature             | Layer 4 (TCP)       | Layer 7 (HTTP)         |
+|---------------------|---------------------|------------------------|
+| Works with          | Any network traffic | Web traffic (HTTP/HTTPS) |
+| Routing decision    | IP and Port         | URL, Cookie, Header    |
+| Speed               | Fast                | Slightly slower        |
+| Smart routing       | No                  | Yes                    |
+
+---
+
+**In short:**
+- Layer 4 = Fast, simple, doesn’t care what’s inside.
+- Layer 7 = Smart, can make decisions based on what you’re asking for.
