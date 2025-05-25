@@ -569,5 +569,201 @@ Left subtree < root < right subtree (for all nodes).
 3.Balanced Trees (AVL, Red-Black)
 Maintains height balance for efficient operations.
 
+
+
+
 Tree traversal is the process of visiting (checking and/or updating) each node in a tree data structure exactly once in a systematic way.
 Traversal allows us to process all the data in the tree, search for an element, or display the structure.
+
+### 1. Depth-First Traversal (DFT)
+In Depth-First Traversal, you go as deep as possible down one branch before backing up and exploring other branches. The main types are:
+
+- **Preorder Traversal:** Visit the root node first, then recursively traverse the left subtree, then the right subtree.
+    - Order: Root → Left → Right
+- **Inorder Traversal:** Recursively traverse the left subtree, visit the root node, then recursively traverse the right subtree.
+    - Order: Left → Root → Right
+    - For binary search trees, this traversal visits nodes in ascending order.
+- **Postorder Traversal:** Recursively traverse the left subtree, then the right subtree, and visit the root node last.
+    - Order: Left → Right → Root
+
+### 2. Breadth-First Traversal (BFT) or Level Order Traversal
+In Breadth-First Traversal, you visit all nodes at each depth level before proceeding to the next level. 
+This is usually implemented using a queue.
+
+- **Level Order Traversal:** Start at the root, visit all nodes at depth 1, then all nodes at depth 2, etc.
+
+---
+
+### Example (Binary Tree):
+
+For this tree:
+
+```
+    A
+   / \
+  B   C
+ / \   \
+D   E   F
+```
+
+- **Preorder:** A, B, D, E, C, F
+- **Inorder:** D, B, E, A, C, F
+- **Postorder:** D, E, B, F, C, A
+- **Level Order:** A, B, C, D, E, F
+
+---
+
+### Why is Tree Traversal Useful?
+
+- Searching for a value in the tree.
+- Printing the contents of a tree in a specific order.
+- Copying the tree.
+- Deleting the tree.
+
+********************************************************************************************************************************************
+
+DSA Graphs :-
+
+A **graph** is a collection of nodes (also called vertices) connected by edges. Graphs can represent various 
+real-world structures like social networks, maps, networks, and more.
+
+---
+
+## Types of Graphs
+
+1. **Directed vs. Undirected Graphs**
+   - **Directed Graph (Digraph):** Edges have a direction (A → B).
+   - **Undirected Graph:** Edges do not have direction (A — B).
+
+2. **Weighted vs. Unweighted Graphs**
+   - **Weighted:** Edges have weights (costs, distances).
+   - **Unweighted:** All edges are equal.
+
+3. **Cyclic vs. Acyclic Graphs**
+   - **Cyclic:** Has at least one cycle.
+   - **Acyclic:** No cycles (e.g., DAG - Directed Acyclic Graph).
+
+4. **Connected vs. Disconnected**
+   - **Connected:** There is a path between every pair of vertices.
+   - **Disconnected:** Some vertices cannot be reached from others.
+
+---
+
+## Graph Representations
+
+1. **Adjacency Matrix**
+   - 2D array where matrix[i][j] = 1 (or weight) if there is an edge from i to j.
+
+2. **Adjacency List**
+   - Array or map where each vertex has a list of adjacent vertices.
+
+---
+
+## Common Graph Algorithms
+
+- **Traversal:**
+  - **Breadth-First Search (BFS):** Explores neighbors level by level (uses a queue).
+  - **Depth-First Search (DFS):** Explores as far as possible along each branch (uses a stack or recursion).
+- **Shortest Path:**
+  - **Dijkstra’s Algorithm:** For weighted graphs (no negative weights).
+  - **Bellman-Ford Algorithm:** For graphs with negative weights.
+- **Minimum Spanning Tree:**
+  - **Kruskal’s Algorithm**
+  - **Prim’s Algorithm**
+- **Cycle Detection**
+- **Topological Sorting** (for DAGs)
+- **Strongly Connected Components**
+
+---
+
+## Example: Adjacency List (Python)
+
+```python
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A', 'D'],
+    'D': ['B', 'C']
+}
+```
+
+---
+
+## Applications
+
+- Social networks (friends, followers)
+- Routing algorithms (maps, GPS)
+- Web page links (Google search)
+- Network topology
+
+Graph traversal 
+Graph traversal refers to the process of visiting all the nodes (vertices) in a graph in a systematic way. Traversals are fundamental for searching, analyzing, and manipulating graphs in computer science and algorithms.
+
+There are two primary types of graph traversal:
+
+---
+
+## 1. Breadth-First Search (BFS)
+
+- **BFS** explores the graph level by level.
+- It starts at a selected node (source/starting vertex) and visits all its neighbors before moving to the next level neighbors.
+- It uses a **queue** data structure (FIFO).
+- Useful for finding the shortest path in unweighted graphs.
+
+**Steps:**
+1. Enqueue the starting node and mark it as visited.
+2. While the queue is not empty:
+   - Dequeue a node.
+   - Visit all its unvisited neighbors, mark them as visited, and enqueue them.
+
+**Example (Python):**
+```python
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+
+    while queue:
+        node = queue.popleft()
+        print(node)
+        for neighbor in graph[node]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+```
+
+---
+
+## 2. Depth-First Search (DFS)
+
+- **DFS** explores as far as possible along each branch before backtracking.
+- It can be implemented using recursion or a **stack** (LIFO).
+- Useful for tasks like topological sorting, cycle detection, and solving puzzles.
+
+**Steps:**
+1. Start at a node, mark it as visited.
+2. For each unvisited neighbor, recursively perform DFS.
+
+**Example (Python, recursive):**
+```python
+def dfs(graph, node, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(node)
+    print(node)
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+```
+
+---
+
+## Comparison Table
+
+| Traversal | Data Structure | Order                  | Use Cases                |
+|-----------|----------------|------------------------|--------------------------|
+| BFS       | Queue          | Level by level         | Shortest path, connectivity |
+| DFS       | Stack/Recursion| Deep branch first      | Topological sort, cycles, components |
+
