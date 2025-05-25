@@ -1,1 +1,573 @@
+A data structure is a way of organizing and storing data so that it can be accessed and modified efficiently.
+We structure data in different ways depending on what data we have, and what we want to do with it.
 
+Types od data structures :-
+
+## 1. Primitive Data Structures
+
+**Primitive data structures** are the most basic building blocks provided by a programming language. 
+  They store simple data values and are directly operated upon by machine instructions.
+
+**Examples:**
+- **Integer** (int): Whole numbers (e.g., 1, 42, -7)
+- **Float/Double**: Decimal numbers (e.g., 3.14, -0.001)
+- **Character** (char): Single character (e.g., 'a', 'Z', '5')
+- **Boolean**: True or False values
+
+These are usually built-in types and are not composed of other data structures.
+
+---
+
+## 2. Non-Primitive Data Structures
+
+**Non-primitive data structures** are more complex and are built using primitive data types. 
+  They can store a collection of values and provide more functionality for data organization and manipulation.
+
+**Types of Non-Primitive Data Structures:**
+- **Linear**: Elements are arranged in a sequence.
+  - Examples: Array, Linked List, Stack, Queue
+- **Non-linear**: Elements are arranged hierarchically.
+  - Examples: Tree, Graph
+
+Non-primitive data structures can be further divided into:
+- **Static** (e.g., Array): Fixed size, defined at compile time.
+- **Dynamic** (e.g., Linked List): Size can change during runtime.
+
+---
+
+## 3. Abstract Data Type (ADT)
+
+**Abstract Data Type (ADT)** is a theoretical concept that defines what operations can be performed on a data structure, 
+  without specifying how these operations are implemented.
+
+- ADTs describe the behavior (what to do), not the implementation (how to do it).
+- They allow programmers to focus on the logic of the data structure rather than the details of implementation.
+
+**Examples of ADTs:**
+- **Stack ADT**: Supports push, pop, peek, isEmpty operations.
+- **Queue ADT**: Supports enqueue, dequeue, front, isEmpty operations.
+- **List ADT**: Supports insert, delete, find, update, etc.
+
+**Note:** Arrays and linked lists are data structures that can be used to implement ADTs like stacks, queues, and lists.
+
+
+| Type                      | Description                                     | Examples                        |
+|---------------------------|-------------------------------------------------|----------------------------------|
+| Primitive Data Structure  | Basic, built-in types                           | int, char, float, boolean        |
+| Non-Primitive Data Structure | Built from primitives, may be linear/non-linear | Array, Linked List, Tree, Graph  |
+| Abstract Data Type (ADT)  | Defines operations, not implementation          | Stack, Queue, List, Map          |
+
+********************************************************************************************************************************************
+What are Algorithms?
+
+
+**Algorithms** are step-by-step procedures or sets of rules designed to perform a specific task or solve a particular problem. 
+In computer science, an algorithm is a well-defined sequence of instructions that takes input, processes it, and produces an output.
+
+### Key Characteristics of Algorithms:
+- **Well-defined:** Each step is clear and unambiguous.
+- **Input:** Accepts zero or more inputs.
+- **Output:** Produces at least one output.
+- **Finiteness:** The process must end after a finite number of steps.
+- **Effectiveness:** Each step must be basic enough to be carried out.
+
+### Example:
+A simple algorithm to add two numbers:
+1. Start
+2. Take two numbers as input (A and B)
+3. Add the numbers (C = A + B)
+4. Display the result (C)
+5. End
+
+### Why are Algorithms Important?
+- They are the foundation of all computer programs.
+- Efficient algorithms improve performance and resource usage.
+- They help solve problems systematically.
+
+********************************************************************************************************************************************
+
+DSA Usage :-
+
+Operating Systems
+Database Systems
+Web Applications
+Machine Learning
+Video Games
+Cryptographic Systems
+Data Analysis
+Search Engines
+
+********************************************************************************************************************************************
+DSA Terminologies :-
+
+Time Complexity	
+A measure of the amount of time an algorithm takes to run, depending on the amount of data the algorithm is working on.
+
+Space Complexity	
+A measure of the amount of memory an algorithm uses, depending on the amount of data the algorithm is working on.
+
+Recursion	
+A programming technique where a function calls itself.
+
+Divide and Conquer	
+A method of solving complex problems by breaking them into smaller, more manageable sub-problems, solving the sub-problems, 
+and combining the solutions. Recursion is often used when using this method in an algorithm.
+
+Brute Force	
+A simple and straight forward way an algorithm can work by simply trying all possible solutions and then choosing the best one.
+
+Big O Notation
+Big O Notation is a mathematical way to describe the efficiency of an algorithm as the input size grows. 
+It tells you how the runtime (or sometimes space) of an algorithm increases as the size of the input increases.
+Big O helps you analyze and compare algorithms without worrying about hardware or programming language differences.
+
+
+1. O(1) — Constant Time
+Description:
+The algorithm’s running time does not depend on the size of the input. 
+No matter how large the input is, the operation takes the same amount of time.
+Example:
+Accessing an element in an array by index
+
+2. O(log n) — Logarithmic Time
+Description:
+The algorithm reduces the problem size by a constant factor (usually by half) each time. 
+Very efficient for large datasets.
+Example:
+Binary search in a sorted array
+
+3. O(n) — Linear Time
+Description:
+The running time increases linearly with the size of the input.
+If the input doubles, the running time doubles.
+Example:
+Looping through an entire array
+
+4. O(n²) — Quadratic Time
+Description:
+The running time increases as the square of the input size. Often seen in algorithms with nested loops over the data.
+Example:
+Bubble sort, checking all pairs in an array
+
+5. O(n log n) — Linearithmic Time
+O(n log n) is a common time complexity in computer science, especially for efficient sorting and divide-and-conquer algorithms. 
+
+What does O(n log n) mean?
+n is the size of your input.
+log n (usually base 2 in computer science) represents the number of times you can divide n in half before you reach 1.
+O(n log n) means the total operations grow a little faster than linear time but much slower than quadratic time.
+Where does O(n log n) come from?
+Many O(n log n) algorithms follow a divide-and-conquer approach:
+
+The problem is repeatedly divided in half (log n divisions).
+At each division level, you process or combine all n elements (n work per level).
+Total work = log n levels × n work per level = O(n log n)
+
+
+Example: merge sort,heap sort
+
+6.O(2ⁿ) — Exponential Time
+O(2ⁿ) (pronounced "order 2 to the power of n") describes algorithms whose running time doubles with every additional element in the input.
+This means as the input size increases, the number of operations grows extremely fast—much faster than linear (O(n)), quadratic (O(n²)),
+or even O(n log n) algorithms.
+
+Exponential time usually occurs in algorithms that:
+
+Explore ALL possible combinations or subsets of the input.
+Solve problems by recursively branching into two (or more) possibilities at each step.
+
+Example: Recursive Calculation of Fibonacci Numbers
+
+7. O(n!) — Factorial Time
+O(n!) (pronounced “order n factorial”) represents the most rapid growth in common algorithmic complexities.
+It means that the algorithm’s running time increases as the factorial of the input size (n).
+n! = n × (n-1) × (n-2) × ... × 2 × 1
+Why Does O(n!) Happen?
+Factorial time often appears when an algorithm must check all possible arrangements or orderings of a set of items. 
+This is especially common in:
+
+Generating all permutations of n elements.
+Brute-force solutions to optimization problems where the order of processing matters.
+
+********************************************************************************************************************************************
+
+DSA Arrays :-
+
+An **array** is a linear data structure that stores a collection of elements of the same type, arranged in a contiguous block of memory. 
+Each element is accessed using an index (or subscript), with indexing typically starting from 0.
+
+## Key Properties
+
+- **Fixed Size:** The size of an array is defined at the time of creation and cannot be changed (in languages like C, C++). 
+    Some languages (like Python, JavaScript) provide dynamic arrays (lists).
+- **Homogeneous:** All elements must be of the same data type.
+- **Contiguous Memory:** Elements are stored next to each other in memory, allowing for efficient access.
+
+---
+
+## Array Representation
+
+### Example (C/C++ style):
+```c
+int arr[5] = {10, 20, 30, 40, 50};
+```
+| Index | 0  | 1  | 2  | 3  | 4  |
+|-------|----|----|----|----|----|
+| Value | 10 | 20 | 30 | 40 | 50 |
+
+---
+
+## Types of Arrays
+
+- **One-dimensional Array:** A simple list (as above).
+- **Multi-dimensional Array:** Arrays of arrays, like matrices (2D), cubes (3D), etc.
+  - Example (2D): `int matrix[3][3];`
+
+---
+
+## Array Operations
+
+| Operation         | Description                                    | Time Complexity |
+|-------------------|------------------------------------------------|-----------------|
+| Access            | Get element at index i: arr[i]                 | O(1)            |
+| Update            | Set value at index i: arr[i] = x               | O(1)            |
+| Traverse          | Visit each element once                        | O(n)            |
+| Insert (at end)   | Add element at last index                      | O(1) (if space) |
+| Insert (anywhere) | Add element at any position (shift elements)   | O(n)            |
+| Delete (anywhere) | Remove element from any position (shift left)  | O(n)            |
+| Search            | Find an element (linear search)                | O(n)            |
+| Binary Search     | Find in sorted array (binary search)           | O(log n)        |
+
+---
+
+## Advantages of Arrays
+
+- Simple and easy to use.
+- Fast access via index (random access).
+- Efficient memory usage for small, fixed-size collections.
+
+---
+
+## Disadvantages of Arrays
+
+- Fixed size (static arrays).
+- Inserting/deleting elements (except at the end) is costly (requires shifting).
+- Homogeneous: All elements must be of the same type.
+
+---
+
+## Applications of Arrays
+
+- Storing lists of data (scores, names, etc.).
+- Used in implementing other data structures: stacks, queues, heaps, hash tables.
+- Matrix operations, image processing, and scientific computations.
+
+---
+
+## Common Array Algorithms
+
+- **Traversal:** Loop through each element.
+- **Searching:** Linear Search, Binary Search.
+- **Sorting:** Bubble Sort, Selection Sort, Insertion Sort, Quick Sort, Merge Sort.
+- **Reversing:** Reverse the elements in-place.
+- **Rotation:** Rotate array elements left or right.
+
+## Dynamic Arrays
+
+Languages like Python (`list`), Java (`ArrayList`), and C++ (`vector`) provide dynamic arrays, which can resize automatically.
+
+---
+
+## Summary Table
+
+| Feature     | Static Array | Dynamic Array (List/Vector) |
+|-------------|--------------|-----------------------------|
+| Size        | Fixed        | Can grow/shrink             |
+| Access      | O(1)         | O(1)                        |
+| Insert End  | O(1)         | Amortized O(1)              |
+| Insert Mid  | O(n)         | O(n)                        |
+| Delete      | O(n)         | O(n)                        |
+
+
+
+
+## Address Calculation in Arrays
+
+When you use arrays, the elements are stored in **contiguous memory locations**. 
+Calculating the address of any element in the array is crucial for efficient access.
+
+### Formula for Address Calculation
+
+Suppose:
+- **Base Address (BA):** The memory address of the first element of the array (arr[0]).
+- **Element Size (S):** The size (in bytes) of each array element (for example, 4 bytes for an int).
+- **Index (i):** The position of the element you want (0-based indexing).
+- **Address of arr[i] = ?**
+
+#### Formula (for 1-D Arrays):
+
+```
+Address(arr[i]) = Base Address + (i * Size of each element)
+```
+Or, in symbols:
+```
+Address(arr[i]) = BA + i × S
+```
+
+### Example
+
+Suppose:
+- Base Address (BA) = 1000
+- Element Size (S) = 4 bytes (e.g., integer)
+- Find address of arr[3]:
+
+```
+Address(arr[3]) = 1000 + 3 × 4 = 1000 + 12 = 1012
+```
+
+---
+
+## For Multi-dimensional Arrays
+
+### 2-D Array (Row-Major Order is common in C/C++)
+
+Suppose Array is `arr[m][n]` (m rows, n columns), and you want `arr[i][j]`:
+
+```
+Address(arr[i][j]) = Base Address + [ (i × n) + j ] × S
+```
+- i = row index (0-based)
+- j = column index (0-based)
+- n = number of columns
+
+#### Example
+
+For `arr[4][5]`, Base Address = 2000, element size = 2 bytes, find address of `arr[2][3]`:
+
+```
+Address(arr[2][3]) = 2000 + [ (2 × 5) + 3 ] × 2
+                   = 2000 + (10 + 3) × 2
+                   = 2000 + 13 × 2
+                   = 2000 + 26
+                   = 2026
+
+| Array Type              | Address Formula                                      |
+|-------------------------|-----------------------------------------------------|
+| 1-D (arr[i])            | Base + i × Size                                      |
+| 2-D (arr[i][j])         | Base + [i × n + j] × Size (row-major order)         |
+| 2-D (arr[i][j])         | Base + [j × m + i] × Size (column-major order)      |
+
+
+********************************************************************************************************************************************
+
+DSA Linked Lists :-
+
+A linked list is a linear data structure where elements, called nodes, are stored in non-contiguous memory locations. 
+Each node contains data and a reference (pointer) to the next node in the sequence.
+
+Types of Linked Lists :-
+
+Singly Linked List
+Each node points to the next node only.
+Traversal is only in one direction (forward).
+
+Doubly Linked List
+Each node has two pointers: one to the next node, and one to the previous node.
+Allows traversal in both directions (forward and backward).
+
+Circular Linked List
+The last node points back to the first node, forming a circle.
+Can be singly or doubly circular.
+
+
+Basic Operations and Complexity
+Operation	Description	Time Complexity
+Traversal	Visit each node	O(n)
+Insertion	At beginning (head)	O(1)
+Insertion	At end (tail, if tail pointer is available)	O(1)
+Insertion	At arbitrary position (after node search)	O(n)
+Deletion	At beginning	O(1)
+Deletion	At end (without tail pointer or prev pointer)	O(n)
+Deletion	At arbitrary position (after node search)	O(n)
+Search	Find node with specific value	O(n)
+Update	Change value at a node	O(n)
+
+Advantages
+Dynamic size: Grows or shrinks at runtime.
+Efficient insertions/deletions: Especially at the beginning or middle, without shifting elements (unlike arrays).
+Memory utilization: Allocates memory as needed.
+
+Disadvantages
+No random access: Accessing the nth element requires traversing from the head.
+Extra memory: Each node needs extra space for pointers.
+Cache locality: Less efficient than arrays due to non-contiguous memory.
+
+Applications of Linked Lists
+Implementation of stacks and queues.
+Undo functionality in applications (history).
+Dynamic memory allocation.
+Representation of polynomials, large numbers, adjacency lists in graphs.
+
+Common Algorithms on Linked Lists
+Reversing a linked list
+Detecting cycles (using Floyd’s cycle-finding algorithm)
+Finding the middle element (using slow and fast pointers)
+Merging two sorted linked lists
+Removing duplicates
+Intersection of two linked lists
+
+
+
+Feature	                  Array	        Linked List
+Memory	                  Contiguous	  Non-contiguous
+Size	                      Fixed	        Dynamic
+Access	                    O(1)	          O(n)
+Insert (anywhere)	          O(n)	          O(1) (if node known)
+Delete (anywhere)	          O(n)	          O(1) (if node known)
+Extra memory	              None	      Pointer(s) per node
+
+********************************************************************************************************************************************
+
+DSA Stacks :-
+
+A stack is a linear data structure that follows the Last-In, First-Out (LIFO) principle. 
+This means the last element added (pushed) to the stack is the first one to be removed (popped).
+
+Key Properties
+LIFO Order: Last element inserted is the first to be removed.
+Restricted Access: Elements can only be inserted or removed from the “top” of the stack.
+Single Pointer: Only one pointer (top) is maintained to track the top element.
+
+Basic Stack Operations
+Operation	        Description	                                  Time Complexity
+push(x)	        Add element x to the top of stack	                    O(1)
+pop()	          Remove and return the top element	                    O(1)
+peek()/top()	  View the top element without removing it	            O(1)
+isEmpty()	        Check if the stack is empty	                        O(1)
+size()	        Number of elements in the stack	                    O(1)
+
+
+Applications of Stack
+Function/Recursion call management: Stores function calls and local variables.
+Expression evaluation: Infix to postfix conversion, evaluating postfix/prefix expressions.
+Undo/Redo mechanisms: In editors, browsers (back/forward navigation).
+Syntax parsing: In compilers and interpreters.
+Balanced Parentheses Checking: Matching open and close brackets.
+Backtracking: E.g., maze solving, DFS in graphs.
+
+Stack Variants
+Dynamic Stack: Implemented using linked list; grows/shrinks dynamically.
+Fixed Stack: Implemented using arrays; has a maximum capacity.
+
+Overflow and Underflow
+Stack Overflow: Attempting to push onto a full stack (array-based).
+Stack Underflow: Attempting to pop from an empty stack.
+
+Limitations
+Not suitable for random access.
+Can overflow (fixed-size stack).
+Extra memory (linked list)
+Search/traversal is slow
+LIFO only
+
+********************************************************************************************************************************************
+
+DSA Queues :-
+
+A queue is a linear data structure that follows the First-In, First-Out (FIFO) principle. 
+The element inserted first is the first one to be removed, similar to a line of people waiting for a service.
+
+Key Properties
+FIFO Order: The first element added is the first to be removed.
+Restricted Access: Elements are added at the “rear” (end) and removed from the “front” (beginning).
+Single Direction Traversal: Only the front element can be removed and only the rear can be added.
+
+Basic Queue Operations
+Operation	            Description	                        Time Complexity
+enqueue(x)	    Add element x to the rear of the queue	    O(1)
+dequeue()	        Remove and return the front element      	O(1)
+peek()/front()	View the front element without removing it	O(1)
+isEmpty()	        Check if the queue is empty	              O(1)
+size()	        Number of elements in the queue	            O(1)
+
+Using Arrays (Static Queue)
+Fixed size.
+May waste space if elements are dequeued (solved by circular queue).
+
+Using Linked List (Dynamic Queue)
+
+Types of Queues :-
+
+Simple Queue (Linear Queue)
+Regular FIFO queue.
+
+Circular Queue
+Last position is connected to the first; efficiently uses space.
+
+Deque (Double-Ended Queue)
+Elements can be added or removed at both ends.
+
+Priority Queue
+Element with highest priority is served first, not necessarily the one inserted first.
+Grows and shrinks dynamically with no predefined size.
+
+Applications of Queue
+CPU Scheduling: Tasks/jobs processed in order.
+Printer Spooling: Print jobs managed in a queue.
+Breadth-First Search (BFS): In graphs/trees.
+Call Center Systems: Calls handled in order.
+Data Buffering: Like IO Buffers, data streaming.
+
+Limitations
+Linear Array Queue: Can waste space if not circular.
+Random Access Not Allowed: Only front or rear can be accessed directly.
+Fixed Size (for static implementation): Needs resizing or dynamic structure for flexibility.
+
+
+********************************************************************************************************************************************
+
+DSA Trees :-
+
+A tree is a hierarchical (non-linear) data structure consisting of nodes connected by edges. 
+Each tree has a root node, and each node may have zero or more child nodes.
+Trees are used to represent hierarchical relationships (like folder structures, organization charts, etc.).
+
+
+Node: Element of the tree.
+Root: Topmost node (no parent).
+Parent/Child: Directly connected nodes (parent points to child).
+Leaf: Node with no children.
+Subtree: Tree formed by a node and its descendants.
+Height/Depth: Levels from root to the deepest leaf.
+Edge: Connection between two nodes.
+
+Real-Life Applications of Trees
+Hierarchical data (file systems, folders)
+Database indexing (B-trees, AVL trees)
+Expression parsing (expression trees)
+Routing algorithms (network trees)
+Decision trees (machine learning)
+Auto-complete, dictionary (Trie)
+
+Types of Trees :-
+
+1. Binary Tree
+Each node has at most two children (left and right).
+
+A complete Binary Tree has all levels full of nodes, except the last level, which is can also be full,
+or filled from left to right. The properties of a complete Binary Tree means it is also balanced.
+
+A full Binary Tree is a kind of tree where each node has either 0 or 2 child nodes.
+
+A perfect Binary Tree has all leaf nodes on the same level, which means that all levels are full of nodes,
+and all internal nodes have two child nodes.The properties of a perfect Binary Tree means it is also full, balanced, and complete.
+
+2.Binary Search Tree (BST)
+A binary tree with the property:
+Left subtree < root < right subtree (for all nodes).
+
+3.Balanced Trees (AVL, Red-Black)
+Maintains height balance for efficient operations.
+
+Tree traversal is the process of visiting (checking and/or updating) each node in a tree data structure exactly once in a systematic way.
+Traversal allows us to process all the data in the tree, search for an element, or display the structure.
