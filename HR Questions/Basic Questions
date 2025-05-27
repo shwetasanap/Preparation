@@ -390,8 +390,37 @@ NBFC stands for Non-Banking Financial Company.
 It is a financial institution that provides bank-like services (such as loans, credit, asset financing, investments, etc.) without holding a banking license.
 NBFCs play a key role in lending, especially to underserved or niche segments, but they cannot accept demand deposits like savings or current accounts.
 
+*************************************************************************************
+1.Database Getting Too Slow
+Challenge:
+Database queries were taking too long as data grew.
+
+What I Did:
+
+Added indexes to commonly used columns.
+
+Optimized slow SQL queries.
+
+Result:
+Reports and search results loaded much faster.
+
+*************************************************************************************
 
 
+ Bug in Login Feature
+Challenge:
+Users couldn’t log in after entering correct details.
+
+What I Did:
+
+Debugged the backend and found a mismatch in password hashing.
+
+Fixed the logic to use the correct encryption method.
+
+Result:
+Login worked properly again, and support tickets went down.
+
+*************************************************************************************
 Behavioral Questions:
 Prepare to answer questions about your experience with Spring Boot projects, challenges you've faced, and how you've overcome them. 
 Be prepared to discuss your problem-solving approach, communication skills, and teamwork abilities. 
