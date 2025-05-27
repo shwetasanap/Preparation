@@ -190,6 +190,208 @@ This module had around 12 different stages, and I ensured smooth transitions and
 Apart from these, I contributed significantly to code enhancements by writing several small utility APIs, as well as 
 RESTful services to communicate with other internal services for tasks like fetching loan status, customer data, and approval history.
 
+In the **loan application process**, the **sanction module** plays a critical role in **evaluating, approving, and finalizing** the loan decision.
+It typically comes **after the underwriting stage** and **before disbursement**. Here's a breakdown of what the sanction module does:
+
+---
+
+### 🔍 Key Functions of the Sanction Module:
+
+1. **Loan Eligibility Confirmation**
+
+   * Validates whether the borrower qualifies based on creditworthiness, income, collateral, etc.
+
+2. **Final Risk Assessment**
+
+   * Reconfirms risk parameters evaluated during underwriting (e.g. credit score, debt-to-income ratio).
+
+3. **Approval Decision**
+
+   * Based on the internal credit policy, the sanctioning authority (or automated system) approves or rejects the loan.
+   * May include different approval levels depending on loan amount (e.g. branch manager, regional officer).
+
+4. **Sanction Letter Generation**
+
+   * A formal document is issued to the borrower, detailing:
+
+     * Approved loan amount
+     * Interest rate
+     * Tenure
+     * EMI schedule
+     * Terms and conditions
+
+5. **Document Checklist Verification**
+
+   * Ensures all required documentation (KYC, income proof, collateral documents) is complete.
+
+6. **Credit Limit Setup**
+
+   * For revolving credit or working capital loans, sets up the sanctioned credit limit in the system.
+
+7. **Internal Compliance Checks**
+
+   * May involve legal or technical vetting (especially in home or secured loans).
+
+---
+
+### ⚙️ In Digital Loan Systems
+
+In digital or automated loan processing systems (like in NBFCs or banks using core banking software), the **sanction module** is often integrated with:
+
+* Credit decision engines
+* CRM systems
+* Document management systems
+* Audit trails for regulatory compliance
+
+---
+
+### 🔁 Post-Sanction Activities (not part of sanction module but follow it)
+
+* Disbursement of funds
+* Repayment tracking
+* Post-disbursement document collection
+
+
+**CRM** stands for **Customer Relationship Management**. It refers to both the **strategy** and the **software systems** used by businesses to
+manage interactions with customers and potential customers.
+
+---
+
+### 🔹 What is CRM? (Definition)
+
+At its core, **CRM is a system that helps businesses manage relationships** with their customers throughout the customer
+lifecycle — from first contact to after-sales support.
+
+---
+
+### 🔧 What Does CRM Do?
+
+A CRM system helps businesses:
+
+1. **Centralize Customer Data**
+
+   * Store contact info, purchase history, communication logs, service requests, etc.
+
+2. **Track Sales & Leads**
+
+   * Monitor potential customers (leads) and follow up with them through the sales pipeline.
+
+3. **Automate Communication**
+
+   * Send automated emails, reminders, and updates to customers.
+
+4. **Improve Customer Support**
+
+   * Log service issues, track resolutions, and manage support tickets.
+
+5. **Enhance Marketing Campaigns**
+
+   * Segment customers and target them with personalized promotions.
+
+---
+
+### 🧠 CRM = Strategy + Technology
+
+| **Aspect**     | **Details**                                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| **Strategy**   | Understanding customer behavior, building trust, and improving customer satisfaction.                        |
+| **Technology** | Software tools like Salesforce, Zoho CRM, HubSpot, etc., that automate and streamline customer interactions. |
+
+---
+
+### 🏦 CRM in Banking & Loans
+
+In the context of **loans or banking**, CRM systems help:
+
+* Track loan applications and status for each customer
+* Send reminders for document submission or EMI due dates
+* Maintain customer histories for cross-selling (e.g., offering credit cards or insurance)
+* Handle queries and complaints efficiently
+
+---
+
+### ✅ Example
+
+If a customer applies for a loan:
+
+1. The CRM logs their application.
+2. Sends automatic follow-ups or alerts to sales staff.
+3. Tracks each step (e.g., document collection, sanctioning, disbursement).
+4. Stores all communication and updates.
+5. Helps support teams respond if the customer calls with a query
+
+In the context of loans, underwriting is the process of evaluating the risk of lending money to a borrower.
+It's a critical step in the loan approval process where the lender determines whether the applicant qualifies for the loan, and under what terms.
+
+🔍 What Is Loan Underwriting?
+Loan underwriting is the risk assessment phase where the lender checks:
+
+Can the borrower repay the loan?
+
+What is the risk of default?
+
+What interest rate or conditions should apply?
+
+
+In the **context of loans**, **FCU** usually stands for **Fraud Control Unit**. The **FCU module** is a critical part of the **risk management** and **compliance** process in financial institutions, especially in digital lending, banks, NBFCs, and housing finance companies.
+
+---
+
+### 🔍 What is the FCU Module?
+
+The **FCU (Fraud Control Unit) module** is designed to **detect, prevent, and investigate fraud** during the loan application process. It acts as a filter to identify **suspicious activities**, **fake documents**, or **high-risk profiles** before a loan is sanctioned or disbursed.
+
+---
+
+### 🧩 Key Functions of an FCU Module:
+
+| **Function**                       | **Description**                                                                |
+| ---------------------------------- | ------------------------------------------------------------------------------ |
+| **Document Verification**          | Ensures submitted documents (ID, income proof, property papers) are genuine.   |
+| **Field Verification**             | Field agents may physically verify address, job, or business location.         |
+| **Digital Footprint Check**        | Examines borrower’s digital presence and patterns to detect anomalies.         |
+| **Red Flag Identification**        | Flags duplicate PANs, mismatched addresses, or fraud-prone IP addresses.       |
+| **Blacklist Screening**            | Checks against internal/external blacklists or watchlists.                     |
+| **Pattern Analysis**               | Detects suspicious behaviors (e.g. multiple applications from same IP/device). |
+| **Geo-tagging & Geo-verification** | Confirms borrower location using GPS data from mobile apps.                    |
+| **Face Match / KYC Validation**    | Uses OCR, facial recognition, and video KYC tools to validate identity.        |
+
+---
+
+### 🏦 Why FCU is Important in Loan Processing
+
+* Prevents **identity theft** and **document forgery**
+* Protects against **loan stacking** (multiple loans from different lenders at once)
+* Reduces **delinquency** and **NPA (Non-Performing Assets)**
+* Ensures **regulatory compliance** with KYC/AML norms
+
+---
+
+### 🔄 Where FCU Fits in Loan Workflow
+
+```text
+Loan Application → Underwriting → FCU Checks → Sanction → Disbursement
+```
+
+Sometimes, FCU runs in **parallel** with underwriting or even **before** underwriting begins.
+
+---
+
+### ✅ Example
+
+A borrower submits a loan application online. The FCU module:
+
+* Matches their selfie with the ID photo using facial recognition
+* Detects that the provided address has been flagged in a previous fraud case
+* Flags the case for manual review or rejection
+
+NBFC stands for Non-Banking Financial Company.
+
+It is a financial institution that provides bank-like services (such as loans, credit, asset financing, investments, etc.) without holding a banking license.
+NBFCs play a key role in lending, especially to underserved or niche segments, but they cannot accept demand deposits like savings or current accounts.
+
+
+
 Behavioral Questions:
 Prepare to answer questions about your experience with Spring Boot projects, challenges you've faced, and how you've overcome them. 
 Be prepared to discuss your problem-solving approach, communication skills, and teamwork abilities. 
@@ -198,3 +400,6 @@ Understand Mastercard's core values and culture.
 
 "My strengths are attention to detail, taking ownership, and quick learning. I ensure code quality and am proactive about resolving issues.
 A weakness I’ve been working on is overthinking solutions initially — I now involve others early through design discussions to balance perfection with practicality."
+
+
+Technical challenges and overcome
