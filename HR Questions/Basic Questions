@@ -252,7 +252,8 @@ In digital or automated loan processing systems (like in NBFCs or banks using co
 * Post-disbursement document collection
 
 
-**CRM** stands for **Customer Relationship Management**. It refers to both the **strategy** and the **software systems** used by businesses to
+**CRM** stands for **Customer Relationship Management**. It refers to both the **strategy** and the **software systems** 
+used by businesses to
 manage interactions with customers and potential customers.
 
 ---
@@ -407,18 +408,74 @@ Reports and search results loaded much faster.
 *************************************************************************************
 
 
- Bug in Login Feature
-Challenge:
-Users couldn’t log in after entering correct details.
+Here are some common technical challenges you might have faced in your work, along with simple strategies to overcome them:
 
-What I Did:
+---
 
-Debugged the backend and found a mismatch in password hashing.
+### 1. Implementing Dynamic Filters
+**Challenge:**  
+Handling a large number of filter combinations and keeping the UI responsive.
 
-Fixed the logic to use the correct encryption method.
+**How to Overcome:**  
+- Use efficient data structures (like maps or sets) to quickly filter data.
+- Implement debouncing for search/filter inputs to avoid unnecessary backend calls.
+- Paginate or lazy-load results for better performance.
 
-Result:
-Login worked properly again, and support tickets went down.
+---
+
+### 2. Multi-Level Approval Workflows
+**Challenge:**  
+Managing complex approval logic and avoiding bottlenecks or unauthorized approvals.
+
+**How to Overcome:**  
+- Use a clear workflow state machine or workflow engine.
+- Define roles and permissions strictly in your authorization logic.
+- Log every approval/rejection action for easy auditing.
+
+---
+
+### 3. Integrating FCU Activities (Verification & Fraud Checks)
+**Challenge:**  
+Coordinating between the main application and external verification/fraud services.
+
+**How to Overcome:**  
+- Use asynchronous APIs or messaging (like queues) for long-running checks.
+- Implement good error handling and retry logic for external service failures.
+- Clearly display the FCU status and errors to users.
+
+---
+
+### 4. Master Data Management with Validation & Auditing
+**Challenge:**  
+Maintaining data integrity and tracking changes reliably.
+
+**How to Overcome:**  
+- Centralize validation logic (on backend or shared library).
+- Use database triggers or application code to log all changes (who, when, what).
+- Provide a user-friendly UI to review audit history.
+
+---
+
+### 5. Loan Decisioning with Multiple Stages
+**Challenge:**  
+Managing logic flow for many different loan types and stages.
+
+**How to Overcome:**  
+- Apply design patterns like State or Strategy to handle different flows.
+- Modularize stage logic so each stage is independent and easy to test.
+- Use configuration files or tables to define stage transitions for flexibility.
+
+---
+
+### 6. Utility APIs & Service Integrations
+**Challenge:**  
+Maintaining clean, efficient, and consistent APIs.
+
+**How to Overcome:**  
+- Follow RESTful standards and consistent naming conventions.
+- Document APIs clearly (use Swagger/OpenAPI).
+- Write unit tests for each utility API.
+
 
 *************************************************************************************
 Behavioral Questions:
