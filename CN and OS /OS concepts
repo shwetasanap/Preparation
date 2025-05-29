@@ -579,7 +579,9 @@ Locking files :-
 
 
 *************************************************************************************************************************************************************************
-**Fragmentation** in an operating system (OS) refers to the condition where storage space (typically RAM or disk) is used inefficiently, reducing performance and the system's ability to allocate memory effectively. It happens when memory is broken into small, non-contiguous pieces over time. There are two main types:
+**Fragmentation** in an operating system (OS) refers to the condition where storage space (typically RAM or disk) is used inefficiently, 
+reducing performance and the system's ability to allocate memory effectively. It happens when memory is broken into small, 
+non-contiguous pieces over time. There are two main types:
 
 ---
 
