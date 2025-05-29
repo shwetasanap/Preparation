@@ -831,6 +831,9 @@ Page Replacement Algorithms decide which page to remove from memory.
 | LRU       | Least recently used             | Good performance     | Needs tracking usage    |
 | OPT       | Future knowledge (ideal)        | Best possible        | Not practical           |
 | Clock     | Second chance (like FIFO + LRU) | Efficient compromise | Slightly complex        |
+
+OPT replaces the page that will not be used for the longest period of time in the future.
+
 Pages are in a circle (like a clock).
 Each page has a "used" bit:
 If bit = 0 → remove it.
