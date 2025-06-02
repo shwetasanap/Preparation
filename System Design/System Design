@@ -942,7 +942,7 @@ Unified Modeling Language (UML) diagrams are essential tools in system design. T
 behavior, and interactions. The most commonly used UML diagrams in system design are Class Diagrams, Sequence Diagrams,
 and Activity Diagrams.
 
-
+*********************************************************************************************************************************************
 High-Level Design (HLD) in Software Development
 
 High-Level Design is a initial step in development of applications where overall structure of a system is planned. 
