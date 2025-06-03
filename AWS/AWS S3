@@ -69,7 +69,7 @@ Automatically replicate objects to buckets in other AWS regions (for disaster re
 Connect s3 to java code :-
 
 To connect AWS S3 in your Java code, you'll typically use the 
-AWS SDK(tools and libraries by aws to interact with aws sefvies with preferred programming language) 
+AWS SDK(tools and libraries by aws to interact with aws services with preferred programming language) 
 for Java. Here's a full guide on how to integrate and use it:
 
 1. Add AWS SDK Dependency
