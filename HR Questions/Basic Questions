@@ -83,9 +83,10 @@ I aim to contribute innovative ideas and help the company succeed.
 
 SDLC:-
 
-Of course! Here’s a bit more detail about each stage of the Software Development Life Cycle (SDLC):
-
----
+SDLC (Software Development Life Cycle) is a structured process used for developing software applications.
+It outlines a series of clearly defined phases or steps that guide teams through planning, creating, testing, 
+deploying, and maintaining software. The main goal of SDLC is to produce high-quality software that meets user
+requirements, is delivered on time, and is cost-effective.
 
 ### 1. **Requirement Gathering & Analysis**
 - Stakeholders (clients, users, managers) share what the software should do.
