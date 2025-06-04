@@ -79,7 +79,47 @@ My career aspirations focus on continuous growth and skill improvement. I plan t
 trends, pursue certifications, and attend conferences to learn from experts. By improving my skills,
 I aim to contribute innovative ideas and help the company succeed.
 
-**Requirement gathering** is **one of the most critical phases** of any project—whether it's software development, marketing, operations, or construction. Here's **why it matters so much**:
+
+
+SDLC:-
+
+Of course! Here’s a bit more detail about each stage of the Software Development Life Cycle (SDLC):
+
+---
+
+### 1. **Requirement Gathering & Analysis**
+- Stakeholders (clients, users, managers) share what the software should do.
+- Requirements are collected, discussed, and documented in detail.
+- Feasibility of the project is analyzed (can it be done, what are the risks, costs, etc.).
+
+### 2. **Design**
+- System architects and developers transform the requirements into a blueprint.
+- High-level design: Defines software architecture, database design, technology stack.
+- Low-level design: Details modules, interfaces, data flows, and algorithms.
+
+### 3. **Implementation (Coding)**
+- Developers write code as per the design documents.
+- Tasks are divided among team members.
+- Coding standards and best practices are followed.
+
+### 4. **Testing**
+- Testers check the software for defects (bugs) and verify it meets requirements.
+- Types of testing: unit, integration, system, acceptance, etc.
+- Issues found are reported to developers for fixing.
+
+### 5. **Deployment**
+- The tested software is released to the production environment.
+- May involve staged rollouts (beta releases, pilot testing) before full launch.
+- Users start using the system.
+
+### 6. **Maintenance**
+- Ongoing support after deployment.
+- Includes fixing bugs, making improvements, adding new features, and adapting to new environments.
+- Ensures the software continues to meet user needs over time.
+
+
+**Requirement gathering** is **one of the most critical phases** of any project—whether it's software development, 
+marketing, operations, or construction. Here's **why it matters so much**:
 
 ---
 
