@@ -167,13 +167,68 @@ marketing, operations, or construction. Here's **why it matters so much**:
 
 Out of box thinking
 
-Meetings productivity less so keep neeting on specific timings
-issues solving sessions on fridays
+n one project, we had a problem where our Java application’s log files were growing too large and difficult to search through.
+Instead of just increasing storage or manually checking logs, I wrote a small Java utility that automatically archived old log 
+files and indexed log entries by date and error type. This made it easy for anyone on the team to quickly find relevant information,
+saving a lot of time during debugging sessions.
+
+Archive Old Log Files:
+Move log files older than a certain date to an archive folder (e.g., zipped).
+Index Log Entries:
+Read log files, parse entries, and create a simple index, e.g., using a Map<String, List<String>> where the key can be date or error type.
+
+import java.io.*;
+import java.nio.file.*;
+import java.util.*;
+
+public class SimpleLogArchiver {
+    public static void main(String[] args) throws IOException {
+        String logDir = "logs";
+        String archiveDir = "logs/archive";
+        int daysOld = 7;
+
+        // Create archive directory if it doesn't exist
+        Files.createDirectories(Paths.get(archiveDir));
+
+        // Archive old log files
+        File[] logFiles = new File(logDir).listFiles((dir, name) -> name.endsWith(".log"));
+        if (logFiles != null) {
+            long cutoff = System.currentTimeMillis() - (daysOld * 24 * 60 * 60 * 1000L);
+            for (File log : logFiles) {
+                if (log.lastModified() < cutoff) {
+                    Files.move(log.toPath(), Paths.get(archiveDir, log.getName()), StandardCopyOption.REPLACE_EXISTING);
+                }
+            }
+        }
+
+        // Index log entries by error type
+        Map<String, List<String>> errorIndex = new HashMap<>();
+        logFiles = new File(logDir).listFiles((dir, name) -> name.endsWith(".log"));
+        if (logFiles != null) {
+            for (File log : logFiles) {
+                try (BufferedReader reader = new BufferedReader(new FileReader(log))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        if (line.contains("ERROR")) {
+                            errorIndex.computeIfAbsent("ERROR", k -> new ArrayList<>()).add(line);
+                        } else if (line.contains("WARN")) {
+                            errorIndex.computeIfAbsent("WARN", k -> new ArrayList<>()).add(line);
+                        } else if (line.contains("INFO")) {
+                            errorIndex.computeIfAbsent("INFO", k -> new ArrayList<>()).add(line);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Example: Print all ERROR lines
+        System.out.println("ERROR log entries:");
+        errorIndex.getOrDefault("ERROR", Collections.emptyList()).forEach(System.out::println);
+    }
+}
 
 when issue occurs how you tackle
-Great question! Here’s a simple but effective way to explain **how you tackle issues** in a software development project (or any project) during an interview:
 
----
 
 ### **Answer:**
 
@@ -189,7 +244,6 @@ document the findings, and put measures in place to avoid similar issues in the 
 
 how you take feedback from other people
 
-Sure! Here's a **simple and concise** version tailored to a **software company**:
 
 ---
 
