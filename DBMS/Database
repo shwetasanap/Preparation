@@ -261,6 +261,8 @@ Data validation: Triggers can perform additional validation checks on data befor
 - Trade-Off: While indexes improve read performance, they can slow down write operations (like INSERT, UPDATE, and DELETE) 
   because the index itself needs to be updated.
 
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
 22. What are clustered and non-clustered Indexes? 
 
 23. What is CLAUSE in SQL?
