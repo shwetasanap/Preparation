@@ -1,3 +1,5 @@
+
+
 1) Stack and heap memory
 In Java, memory refers to the space allocated by the Java Virtual Machine (JVM) for storing variables, objects, methods,
 and other data during the execution of a program.
@@ -1424,6 +1426,10 @@ It represents a future result of an asynchronous computation.
 CompletableFuture provides a powerful and flexible way to write asynchronous, non-blocking code. 
 It was introduced in Java 8 and has become popular due to its ease of use and ability to handle complex asynchronous workflows.
 
+
+Executor is the simplest interface for launching a task.-->execute(Runnable)
+ExecutorService is a more powerful sub-interface with advanced features like shutting down, submitting tasks for results,
+and managing pools.
 
 1. What is ExecutorService?
 ExecutorService is a Java interface that helps manage a pool of threads to execute tasks asynchronously (i.e., in the background).
