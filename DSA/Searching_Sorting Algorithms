@@ -1,1 +1,275 @@
 
+## 1. **Bubble Sort**
+
+**How it works:**  
+Repeatedly compare adjacent elements and swap them if they are in the wrong order. Pass through the list multiple times.
+
+**Steps:**
+1. Start at the beginning of the array.
+2. Compare the first two elements. If the first is bigger, swap them.
+3. Move to the next pair and repeat.
+4. Continue to the end. The largest element “bubbles” to the end.
+5. Repeat steps 1-4 for the rest of the array (ignoring the last sorted elements).
+6. Stop when no swaps are needed.
+
+**Example (First Pass):**  
+- Compare 5 and 2 → Swap → [2, 5, 4, 6, 1, 3]  
+- Compare 5 and 4 → Swap → [2, 4, 5, 6, 1, 3]  
+- Compare 5 and 6 → No swap  
+- Compare 6 and 1 → Swap → [2, 4, 5, 1, 6, 3]  
+- Compare 6 and 3 → Swap → [2, 4, 5, 1, 3, 6]
+
+---
+
+## 2. **Selection Sort**
+
+**How it works:**  
+Find the smallest element and put it at the start. Repeat for the rest.
+
+**Steps:**
+1. Find the minimum element in the array.
+2. Swap it with the first element.
+3. Find the minimum in the remaining (unsorted) array.
+4. Swap it with the next element.
+5. Continue until the array is sorted.
+
+**Example (First Step):**  
+- Find min in [5, 2, 4, 6, 1, 3] → 1  
+- Swap 1 with 5 → [1, 2, 4, 6, 5, 3]
+
+---
+
+## 3. **Insertion Sort**
+
+**How it works:**  
+Build the sorted array one element at a time by inserting elements into their correct position.
+
+**Steps:**
+1. Start with the second element (index 1).
+2. Compare it to elements before it and insert it in the right spot.
+3. Move to the next element and repeat.
+4. Continue until the array is sorted.
+
+**Example (First Step):**  
+  [5, 2, 4, 6, 1, 3]
+- Take 2 (index 1). Compare with 5 → 2 < 5, so insert before 5 → [2, 5, 4, 6, 1, 3]  
+- [5, 4, 6, 1, 3]--> next unsorted array, [2]-->sorted array
+- Next, take 4. Compare with 5, then 2 → insert between 2 and 5 → [2, 4, 5, 6, 1, 3]
+
+---
+
+## 4. **Merge Sort**
+
+**How it works:**  
+Divide the array into halves, sort each half, then merge.
+
+**Steps:**
+1. Divide the array into two halves.
+2. Recursively sort each half.
+3. Merge the sorted halves back together.
+
+**Example:**   [5, 2, 4, 6, 1, 3]
+- Split: [5, 2, 4] and [6, 1, 3]  
+- Split again: [5], [2, 4], [6], [1, 3]  
+- Sort and merge: [2, 4, 5], [1, 3, 6]  
+- Final merge: [1, 2, 3, 4, 5, 6]
+
+---
+
+## 5. **Quick Sort**
+
+**How it works:**  
+Pick a pivot, partition the array, and sort partitions recursively.
+
+**Steps:**
+1. Pick a pivot (e.g., last element).
+2. Partition: Elements less than pivot go left, greater go right.
+3. Recursively sort left and right partitions.
+4. Combine.
+
+**Example (Pivot = 3):**    [5, 2, 4, 6, 1, 3]
+- Partition: [2, 1] [3] [5, 4, 6]  
+- Sort left: [1, 2], right: [4, 5, 6]  
+- Combine: [1, 2, 3, 4, 5, 6]
+
+---
+
+## 6. **Heap Sort**
+
+**How it works:**  
+Build a heap, repeatedly remove the largest element, and rebuild the heap.
+Heap Sort is a way to sort numbers by using a special tree called a heap.
+In a max-heap, the biggest number is always at the top.
+**Steps:**
+1. Build a max heap from the array.To build a max-heap from an array, you rearrange the array so that each parent node 
+   is greater than its children.
+2. Swap the first (max) with the last element.
+3. Reduce heap size by one and heapify the root.
+4. Repeat until sorted.
+
+Example:-
+Suppose your array is: [4, 10, 3, 5, 1]
+        4
+       / \
+     10   3
+     / \
+    5   1
+
+[10, 4, 3, 5, 1]
+       10
+       / \
+     4    3
+     / \
+    5   1
+
+[10, 5, 3, 4, 1]
+
+        10
+       / \
+      5   3
+     / \
+    4   1
+
+The array [10, 5, 3, 4, 1] is now a max-heap.
+Swap 10 and 1 → [1, 5, 3, 4, 10]
+Now, 10 is sorted at the end.
+
+Rebuild max-heap for first 4 numbers: [5, 4, 3, 1, 10]
+
+Swap 5 and 1 → [1, 4, 3, 5, 10]
+Now, 5 is sorted.
+
+Heapify: [4, 1, 3, 5, 10]
+Swap 4 and 1: [1, 3, 4, 5, 10]
+Now, 4 is sorted.
+
+
+---
+
+## 7. **Counting Sort** (good for small integer ranges)
+
+**How it works:**  
+Count the number of occurrences for each value, then calculate their position.
+
+**Steps:**
+1. Create a count array for the range of input values.
+2. Count each element.
+3. Calculate positions.
+4. Build the sorted array.
+
+Example: Sort [4, 2, 2, 8, 3, 3, 1]
+
+Step 1: Find the Range
+Smallest number: 1
+Largest number: 8
+
+Step 2: Create a Count Array
+Make an array of size max + 1 (so, size 9 for numbers 0–8), all initialized to 0:
+Code
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+ 0  1  2  3  4  5  6  7  8
+
+Step 3: Count Occurrences
+For each number in the original array, add 1 to the count at that index:
+
+After 4: [0, 0, 0, 0, 1, 0, 0, 0, 0]
+After 2: [0, 0, 1, 0, 1, 0, 0, 0, 0]
+After 2: [0, 0, 2, 0, 1, 0, 0, 0, 0]
+After 8: [0, 0, 2, 0, 1, 0, 0, 0, 1]
+After 3: [0, 0, 2, 1, 1, 0, 0, 0, 1]
+After 3: [0, 0, 2, 2, 1, 0, 0, 0, 1]
+After 1: [0, 1, 2, 2, 1, 0, 0, 0, 1]
+
+Step 4: Write Sorted Output
+Go through the count array and write each number as many times as it occurs:
+
+1 appears 1 time: [1]
+2 appears 2 times: [1, 2, 2]
+3 appears 2 times: [1, 2, 2, 3, 3]
+4 appears 1 time: [1, 2, 2, 3, 3, 4]
+8 appears 1 time: [1, 2, 2, 3, 3, 4, 8]
+
+Final sorted array:
+[1, 2, 2, 3, 3, 4, 8]
+
+
+# Time and Space Complexity of Sorting Algorithms
+
+## 1. Bubble Sort
+- **Time Complexity:**
+  - **Best:** O(n) — If the array is already sorted, only one pass is needed (with no swaps).
+  - **Average/Worst:** O(n²) — Each element is compared with every other element.
+- **Space Complexity:** O(1) — Sorting is done in-place, requiring no extra space.
+- **Explanation:** Nested loops cause quadratic time; only a constant number of variables are used.
+
+---
+
+## 2. Selection Sort
+- **Time Complexity:**
+  - **Best/Average/Worst:** O(n²) — Always scans the unsorted part to find the minimum for each position.
+- **Space Complexity:** O(1) — Done in-place.
+- **Explanation:** Even if the array is sorted, it still compares every pair.
+
+---
+
+## 3. Insertion Sort
+- **Time Complexity:**
+  - **Best:** O(n) — When the array is already sorted, only one comparison per element.
+  - **Average/Worst:** O(n²) — Each new element may need to be compared with all earlier elements.
+- **Space Complexity:** O(1) — Operates in-place.
+- **Explanation:** Efficient for nearly sorted data, but slow for reversed arrays.
+
+---
+
+## 4. Merge Sort
+- **Time Complexity:**
+  - **Best/Average/Worst:** O(n log n) — Each split divides the array, and merging takes O(n) at each level.
+- **Space Complexity:** O(n) — Extra space is needed to merge arrays.
+- **Explanation:** Recursively splits and merges, requiring extra arrays.
+
+---
+
+## 5. Quick Sort
+- **Time Complexity:**
+  - **Best/Average:** O(n log n) — Good pivots split the array evenly.
+  - **Worst:** O(n²) — Bad pivot choices (e.g., always smallest/largest) make the array split unevenly.
+- **Space Complexity:** O(log n) — For recursion stack (in-place partitioning).
+- **Explanation:** Partitioning is in-place, but recursive calls use stack space.
+
+---
+
+## 6. Heap Sort
+- **Time Complexity:**
+  - **Best/Average/Worst:** O(n log n) — Building a heap takes O(n), sorting takes O(n log n).
+- **Space Complexity:** O(1) — Sorting is done in-place.
+- **Explanation:** Heap operations are logarithmic, and no extra arrays are used.
+
+---
+
+## 7. Counting Sort
+- **Time Complexity:**
+  - **Best/Average/Worst:** O(n + k) — n = number of items, k = range of input values.
+- **Space Complexity:** O(k) — Extra space for counting array.
+- **Explanation:** Great for small integer ranges; space grows with the range.
+
+---
+
+## Summary Table
+
+| Algorithm      | Best      | Average   | Worst     | Space    | Stable? |
+|----------------|-----------|-----------|-----------|----------|---------|
+| Bubble Sort    | O(n)      | O(n²)     | O(n²)     | O(1)     | Yes     |
+| Selection Sort | O(n²)     | O(n²)     | O(n²)     | O(1)     | No      |
+| Insertion Sort | O(n)      | O(n²)     | O(n²)     | O(1)     | Yes     |
+| Merge Sort     | O(n log n)| O(n log n)| O(n log n)| O(n)     | Yes     |
+| Quick Sort     | O(n log n)| O(n log n)| O(n²)     | O(log n) | No      |
+| Heap Sort      | O(n log n)| O(n log n)| O(n log n)| O(1)     | No      |
+| Counting Sort  | O(n + k)  | O(n + k)  | O(n + k)  | O(k)     | Yes     |
+
+---
+
+**Tips:**
+- O(1) space means the algorithm sorts in-place.
+- O(n log n) is the best you can do for comparison-based sorts.
+- Counting sort is not comparison-based; it can be faster if k is small.
+- Stable sorts keep equal elements in their original order.
