@@ -383,6 +383,10 @@ orElseThrow: It returns the value if present; if not, then it delivers an except
 Lambda expressions in Java, introduced in Java SE 8, represent instances of functional interfaces (interfaces with a single abstract method). 
 They provide a concise way to express instances of single-method interfaces using a block of code.
 
+
+Lambda expressions are a way to write anonymous functions in Java, making your code shorter and more expressive—especially 
+when working with collections and functional interfaces.
+
 Functionalities of Lambda Expression
 Lambda Expressions implement the only abstract function and therefore implement functional interfaces lambda expressions are added in Java 8 and provide the below functionalities.
 
