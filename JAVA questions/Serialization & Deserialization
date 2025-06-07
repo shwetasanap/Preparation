@@ -60,3 +60,84 @@ If a superclass implements Serializable, the subclass will inherit this behavior
 When deserializing an object, Java ensures that the class hierarchy is properly reconstructed. The parent class is deserialized first, followed by the child class.
 If the superclass has a serialVersionUID, the subclass must either declare a serialVersionUID with the same value or allow Java to generate one automatically
 based on the superclass's serialVersionUID. Otherwise, deserialization can fail if the serialVersionUID is not compatible.
+
+
+
+
+## **What is Externalizable?**
+
+- The `Externalizable` interface is part of Java’s serialization mechanism, found in `java.io`.
+- It provides a way for classes to define **custom serialization logic**—that is, you control exactly how an object is written to and read from a stream.
+- It **extends** the `Serializable` interface.
+
+---
+
+## **Key Points:**
+
+- **Methods to Implement:**
+  - `void writeExternal(ObjectOutput out) throws IOException`
+    - Define how the object’s data is written.
+  - `void readExternal(ObjectInput in) throws IOException, ClassNotFoundException`
+    - Define how the object’s data is read.
+- **No Automatic Serialization:**
+  - Unlike `Serializable`, Java does not handle serialization automatically. You must manually implement both methods.
+- **Public No-Arg Constructor Required:**
+  - Classes implementing `Externalizable` must have a public no-argument constructor. The JVM uses this to create the object during deserialization, before calling `readExternal`.
+
+---
+
+## **How is it Different from Serializable?**
+
+| Feature              | Serializable                              | Externalizable                                 |
+|----------------------|-------------------------------------------|------------------------------------------------|
+| Control              | Default (automatic) serialization         | Custom (manual) serialization                  |
+| Methods to Override  | None, but can use `writeObject/readObject`| Must implement `writeExternal/readExternal`    |
+| No-arg Constructor   | Not mandatory                             | Mandatory (must be public)                     |
+
+---
+
+## **Example:**
+
+```java
+import java.io.*;
+
+public class MyData implements Externalizable {
+    private int id;
+    private String name;
+
+    // Mandatory public no-arg constructor
+    public MyData() {}
+
+    public MyData(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeInt(id);
+        out.writeObject(name);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        id = in.readInt();
+        name = (String) in.readObject();
+    }
+}
+```
+
+---
+
+## **When to Use Externalizable?**
+
+- When you need **full control** over serialization (e.g., for performance, security, or compatibility reasons).
+- When you want to **exclude** certain fields or serialize fields in a custom format.
+
+---
+
+**Summary:**  
+- `Externalizable` gives you complete control of the serialization process.
+- You must explicitly define how your object is written and read.
+- It’s more powerful and flexible, but requires more work than `Serializable`.
+
