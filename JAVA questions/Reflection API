@@ -1,0 +1,89 @@
+
+
+## **What is Java Reflection API?**
+
+The **Java Reflection API** is a powerful feature in Java that allows you to:
+- Inspect classes, interfaces, fields, and methods at runtime (while the program is running),
+- Even if you don’t know their names at compile time,
+- And manipulate their members (fields, methods, constructors).
+
+---
+
+## **Main Capabilities**
+
+- **Examine Class Structure:**  
+  Get information about class, superclass, implemented interfaces, fields, methods, constructors, and annotations.
+- **Instantiate Objects:**  
+  Create objects dynamically, even if you don’t know the class name at compile time.
+- **Access Fields/Methods:**  
+  Read or modify fields and invoke methods, even private ones (with proper permissions).
+- **Array and Modifier Introspection:**  
+  Work with arrays, check modifiers (public, private, static, etc.).
+
+---
+
+## **Key Classes in Reflection API**
+
+- `Class` – Represents a class or interface in Java.
+- `Method` – Represents a method of a class.
+- `Field` – Represents a field (variable) of a class.
+- `Constructor` – Represents a constructor of a class.
+- `Modifier` – Provides information about class and member access modifiers.
+
+---
+
+## **Basic Example**
+
+```java
+import java.lang.reflect.*;
+
+public class ReflectionDemo {
+    public static void main(String[] args) throws Exception {
+        // Get Class object for MyClass
+        Class<?> clazz = Class.forName("MyClass");
+        
+        // List all methods
+        Method[] methods = clazz.getDeclaredMethods();
+        for(Method m : methods) {
+            System.out.println("Method: " + m.getName());
+        }
+        
+        // Instantiate object
+        Object obj = clazz.getDeclaredConstructor().newInstance();
+        
+        // Access a field
+        Field field = clazz.getDeclaredField("myField");
+        field.setAccessible(true);
+        field.set(obj, "Hello Reflection");
+        
+        // Invoke a method
+        Method method = clazz.getDeclaredMethod("printField");
+        method.invoke(obj);
+    }
+}
+```
+
+---
+
+## **Common Use Cases**
+
+- Frameworks (like Spring, Hibernate) for dependency injection, object mapping.
+- Tools and libraries that need to work with unknown classes at runtime (e.g., IDEs, debuggers).
+- Serialization/deserialization libraries (like Jackson, Gson).
+
+---
+
+## **Pros and Cons**
+
+| Pros                              | Cons                                               |
+|------------------------------------|----------------------------------------------------|
+| Powerful and flexible              | Slower than direct access (performance overhead)   |
+| Enables dynamic and generic code   | More complex and can break encapsulation           |
+| Useful for frameworks & libraries  | Security risks if misused                          |
+
+---
+
+## **Summary**
+
+**Java Reflection API** lets you inspect and manipulate classes and objects at runtime, providing dynamic behavior and flexibility, but it should be used carefully due to security and performance considerations.
+
