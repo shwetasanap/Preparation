@@ -39,6 +39,10 @@ is that static variables and methods are associated with a class, while a static
 A static variable is instantiated once, a static method can be called from a class without instantiating 
 an instance of the class, a static class cannot be instantiated. 
 
+Declaration: Use the static keyword inside another class.
+No Outer Instance Needed: You can create an instance of a static inner class without creating an instance of the outer class.
+Access: It can access only static members (fields and methods) of the outer class directly.
+Use Cases: Often used to group classes that will only be used in one place, or to logically associate helper classes with their outer class.
 
 ******************************************************************************************************************************************************************************************
 3) System.out.println() and  System.err.println() 
