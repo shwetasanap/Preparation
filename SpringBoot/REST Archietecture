@@ -1,4 +1,6 @@
-The architectural constraints of a **RESTful API** are a set of rules and guidelines defined by Roy Fielding in his doctoral dissertation to create scalable, reliable, and performant web services. These constraints distinguish REST (Representational State Transfer) from other network architectures.
+The architectural constraints of a **RESTful API** are a set of rules and guidelines defined by Roy Fielding in his 
+doctoral dissertation to create scalable, reliable, and performant web services. These constraints distinguish REST 
+(Representational State Transfer) from other network architectures.
 
 Here are the key architectural constraints of RESTful APIs:
 
@@ -52,3 +54,6 @@ Here are the key architectural constraints of RESTful APIs:
 **In summary:**  
 A RESTful API must follow these architectural constraints to be considered RESTful. These constraints help build scalable, 
 maintainable, and performant web services.
+A **RESTful API** is a web service that allows different applications to communicate with each other over the internet using 
+standard HTTP methods (like GET, POST, PUT, DELETE) and follows the principles of the REST architecture, such as statelessness
+and resource-based URLs.
