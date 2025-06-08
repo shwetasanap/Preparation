@@ -24,6 +24,16 @@ That means:
 
 	•	Logback does the actual logging (implementation)
 
+What it is:
+SLF4J is a logging facade (interface/abstraction) for various logging frameworks in Java.
+What it does:
+It allows developers to write logging code without being tied to a specific logging implementation (like Logback, Log4j,
+or java.util.logging).
+How it works:
+You code against the SLF4J API. At runtime, SLF4J binds to the actual logging framework via a binding JAR.
+Why it’s useful:
+You can switch logging implementations (e.g., from Logback to Log4j) without changing your application code.
+
 3. Logger Example
 
 Here’s a simple example:
