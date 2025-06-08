@@ -472,7 +472,7 @@ ResponseEntity<String> response = restTemplate.exchange(
 
 
 ---
-
+WebClient:-
 
 
 WebClient is the modern, non-blocking, and asynchronous HTTP client introduced in Spring 5 as part of the 
