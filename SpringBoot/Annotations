@@ -167,3 +167,15 @@ Certainly! Here’s a concise guide to the **most important annotations in Sprin
 
 ---
 
+@Transactional is a Spring annotation used to manage database transactions automatically. 
+When you apply @Transactional to a method or class, Spring ensures that the method 
+(or all methods in the class) runs within a database transaction.
+
+What does it do?
+Begins a transaction before the method starts.
+Commits the transaction if the method completes successfully.
+Rolls back the transaction if a runtime (unchecked) exception occurs.
+
+Without @Transactional, you lose atomicity (all-or-nothing behavior) for methods that make multiple database changes.
+You risk data inconsistency and integrity issues if errors occur.
+For simple single-step database operations, you might not notice a difference, but for anything more complex, @Transactional is important.
