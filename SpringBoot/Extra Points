@@ -420,9 +420,60 @@ Asynchronous processing: For modern applications with high concurrency or real-t
 (which is non-blocking) instead of RestTemplate.
 
 Reactive applications: If you're building a reactive application with Spring WebFlux, WebClient should be your go-to choice.
+Here’s a summary of the main **RestTemplate** methods in Spring for making HTTP requests:
+
+---
+
+## **Core RestTemplate Methods**
+
+| Method                   | Purpose                                             |
+|--------------------------|-----------------------------------------------------|
+| **getForObject**         | Retrieve a resource (GET), returns response body    |
+| **getForEntity**         | Retrieve a resource (GET), returns response + status, headers |
+| **postForObject**        | Create a resource (POST), returns response body     |
+| **postForEntity**        | Create a resource (POST), returns response + status, headers |
+| **put**                  | Update a resource (PUT), no return value            |
+| **delete**               | Delete a resource (DELETE), no return value         |
+| **exchange**             | General method for any HTTP method, allows setting headers, body, etc. Returns ResponseEntity |
+| **execute**              | Lowest-level method, for custom requests            |
+| **headForHeaders**       | Retrieve headers (HEAD request)                     |
+| **optionsForAllow**      | Get supported HTTP methods for a URL (OPTIONS)      |
+| **patchForObject**       | Partially update a resource (PATCH), returns response body (Spring 4.3+) |
+
+---
+
+## **Example Usage**
+
+```java
+RestTemplate restTemplate = new RestTemplate();
+
+// GET
+String body = restTemplate.getForObject("http://example.com/api/resource", String.class);
+
+// POST
+MyResponse resp = restTemplate.postForObject("http://example.com/api/resource", requestBody, MyResponse.class);
+
+// PUT
+restTemplate.put("http://example.com/api/resource/1", updatedObject);
+
+// DELETE
+restTemplate.delete("http://example.com/api/resource/1");
+
+// EXCHANGE (for custom methods, headers, etc.)
+HttpHeaders headers = new HttpHeaders();
+headers.set("Authorization", "Bearer token");
+HttpEntity<?> entity = new HttpEntity<>(headers);
+ResponseEntity<String> response = restTemplate.exchange(
+    "http://example.com/api/resource",
+    HttpMethod.GET,
+    entity,
+    String.class
+);
 
 
-WebClient :-
+---
+
+
 
 WebClient is the modern, non-blocking, and asynchronous HTTP client introduced in Spring 5 as part of the 
 Spring WebFlux module. It was designed to be a more flexible and efficient way of making HTTP requests in 
