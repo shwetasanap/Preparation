@@ -2,6 +2,9 @@
 **Spring Data JPA** is a part of the larger Spring Data family, and it makes it easier to implement JPA 
 (Java Persistence API)-based repositories in Java applications. 
 
+The Spring Data family is a collection of projects and modules under the larger Spring ecosystem,
+designed to simplify and standardize data access in Java applications. 
+
 JPA is a specification for managing, persisting, 
 and accessing data between Java objects and relational databases.
 
