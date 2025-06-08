@@ -1,0 +1,54 @@
+The architectural constraints of a **RESTful API** are a set of rules and guidelines defined by Roy Fielding in his doctoral dissertation to create scalable, reliable, and performant web services. These constraints distinguish REST (Representational State Transfer) from other network architectures.
+
+Here are the key architectural constraints of RESTful APIs:
+
+---
+
+### 1. **Client-Server**
+- **Separation of concerns:** The client (user interface) and the server (data storage and logic) are separated, allowing each to evolve independently.
+- **Benefit:** Simplifies development and improves scalability.
+
+### 2. **Statelessness**
+- **No client context is stored on the server between requests.** Each request from a client must contain all the information needed to process the request.
+- **Benefit:** Improves scalability and reliability.
+
+### 3. **Cacheability**
+- **Responses must define themselves as cacheable or not.** Caching can be used to eliminate some client-server interactions, improving performance.
+- **Benefit:** Increases efficiency and scalability.
+
+### 4. **Uniform Interface**
+- **A standard way of interacting with resources (using URIs, HTTP methods, etc.).** This is fundamental to REST.
+- **Benefit:** Simplifies and decouples the architecture, allowing each part to evolve independently.
+
+  Key aspects of the uniform interface:
+  - Resource identification in requests (using URIs)
+  - Resource manipulation through representations (e.g., JSON, XML)
+  - Self-descriptive messages (enough information to describe how to process the message)
+  - Hypermedia as the engine of application state (HATEOAS)
+
+### 5. **Layered System**
+- **The client cannot ordinarily tell whether it is connected directly to the end server or to an intermediary (proxy, gateway, etc.).**
+- **Benefit:** Improves scalability via load balancing and shared caches and enhances security.
+
+### 6. **Code on Demand (optional)**
+- **Servers can temporarily extend or customize client functionality by transferring executable code (e.g., JavaScript).**
+- **Benefit:** Optional; used rarely in practice.
+
+---
+
+## **Summary Table**
+
+| Constraint         | Description                                         | Mandatory/Optional |
+|--------------------|-----------------------------------------------------|--------------------|
+| Client-Server      | Separation of UI and data storage                   | Mandatory          |
+| Stateless          | No client state stored on server between requests   | Mandatory          |
+| Cacheable          | Responses labeled as cacheable or not               | Mandatory          |
+| Uniform Interface  | Standardized resource interaction                   | Mandatory          |
+| Layered System     | Intermediaries (proxies, gateways) allowed          | Mandatory          |
+| Code on Demand     | Servers can send code to clients                    | Optional           |
+
+---
+
+**In summary:**  
+A RESTful API must follow these architectural constraints to be considered RESTful. These constraints help build scalable, 
+maintainable, and performant web services.
