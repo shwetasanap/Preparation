@@ -48,3 +48,122 @@ Spring Boot integrates environment support into the ApplicationContext, allowing
 Profiles can be defined in the application.properties or application.yml, and the context loads the corresponding configuration.
 
 
+
+Certainly! Here’s a concise guide to the **most important annotations in Spring Boot**. Spring Boot uses a lot of annotations from the core Spring Framework as well as its own to simplify configuration, dependency injection, and application development.
+
+---
+
+## **Core Annotations**
+
+### **Application Setup**
+- **@SpringBootApplication**  
+  Combines `@Configuration`, `@EnableAutoConfiguration`, and `@ComponentScan`. Marks the main class of a Spring Boot application.
+
+### **Configuration**
+- **@Configuration**  
+  Indicates that the class can be used by Spring IoC as a source of bean definitions.
+- **@Bean**  
+  Marks a method as producing a bean to be managed by Spring.
+
+### **Component Scanning**
+- **@Component**  
+  Indicates a class is a Spring component (bean) auto-detected during classpath scanning.
+- **@Service**  
+  Specialized version of `@Component` for service layer classes.
+- **@Repository**  
+  Specialized version for DAO (data access) components.
+- **@Controller**  
+  Specialized for web controllers (MVC).
+- **@RestController**  
+  Shorthand for `@Controller` + `@ResponseBody`; used for REST APIs.
+
+### **Dependency Injection**
+- **@Autowired**  
+  Injects dependencies automatically by type.
+- **@Qualifier**  
+  Specifies which bean to inject when multiple candidates exist.
+- **@Primary**  
+  Marks a bean as primary when multiple candidates exist.
+- **@Value**  
+  Injects values from property files.
+
+### **Web & REST**
+- **@RequestMapping**  
+  Maps HTTP requests to handler methods (can specify path, method, etc.).
+- **@GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping**  
+  Shortcut annotations for HTTP methods.
+- **@PathVariable**  
+  Binds URI template variable to method parameter.
+- **@RequestParam**  
+  Binds HTTP query parameter to method parameter.
+- **@RequestBody**  
+  Binds the body of the HTTP request to a method parameter.
+- **@ResponseBody**  
+  Indicates the return value should be bound to the web response body.
+
+### **Persistence & Transactions**
+- **@Entity**  
+  Marks a class as a JPA entity (table).
+- **@Table**  
+  Specifies the table name for an entity.
+- **@Id**  
+  Marks a field as the primary key.
+- **@GeneratedValue**  
+  Configures primary key generation strategy.
+- **@Column**  
+  Maps a field to a database column.
+- **@Transactional**  
+  Marks a method or class as transactional.
+
+### **Spring Boot Specific**
+- **@EnableAutoConfiguration**  
+  Enables Spring Boot’s auto-configuration mechanism.
+- **@ComponentScan**  
+  Tells Spring where to search for annotated components.
+- **@SpringBootTest**  
+  Used for integration testing in Spring Boot.
+
+### **Validation**
+- **@Valid**  
+  Triggers validation on a method parameter.
+- **@NotNull, @Size, @Min, @Max, @Pattern**  
+  Standard validation annotations.
+
+### **Scheduling & Asynchronous**
+- **@Scheduled**  
+  Marks a method to be scheduled (for tasks).
+- **@EnableScheduling**  
+  Enables scheduling support.
+- **@Async**  
+  Marks a method to run asynchronously.
+- **@EnableAsync**  
+  Enables asynchronous method execution.
+
+### **Security**
+- **@PreAuthorize, @PostAuthorize**  
+  Method-level security.
+- **@Secured**  
+  Restricts method access.
+- **@EnableWebSecurity**  
+  Enables Spring Security.
+
+---
+
+## **Summary Table**
+
+| Annotation           | Purpose/Usage                                   |
+|----------------------|-------------------------------------------------|
+| @SpringBootApplication | Main class, enables auto config & scan        |
+| @Component, @Service, @Repository, @Controller, @RestController | Bean discovery & specialization |
+| @Autowired, @Qualifier, @Primary, @Value | Dependency Injection        |
+| @RequestMapping, @GetMapping, etc. | Map HTTP requests              |
+| @Entity, @Id, @Table, @Column | JPA persistence                      |
+| @Transactional       | Transaction management                          |
+| @EnableAutoConfiguration | Enable auto-configuration                  |
+| @SpringBootTest      | Integration testing                             |
+| @Valid, @NotNull, etc. | Bean validation                              |
+| @Scheduled, @Async   | Scheduling, async execution                     |
+| @EnableWebSecurity   | Enable security                                 |
+
+---
+
