@@ -16,3 +16,7 @@ BeanCurrentlyInCreationException:-
 It occurs if two or more beans depend on each other directly or indirectly, and Spring cannot
 resolve the dependencies using standard constructor or setter injection.
 When Spring tries to instantiate A, it needs B, but B also needs A, causing an infinite loop
+
+BeanInitializationException:-
+This exception occurs after the bean is instantiated (object created), but before it is fully 
+initialized and ready for use in the Spring container.
