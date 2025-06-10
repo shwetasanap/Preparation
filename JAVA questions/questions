@@ -1961,3 +1961,18 @@ Characteristics: Informs about data traits (e.g., ORDERED, SIZED)
 Methods:
 tryAdvance(): Processes the next element
 trySplit(): Splits the data for parallel execution
+
+******************************************************************************************************************************************************************************
+Java 11 features
+
+String Class Enhancements
+
+New utility methods:
+isBlank(): Checks if the string is empty or contains only white space.
+lines(): Returns a stream of lines extracted from the string.
+strip(), stripLeading(), stripTrailing(): Remove whitespaces from the string.
+repeat(int): Repeats the string n times.
+
+Files.readString() and Files.writeString()
+
+Simplified reading and writing of strings to files with new static methods.
