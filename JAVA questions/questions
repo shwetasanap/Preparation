@@ -1969,6 +1969,8 @@ String Class Enhancements
 
 New utility methods:
 isBlank(): Checks if the string is empty or contains only white space.
+isBlank() is different from isEmpty(), which only checks if the string length is zero and does not consider whitespace.
+
 lines(): Returns a stream of lines extracted from the string.
 strip(), stripLeading(), stripTrailing(): Remove whitespaces from the string.
 repeat(int): Repeats the string n times.
