@@ -20,3 +20,10 @@ When Spring tries to instantiate A, it needs B, but B also needs A, causing an i
 BeanInitializationException:-
 This exception occurs after the bean is instantiated (object created), but before it is fully 
 initialized and ready for use in the Spring container.
+
+BeanInstantiationException:-
+When Spring cannot instantiate the bean class itself
+
+BeanCreationException:-
+Any error during bean creation process
+e.g. :- Instantiation, dependency, or init errors
