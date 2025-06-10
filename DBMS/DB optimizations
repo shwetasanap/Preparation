@@ -1,4 +1,20 @@
+optimization Technique-->Purpose
+Indexing-->Speed up searches
+Avoid SELECT *-->Reduce data load
+Joins over subqueries-->Better performance
+EXPLAIN plan-->Analyze query performance
+Normalization-->Remove redundancy
+Caching-->Reduce DB hits
+Partitioning based on certain columns of table-->Speed up large table queries
+Proper data types-->Save memory and improve speed
+LIMIT clause-->Control result size
+Query tuning-->Use efficient syntax
+Batching-->Fewer round-trips(insert/update in bulk rather than doing it by single row)
+Connection pooling-->Reuse connections
+Archiving-->Keep active tables small
 
+
+1.Indexes:-
 
 ## 1. **Columns Frequently Used in WHERE Clauses**
 - If a column is commonly used to filter records (e.g., `WHERE email = '...'`), it’s a good candidate for an index.
@@ -37,7 +53,114 @@
 
 ---
 
-**Summary:**  
-Index columns that are frequently used to search, join, sort, or group data. Avoid indexing columns that are rarely queried or have low uniqueness.
+2. Caching
 
-If you have a specific query or table in mind, I can give you tailored advice!
+Here’s how you can use **Redis as an external cache in a Spring Boot Java application**:
+
+---
+
+## **1. Add Redis Dependency**
+
+Add the following to your `pom.xml` if you use Maven:
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+```
+
+---
+
+## **2. Configure Redis in `application.properties`**
+
+```properties
+spring.cache.type=redis
+spring.redis.host=localhost
+spring.redis.port=6379
+# Optional: set time to live for cache entries
+spring.cache.redis.time-to-live=60000
+```
+
+---
+
+## **3. Enable Caching in Your Application**
+
+Add `@EnableCaching` to your main application class:
+```java
+@SpringBootApplication
+@EnableCaching
+public class MyApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MyApplication.class, args);
+    }
+}
+```
+
+---
+
+## **4. Use Caching Annotations in Your Services**
+
+Example:
+```java
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Cacheable(value = "users", key = "#id")
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @CacheEvict(value = "users", key = "#id")
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @CachePut(value = "users", key = "#user.id")
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
+}
+```
+- `@Cacheable`: Caches the result.
+- `@CacheEvict`: Removes cache entry when data is deleted.
+- `@CachePut`: Updates the cache when data is updated.
+
+---
+
+## **5. Run Redis Server**
+
+Make sure a Redis server is running on the configured host and port (`localhost:6379` by default).
+
+---
+
+## **Summary Table**
+
+| Step            | Description                                            |
+|-----------------|-------------------------------------------------------|
+| 1. Dependency   | Add Redis and cache starter dependencies              |
+| 2. Configure    | Set Redis config in `application.properties`          |
+| 3. Enable       | Add `@EnableCaching` in main app class                |
+| 4. Annotate     | Use `@Cacheable`, `@CacheEvict`, `@CachePut` in code  |
+| 5. Run Redis    | Start Redis server                                    |
+
+
+Using Map-based Caching (Simple Java)
+public class SimpleCache {
+    private Map<Long, User> cache = new HashMap<>();
+
+    public User getUserById(Long id) {
+        if (cache.containsKey(id)) {
+            return cache.get(id);
+        }
+        User user = dbFindUserById(id); // fetch from DB
+        cache.put(id, user);
+        return user;
+    }
+}
