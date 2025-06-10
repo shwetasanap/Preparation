@@ -1859,6 +1859,8 @@ if (obj instanceof String s) { //Inline pattern matching and casting
 • }
 •
 4. New switch Expressions (Preview in Java 12, Finalized later)
+You can use type patterns (like Integer i, String s) directly in case labels.
+You can have a case null to handle the null case.
 • Useful for returning values directly from switch.
 int numLetters = switch (day) {
 •    case MONDAY, FRIDAY, SUNDAY -> 6;
