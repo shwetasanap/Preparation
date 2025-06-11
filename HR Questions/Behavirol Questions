@@ -1,0 +1,75 @@
+1. Describe a situation where you had to work with a difficult team member. What was the outcome?
+-->
+In a previous project, I worked with a team member who often missed deadlines and seemed unresponsive to feedback. 
+This affected our team’s progress and morale. I decided to approach the situation empathetically and set up a one-on-one conversation
+to understand if there were any underlying issues. During our discussion, I learned that they were struggling with some of the technical
+aspects of the project and felt uncomfortable asking for help.
+
+I offered to support them by reviewing certain tasks together and encouraged them to communicate more openly with the team. 
+Over time, their performance improved and they became more engaged. As a result, our team collaboration strengthened and we were 
+able to complete the project successfully. The experience taught me the importance of communication, empathy, and proactive
+problem-solving when working with diverse personalities.
+
+
+2.Give an example of a goal you set and how you achieved it.
+-->
+I wanted to improve my time management skills at work. To do this, I started creating a daily to-do list with my top priorities.
+I made sure to check off each task as I completed it. After a few weeks, I noticed I was able to finish my work on time and felt 
+less stressed. This small change really helped me become more organized and productive.
+
+
+3.Have you ever made a mistake on a project? How did you address it?
+-->
+Yes, I have made mistakes in projects before. For example, I once misunderstood part of a client’s requirements and worked on the
+wrong feature. As soon as I realized the mistake, I informed my manager and the team. I took responsibility and quickly corrected 
+the issue by updating the feature to match the client’s needs. I also double-checked requirements with the client going forward 
+to make sure it didn’t happen again. The project was delivered on time, and I learned the importance of clear communication and
+asking questions when things aren’t clear.
+
+4.Tell me about a time you had to quickly adapt to a major change at work.
+-->
+We had a sudden requirement to add security to our Spring Boot application using Spring Security. 
+I had never used Spring Security before, so I quickly read the documentation and watched a few tutorials.
+I tried out different configurations in a test project and, with some help from my teammates, was able to 
+set up authentication and authorization in our application within a few days. This experience helped me become 
+comfortable with learning new Spring Boot modules under tight deadlines.
+
+
+5.How do you prioritize your tasks when you have multiple deadlines?
+-->
+When I have multiple deadlines, I start by making a list of all my tasks and their due dates.
+I rank them by urgency and importance, and focus on the highest-priority tasks first. 
+I also break down big tasks into smaller steps and set mini-deadlines for myself to stay on track. 
+If needed, I communicate with my team or manager to make sure I’m focusing on the right priorities.
+
+6.Give an example of how you handled receiving constructive criticism
+-->
+When I received constructive criticism about my coding style, I took it positively and reviewed the feedback. 
+I asked for specific examples and made changes to my code. As a result, my code became cleaner and easier for my team to read.
+
+7.Tell me about a project where you took the initiative. What did you do and what was the result?
+-->
+
+On a previous team, I noticed our project documentation was outdated and causing confusion for new members.
+I took the initiative to update all the documentation, including setting up a new onboarding guide.
+I coordinated with teammates to make sure the information was accurate.
+As a result, new team members were able to get up to speed much faster and team productivity improved.
+
+8.Describe a time when you went above and beyond your job responsibilities.
+-->
+In my previous role, a teammate unexpectedly went on leave right before a big project deadline.
+Although it wasn’t part of my core responsibilities, I volunteered to take on their tasks in addition to my own. 
+I worked extra hours to ensure both sets of work were completed on time, and the project was delivered successfully.
+My manager appreciated my dedication and teamwork.
+
+
+While working as a developer, I noticed frequent bugs in our deployment process that weren’t officially my responsibility to fix.
+I took the initiative to investigate, documented the issues, and created a set of scripts to automate deployment checks.
+This reduced errors and improved our release process, earning positive feedback from both the development and operations teams.
+
+
+
+
+
+
+
