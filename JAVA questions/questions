@@ -1980,3 +1980,28 @@ repeat(int): Repeats the string n times.
 Files.readString() and Files.writeString()
 
 Simplified reading and writing of strings to files with new static methods.
+
+******************************************************************************************************************************************************************************
+
+
+### 1. Calling `start()`
+- When you call `ethread.start()`, the JVM creates a new thread.
+- That new thread gets its own, separate call stack.
+- The new thread’s call stack begins with the run() method, and any methods called from there are added to that stack.
+- This call stack is independent from the original (calling) thread’s stack.
+
+### 2. Calling `run()` directly
+- If you call `ethread.run()` directly, it is just a normal method call on the current thread.
+- No new thread is created, and therefore no new call stack is created.
+- The run() method’s execution is part of the current thread’s existing call stack.
+
+### Summary Table
+
+| Call                   | New Thread? | New Call Stack? |
+|------------------------|-------------|-----------------|
+| `ethread.start()`      | Yes         | Yes             |
+| `ethread.run()`        | No          | No              |
+
+**In short:**  
+- `start()` → new thread, new call stack.  
+- `run()` → no new thread, no new call stack.
